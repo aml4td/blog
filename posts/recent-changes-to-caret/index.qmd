@@ -1,0 +1,31 @@
+---
+title: "Recent Changes to caret"
+author: "Max Kuhn"
+date: "2013-05-18"
+categories:
+  - R
+  - caret
+draft: false
+---
+
+Here is a summary of some recent changes to [caret](http://caret.r-forge.r-project.org/). 
+
+Feature Updates:
+
+* `train` was updated to utilize recent changes in the [gbm](http://code.google.com/p/gradientboostedmodels/) package that allow for boosting with three or more classes (via the multinomial distribution)
+
+* The Yeo-Johnson power transformation was added. This is very similar to the Box-Cox transformation, but it does not require the data to be greater than zero.
+
+New models referenced by `train`:
+
+* Maximum uncertainty linear discriminant analysis (`Mlda`) and factor-based linear discriminant analysis (`RFlda`) from the [HiDimDA](http://cran.r-project.org/web/packages/HiDimDA/index.html) package were added. 
+
+* The `kknn.train` model in the [kknn](http://cran.r-project.org/web/packages/kknn/index.html) package was added. This is basically a more intelligent _K_-nearest neighbors model that can use distance weighting, non-Euclidean distances (via the o Minkowski distance) and a few other features. 
+
+* The `extraTrees` function in the [package of the same name](http://cran.r-project.org/web/packages/extraTrees/index.html) was added. This generalizes the random forest model by adding randomness to the predictors _and_ the split values that are evaluated at each split point.
+
+Numerous bugs were also fixed in the last few releases. 
+
+The new version is [5.16-04](http://cran.r-project.org/web/packages/caret/index.html).
+Feel free to email me at <mxkuhn@gmail.com> if you have any feature requests or questions. 
+

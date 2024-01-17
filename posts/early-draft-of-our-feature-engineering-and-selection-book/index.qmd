@@ -1,0 +1,29 @@
+---
+title: "Early draft of our \"Feature Engineering and Selection\" book"
+author: "Max Kuhn"
+date: "2018-05-14"
+categories:
+  - R
+  - books
+  - feature selection
+  - feature engineering
+draft: false
+---
+
+![](model_process.png){fig-align="center"}
+
+Kjell and I are writing another book on predictive modeling, this time focused on all the things that you can do with predictors. It's about 60% done and we'd love to get feedback. You cna take a look at  [http://feat.engineering](http://feat.engineering) and provide feedback at [https://github.com/topepo/FES/issues](https://github.com/topepo/FES/issues). 
+
+The current TOC is:
+
+1. Introduction
+1. Illustrative Example: Predicting Risk of Ischemic Stroke 
+1. A Review of the Predictive Modeling Process
+1. Exploratory Visualizations
+1. Encoding Categorical Predictors
+1. Engineering Numeric Predictors 
+1. _Detecting Interaction Effects_ (these later chapters are not finished yet)
+1.  _Flattening Profile Data_ 
+1. _Handling Missing Data_ 
+1.  _Feature Engineering Without Overfitting_ 
+1.  _Feature Selection_ 

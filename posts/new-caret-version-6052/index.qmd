@@ -1,0 +1,26 @@
+---
+title: "New caret Version (6.0-52)"
+author: "Max Kuhn"
+date: "2015-07-22"
+categories:
+  - R
+  - caret
+draft: false
+---
+
+A new version of [`caret`](http://topepo.github.io/caret/) (6.0-52) is on [CRAN](https://cran.r-project.org/web/packages/caret/index.html). 
+
+Here is the [news file](https://cran.r-project.org/web/packages/caret/news.html) but the Cliff Notes are:
+
+* sub-sampling for class imbalances is now integrated with `train` and is used inside of standard resampling. There are four methods available right now: up- and down-sampling, SMOTE, and ROSE. The [help page](http://topepo.github.io/caret/sampling.html) has detailed information. 
+* Nine additional models were added, bringing the total up to 192. 
+* More error traps were added for common mistakes (e.g. bad factor levels in classification).
+* Various bug fixes and snake enhancements 
+
+On-deck for upcoming versions:
+
+* An expanded interface for preprocessing. You might want to process some predictors one way and others differently (or not at all). A new interface will allow for this but should maintain backwards compatibility (I hope)
+* Censored data models. Right now we are spec'ing out how this will work but the plan is to have models for predicting the outcome directly as well as models that predict survivor function probabilities. Email me (`max.kuhn@pfizer.com`) if you have an interest in this. 
+* Enabling prediction intervals (for models that support this) using `predict.train`. To be clear, `caret` isn't generating these but if you fit an `lm` model, you will be able to generate intervals from `predict.lm` and pass them through `predict.train`. 
+
+

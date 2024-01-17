@@ -1,0 +1,15 @@
+---
+title: "caret webinar materials"
+author: "Max Kuhn"
+date: "2014-02-28"
+categories:
+  - R
+  - caret
+  - presentations
+draft: false
+---
+
+The webinar was recorded (thanks to Ray DiGiacomo and the Orange County RUG). The slides are [here](https://max-kuhn.squarespace.com/s/webinar.pdf) minus a few typos. 
+
+{{< video https://youtu.be/7Jbb2ItbTC4 >}}
+

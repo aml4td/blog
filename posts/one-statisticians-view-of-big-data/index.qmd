@@ -1,0 +1,38 @@
+---
+title: "One Statistician’s View of Big Data"
+author: "Max Kuhn"
+date: "2013-05-20"
+categories:
+  - big data
+  - class imbalance
+  - Kaggle
+  - presentations
+draft: false
+---
+
+Recently I've had several questions about using machine learning models with large data sets. [Here is a talk][1] I gave at [Yale's Big Data Symposium](http://www.cs.yale.edu/calendars/schultz_symposium.html) on the subject.
+
+[1]: /s/KuhnYale.pdf
+
+I believe that, with a few exceptions, less data is more. Once you get beyond some "large enough" _number of samples_, most models don't really change that much and the additional computation burden is likely to cause practical problems with model fitting.  
+
+Off the top of my head, the exceptions that I can think of are:
+
+* class imbalances
+* poor variability in measured predictors
+* exploring new "spaces" or customer segments
+
+Big Data may be great as long as you are adding something of value (instead of more of what you already have). The last bullet above is a good example. I work a lot with computational chemistry and we are constantly moving into new areas of "chemical space" making new compounds that have qualities that had not been previously investigated. Models that ignore this space are not as good as ones that do include them.
+
+Also, new measurements or characteristic of your samples can make all the difference. Anthony Goldbloom of [Kaggle](http://kaggel.com) has a [great example](http://www.smh.com.au/technology/technology-news/kaggle-data-with-destiny-20120619-20l7g.html) from a competition for predicting the value of used cars: 
+
+> The results included for instance that orange cars were generally more reliable - and that colour was a very significant predictor of the reliability of a used car.
+
+> "The intuition here is that if you are the first buyer of an orange car, orange is an unusual colour you're probably going to be someone who really cares about the car and so you looked after it better than somebody who bought a silver car," said Goldbloom.
+
+> "The data doesn't lie - the data unearthed that correlation. It was something that they had not taken into account before when purchasing vehicles."
+
+My presentation has other examples of adding new information to increase the dimensionality of the data. The final quote sums it up:
+
+> The availability of Big Data should be a trigger to really re-evaluate what we are trying to solve and why this will help.
+

@@ -1,0 +1,31 @@
+---
+title: "Some Thoughts on \"Do we Need Hundreds of Classifiers to Solve Real World Classification Problems?\""
+author: "Max Kuhn"
+date: "2014-11-11"
+categories:
+  - caret
+  - benchmarking
+  - R
+  - random forest
+  - boosting
+  - classification
+draft: false
+---
+
+Sorry for the blogging break. I’ve got a few planned for the next few weeks based on some work I’ve been doing. 
+
+In the meantime, you should check out “[Do we Need Hundreds of Classifiers to Solve Real World Classification Problems?](http://jmlr.org/papers/v15/delgado14a.html)” by Manuel Fernandez-Delgado at [JMLR](http://www.jmlr.org). They took a large number of classifiers and ran them against a large number of data sets from UCI. I was a reviewer on this paper (it heavily relies on [caret](http://topepo.github.io/caret/)) and have been interested in seeing peoples reaction when it was made public. 
+
+My thoughts:
+
+* Before reading this manuscript, take a few minutes and read this oldie by [David Hand](http://scholar.google.com/scholar?hl=en&q=Classifier+Technology+and+the+Illusion+of+Progress&btnG=&as_sdt=1%2C5&as_sdtp=). 
+* Obviously, it pays to tune your model. That is not the most profound statement to make but the paper does a good job of quantifying the impact of tuning the hyper-parameters.
+
+* Random forest takes the top spot on a regular basis. I was surprised by this since, in my experience, boosting does better and bagging does almost as well. 
+
+* The authors believe that the parallel version of random forest in [caret](http://topepo.github.io/caret/) had an edge in performance. That’s hard to believe since it does’t do anything more than split the forest across different cores. That’s it. I took it out of the package for a bit because, if you are tuning the model, parallelizing the cross-validation is faster. I put it back in a few verisons ago since I knew people would want it after reading this manuscript. 
+
+* I was hoping that the authors would take a [better graphical and analytical approach](http://scholar.google.com/scholar?q=%22The+design+and+analysis+of+benchmark+experiments%22&btnG=&hl=en&as_sdt=0%2C5&as_vis=1) to comparing the methods. Table after table numbs my soul. 
+
+* Despite the number of models used, it would have been nice to see more emphasis on recent deep-learning models and boosting via the [gbm](https://github.com/harrysouthworth/gbm) package. 
+

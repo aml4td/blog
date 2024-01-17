@@ -1,0 +1,18 @@
+---
+title: "R/Medicine conference"
+author: "Max Kuhn"
+date: "2018-08-15"
+categories:
+  - R
+  - presentations
+draft: false
+---
+
+![](infer.png){fig-align="center"}
+
+I'll be giving a talk at the R/Medicine conference on Sept 7th in New Haven CT. 
+
+My talk is on modeling in the tidyverse but there are some excellent speakers. Rob Tibshirani, Mike Lawrence, Jennifer Thompson, and a bunch of others will be there.
+
+Take look at the [conference website](http://r-medicine.com/) for more details.  
+

@@ -1,0 +1,35 @@
+---
+title: "Nonclinical Statistics Book"
+author: "Max Kuhn"
+date: "2016-02-08"
+categories:
+  - books
+  - nonclinical statistics
+  - drug discovery
+draft: false
+---
+
+![](cover.jpeg){fig-align="center"}
+
+Springer has a [new book](http://www.springer.com/us/book/9783319235578) ([Amazon](https://www.amazon.com/dp/331979499X/ref=cm_sw_r_tw_dp_B6SNWA70EJNCMXPY2A0Q )) edited by Lanju Zhang that captures the breadth of problems for statistics in the pharmaceutical industry including: compound optimization, genetic testing, high-throughput screening, safety testing, and manufacturing. From the first chapter:
+
+ > 'We define “Nonclinical Statistics” as statistics applied to areas other than clinical trials in pharmaceutical/biotechnology industries'
+ 
+It's a big book (~700 pages) and has a lot of great content. I was a section editor for the drug discovery chapters:
+
+ * Statistical Methods for Drug Discovery (Max Kuhn, Phillip Yates, and Craig Hyde)
+ * High-Throughput Screening Data Analysis (Hanspeter Gubler)
+ * Quantitative-Structure Activity Relationship Modeling and Cheminformatics (Max Kuhn)
+ * GWAS for Drug Discovery (Yang Lu, Katherine Perez-Morera and Rita M. Cantor)
+ * Statistical Applications in Design and Analysis of In Vitro Safety Screening Assays (Lei Shu, Gary Gintant and Lanju Zhang)
+
+I particularly like the chapter by Bill Pikounis and Luc Bijnens ("How To Be a Good Nonclinical Statistician") which has a lot of excellent general advice. 
+
+The back cover blurb is:
+
+ > 'This book serves as a reference text for regulatory, industry and academic statisticians and also a handy manual for entry level Statisticians. Additionally it aims to stimulate academic interest in the field of Nonclinical Statistics and promote this as an important discipline in its own right. This text brings together for the first time in a single volume a comprehensive survey of methods important to the nonclinical science areas within the pharmaceutical and biotechnology industries. Specifically the Discovery and Translational sciences, the Safety/Toxiology sciences, and the Chemistry, Manufacturing and Controls sciences. Drug discovery and development is a long and costly process. Most decisions in the drug development process are made with incomplete information. The data is rife with uncertainties and hence risky by nature. This is therefore the purview of Statistics. As such, this book aims to introduce readers to important statistical thinking and its application in these nonclinical areas. The chapters provide as appropriate, a scientific background to the topic, relevant regulatory guidance, current statistical practice, and further research directions.'
+
+The hardcopy format will be released on February 14, 2016. I couldn't say whether you should gift the important person in your life with nonclinical statistics...
+
+
+ 

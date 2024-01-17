@@ -1,0 +1,20 @@
+---
+title: "Working at RStudio"
+author: "Max Kuhn"
+date: "2016-11-28"
+categories:
+  - R
+  - RStudio
+draft: false
+---
+
+![](RStudio-Ball.png){fig-align="center"}
+
+I've joined Hadley's team at [RStudio](https://www.rstudio.com/). 
+
+Unsurprisingly, I’ll be working on some modeling related R packages and infrastructure. It is very exciting and I’m looking forward to learning a lot and creating some cool things. 
+
+I've had a great time doing drug discovery at Pfizer for the last 12ish years and I’ll miss working with everyone there. 
+
+My contact info has been changed on my existing R packages and you can find me either using my personal email (`mxkuhn@gmail.com`), RStudio address (`max@rstudio.com`), or [github page](https://github.com/topepo)
+

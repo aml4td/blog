@@ -1,0 +1,17 @@
+---
+title: "Slides from R/Pharma"
+author: "Max Kuhn"
+date: "2018-08-16"
+categories:
+  - R
+  - presentations
+  - shiny
+  - tidyverse
+draft: false
+---
+
+![](tpost_lung.png){fig-align="center"}
+
+My slides from the R/Pharma conference on "Modeling in the Tidyverse" are in [pdf format](TODO) as well as the [HTML version](TODO). 
+
+(Joe Cheng just killed it in his shiny presentation - see [this repo](https://github.com/jcheng5/rpharma-demo))

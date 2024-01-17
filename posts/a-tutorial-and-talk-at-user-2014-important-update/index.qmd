@@ -1,0 +1,43 @@
+---
+title: "A Tutorial and Talk at useR! 2014 [Important Update]"
+author: "Max Kuhn"
+date: "2014-05-07"
+categories:
+  - R
+  - useR!
+  - presentations
+  - resampling
+draft: false
+---
+
+See the <font color = "red">update below</font> 
+
+I'll be doing a morning tutorial at [useR! at the end of June in Los Angeles](http://user2014.stat.ucla.edu). I've done this same presentation at the last few conferences and this will probably be the last time for _this_ specific workshop. 
+
+
+The tutorial outline is:
+
+* Conventions in R
+* Data splitting and estimating performance
+* Data pre-processing
+* Over-fitting and resampling
+* Training and tuning tree models
+* Training and tuning a support vector machine
+* Comparing models (as time allows)
+* Parallel processing (as time allows)
+
+
+I'm also giving a talk called "_Adaptive Resampling in a Parallel World_": 
+
+> Many predictive models require parameter tuning. For example, a classification tree requires the user to specify the depth of the tree. This type of "meta parameter" or "tuning parameter" cannot be estimated directly from the training data. Resampling (e.g. cross-validation or the bootstrap) is a common method for finding reasonable values of these parameters ([Kuhn and Johnson, 2013)](http://appliedpredictivemodeling.com) . Suppose B resamples are used with M candidate values of the tuning parameters. This can quickly increase the computational complexity of the task. Some of the M models could be disregarded early in the resampling process due to poor performance. [Maron and Moore (1997)](http://scholar.google.com/scholar?hl=en&q=The+Racing+Algorithm%3A+Model+selection+for+lazy+learners&btnG=&as_sdt=1%2C39&as_sdtp=)  and [Shen el at (2011)](http://scholar.google.com/scholar?q=%22Efficient%2C+adaptive+cross–validation+for+tuning+and+comparing+models%22&btnG=&hl=en&as_sdt=0%2C39) describe methods to adaptively filter which models are evaluated during resampling and reducing the total number of model fits. However, model parameter tuning is an "embarrassingly parallel" task; model fits can be calculated across multiple cores or machines to reduce the total training time. With the availability of parallel processing is it still advantageous to adaptively resample?
+
+> This talk will briefly describe adaptive resampling methods and characterize their effectiveness using parallel processing via simulations.
+
+
+The [conference website](http://user2014.stat.ucla.edu) has updated their website to say:
+
+> This year there is no separate registration process or extra fee for attending tutorials.
+
+<font color = "red">UPDATE!</font> Since this is the case, I won't be giving out the book to all the attendees as I originally intended. However, the conference does supply tutorial presenters with a stipend so I will be using that to purchase about a dozen copies that I will randomly distribute to whoever attends. 
+
+Sorry for the confusion...

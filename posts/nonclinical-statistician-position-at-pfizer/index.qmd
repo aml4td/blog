@@ -1,0 +1,47 @@
+---
+title: "Nonclinical Statistician Position at Pfizer"
+author: "Max Kuhn"
+date: "2015-12-14"
+categories:
+  - jobs
+  - drug discovery
+  - Pfizer
+  - nonclinical statistics
+draft: false
+---
+
+![](groton.png){fig-align="center"}
+
+The Research Statistics group collaborates across a wide variety of activities in the early phases of drug discovery. This position is located in Groton CT and has a focus on the optimization of chemical matter and the development of assays to characterize these molecules
+
+The successful candidate will:
+
+ * Demonstrate leadership in influencing and improving drug discovery by identifying, developing, and applying new quantitative methods.
+ * Proactively seek collaborations with scientists and lab heads. 
+ * Collaborate with scientists to plan meaningful studies, statistically analyze, and communicate / document the results.
+
+### Requirements:  
+
+ * M.S. or Ph.D. in Statistics, Biostatistics, or related field and 2+ years statistical consulting experience in drug discovery and development, preferably in a laboratory science environment.
+ * The ability to proactively seek collaborations with scientists and lab heads. 
+ * Strong initiative, excellent interpersonal and communication (written and verbal) skills
+ * Understanding of inference and probability; competence in contemporary linear modeling including mixed models, nonlinear regression; and predictive modeling/machine learning.
+ * Solid understanding of experimental design 
+ * An understanding of tools for the analysis of high dimensional data 
+ * Strong computational skills in R
+
+### Desired:
+
+ * Five or more years experience in the pharmaceutical industry. 
+ * Sound understanding and experience of applying Bayesian methods
+ * Formal training in, or thorough understanding of: human physiology, cell biology, pharmacokinetics and/or pharmaceutical chemistry. 
+ * Strong computing skills in scripting languages, such as perl, python, unix shell scripts or others. SQL and LaTeX skills are also advantageous.
+
+### Applying
+
+
+The position is posted at [http://pfizercareers.com/](http://pfizercareers.com/)
+
+- Go to "Search jobs" on the green tab
+- Choose "SEARCH and APPLY for Jobs"
+- In the "Advanced Search" bar, search on Job Id 1024297

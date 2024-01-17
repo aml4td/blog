@@ -1,0 +1,15 @@
+---
+title: "Podcast on Nonclinical Statistics"
+author: "Max Kuhn"
+date: "2018-06-30"
+categories:
+  - R
+  - presentations
+  - podcast
+draft: false
+---
+
+![](DjXIG2TV4AAHmX3.jpeg){fig-align="center"}
+
+[Hugo Bowne-Anderson](https://twitter.com/hugobowne) and I spoke about about data science in pharmaceuticals, the tidyverse, and more for the excellent [DataFramed](https://www.datacamp.com/community/podcast) podcast from DataCamp. Listen to it [here](https://www.datacamp.com/community/podcast/data-science-pharmaceuticals) or through your favorite blogging app.  
+

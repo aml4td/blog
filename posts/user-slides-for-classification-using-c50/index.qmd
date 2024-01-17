@@ -1,0 +1,14 @@
+---
+title: "UseR! Slides for \"Classification Using C5.0\""
+author: "Max Kuhn"
+date: "2013-07-17"
+categories:
+  - R
+  - useR!
+  - C5.0
+draft: false
+---
+
+I've had a lot of requests, so here they are. Hopefully, all of the slides will be posted on the conference website.
+
+EDIT: The PDF for the LaTeX slides appear to be unreadable by some. Here is a new link: Classification Using C5.0

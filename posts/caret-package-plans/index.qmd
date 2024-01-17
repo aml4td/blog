@@ -1,0 +1,21 @@
+---
+title: "caret package plans"
+author: "Max Kuhn"
+date: "2017-02-02"
+categories:
+  - caret
+draft: false
+---
+
+A few people have asked if anything is going to happen to [`caret`](http://topepo.github.io/caret/) now that I'm working at RStudio. 
+
+The answer is "very little will be different". 
+
+More specifically:
+
+* `caret` will be around for a long time. I'm still using it for things too!
+* There will still be hills and valleys for development/support. That pattern already exists and will continue since I still have a "day job". 
+* As for new things coming out of Rstudio, there is likely to be a fair amount of overlap with `caret` (in terms of functionality). `caret` may be the most un[tidy](http://tidyverse.org/) package out there; just take a look at any call to `train` or the other modeling functions. There wont be a `caret2` but probably a set of packages that overlap with `caret` in different ways (I thought about trolling and calling the first package `carrot`). 
+* `caret` is fairly focused (myopic?) since it concentrates on prediction. There are similar things that people might want to do  where the quantities of interest might not be prediction of a number or class. For example, while you might want to make inferences on your linear mixed model, you might also want to report your resampled RMSE to prove that your model has some fidelity to the actual data. 
+* There are some features that I want(ed) for `caret` that would be invasive changes or might break backwards compatibility. Those are more likely to end up in a new package. 
+* While you might now want a tidyverse solution to modeling (and that's fine), there will be some features in new pacakges that will be incentives. It is easier to add new stuff in a new system than to redefine the old. Hopefully, I've learned my lessons in regards to extensibility; while the user may not realize it, the innards of `caret` have been refactored more than once. 

@@ -1,0 +1,31 @@
+---
+title: "UseR! 2013 Highlights"
+author: "Max Kuhn"
+date: "2013-07-13"
+categories:
+  - R
+  - useR!
+draft: false
+---
+
+The conference was excellent this year. My highlights:
+
+* Bojan Mihaljevic gave a great presentation on [machine learning models built from network models](http://www.edii.uclm.es/~useR-2013/abstracts/files/106_user2013_BayesClass.pdf). Their package isn't on CRAN yet, but I'm really looking forward to it. 
+
+* Jim Harner's presentation on [K-NN models with feature selection](http://www.edii.uclm.es/~useR-2013/abstracts/files/115_useR2013_prknn.pdf) was also very interesting, especially the computational aspects of training the model in parallel.
+
+* Tal Galili gave a pretty interesting [summary of models on tRNA seqeunces](http://www.edii.uclm.es/~useR-2013/abstracts/files/147_TalGalili_-_Deciphering_the_tRNA_operational_code_-_using_R.pdf). This was a great case study in cross-validation. A simple CV loop was compared with one that used the two Archaea families. The results were very different.   
+
+* The first session on _Computational Challenges in Molecular Biology_ showed a set of applications of modeling in biology. For me, the presentations of [Thomas Poulsen](http://www.edii.uclm.es/~useR-2013/abstracts/files/57_tp_2013.pdf) and [Insa Winzenborg](http://www.edii.uclm.es/~useR-2013/abstracts/files/58_abstract_useR2013_winzenborg.pdf) really stood out (in a positive way).
+
+* Hadley Wickham's talk on [big data and R](http://www.edii.uclm.es/~useR-2013/invited/useR2013_wickham.pdf) was excellent. His new [dplyr](https://github.com/hadley/dplyr) package should solve a lot of problems for me. I find his work to be excellent despite one  member of R Core remarking to me that `caret` should not depend on `plyr` since it was considered by them to be "unreliable". I feel that nothing is farther form the truth. 
+
+* Another RStudio-ista, Joe Cheng, gave yet another great presentation on [shiny](http://www.edii.uclm.es/~useR-2013/abstracts/files/98_shiny-useR2013-abstract.pdf).
+
+* Finally, I really enjoy the lightning talks. The presentation was setup so that the speaker could have 15 slides and each slide will be shown for 20 seconds. It is sort of a combination of a talk and a game of boggle. 
+
+I'm hoping that the presentations will be posted on the website.
+
+Albacete was very nice, as was the food and beer. Next year, the conference will be in [Los Angeles](http://user2014.stat.ucla.edu/). It should be a lot of fun.
+
+

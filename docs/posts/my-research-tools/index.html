@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.533">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Max Kuhn">
+<meta name="dcterms.date" content="2014-12-15">
+
+<title>Applied Predictive Modeling Blog - My Research Tools</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Applied Predictive Modeling Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">about.html</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/aml4td/blog"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#rss-feeds-for-journals." id="toc-rss-feeds-for-journals." class="nav-link active" data-scroll-target="#rss-feeds-for-journals.">RSS feeds for journals.</a></li>
+  <li><a href="#google-alerts" id="toc-google-alerts" class="nav-link" data-scroll-target="#google-alerts">Google Alerts</a></li>
+  <li><a href="#google-scholar" id="toc-google-scholar" class="nav-link" data-scroll-target="#google-scholar">Google Scholar</a></li>
+  <li><a href="#papers" id="toc-papers" class="nav-link" data-scroll-target="#papers">Papers</a></li>
+  <li><a href="#typesetting" id="toc-typesetting" class="nav-link" data-scroll-target="#typesetting">Typesetting</a></li>
+  <li><a href="#my-journal-feeds" id="toc-my-journal-feeds" class="nav-link" data-scroll-target="#my-journal-feeds">My Journal Feeds</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">My Research Tools</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">research</div>
+    <div class="quarto-category">knitr</div>
+    <div class="quarto-category">Sweave</div>
+    <div class="quarto-category">Papers</div>
+    <div class="quarto-category">RSS</div>
+    <div class="quarto-category">Google</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Max Kuhn </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 15, 2014</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Pfizer has an excellent group of librarians and they recently contacted people, including a few statisticians, about how we find and organize article. I’ve spent considerable time thinking about this over the years. I’ve wanted to start a discussion about this topic for a while since I can’t believe that someone isn’t doing this better. Comments here or via email are enthusiastically welcome.</p>
+<p>For <strong>finding</strong> journal articles, I do a few different things.</p>
+<section id="rss-feeds-for-journals." class="level3">
+<h3 class="anchored" data-anchor-id="rss-feeds-for-journals.">RSS feeds for journals.</h3>
+<p>RSS feeds are pretty straightforward to use. Most journals have RSS feeds of various types for journals (e.g.&nbsp;current issue, just accepted, articles ASAP etc.) In some cases, like PLOSone, you can create RSS feeds for specific search terms within that journal (see the examples at the bottom of this post). I haven’t figured out how to filter RSS feeds based on whether the manuscript has supplemental materials (e.g.&nbsp;data).</p>
+<p>RSS isn’t perfect. For example, some of the ASA journals have mucked up their XML and I see a lot of repeats of articles on the same day. An edited list of what I keep tabs on is at the end of this post.</p>
+<p>(As an aside, RSS feeds are also great for monitoring specific topics on <a href="http://stackoverflow.com">Stack Overflow</a> and <a href="http://stats.stackexchange.com">Crossvalidated</a>)</p>
+<p>I have tried myriad RSS readers to aggregate and monitor my feeds. I’m currently using <a href="https://feedly.com">Feedly</a>.</p>
+<p>Also, this is only for content that you have identified as interesting. There could be something else out there that you have missed completely. That leads me to…</p>
+</section>
+<section id="google-alerts" class="level3">
+<h3 class="anchored" data-anchor-id="google-alerts"><a href="https://www.google.com/alerts">Google Alerts</a></h3>
+<p>I have about 30 different alerts. Some are related to general topics (e.g.&nbsp;<code>["training set" "test set" -microarray -SNP -QSAR -proteom -RNA -biomarker -biomarkers]</code>) and others look for anything citing specific manuscripts (e.g.&nbsp;<code>[Documents citing "The design and analysis of benchmark experiments"]</code>). See <a href="https://support.google.com/alerts/answer/4815780?hl=en">this page</a> for examples of how to create effective alerts. There are <a href="http://lifehacker.com/five-creative-uses-for-google-alerts-475278626">other uses</a> for alerts too.</p>
+<p>Alerts are very effective. I usually get emails with the alerts in batches of 20 or so at a time. I haven’t quite figured out what the trigger is; in some cases I get two batches in a single day.</p>
+<p>One thing I would put on the wish list is to so some sort of smart aggregation. If have alerts for <code>[ "simulated annealing" "feature selection" ]; Articles excluding patents</code> and <code>[ "genetic algorithm" "feature selection" ]; Articles excluding patents</code>, this results in abundant redundancy since many feature selection articles mention both search algorithms.</p>
+<p>Keep in mind that the alerts may not be <em>new</em> articles but items that are <em>new to Google</em>. This isn’t really an issue for me but it is worth mentioning.</p>
+</section>
+<section id="google-scholar" class="level3">
+<h3 class="anchored" data-anchor-id="google-scholar"><a href="http://scholar.google.com">Google Scholar</a></h3>
+<p>I love Google Scholar. Search on a title and you always be able to find the manuscript, links to different sources for obtaining it, plus a list of articles which reference it. Subject-based search are just as effective.</p>
+<p>(Our librarians were surprised to find that we could get access to articles that our institution did not have licenses for via Google. For example, the scholar page for an article will list multiple versions of the reference. Some of these may correspond to the home page of one of the authors where he/she has a local copy of the PDF)</p>
+<p><a href="http://scholar.google.com/intl/en-US/scholar/help.html">Google</a> has good tips on searching. <a href="http://www.slideshare.net/mhardy/extreme-googling-tips-tricks-for-expert-searching-presentation">This presentation</a> is excellent with some tricks that I didn’t know.</p>
+<p>So once I’ve found articles, <strong>how do I manage them</strong>?</p>
+</section>
+<section id="papers" class="level3">
+<h3 class="anchored" data-anchor-id="papers"><a href="http://www.papersapp.com">Papers</a></h3>
+<p>Papers… I have equal parts love and hate for this program. I’ll list the pros and cons below. I should say that I have been using this since the original version and have become increasingly frustrated . I’m not using the most recent version and I have tried a lot of <a href="http://en.wikipedia.org/wiki/Comparison_of_reference_management_software">different alternatives</a> (e.g.&nbsp;<a href="http://www.mendeley.com">Mendeley</a>, <a href="http://bibdesk.sourceforge.net">BibDesk</a>, <a href="http://www.sonnysoftware.com/bookends/bookends.html">Bookends</a>, <a href="http://endnote.com">Endnote</a>, <a href="http://www.thirdstreetsoftware.com/site/Sente.html">Sente</a>, <a href="https://www.zotero.org">Zotero</a>). Unfortunately, for someone with thousands of PDFs, Papers (version 2) has some features that the others haven’t mastered yet. I would <em>love</em> to move away from Papers.</p>
+<p>What is good:</p>
+<ul>
+<li>Importing articles is easy. In many cases, just dropping them into the window will find the metadata and automatically annotate the reference. Weirdly, drag-and-drop works better than the “Match” feature in the article window. There are <code>Open In Papers</code> bookmarks for most browsers. Once you find a journal article, use this link to start Papers and open the link. Often, the application automatically reads the citation information from the webpage and imports it. Clicking on the PDF link within the article’s web page imports that file.</li>
+<li>Articles within Papers can collect supplementary files easily. One minor issue is that plain text files are not automatically imported as PDF, CSV for other file formats are.</li>
+<li>Papers does a great job or organizing the PDFs locally. I sync to Dropbox and have the same repository across different computers.</li>
+<li>The <a href="https://www.economics.utoronto.ca/osborne/latex/BIBTEX.HTM">bibtex</a> export works well. This was invaluable when we were writing the book.</li>
+<li>Their apps for tablets/mobile are easy to use and low maintenance. Syncing has not been an issue for me so far.</li>
+</ul>
+<p>The bad news</p>
+<ul>
+<li>Slooooow. It is really slow.</li>
+<li>The search facilities for your PDF repository are not very powerful. This seems like it is a pretty low bar to jump over.</li>
+<li>Keywords work but are manually added and the interface is pretty kludgy. I would love for this feature to work better. Hell, it wouldn’t be difficult to automatically figure this out based on content (I wrote some rudimentary R/SQL code to do it on an really long plane flight once).</li>
+<li>I have a small percentage of papers whose PDFs have gone missing.</li>
+<li>I might accidentally import an article twice. In most cases, Papers doesn’t tell me that I’m doing it until it is too late. Although they have a method for merging entries, I’d like to avoid this process beforehand.</li>
+<li>They release versions with <em>little to no testing</em>. This is amazing but basic functionality in new major versions simply does not work. It is remarkable in the worst way.</li>
+<li>While they did win the Apple Design Award for the first version, the interface seems to be getting worse with every new release. The color scheme for Papers 3 makes me depressed. Literal 50 shades of gray.</li>
+</ul>
+<p>The last two issues have driven me crazy. I don’t see myself upgrading any time soon.</p>
+</section>
+<section id="typesetting" class="level3">
+<h3 class="anchored" data-anchor-id="typesetting">Typesetting</h3>
+<p>I use <a href="http://en.wikipedia.org/wiki/LaTeX">LaTeX</a> for almost all articles that I write. It is a pain when working with others who have never used it (or heard of it) but it is worth it. Also, the power you get when using LaTeX with <a href="https://www.stat.uni-muenchen.de/~leisch/Sweave/">Sweave</a> or <a href="http://yihui.name/knitr/">knitr</a> simply cannot be underestimated. Apart from exporting bibtex from Papers, the other tools I use are:</p>
+<ul>
+<li><a href="http://www.sublimetext.com">Sublime Text</a>: This is a great, lightweight editor that has some great add-ons for typesetting that integrate with <a href="http://skim-app.sourceforge.net">Skim</a>. Skim is pretty nice, but I would really like Sublime to work with OS X’s Preview.<br>
+</li>
+<li><a href="https://www.texpadapp.com">texpad</a> is another good editor for OS X but, given the price, it might be difficult to argue that it is better than Sublime. It does hide a lot of the LaTeX junk that goes into typesetting a tex file but this is really a minor perk.</li>
+</ul>
+<p>I gave <a href="https://dl.dropboxusercontent.com/u/10053401/KuhnENAR.pdf">a talk at ENAR last year</a> related to this. We’ve since moved the book version control to github and have translated all of our <code>Sweave</code> code to <code>knitr</code>.</p>
+</section>
+<section id="my-journal-feeds" class="level3">
+<h3 class="anchored" data-anchor-id="my-journal-feeds">My Journal Feeds</h3>
+<p>In no particular order:</p>
+<ul>
+<li><a href="http://www.biomedcentral.com/bmcbioinformatics/rss/">BMC Bioinformatics - Latest Articles</a></li>
+<li><a href="http://rss.sciencedirect.com/publication/science/11514">Computational Biology and Chemistry</a></li>
+<li><a href="http://bioinformatics.oxfordjournals.org/rss/current.xml">Bioinformatics - current issue</a></li>
+<li><a href="http://barf.jcowboy.org/bioinformatics.xml">Bioinformatics</a></li>
+<li><a href="http://jbx.sagepub.com/rss/current.xml">Journal of Biomolecular Screening current issue</a></li>
+<li><a href="http://www.liebertonline.com/action/showFeed?ui=0&amp;mi=3fcrht&amp;ai=rz&amp;jc=cmb&amp;type=etoc&amp;feed=rss">Journal of Computational Biology - Table of Contents</a></li>
+<li><a href="http://feeds.rsc.org/rss/MD?format=xml">RSC - Med. Chem. Commun. latest articles</a></li>
+<li><a href="http://rss.sciencedirect.com/publication/science/5232">Chemometrics and Intelligent Laboratory Systems</a></li>
+<li><a href="http://feeds.feedburner.com/acs/jcisd8">Journal of Chemical Information and Modeling: Latest Articles (ACS Publications)</a></li>
+<li><a href="http://bit.ly/127TmgW">Journal of Computational Chemistry</a></li>
+<li><a href="http://bit.ly/1vzOZF3">Molecular Informatics</a></li>
+<li><a href="http://feeds.feedburner.com/acs/jmcmar">Journal of Medicinal Chemistry: Latest Articles (ACS Publications)</a></li>
+<li><a href="http://bit.ly/1y9b14S">Journal of Chemometrics</a></li>
+<li><a href="http://www.jcheminf.com/latest/rss">Journal of Cheminformatics - Latest Articles</a></li>
+<li><a href="http://bit.ly/15LgkvC">PLOS ONE ML</a></li>
+<li><a href="http://api.ingentaconnect.com/content/ben/cchts/latest?format=rss">Latest Issue of Combinatorial Chemistry &amp; High Throughput Screening</a></li>
+<li><a href="http://www.biomedcentral.com/bmccellbiol/latest/rss">BMC Cell Biology - Latest Articles</a></li>
+<li><a href="http://www.unboundmedicine.com/medline/ebm/journal/Nature_reviews._Molecular_cell_biology.rss">Nature reviews. Molecular cell biology[TA]</a></li>
+<li><a href="http://feeds.nature.com/nrd/rss/current">Nature Reviews Drug Discovery - Issue - nature.com science feeds</a></li>
+<li><a href="http://www.nature.com/nrg/current_issue/rss">Nature Reviews Genetics - Issue - nature.com science feeds</a></li>
+<li><a href="http://genomebiology.com/rss">Genome Biology - Latest Articles</a></li>
+<li><a href="http://genome.cshlp.org/rss/current.xml">Genome Research current issue</a></li>
+<li><a href="http://rss.sciencedirect.com/publication/science/5020">Drug Discovery Today</a></li>
+<li><a href="http://feeds.nature.com/NatureBiologicalSciencesResearch">Nature Biological Sciences Research</a></li>
+<li><a href="http://jmlr.csail.mit.edu/jmlr.xml">JMLR</a></li>
+<li><a href="http://www.springerlink.com/content/0885-6125/preprint/?export=rss">Machine Learning (Online First)</a></li>
+<li><a href="http://arxiv.org/rss/stat.ML">stat.ML updates on arXiv.org</a></li>
+<li><a href="http://bit.ly/1yw18wI">PLOS ONE feature selection</a></li>
+<li><a href="http://rd.springer.com/search.rss?facet-content-type=Article&amp;facet-journal-id=10994&amp;channel-name=Machine%20Learning">Machine Learning</a></li>
+<li><a href="http://feeds.nature.com/nature/rss/current">Nature - Issue</a></li>
+<li><a href="http://www.jstatsoft.org/rss">Journal of Statistical Software</a></li>
+<li><a href="http://www.pnas.org/rss/Statistics.xml">Proceedings of the National Academy of Sciences Statistics</a></li>
+<li><a href="http://amstat.tandfonline.com/action/showFeed?ui=0&amp;mi=5ugd1w&amp;ai=4ep&amp;jc=uasa20&amp;type=etoc&amp;feed=rss">Journal of the American Statistical Association: Table of Contents</a></li>
+<li><a href="http://amstat.tandfonline.com/action/showFeed?ui=0&amp;mi=5ugd1w&amp;ai=4et&amp;jc=utas20&amp;type=etoc&amp;feed=rss">The American Statistician: Table of Contents</a></li>
+<li><a href="http://bit.ly/1vzPm2w">Wiley Interdisciplinary Reviews: Computational Statistics</a></li>
+<li><a href="http://rss.sciencedirect.com/publication/science/5880">Computational Statistics &amp; Data Analysis</a></li>
+<li><a href="http://arxiv.org/rss/physics.data-an">physics.data-an updates on arXiv.or</a></li>
+<li><a href="http://projecteuclid.org/feeds/euclid.ejs_article_rss.xml">Electronic Journal of Statistics</a></li>
+<li><a href="http://bit.ly/127TKMh">Pharmaceutical Statistics</a></li>
+<li><a href="http://bit.ly/1rGIWQJ">Journal of the Royal Statistical Society: Series C (Applied Statistics)</a></li>
+<li><a href="http://biostatistics.oxfordjournals.org/rss/current.xml">Biostatistics - current issue</a></li>
+<li><a href="http://bit.ly/1zG0QC7">Journal of the Royal Statistical Society: Series B (Statistical Methodology)</a></li>
+<li><a href="http://feeds.nature.com/nrd/rss/current">Nature Reviews Drug Discovery - Issue - nature.com science feeds</a></li>
+<li><a href="http://rss.sciencedirect.com/publication/science/5020">Drug Discovery Today</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

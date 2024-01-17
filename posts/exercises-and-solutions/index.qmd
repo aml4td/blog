@@ -1,0 +1,11 @@
+---
+title: "Exercises and Solutions"
+author: "Max Kuhn"
+date: "2013-08-30"
+draft: false
+---
+
+Kjell and I are putting together solutions to the exercise sections. It is a lot of work, so it may take some time.  
+
+If you are teaching a class and are interested in using the book for a class, please drop me an email (`mxkuhn@gmail.com`). We would like to hear more about possible specifics. For example, we would like feedback on the format (e.g. pdf or web page), availability (e.g. password protected website?) or any other aspect.
+

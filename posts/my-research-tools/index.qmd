@@ -1,0 +1,139 @@
+---
+title: "My Research Tools"
+author: "Max Kuhn"
+date: "2014-12-15"
+categories:
+  - research
+  - knitr
+  - Sweave
+  - Papers
+  - RSS
+  - Google
+draft: false
+---
+
+Pfizer has an excellent group of librarians and they recently contacted people, including a few statisticians, about how we find and organize article. I've spent considerable time thinking about this over the years. I've wanted to start a discussion about this topic for a while since I can't believe that someone isn't doing this better. Comments here or via email are enthusiastically welcome. 
+
+For **finding** journal articles, I do a few different things.
+
+### RSS feeds for journals.  
+
+RSS feeds are pretty straightforward to use. Most journals have RSS feeds of various types for journals (e.g. current issue, just accepted, articles ASAP etc.) In some cases, like PLOSone, you can create RSS feeds for specific search terms within that journal (see the examples at the bottom of this post). I haven't figured out how to filter RSS feeds based on whether the manuscript has supplemental materials (e.g. data). 
+
+RSS isn't perfect. For example, some of the ASA journals have mucked up their XML and I see a lot of repeats of articles on the same day. An edited list of what I keep tabs on is at the end of this post. 
+
+(As an aside, RSS feeds are also great for monitoring specific topics on [Stack Overflow](http://stackoverflow.com) and [Crossvalidated](http://stats.stackexchange.com))
+
+I have tried myriad RSS readers to aggregate and monitor my feeds. I'm currently using [Feedly](https://feedly.com). 
+
+Also, this is only for content that you have identified as interesting. There could be something else out there that you have missed completely. That leads me to...
+
+
+### [Google Alerts](https://www.google.com/alerts)
+
+I have about 30 different alerts. Some are related to general topics (e.g. `["training set" "test set" -microarray -SNP -QSAR -proteom -RNA -biomarker -biomarkers]`) and others look for anything citing specific manuscripts (e.g. `[Documents citing "The design and analysis of benchmark experiments"]`). See [this page](https://support.google.com/alerts/answer/4815780?hl=en) for examples of how to create effective alerts. There are [other uses](http://lifehacker.com/five-creative-uses-for-google-alerts-475278626) for alerts too. 
+
+Alerts are very effective. I usually get emails with the alerts in batches of 20 or so at a time. I haven't quite figured out what the trigger is; in some cases I get two batches in a single day. 
+
+One thing I would put on the wish list is to so some sort of smart aggregation. If have alerts for `[ "simulated annealing" "feature selection" ]; Articles excluding patents` and `[ "genetic algorithm" "feature selection" ]; Articles excluding patents`, this results in abundant redundancy since many feature selection articles mention both search algorithms.
+
+Keep in mind that the alerts may not be _new_ articles but items that are _new to Google_. This isn't really an issue for me but it is worth mentioning. 
+
+
+### [Google Scholar](http://scholar.google.com)
+
+
+I love Google Scholar. Search on a title and you always be able to find the manuscript, links to different sources for obtaining it, plus a list of articles which reference it. Subject-based search are just as effective. 
+
+(Our librarians were surprised to find that we could get access to articles that our institution did not have licenses for via Google. For example, the scholar page for an article will list multiple versions of the reference. Some of these may correspond to the home page of one of the authors where he/she has a local copy of the PDF)
+
+[Google](http://scholar.google.com/intl/en-US/scholar/help.html) has good tips on searching. [This presentation](http://www.slideshare.net/mhardy/extreme-googling-tips-tricks-for-expert-searching-presentation) is excellent with some tricks that I didn't know. 
+
+
+So once I've found articles, **how do I manage them**? 
+
+
+### [Papers](http://www.papersapp.com)
+
+
+Papers... I have equal parts love and hate for this program. I'll list the pros and cons below. I should say that I have been using this since the original version and have become increasingly frustrated . I'm not using the most recent version and I have tried a lot of [different alternatives](http://en.wikipedia.org/wiki/Comparison_of_reference_management_software) (e.g. [Mendeley](http://www.mendeley.com), [BibDesk](http://bibdesk.sourceforge.net), [Bookends](http://www.sonnysoftware.com/bookends/bookends.html), [Endnote](http://endnote.com), [Sente](http://www.thirdstreetsoftware.com/site/Sente.html), [Zotero](https://www.zotero.org)). Unfortunately, for someone with thousands of PDFs, Papers (version 2) has some features that the others haven't mastered yet. I would _love_ to move away from Papers. 
+
+What is good:
+
+* Importing articles is easy. In many cases, just dropping them into the window will find the metadata and automatically annotate the reference. Weirdly, drag-and-drop works better than the "Match" feature in the article window. There are `Open In Papers` bookmarks for most browsers. Once you find a journal article, use this link to start Papers and open the link. Often, the application automatically reads the citation information from the webpage and imports it. Clicking on the PDF link within the article's web page imports that file. 
+* Articles within Papers can collect supplementary files easily. One minor issue is that plain text files are not automatically imported as PDF, CSV for other file formats are. 
+* Papers does a great job or organizing the PDFs locally. I sync to Dropbox and have the same repository across different computers. 
+* The [bibtex](https://www.economics.utoronto.ca/osborne/latex/BIBTEX.HTM) export works well. This was invaluable when we were writing the book. 
+* Their apps for tablets/mobile are easy to use and low maintenance. Syncing has not been an issue for me so far. 
+
+The bad news
+
+* Slooooow. It is really slow.
+* The search facilities for your PDF repository are not very powerful. This seems like it is a pretty low bar to jump over. 
+* Keywords work but are manually added and the interface is pretty kludgy. I would love for this feature to work better. Hell, it wouldn't be difficult to automatically figure this out based on content (I wrote some rudimentary R/SQL code to do it on an really long plane flight once). 
+* I have a small percentage of papers whose PDFs have gone missing. 
+* I might accidentally import an article twice. In most cases, Papers doesn't tell me that I'm doing it until it is too late. Although they have a method for merging entries, I'd like to avoid this process beforehand. 
+* They release versions with _little to no testing_. This is amazing but basic functionality in new major versions simply does not work. It is remarkable in the worst way. 
+* While they did win the  Apple Design Award for the first version, the interface seems to be getting worse with every new release. The color scheme for Papers 3 makes me depressed. Literal 50 shades of gray. 
+
+The last two issues have driven me crazy. I don't see myself upgrading any time soon. 
+
+
+### Typesetting
+
+I use [LaTeX](http://en.wikipedia.org/wiki/LaTeX) for almost all articles that I write. It is a pain when working with others who have never used it (or heard of it) but it is worth it. Also, the power you get when using LaTeX with [Sweave](https://www.stat.uni-muenchen.de/~leisch/Sweave/) or [knitr](http://yihui.name/knitr/) simply cannot be underestimated. Apart from exporting bibtex from Papers, the other tools I use are:
+
+* [Sublime Text](http://www.sublimetext.com): This is a great, lightweight editor that has some great add-ons for typesetting that integrate with [Skim](http://skim-app.sourceforge.net). Skim is pretty nice, but I would really like Sublime to work with OS X's Preview.  
+* [texpad](https://www.texpadapp.com) is another good editor for OS X but, given the price, it might be difficult to argue that it is better than Sublime. It does hide a lot of the LaTeX junk that goes into typesetting a tex file but this is really a minor perk. 
+
+I gave [a talk at ENAR last year](https://dl.dropboxusercontent.com/u/10053401/KuhnENAR.pdf) related to this. We've since moved the book version control to github and have translated all of our `Sweave` code to `knitr`. 
+
+
+### My Journal Feeds
+
+In no particular order:
+
+* [BMC Bioinformatics - Latest Articles](http://www.biomedcentral.com/bmcbioinformatics/rss/)
+* [Computational Biology and Chemistry](http://rss.sciencedirect.com/publication/science/11514)
+* [Bioinformatics - current issue](http://bioinformatics.oxfordjournals.org/rss/current.xml)
+* [Bioinformatics](http://barf.jcowboy.org/bioinformatics.xml)
+* [Journal of Biomolecular Screening current issue](http://jbx.sagepub.com/rss/current.xml)
+* [Journal of Computational Biology - Table of Contents](http://www.liebertonline.com/action/showFeed?ui=0&mi=3fcrht&ai=rz&jc=cmb&type=etoc&feed=rss)
+* [RSC - Med. Chem. Commun. latest articles](http://feeds.rsc.org/rss/MD?format=xml)
+* [Chemometrics and Intelligent Laboratory Systems](http://rss.sciencedirect.com/publication/science/5232)
+* [Journal of Chemical Information and Modeling: Latest Articles (ACS Publications)](http://feeds.feedburner.com/acs/jcisd8)
+* [Journal of Computational Chemistry](http://bit.ly/127TmgW)
+* [Molecular Informatics](http://bit.ly/1vzOZF3)
+* [Journal of Medicinal Chemistry: Latest Articles (ACS Publications)](http://feeds.feedburner.com/acs/jmcmar)
+* [Journal of Chemometrics](http://bit.ly/1y9b14S)
+* [Journal of Cheminformatics - Latest Articles](http://www.jcheminf.com/latest/rss)
+* [PLOS ONE ML](http://bit.ly/15LgkvC)
+* [Latest Issue of Combinatorial Chemistry &#38; High Throughput Screening](http://api.ingentaconnect.com/content/ben/cchts/latest?format=rss)
+* [BMC Cell Biology - Latest Articles](http://www.biomedcentral.com/bmccellbiol/latest/rss)
+* [Nature reviews. Molecular cell biology[TA]](http://www.unboundmedicine.com/medline/ebm/journal/Nature_reviews._Molecular_cell_biology.rss)
+* [Nature Reviews Drug Discovery - Issue - nature.com science feeds](http://feeds.nature.com/nrd/rss/current)
+* [Nature Reviews Genetics - Issue - nature.com science feeds](http://www.nature.com/nrg/current_issue/rss)
+* [Genome Biology - Latest Articles](http://genomebiology.com/rss)
+* [Genome Research current issue](http://genome.cshlp.org/rss/current.xml)
+* [Drug Discovery Today](http://rss.sciencedirect.com/publication/science/5020)
+* [Nature Biological Sciences Research](http://feeds.nature.com/NatureBiologicalSciencesResearch)
+* [JMLR](http://jmlr.csail.mit.edu/jmlr.xml)
+* [Machine Learning (Online First)](http://www.springerlink.com/content/0885-6125/preprint/?export=rss)
+* [stat.ML updates on arXiv.org](http://arxiv.org/rss/stat.ML)
+* [PLOS ONE feature selection](http://bit.ly/1yw18wI)
+* [Machine Learning](http://rd.springer.com/search.rss?facet-content-type=Article&facet-journal-id=10994&channel-name=Machine%20Learning)
+* [Nature - Issue](http://feeds.nature.com/nature/rss/current)
+* [Journal of Statistical Software](http://www.jstatsoft.org/rss)
+* [Proceedings of the National Academy of Sciences Statistics](http://www.pnas.org/rss/Statistics.xml)
+* [Journal of the American Statistical Association: Table of Contents](http://amstat.tandfonline.com/action/showFeed?ui=0&mi=5ugd1w&ai=4ep&jc=uasa20&type=etoc&feed=rss)
+* [The American Statistician: Table of Contents](http://amstat.tandfonline.com/action/showFeed?ui=0&mi=5ugd1w&ai=4et&jc=utas20&type=etoc&feed=rss)
+* [Wiley Interdisciplinary Reviews: Computational Statistics](http://bit.ly/1vzPm2w)
+* [Computational Statistics & Data Analysis](http://rss.sciencedirect.com/publication/science/5880)
+* [physics.data-an updates on arXiv.or](http://arxiv.org/rss/physics.data-an)
+* [Electronic Journal of Statistics](http://projecteuclid.org/feeds/euclid.ejs_article_rss.xml)
+* [Pharmaceutical Statistics](http://bit.ly/127TKMh)
+* [Journal of the Royal Statistical Society: Series C (Applied Statistics)](http://bit.ly/1rGIWQJ)
+* [Biostatistics - current issue](http://biostatistics.oxfordjournals.org/rss/current.xml)
+* [Journal of the Royal Statistical Society: Series B (Statistical Methodology)](http://bit.ly/1zG0QC7)
+* [Nature Reviews Drug Discovery - Issue - nature.com science feeds](http://feeds.nature.com/nrd/rss/current)
+* [Drug Discovery Today](http://rss.sciencedirect.com/publication/science/5020)

@@ -1,0 +1,21 @@
+---
+title: "Confidence in Prediction"
+author: "Max Kuhn"
+date: "2/12/2013"
+categories:
+  - applicability domain
+  - Cubist
+  - extrapolation
+draft: false
+---
+
+
+A few colleagues have just published a paper on measuring the confidence in prediction in regression models ("I[nterpretable, Probability-Based Confidence Metric for Continuous Quantitative Structure-Activity Relationship Models](http://pubs.acs.org/doi/abs/10.1021/ci300554t)"). The idea is related to applicability domains: the region of the predictor space were the model can create reliable predictions. 
+
+Historically, the primary method for computing the applicability domain was to judge the similarity of new samples to the training set to characterize if the model would need to extrapolate for these samples. That doesn't take into account the training set outcomes or, more importantly, any regions inside the training set space where the model does not fit the data well. 
+
+The approach that this paper takes is to create a local root mean squared error that is weighted by the distance of the new sample to the nearest training set neighbors (inspired by the approach taken by [Quinlan (1993)](http://cs.ecs.baylor.edu/~hamerly/courses/5325_11s/papers/ibl/quinlan1993combining.pdf) for instance-based corrections in [Cubist](http://www.rulequest.com/cubist-info.html)). 
+
+We examine confidence in prediction methods in our book in the section "When Should You Trust Your Model’s Prediction?"
+
+Source: http://pubs.acs.org/doi/abs/10.1021/ci300554t

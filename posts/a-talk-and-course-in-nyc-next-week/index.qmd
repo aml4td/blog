@@ -1,0 +1,24 @@
+---
+title: "A Talk and Course in NYC Next Week"
+author: "Max Kuhn"
+date: "2015-03-13"
+categories:
+  - R
+  - presentations
+draft: false
+---
+
+![](preproc.png){fig-align="center"}
+
+I'll be giving talk on Tuesday February 17 (7:00PM-9:00PM) that will be an overview of predictive modeling. It will not be highly technical and here is the _current_ outline:
+
+* "Predictive modeling" definition
+* Some example applications
+* A short overview and example  
+* How is this different from what statisticians already do?
+* What can drive choice of methodology?
+* Where should we focus our efforts?
+
+The location is Thoughtworks NYC ([99 Madison Avenue, 15th Floor](http://maps.google.com/maps?f=q&hl=en&q=99+Madison+Avenue%2C+15th+Floor%2C+New+York%2C+NY%2C+10016%2C+us)).
+
+The next day (Wednesday Feb 18th) I will be teaching **Applied Predictive Modeling** for the [NYC Data Science Academy](http://nycdatascience.com/courses/applied-predictive-modeling-with-max-kuhn/) from 9:00am – 4:30pm at [205 E 42nd Street, New York, NY 10017](https://www.google.com/maps/dir/''/205+E+42nd+St,+New+York,+NY+10017/@40.7509392,-73.9757455,17z/data=!3m1!4b1!4m8!4m7!1m0!1m5!1m1!1s0x89c25903051dbcb7:0xfd2524007961b6fd!2m2!1d-73.9735997!2d40.7509392). This will focus on **R**. 

@@ -1,0 +1,17 @@
+---
+title: "Regression Solutions Available"
+author: "Max Kuhn"
+date: "2015-01-08"
+categories:
+  - R
+  - exercises
+draft: false
+---
+
+The github page for the APM exercises has been updated with three new files for Chapters 6-8 (the section on regression).
+
+The classifications section is in-progress.
+
+Here's one of our fancy-pants graphs:
+
+![](rmse.jpeg){fig-align="center"}

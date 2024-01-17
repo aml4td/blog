@@ -1,0 +1,19 @@
+---
+title: "Central Iowa R User Group Talk [Updated]"
+author: "Max Kuhn"
+date: "2016-01-18"
+categories:
+  - R user group
+  - R
+  - presentations
+draft: false
+---
+
+![](bounds.png){fig-align="center"}
+
+I'll be giving a talk ("Applied Predictive Modeling") to the [Central Iowa R User Group](http://www.meetup.com/Central-Iowa-R-User-Group/) on Thursday night at 6:00 PM to 8:00 PM (CST). 
+
+It looks like it will be broadcast live on YouTube. The link is [http://www.youtube.com/watch?v=99lnTku75Pc](http://www.youtube.com/watch?v=99lnTku75Pc).  
+
+Update: Here are my [sldies](TODO) and [code](TODO) for the session
+

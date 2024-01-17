@@ -1,0 +1,26 @@
+---
+title: "_Applied Predictive Modeling_ Blog"
+listing:
+  contents: posts
+  date-format: YYYY-MM-DD
+  sort: "date desc"
+  type: default
+  categories: false
+  sort-ui: true
+  filter-ui: false
+page-layout: full
+title-block-banner: true
+---
+
+This is a continuation of the blog that we made for our previous book ([original blog location](http://appliedpredictivemodeling.com/blog)). New posts, as of 2024, can be found here.
+
+The posts here are not associated with our employers; opinions are our own. 
+
+Other places that we create content: 
+
+- Tidyverse [blog](https://www.tidyverse.org/blog/)
+- `tidymodels.org`'s [_Learn_ pages](https://tidymodels.org/learn)
+
+<br><br>
+
+

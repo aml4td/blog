@@ -1,0 +1,16 @@
+---
+title: "caret webinar on Feb 25"
+author: "Max Kuhn"
+date: "2014-02-02"
+categories:
+  - R
+  - caret
+  - R user group
+draft: false
+---
+
+I"ll be doing a webinar with the Orange County R User Group on the [caret package](http://caret.r-forge.r-project.org/) on Tue, Feb 25, 2014 1:00 PM - 2:00 PM EST.
+
+Here is the url in case you are interested: https://www3.gotomeeting.com/register/673845982
+
+Thanks to Ray DiGiacomo for setting this up.

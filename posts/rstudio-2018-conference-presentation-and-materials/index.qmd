@@ -1,0 +1,25 @@
+---
+title: "RStudio 2018 Conference Presentation and Materials"
+author: "Max Kuhn"
+date: "2018-03-04"
+categories:
+  - R
+  - presentations
+  - caret
+  - rsample
+  - recipes
+  - tidyposterior
+  - RStudio
+draft: false
+---
+
+![](bayes-1.png){fig-align="center"}
+
+We've released our videos of the talks at the 2018 RStudio conference. My talk was Modeling in the Tidyverse [(video)](https://www.rstudio.com/resources/videos/modeling-in-the-tidyverse/) and I was also in the Tidyverse fireside chat [(video)](https://youtu.be/Ol1FjFR2IMU?t=27720). There are a lot of great talks on the [conference website](https://www.rstudio.com/resources/webinars/). 
+
+I also conducted a two day workshop on `caret` and the new modeling packages ([`recipes`](https://topepo.github.io/recipes/), [`rsample`](https://topepo.github.io/rsample/), [`tidyposterior`](https://topepo.github.io/tidyposterior/) and others) at the conference. The was no video of that, but all of the materials can be found in the [course GitHub repository](https://github.com/topepo/rstudio-conf-2018). 
+
+There will be at least one other workshop for this year on these topics. When that is finalized, I'll post the details here and on [on twitter](https://twitter.com/topepos). 
+
+(the image above is from the workshop and is from [`tidyposterior`](https://topepo.github.io/tidyposterior/))
+

@@ -1,0 +1,42 @@
+---
+title: "New Version of caret on CRAN"
+author: "Max Kuhn"
+date: "2015-01-05"
+categories:
+  - caret
+  - R
+  - feature engineering
+  - genetic algorithms
+  - simulated annealing
+draft: false
+---
+
+A new version of caret is on CRAN.
+
+![](ga_rf_profile.png){fig-align="center"}
+
+Some recent features/changes:
+
+* The license was changed to GPL >= 2 to accommodate new code from the [`GA`](http://cran.r-project.org/package=GA) package.
+* New feature selection functions [`gafs`](http://topepo.github.io/caret/GA.html) and [`safs`](http://topepo.github.io/caret/SA.html) were added, along with helper functions and objects, were added. The package [HTML](http://topepo.github.io/caret/) was updated to expand more about feature selection. I'll talk more about these functions in an upcoming blog post.
+* A reworked version of `nearZerVar` based on code from Michael Benesty was added the old version is now called `nzv` that uses less memory and can be used in parallel.
+* `sbfControl` now has a `multivariate` option where all the predictors are exposed to the scoring function at once.
+* Several regression simulation functions were added: `SLC14_1`, `SLC14_2`, `LPH07_1` and `LPH07_2`
+* For the input data `x` to `train`, we now respect the class of the input value to accommodate other data types (such as sparse matrices).
+* A function `update.rfe` was added.
+
+
+Recently added models:
+
+* From the [`adabag`](http://cran.r-project.org/package=adabag) package, two new models were added: `AdaBag` and `AdaBoost.M1`.
+* Weighted subspace random forests from the [`wsrf`](http://cran.r-project.org/package=wsrf) package was added.
+* Additional bagged FDA and MARS models were added (model codes `bagFDAGCV` and `bagEarthGCV`) were added that use the GCV statistic to prune the model. This leads to memory reductions during training.
+* Brenton Kenkel added ordered logistic or probit regression to `train` using `method = "polr"` from `MASS`
+* The adaptive mixture discriminant model from the [`adaptDA`](http://cran.r-project.org/package=adaptDA) package
+* A robust mixture discriminant model from the [`robustDA`](http://cran.r-project.org/package=robustDA) package was added.
+* The multi-class discriminant model using binary predictors in the [`binda`](http://cran.r-project.org/package=binda) package was added.
+* Ensembles of partial least squares models (via the [`enpls`](http://cran.r-project.org/package=enpls) package) was added.
+* [`plsRglm`](http://cran.r-project.org/package=plsRglm) was added.
+* From the [`kernlab`](http://cran.r-project.org/package=kernlab) package, SVM models using string kernels were added: `svmBoundrangeString`, `svmExpoString`, `svmSpectrumString`
+* The model code for `ada` had a bug fix applied and the code was adapted to use the "sub-model trick" so it should train faster.
+

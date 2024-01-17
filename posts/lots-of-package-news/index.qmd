@@ -1,0 +1,33 @@
+---
+title: "Lots of Package News"
+author: "Max Kuhn"
+date: "2017-12-11"
+categories:
+  - R
+  - caret
+  - recipes
+  - C5.0
+  - Cubist
+  - Bayesian models
+draft: false
+---
+
+![](recipes_rsample.png){fig-align="center"}
+
+I've sent a slew of packages to CRAN recently (thanks to Swetlana and Uwe). There are updates to: 
+
+* [`caret`](https://topepo.github.io/caret) was primarily updated to deal with an issue introduced in the last version. It is a good idea to avoid fully loading the underlying modeling packages to avoid name conflicts. We made that change in the last version and it ended up being more complex than thought. A quirk in the regression tests missed it too but the whole thing can be avoided by _loading the modeling package_. [`news` file](https://cran.r-project.org/web/packages/caret/news.html)
+
+* [`rsample`](https://topepo.github.io/rsample) had some modest additions including bridges to `caret` and `recipes`. The website added more application examples (times series and survival analysis). [`news` file](https://topepo.github.io/rsample/news/)
+
+* [`recipes`](https://topepo.github.io/recipes) had more substantial enhancments including six new steps, a better interface for creating interactions (using [selectors](https://topepo.github.io/recipes/reference/selections.html)), and the ability to save the processed data in a sparse format. [`news` file](topepo.github.io/recipes/news/)
+
+* [`Cubist`](https://topepo.github.io/Cubist/) and [`C50`](https://topepo.github.io/C5.0/) have been updated and brought into the age of `roxygen` and `pkgdown`. `C5.0` now has a nice plot method _a la_ `partykit` and now has a vignette. I'll be adding a few features to each over time. 
+
+
+Two **new** packages:
+
+* [`yardstick`](https://topepo.github.io/yardstick) contains many of the performance measurement methods in `caret` but in a format that is easier to use with `dplyr` syntax and functional programming. 
+
+* [`tidyposterior`](https://topepo.github.io/tidyposterior) is a Bayesian version of `caret`'s `resamples` function. It can be used to take the resampling results from multiple models and do more formal statistical comparisons. It is similar _in spirit_ to [Benavoli et al (2017)](http://jmlr.org/papers/v18/16-305.html). We are looking for [***nominations for the hex logo***](https://twitter.com/dataandme/status/930820142900174848) so please offer your suggestions (but keep it clean). 
+

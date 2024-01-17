@@ -1,0 +1,21 @@
+---
+title: "What Was Left Out"
+author: "Max Kuhn"
+date: "2/10/2013"
+categories:
+  - time series
+  - generalized additive models
+  - ensembles
+draft: false
+---
+
+There were a few topics that just couldn't be added to the book due to time and, especially, space. For a project like this, the old saying is "you're never done, you just stop working on it". 
+
+First, the [generalized additive model](http://en.wikipedia.org/wiki/Generalized_additive_model) is one of my favorites. It is simple, effective and has the added bonus of of giving the user an idea of the functional form of relationship between the  predictor and outcome. We describe the same ideas for cubic smoothing splines, but the GAM model is probably more flexible. 
+
+Time series models were also excluded since they are fundamentally different than the models we describe (where the training set points are independent). There is a strong literature on using neural networks for these models. I would recommend [Rob Hyndman](http://robjhyndman.com/)'s [book](http://www.exponentialsmoothing.net/) on this subject. 
+
+Finally, ensembles of different models were not included. For example, for a particular data set, a random forest, support vector machine and naive Bayes might be fit to the training data and their individual predictions could be combined into a single prediction per sample. We do discuss other ensemble models (e.g. boosting, bagging etc). Good resources on this topic and [Seni and Elder (2010)](http://www.amazon.com/gp/product/1608452840/) and [Kuncheva (2004)](http://www.wiley.com/WileyCDA/WileyTitle/productCd-0471210781.html. 
+
+At least this gives us some topics for a potential second addition. 
+

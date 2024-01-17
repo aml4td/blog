@@ -1,0 +1,20 @@
+---
+title: "useR! 2014 Highlights"
+author: "Max Kuhn"
+date: "2014-07-03"
+categories:
+  - R
+  - useR!
+  - caret
+draft: false
+---
+
+* My talk went well; here are the [slides](TODO) and a link to the [paper pre-print](http://arxiv.org/abs/1405.6974).
+* Hadley Wickham gave an [excellent tutorial](http://bit.ly/dplyr-tutorial) on `dplyr`.
+* Based on the talk I saw, I think I will take the data sets from the book and make some public visualizations on the [`Plotly`](http://nbviewer.ipython.org/gist/mkcor/0ee7c73d9ba4c68ddc1a/) website. 
+* There were a few presentations on interactive graphics that were very good ([here](http://user2014.stat.ucla.edu/abstracts/talks/185_Vaidyanathan.pdf), [here](http://user2014.stat.ucla.edu/abstracts/talks/74_Chang.pdf) and [here](http://nbviewer.ipython.org/gist/mkcor/0ee7c73d9ba4c68ddc1a/)). 
+* Tal Galili gave an excellent talk on visualizing and analyzing hierarchical clustering algorithms.
+* The HeR session was great. I also learned about [R-ladies](http://www.meetup.com/R-ladies/).
+* [Revolution Analytics](https://github.com/RevolutionAnalytics/RRT) and [RStudio](http://rstudio.github.io/packrat/) proposed two similar techniques for preserving versions for better reproducibility.
+* The [subsemble](http://cran.r-project.org/web/packages/subsemble/index.html) package by Erin LeDell was impressive.
+* I had dinner with John Chambers, which was pretty cool too.  

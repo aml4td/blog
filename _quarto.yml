@@ -1,0 +1,26 @@
+project:
+  type: website
+  output-dir: docs
+  preview:
+    port: 4202
+
+website:
+  title: "Applied Machine Learning for Tabular Data"
+  site-url: "https://blog.aml4td.org"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/aml4td/blog
+
+format:
+  html:
+    toc: true
+    theme: [simplex, includes/aml4td-blog.scss]
+    mainfont: 'Libre Franklin'
+    fig-width: 6
+    fig-height: 4.25
+    fig-align: center
+    tbl-cap-location: bottom
+    fig-cap-location: bottom
+    keep-md: false

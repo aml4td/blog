@@ -1,0 +1,16 @@
+---
+title: "DataCamp Course [UPDATE]"
+author: "Max Kuhn"
+date: "2016-09-26"
+draft: false
+---
+
+Zachary Deane-Mayer, who collaborates on `caret`, has put together a DataCamp course on Machine Learning in R. 
+
+Zach and DataCamp did a great job of developing a course that is just right for people who are relatively new to R. 
+
+The really cool thing about the course is that their system lets you execute the R code as the instructors walk you through it (on their system). If you are taking the class on your work machine and can’t easily get R, this takes all the burden of getting an install together. You can just focus on the code and the reasons why you might approach a problem in that way. 
+
+(Disclosure: I contributed some videos to the course but I don't make any money from it or DataCamp)
+
+[update] As much as I'd love recommend Zach's work, please avoid using DataCamp because of the [sexual assult issues](https://www.businessinsider.com/datacamp-ceo-made-uninvited-physical-contact-with-employee-sources-say-2019-4) and [cover up](https://www.buzzfeednews.com/article/daveyalba/datacamp-sexual-harassment-metoo-tech-startup). 

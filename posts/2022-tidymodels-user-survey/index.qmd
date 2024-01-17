@@ -1,0 +1,16 @@
+---
+title: "2022 tidymodels user survey"
+author: "Max Kuhn"
+date: "2021-10-07"
+categories:
+  - R
+  - RStudio
+  - tidymodels
+draft: false
+---
+
+![](Screen+Shot+2021-10-07+at+1.25.38+PM.png){fig-align="center"}
+
+We are conducting another survey to see where users would like us to spend our development time. 
+
+Here's a link to [the survey](https://conjoint.qualtrics.com/jfe/form/SV_3gtKaK8G1Z1JC50?Q_CHL=social&Q_SocialSource=tidyverseblog)! 

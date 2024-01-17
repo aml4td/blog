@@ -1,0 +1,26 @@
+---
+title: 'type = "what"?'
+author: "Max Kuhn"
+date: "2013-06-13"
+categories:
+  - R
+  - class probabilities
+  - caret
+draft: false
+---
+
+One great thing about R is that has a wide diversity of packages written by many different people of many different viewpoints on how software should be designed. However, this does tend to bite us periodically.  
+
+When I teach newcomers about R and predictive modeling, I have a slide that illustrates one of the weaknesses of this system: heterogeneous interfaces. If you are building a classification model and want to generate class probabilities for new samples, the syntax can be... diverse. Here is a sample of syntax for different models:
+
+![](table.png){fig-align="center"}
+
+
+That's a lot of minutia to remember. I did a quick and dirty census of all the classification models used by caret to quantify the variability in this particular syntax. The [`train`](http://caret.r-forge.r-project.org/training.html) utilizes 64 different models that can produce class probabilities. Of these, many were from the same package. For example, both `nnet` and `multinom` are in the [nnet](http://cran.r-project.org/web/packages/nnet/index.html) package and probably should not count twice since the latter is a wrapper for the former. As another example, the [RWeka](http://cran.r-project.org/web/packages/RWeka/index.html) packages has at least six functions that all use `probability` as the value for `type`. 
+
+For this reason, I cooked the numbers down to one value of `type` per package (using majority vote if there was more than one). There were 40 different packages once these redundancies were eliminated. Here is a histogram of the `type` values for calculating probabilities: 
+
+![](freqs.png){fig-align="center"}
+The most frequent situation is no `type` value at all. For example, the `lda` package automatically generated predicted classes and posterior probabilities without requiring the user to specify anything. There were a handful of cases where the class did not have a `predict` method to generate class probabilities (e.g. [party](http://cran.r-project.org/web/packages/party/index.html) and [pamr](http://cran.r-project.org/web/packages/pamr/index.html)) and these also counted as "none".
+
+For those of us that use R to create predictive models on a day-to-day basis, this is a lot of detail to remember (especially if we want to try different models). This is one of the reasons I created [caret](http://cran.r-project.org/web/packages/caret/index.html); it has a unified interface to models that eliminates the need to remember the name of the function, the value of `type` and any other arguments. In case you are wondering, I chose **`type = "prob"'**.  

@@ -1,0 +1,14 @@
+---
+title: "ASA Talk in New York This Thursday (11/14)"
+author: "Max Kuhn"
+date: "2013-11-09"
+categories:
+  - presentations
+draft: false
+---
+
+I'll be giving a [talk on predictive modeling](http://nycasa.org/nov_14_2013_nycasa.html) for the American Statistical Association next Thursday (the 14th) :
+
+> **Predictive Modeling: An Introduction and a Disquisition in Three Parts**
+>
+> The primary goal of predictive modeling (aka machine learning) (aka pattern recognition) is to produce the most accurate prediction for some quantity of interest. In this talk, I will give a brief introduction as well as as a discussion on three topics: the friction between interpretability and accuracy, the role of Big Data and the current unmet needs.

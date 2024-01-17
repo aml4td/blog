@@ -1,0 +1,36 @@
+---
+title: "Exercise Solutions"
+author: "Max Kuhn"
+date: "2014-10-01"
+categories:
+  - exercises
+draft: false
+---
+
+I'm finally recovering form the summer and will start posing again soon.
+
+In the meantime, Kjell and I have made some progress on the exercise solutions. We'd like some feedback from the readers and instructors on how to release them:
+
+> Hello,
+> 
+> Thank you for contacting Max and me regarding solutions to exercises in Applied Predictive Modeling. We took a needed break after completing the manuscript, and we're now working on compiling the exercise solutions.
+> 
+> Over the past year, we have had requests for solutions from practitioners who are applying these techniques and approaches in their work, professors who are using the text in their classes, and students who are taking a course which uses APM as a text.
+> 
+> Given that the text is being used in courses and that the exercises may be assigned as part of the coursework, we'd like to be sensitive to those professors and not completely divulge our solutions. At the same time, we would also like to provide as many solutions as possible for practitioners who are working through the exercises to improve their skills. These are clearly two different audiences with different needs.
+> 
+> That said, the general nature of predictive modeling and the way we have worded many of the exercises provide the potential for a number of possible "correct" solutions--not just the solutions that we provide.
+> 
+> Springer, our publisher, has suggested one possible solution by offering to host a password protected website for exercise solutions. Another potential path would be to provide solutions to select exercises (e.g. odd numbered exercises). At the other extreme, we could post all solutions.
+> 
+> In the context of this background, we have some questions for you:
+> 
+> For those of you who are professors using APM as a text, what approach to exercise solutions would be most useful to you? Would you be negatively impacted if we published solutions to all exercises?
+> 
+> For those of you who are practitioners, what approach would be the best alternative (to publishing all solutions) for you, given that the text is being used in courses?
+> 
+> We welcome your feedback and other ideas you have for providing exercise solutions.
+> 
+> Thanks, and we look forward to hearing from you.
+
+> Best regards,Kjell(`kjell@arboranalytics.com`) and Max (`max.kuhn@pfizer.com`)

@@ -1,0 +1,16 @@
+---
+title: "2016 UK Tour"
+author: "Max Kuhn"
+date: "2016-09-26"
+categories:
+  - R user group
+  - R
+  - presentations
+draft: false
+---
+
+I'll be in the UK next week doing three talks in three days: 
+
+* First, I'll be giving a talk at the [London R-Ladies meetup](http://www.meetup.com/rladies-london/events/233061594/) on Monday October 3rd with perhaps the best title yet: ***Whose Scat Is That? An 'Easily Digestible' Introduction to Predictive Modeling and `caret`***. 
+* On Tuesday, October 4th I'm giving a talk at the [Cambridge RUG](https://www.meetup.com/Cambridge-R-Users-Group-Meetup/events/234302826/) on tuning hyperparameters using optimization algorithms. This is an extension of [this blog post](http://blog.revolutionanalytics.com/2016/06/bayesian-optimization-of-machine-learning-models.html).  
+* Finally, on Wednesday (the 5th) at the fantastic [Nonclinical Statistics Conference](http://www.ncs-conference.org/), I'll be speaking on ***Statistical Mediation in Early Discovery by Bayesian Analysis and Visualization***. The banner image above is from this talk. Lots of priors and [shiny apps](http://shiny.rstudio.com). 

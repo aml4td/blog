@@ -1,0 +1,20 @@
+---
+title: "Boston R User Group Talk [UPDATE]"
+author: "Max Kuhn"
+date: "2016-03-04"
+categories:
+  - R user group
+  - R
+  - presentations
+  - rule-based models
+draft: false
+---
+
+![](sacremento.png){fig-align="center"}
+
+I'll be giving a talk on [Boston R user Group](http://www.meetup.com/Boston-useR/) on  Thursday March 10th at 6:00 PM. The talk will be on rule-based regression models. 
+
+The image above is the training/test set split for the data that I'll be using the illustrate the models. 
+
+Slides can be found [here](TODO). Someone took video and I will link to that if it is posted soemwhere. 
+

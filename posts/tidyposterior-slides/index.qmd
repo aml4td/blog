@@ -1,0 +1,17 @@
+---
+title: "tidyposterior slides"
+author: "Max Kuhn"
+date: "2018-05-04"
+categories:
+  - R
+  - presentations
+  - tidyposterior
+  - resampling
+  - Bayesian models
+draft: false
+---
+
+![](repeats.gif){fig-align="center"}
+[`tidyposterior`](https://topepo.github.io/tidyposterior/) is an R package for comparing models based on their resampling statistics. There are a few case studies on the webpage to illustrate the process. 
+
+I gave a talk at the [Open Data Science Conference (ODSC)](https://odsc.com/boston) yesterday. A pdf of the slides are [here](TODO). 
