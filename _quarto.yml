@@ -5,7 +5,7 @@ project:
     port: 4202
 
 website:
-  title: "Applied Machine Learning for Tabular Data"
+  title: "_Applied Predictive Modeling_ Blog"
   site-url: "https://blog.aml4td.org"
   navbar:
     right:
