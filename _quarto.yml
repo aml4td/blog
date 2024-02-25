@@ -5,7 +5,7 @@ project:
     port: 4202
 
 website:
-  title: "_Applied Predictive Modeling_ Blog"
+  title: "Applied Predictive Modeling Blog"
   site-url: "https://blog.aml4td.org"
   navbar:
     right:
