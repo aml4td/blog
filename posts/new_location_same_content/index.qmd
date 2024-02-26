@@ -6,6 +6,7 @@ categories:
   - books
   - blog
 draft: false
+image: "cropped.jpg"
 ---
 
 This is the new home for the Applied Predictive Modeling blog. 
@@ -18,3 +19,4 @@ We kept the old blog name, which might be a little confusing since we are focusi
 
 Instead of having discussions inside the blog posts, we’ll create [GitHub issues](https://github.com/aml4td/blog/issues) when we ask for community feedback and folks can respond there. 
 
+(The banner image is by [Jorge Vasconez](https://unsplash.com/photos/body-of-water-during-sunset-c4cWawGBFv8?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash))

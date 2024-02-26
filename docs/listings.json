@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/new_location_same_content/index.html",
       "/posts/2022-tidymodels-user-survey/index.html",
       "/posts/tidymodels-updates-and-voting/index.html",
       "/posts/slides-from-rpharma/index.html",
