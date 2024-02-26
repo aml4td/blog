@@ -116,7 +116,6 @@ ctrl <- trainControl(method = "repeatedcv",
                      index = cvIndex)
 ```
 
-
 To run the optimization, the code will be similar to the GA code used in the last two posts:
 
 ```r

@@ -43,7 +43,7 @@ names(caretSA)
 ## [5] "initial"        "perturb"        "prob"           "selectIter"    
 ```
 
-These functions are detailed on the packages [web page](http://topepo.github.io/caret/SA.html#custom. We will make a copy of this and change the method of measuring performance using hold-out samples:
+These functions are detailed on the packages [web page](http://topepo.github.io/caret/SA.html#custom). We will make a copy of this and change the method of measuring performance using hold-out samples:
 
 ```r
 knnSA <- caretSA

@@ -7,7 +7,6 @@ categories:
 draft: false
 ---
 
-
 In Chapter 11, equivocal zones were briefly discussed. The idea is that some classification errors are close to the probability boundary (i.e. 50% for two class outcomes). If this is the case, we can create a zone where we the samples are predicted as "equivocal" or "indeterminate" instead of one of the class levels. This only works if the model does not incorrectly classify samples with complete (but wrong) confidence.
 
 In molecular diagnostics, many assays are required to have these zones for FDA approval and great care goes into their determination. If the assay returns an equivocal result, a recommendation would be made to repeat the assay or to obtain another sample.
