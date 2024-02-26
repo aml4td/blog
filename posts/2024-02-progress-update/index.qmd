@@ -1,0 +1,27 @@
+---
+title: "Progress Update (February 2024)"
+author: "Max Kuhn"
+date: "2024-03-02"
+categories:
+  - preprocessing
+  - updates
+draft: false
+image: "prep.png"
+---
+
+Since the last update on 2023-11-20, we have a few new sections and chapters. The goal is to have good first drafts of the “Preparation” chapters. As of 2024-03-01, they are:
+
+ - Initial Data Splitting ([drafted](https://aml4td.org/chapters/initial-data-splitting.html))
+ - Transforming Numeric Predictors ([drafted](https://github.com/aml4td/website/blob/main/chapters/numeric-predictors.qmd) but not published)
+ - Working with Categorical Predictors ([waiting for review](https://github.com/aml4td/website/pull/11))
+ - Embeddings
+	 - Linear methods (PCA, PLS, etc) not drafted
+	 - MDS sections ([waiting for review](https://github.com/aml4td/website/pull/11))
+	 - Other methods (nearest shrunken centroids, etc) in progress
+ - Interactions and Nonlinear Features
+	 - Interactions ([waiting for review](https://github.com/aml4td/website/pull/32))
+	 - Spline section (in progress, almost finished)
+	 - Discretization (in progress, almost finished)
+ - Missing Data (started)
+
+We’ll update the website once the first three chapters listed above have good drafts. Another update will follow when the others are done. 
