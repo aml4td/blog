@@ -9,6 +9,7 @@ categories:
   - benchmarking
   - R
 draft: false
+resources: "sim.Rmd"
 ---
 
 What is the objective of most data analysis? One way I think about it is that we are trying to discover or approximate what is really going on in our data (and in general, nature). However, I occasionally run into people think that if one model fulfills our expectations (e.g. higher number of significant p-values or accuracy) than it must be better than any other model that does not. For most data sets, we don't know what the truth is, so this is a problem. 
@@ -254,7 +255,7 @@ trueLarge
 
 At this point, we might want to look and see what would happen if all 200 non-informative predictors were uncorrelated etc. At least we have a testing tool to make objective statements. 
 
-Code to create this can be found here and will end up making its way into the caret package.
+Code to create this can be found [here](sim.Rmd) and will end up making its way into the caret package.
 
 Any suggestions for simulation systems?
 

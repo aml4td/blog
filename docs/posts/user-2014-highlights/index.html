@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.533">
+<meta name="generator" content="quarto-1.5.4">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Max Kuhn">
 <meta name="dcterms.date" content="2014-07-03">
 
-<title>Applied Predictive Modeling Blog - useR! 2014 Highlights</title>
+<title>Applied Predictive Modeling Blog – useR! 2014 Highlights</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -91,7 +91,7 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
-<span class="menu-text">about.html</span></a>
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/aml4td/blog"> <i class="bi bi-github" role="img">
@@ -109,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
     </div>
 <!-- main -->
@@ -152,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <ul>
-<li>My talk went well; here are the <a href="TODO">slides</a> and a link to the <a href="http://arxiv.org/abs/1405.6974">paper pre-print</a>.</li>
+<li>My talk went well; here are the <a href="adaptive.pdf">slides</a> and a link to the <a href="http://arxiv.org/abs/1405.6974">paper pre-print</a>.</li>
 <li>Hadley Wickham gave an <a href="http://bit.ly/dplyr-tutorial">excellent tutorial</a> on <code>dplyr</code>.</li>
 <li>Based on the talk I saw, I think I will take the data sets from the book and make some public visualizations on the <a href="http://nbviewer.ipython.org/gist/mkcor/0ee7c73d9ba4c68ddc1a/"><code>Plotly</code></a> website.</li>
 <li>There were a few presentations on interactive graphics that were very good (<a href="http://user2014.stat.ucla.edu/abstracts/talks/185_Vaidyanathan.pdf">here</a>, <a href="http://user2014.stat.ucla.edu/abstracts/talks/74_Chang.pdf">here</a> and <a href="http://nbviewer.ipython.org/gist/mkcor/0ee7c73d9ba4c68ddc1a/">here</a>).</li>
@@ -327,7 +327,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {

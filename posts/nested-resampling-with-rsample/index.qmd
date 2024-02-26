@@ -8,6 +8,7 @@ categories:
   - cross-validation
   - R
 draft: false
+resources: "nested_svm.Rmd"
 ---
 
 A typical scheme for splitting the data when developing a predictive model is to create an initial split of the data into a training and test set. If resampling is used, it is executed on the training set where a series of binary splits is created. In `rsample`, we use the term analysis set for the data that are used to fit the model and the assessment set is used to compute performance:
@@ -270,7 +271,7 @@ sqrt(mean((large_dat$y - large_pred)^2, na.rm = TRUE))
 
 The nested procedure produces a closer estimate to the approximate truth but the non-nested estimate is very similar. There is some optimization bias here but it is very small (for these data and this model).
 
-The R markdown document used to create this post can be found [here](TODO)
+The R markdown document used to create this post can be found [here](nested_svm.Rmd)
 
 The session information is:
 

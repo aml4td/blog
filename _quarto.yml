@@ -3,6 +3,9 @@ project:
   output-dir: docs
   preview:
     port: 4202
+  render:
+    - "*.qmd" 
+    - "!*.Rmd"
 
 website:
   title: "Applied Predictive Modeling Blog"

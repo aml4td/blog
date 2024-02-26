@@ -8,10 +8,13 @@ categories:
   - shiny
   - tidyverse
 draft: false
+resources: 
+  - "RPharma_18_Kuhn.pdf"
+  - "RPharma_18_Kuhn.zip"
 ---
 
 ![](tpost_lung.png){fig-align="center"}
 
-My slides from the R/Pharma conference on "Modeling in the Tidyverse" are in [pdf format](TODO) as well as the [HTML version](TODO). 
+My slides from the R/Pharma conference on "Modeling in the Tidyverse" are in [pdf format](RPharma_18_Kuhn.pdf) as well as the [HTML version](RPharma_18_Kuhn.zip). 
 
 (Joe Cheng just killed it in his shiny presentation - see [this repo](https://github.com/jcheng5/rpharma-demo))

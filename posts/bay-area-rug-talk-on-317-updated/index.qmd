@@ -8,6 +8,7 @@ categories:
   - R user group
   - PAW
 draft: false
+resources: "caret.pdf"
 ---
 
 I'm making my yearly pilgrimage to San Fransico to [teach](http://www.predictiveanalyticsworld.com/sanfrancisco/2014/r_for_predictive_modeling.php) at [PAW](http://www.predictiveanalyticsworld.com/sanfrancisco/2014). 
@@ -16,4 +17,4 @@ I'll also be giving a short talk at the [Bay Area R Users Group](http://www.meet
 
 It is at 7:00 PM on Monday March 17th at San Francisco Marriott Marquis
 
-The slide deck is here.
+The slide deck is [here](caret.pdf).

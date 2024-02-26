@@ -11,6 +11,7 @@ categories:
   - multivariate regression splines
   - R
 draft: false
+resources: "GA2.Rmd"
 ---
 
 Previously, I talked about genetic algorithms (GA) for feature selection and illustrated the algorithm using a modified version of the [GA](http://cran.r-project.org/web/packages/GA/index.html) R package and [simulated data](http://appliedpredictivemodeling.com/blog/2013/4/11/a-classification-simulation-system). The data were simulated with 200 non-informative predictors and 12 linear effects and three non-linear effects. Quadratic discriminant analysis (QDA) was used to model the data. The [last set of analyses](http://appliedpredictivemodeling.com/blog/2013/4/29/feature-selection-strikes-back-part-1) showed, _for these data_, that:
@@ -311,9 +312,7 @@ The model used additive functions of the predictor data (which may result in an 
 
 The results indicate that a single FDA model does better than the best possible QDA model and the model fitting process was much model simplistic and straight-forward _for these data_. This may not always be true. This simulation system has non-linear terms that QDA should not be able to model (and FDA/MARS can), so it is not a completely fair comparison.
 
-The code for these analyses can be found [**here.**][1]
-
-[1]: /s/GA2.Rmd
+The code for these analyses can be found [here](GA2.Rmd).
 
 The next post in this series looks at another wrapper-based feature selection algorithm: particle swarm optimization. 
 

@@ -1,0 +1,338 @@
+```{r startup,echo=FALSE,results='hide',message=FALSE}
+## knit("GA.Rmd", "GA1.md")
+library(caret)
+library(ggplot2)
+library(reshape2)
+library(RColorBrewer)
+library(GA)
+library(pROC)
+library(desirability)
+library(doMC)
+registerDoMC(14)
+
+source("binary_pso.R")
+
+twoClassSim <- function(n = 100, 
+                        intercept = -5,
+                        linearVars = 10,
+                        noiseVars = 0,    ## Number of uncorrelated x's
+                        corrVars = 0,     ## Number of correlated x's
+                        corrType = "AR1", ## Corr structure ('AR1' or 'exch')
+                        corrValue = 0)    ## Corr parameter)
+{
+  require(MASS)
+  sigma <- matrix(c(2,1.3,1.3,2),2,2)
+  
+  tmpData <- data.frame(mvrnorm(n=n, c(0,0), sigma))
+  names(tmpData) <- paste("TwoFactor", 1:2, sep = "")
+  if(linearVars > 0)
+  {
+    tmpData <- cbind(tmpData, matrix(rnorm(n*linearVars), ncol = linearVars))
+    colnames(tmpData)[(1:linearVars)+2] <- paste("Linear", gsub(" ", "0", format(1:linearVars)), sep = "")
+  }
+  tmpData$Nonlinear1 <- runif(n, min = -1)
+  tmpData <- cbind(tmpData, matrix(runif(n*2), ncol = 2))
+  colnames(tmpData)[(ncol(tmpData)-1):ncol(tmpData)] <- paste("Nonlinear", 2:3, sep = "")
+  
+  tmpData <- as.data.frame(tmpData)
+  p <- ncol(tmpData)
+  
+  if(noiseVars > 0)
+  {
+    tmpData <- cbind(tmpData, matrix(rnorm(n * noiseVars), ncol = noiseVars))
+    colnames(tmpData)[(p+1):ncol(tmpData)] <- paste("Noise", 
+                                                    gsub(" ", "0", format(1:noiseVars)), 
+                                                    sep = "")
+  }
+  if(corrVars > 0)
+  {
+    p <- ncol(tmpData)
+    library(nlme)
+    library(MASS)
+    if(corrType == "exch")
+    {
+      vc <- corCompSymm(value = corrValue, form = ~ 1 | vars)
+      vc <- Initialize(vc, data = data.frame(vars = rep(letters[1], each = noiseVars)))
+      vc <- as.matrix(vc)
+    }
+    if(corrType == "AR1")
+    {
+      vc <- corAR1(value = corrValue, form = ~ 1 | vars)
+      vc <- Initialize(vc, data = data.frame(vars = rep(letters[1], each = corrVars)))
+      vc <- as.matrix(vc)
+    }    
+    tmpData <- cbind(tmpData, mvrnorm(n, mu = rep(0, corrVars), Sigma = vc))
+    colnames(tmpData)[(p+1):ncol(tmpData)] <- paste("Corr", 
+                                                    gsub(" ", "0", format(1:corrVars)), 
+                                                    sep = "")
+  }  
+  lp <- intercept -
+    4 * tmpData$TwoFactor1 + 4*tmpData$TwoFactor2 + 
+    2*tmpData$TwoFactor1*tmpData$TwoFactor2 + 
+    (tmpData$Nonlinear1^3) + 2 * exp(-6*(tmpData$Nonlinear1 - 0.3)^2) +
+    2*sin(pi*tmpData$Nonlinear2* tmpData$Nonlinear3) 
+  
+  if(linearVars > 0)
+  {
+    lin <- seq(10, 1, length = linearVars)/4 
+    lin <- lin * rep(c(-1, 1), floor(linearVars)+1)[1:linearVars] 
+    for(i in seq(along = lin)) lp <- lp + tmpData[, i+3]*lin[i]
+  }
+  
+  prob <- binomial()$linkinv(lp)
+  tmpData$Class <- ifelse(prob <= runif(n), "Class1", "Class2")
+  tmpData$Class <- factor(tmpData$Class, levels = c("Class1", "Class2"))
+  
+  tmpData
+}
+
+rocColors <- c("black", "grey", brewer.pal(8,"Dark2"))
+
+set.seed(114)
+example <- matrix(rnorm(8*4), ncol = 4)
+colnames(example) <- paste("particle", 1:4, sep = "_")
+#rownames(example) <- paste("predictor", 1:5, sep = "")
+x2index(example)
+
+
+```
+
+"Bees don't swarm in a mango grove for nothing. Where can you see a wisp of smoke without a fire?" - Hla Stavhana
+
+In the [last](http://appliedpredictivemodeling.com/blog/2013/4/29/feature-selection-strikes-back-part-1) [two](http://appliedpredictivemodeling.com/blog/2013/5/8/feature-selection-strikes-back-part-2) posts, genetic algorithms were used as feature wrappers to search for more effective subsets of predictors. Here, I will do the same with another type of search algorithm: particle swarm optimization. 
+
+Like genetic algorithms, this search procedure is motivated by nature phenomenon, such as the movements of bird flocks. An excellent good reference for this technique is [Poli et al (2007)](http://scholar.google.com/scholar?q=%22Particle+swarm+optimization%22+author%3APoli). The methodology was originally developed for optimizing real valued parameters, but was later adapted for discrete optimization by [Kennedy and Eberhart (1997)](http://scholar.google.com/scholar?q=%22A+discrete+binary+version+of+the+particle+swarm+algorithm%22+author%3AKennedy). 
+
+The optimization is initiated with random positions and velocities and each particle produces a fitness value. As with genetic algorithms, this is some measure of model fit. A particular value of a subsets is analogous to a particle's _position_. In addition to a position, each particle (i.e. subset of predictors) has an associated _velocity_. The next candidate set of predictors that a particle evaluates is based on it's last position and it's current velocity. 
+
+A swarm of particle are evaluated at once and the location of the best particle is determined. As the velocity of each particle is updated, the update is a function of it's:
+
+1. previous velocity, 
+2. last position and
+3. the position of the best particle
+
+There are other parameters of the search procedure, such as the number of particles or how much relative weight the positions of the individual and best particle are used to determine the next candidate point, but this is the basic algorithm in a nutshell. 
+
+As an example, consider optimzing the Rosenbrock function with two variables (_A_ and _B_):
+
+<pre>
+fitness = 100*(B - A^2)^2 + (A - 1)^2
+</pre>
+
+The best value is at (_A_ = 1, _B_ = 1). This gif shows a particle swarm optimization for 100 iterations. The predicted best (solid white dot) is consistently in the neighborhood of the optimum value at around 50 iterations. 
+
+gif
+
+When searching for subsets, the quantities that we search over are binary (i.e. the predictor is used or excluded from the model). The description above implies that the position is a real valued quantity. If the positions are centered around zero, [Kennedy and Eberhart (1997)](http://scholar.google.com/scholar?q=%22A+discrete+binary+version+of+the+particle+swarm+algorithm%22+author%3AKennedy) suggested using a sigmoidal function to translate this value be between zero and one. A uniform random number is used to determine the binary version of the position that is evaluated. Other strategies have been proposed, including the application of a simple threshold to the translated position (i.e. if the translated position is above 0.5, include the predictor).
+
+`R` has the [`pso`](http://cran.r-project.org/web/packages/pso/index.html) package that implements this algorithm. It does not work for discrete optimization that we need for feature selection. Since its licensed under the GPL, I took the code and removed the parts specific to real valued optimization. That code is **here**. I structured it to be similar to the R code for genetic algorithms. One input into the modified `pso` function is a list that has modules for fitting the model, generating predictions, evaluating the fitness function and so on. I've made some changes so that each particle can return multiple values and will treat the first as the fitness function. I'll fit the same QDA model as before to the same simulated data set. First, here are the QDA functions:
+
+```{r pso_funcs}
+qda_pso <- list(
+  fit = function(x, y, ...)
+    {
+    if(ncol(x) > 0)
+      {
+      mod <- train(x, y, "qda", 
+                   metric = "ROC",
+                   trControl = trainControl(method = "repeatedcv", 
+                                            repeats = 1,
+                                            summaryFunction = twoClassSummary,
+                                            classProbs = TRUE))
+      } else mod <- nullModel(y = y)
+    mod
+    },
+  fitness = function(object, x, y)
+    {
+    if(ncol(x) > 0)
+      {
+      testROC <- roc(y, predict(object, x, type = "prob")[,1], 
+                     levels = rev(levels(y)))
+      largeROC <- roc(large$Class, 
+                      predict(object, large[,names(x),drop = FALSE], type = "prob")[,1], 
+                      levels = rev(levels(y)))  
+      out <- c(Resampling = caret:::getTrainPerf(object)[, "TrainROC"],
+               Test = as.vector(auc(testROC)), 
+               Large_Sample = as.vector(auc(largeROC)),
+               Size = ncol(x))
+      } else {
+        out <- c(Resampling = .5,
+                 Test = .5, 
+                 Large_Sample = .5,
+                 Size = ncol(x))
+        print(out)
+        }
+    out
+    },
+  predict = function(object, x)
+    {
+    library(caret)
+    predict(object, newdata = x)
+    }
+  )
+```
+
+Here is the familiar code to generate the simulated data:
+
+```{r data,cache=TRUE}
+set.seed(468)
+training <- twoClassSim(  500, noiseVars = 100, corrVar = 100, corrValue = .75)
+testing  <- twoClassSim(  500, noiseVars = 100, corrVar = 100, corrValue = .75)
+large    <- twoClassSim(10000, noiseVars = 100, corrVar = 100, corrValue = .75)
+realVars <- names(training)
+realVars <- realVars[!grepl("(Corr)|(Noise)", realVars)]
+cvIndex <- createMultiFolds(training$Class, times = 2)
+ctrl <- trainControl(method = "repeatedcv",
+                     repeats = 2,
+                     classProbs = TRUE,
+                     summaryFunction = twoClassSummary,
+                     allowParallel = FALSE,
+                     index = cvIndex)
+```
+
+To run the optimization, the code will be similar to the GA code used in the last two posts:
+
+```{r pso_run,cache=TRUE}
+set.seed(235)
+psoModel <- psofs(x = training[,-ncol(training)],
+                  y = training$Class,
+                  iterations = 200,
+                  functions = qda_pso,
+                  verbose = FALSE,
+                  parallel = TRUE,
+                  tx = testing[,-ncol(testing)],
+                  ty = testing$Class)
+```
+
+Since this is simulated data, we can evaluate how well the search went using estimates of the fitness (the area under the ROC curve)  calculated using different data sets: resampling, a test set of 500 samples and large set of 10,000 samples that we use to approximate the truth. 
+
+The swarm did move to smaller subsets but, as with the original GA, it overfits to the predictors. This is demonstrated by the increase in the resampled fitness estimates and mediocre test/large sample estimates: 
+
+```{r psoIters,results='hide',message=FALSE,echo=FALSE,cache=TRUE}
+summ <- ddply(psoModel$fitness, .(iter),
+              function(x)
+                {
+                  keep <- c(which.min(x$Resampling)[1], which.max(x$Resampling)[1],
+                           which(x$Resampling == median(x$Resampling))[1])
+                  x <- x[keep,]
+                  x$Group = c("Worst", "Best", "Median")
+                  x
+                })
+
+vert_summ <- melt(summ, measure.vars = c("Resampling", "Test", "Large_Sample"))
+```
+
+```{r pso_ROC,fig.height=6,fig.width=10,echo=FALSE}
+qplot(iter, value, data =  subset(vert_summ, Group == "Best"), 
+      size = Size,
+      color = variable) + labs(y = "Best Area Under the ROC Curve", x= "Iteration")
+```
+
+```{r pso_ROCobj,cache=TRUE}
+psoLarge <- roc(large$Class, 
+                predict(psoModel$fit, 
+                        large[, psoModel$bestVars[[1]]], type = "prob")[,1], 
+                levels = rev(levels(large$Class)))
+
+```
+
+```{r rocPlottPSO,results='hide',message=FALSE,echo=FALSE}
+load("/Volumes/HD2/Dropbox/Website/Blog/GA02/ga1.RData")
+plot(trueLarge, col = rocColors[1], lwd = 2)
+plot(fullLarge, col = rocColors[2], lwd = 2, lty = 2, add = TRUE)
+plot(rfeLarge, col = rocColors[3], lwd = 2, add = TRUE)
+plot(finalDLarge, col = rocColors[4], lwd = 2, add = TRUE)
+plot(psoLarge, col = rocColors[5], lwd = 2, add = TRUE)
+plot(fdaLarge , col = rocColors[6], lwd = 2, add = TRUE)
+
+legend(.4, .5, c("Correct Predictors", "All Predictors", "RFE", "Genetic Algo (D)", "PSO", "FDA"), 
+       col = rocColors[1:6],
+       lwd = rep(2,6), lty = c(1, 2, 1, 1, 1))
+
+```
+
+One tactic that helped the GA was to bias the algorithm towards smaller subsets. For PSO, this can be accomplished during the conversion from real valued positions to binary encodings. The previous code used a value of 1 for a predictor if the "squashed" version (i.e. after applying a sigmoidal function) was greater than 0.5. We can bias the subsets by increasing the threshold. This should start the process with smaller subsets and, since we raise the criteria for activating a predictor, only increase the subset size if there is a considerable increase in the fitness function. Here is the code for that conversion and another run of the PSO:
+
+```{r pso_small,cache=TRUE}
+smallerSubsets <- function(x)
+{  
+  binary <- binomial()$linkinv(x)
+  binary <- ifelse(binary >= .7, 1, 0) 
+  apply(binary, 2, function(x) which(x == 1))
+}
+set.seed(235)
+psoSmallModel <- psofs(x = training[,-ncol(training)],
+                       y = training$Class,
+                       iterations = 200,
+                       convert = smallerSubsets,
+                       functions = qda_pso,
+                       verbose = FALSE,
+                       parallel = TRUE,
+                       tx = testing[,-ncol(testing)],
+                       ty = testing$Class)
+```
+
+```{r pso_small_Iters,results='hide',message=FALSE,echo=FALSE,cache=TRUE}
+summ_small <- ddply(psoSmallModel$fitness, .(iter),
+              function(x)
+                {
+                  keep <- c(which.min(x$Resampling)[1], which.max(x$Resampling)[1],
+                           which(x$Resampling == median(x$Resampling))[1])
+                  x <- x[keep,]
+                  x$Group = c("Worst", "Best", "Median")
+                  x
+                })
+
+vert_summ_small <- melt(summ_small, measure.vars = c("Resampling", "Test", "Large_Sample"))
+```
+
+The results are much better:
+
+```{r pso_small_ROC,fig.height=6,fig.width=10,echo=FALSE}
+qplot(iter, value, data =  subset(vert_summ_small, Group == "Best"), 
+       size = Size,
+       color = variable) + labs(y = "Best Area Under the ROC Curve", x= "Iteration")
+```
+
+The large-sample and test set fitness values agree with the resampled versions. A smoothed version of the number of predictors over iterations shows that the search is driving down the number of predictors and keeping them low: 
+
+```{r pso_small_Size,fig.height=6,fig.width=10,echo=FALSE}
+qplot(iter, Size, data =  subset(vert_summ_small, Group == "Best" & variable == "Resampling"), 
+      geom = "smooth", se = FALSE, degree = 2, span = .3, method = "loess")+ 
+  labs(y = "Best Subset Size", x= "Iteration")
+```
+
+
+```{r pso_ROCobj_small,cache=TRUE,echo=FALSE,results='hide'}
+psoSmall <- roc(large$Class, 
+                predict(psoSmallModel$fit, 
+                        large[, psoSmallModel$bestVars[[1]]], type = "prob")[,1], 
+                levels = rev(levels(large$Class)))
+
+```
+
+Here are the large-sample ROC curves for the approaches shown thus far:
+
+```{r load,results='hide',message=FALSE,echo=FALSE,cache=TRUE}
+load("/Volumes/HD2/Dropbox/Website/Blog/GA02/ga1.RData")
+load("/Volumes/HD2/Dropbox/Website/Blog/GA02/ga2.RData")
+```
+
+```{r rocPlotSmall,results='hide',message=FALSE,echo=FALSE}
+plot(trueLarge, col = rocColors[1], lwd = 2)
+plot(fullLarge, col = rocColors[2], lwd = 2, lty = 2, add = TRUE)
+plot(rfeLarge, col = rocColors[3], lwd = 2, add = TRUE)
+plot(finalDLarge, col = rocColors[4], lwd = 2, add = TRUE)
+plot(fdaLarge, col = rocColors[5], lwd = 2, add = TRUE)
+plot(psoSmall, col = rocColors[6], lwd = 2, add = TRUE)
+
+legend(.4, .5, c("Correct Predictors", "All Predictors", 
+                 "RFE", "Genetic Algo (D)", "FDA", "PSO"), 
+       col = rocColors[1:6],
+       lwd = rep(2,6), lty = c(1, 2, 1, 1, 1,1))
+
+```
+
+For the simulated data, the GA and PSO procedures effectively reduced the number of predictors. After reading the last few posts, one could easily remark that I was only able to do this since I knew what the answers should be. If the optimal subset size was not small, would these approaches have been effective? The next (and final) post will apply these methods to a real data set. 
+
+The code for these analyses are **here** and the modified PSO code is **here**. Thanks to Claus Bendtsen for the original `pso` code and for answering me email.

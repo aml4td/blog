@@ -8,11 +8,10 @@ categories:
   - Kaggle
   - presentations
 draft: false
+resources: "KuhnYale.pdf"
 ---
 
-Recently I've had several questions about using machine learning models with large data sets. [Here is a talk][1] I gave at [Yale's Big Data Symposium](http://www.cs.yale.edu/calendars/schultz_symposium.html) on the subject.
-
-[1]: /s/KuhnYale.pdf
+Recently I've had several questions about using machine learning models with large data sets. [Here is a talk](KuhnYale.pdf) I gave at [Yale's Big Data Symposium](http://www.cs.yale.edu/calendars/schultz_symposium.html) on the subject.
 
 I believe that, with a few exceptions, less data is more. Once you get beyond some "large enough" _number of samples_, most models don't really change that much and the additional computation burden is likely to cause practical problems with model fitting.  
 

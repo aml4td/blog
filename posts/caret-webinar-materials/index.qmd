@@ -7,9 +7,10 @@ categories:
   - caret
   - presentations
 draft: false
+resources: "webinar.pdf"
 ---
 
-The webinar was recorded (thanks to Ray DiGiacomo and the Orange County RUG). The slides are [here](https://max-kuhn.squarespace.com/s/webinar.pdf) minus a few typos. 
+The webinar was recorded (thanks to Ray DiGiacomo and the Orange County RUG). The slides are [here](webinar.pdf) minus a few typos. 
 
 {{< video https://youtu.be/7Jbb2ItbTC4 >}}
 
