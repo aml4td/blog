@@ -40,3 +40,4 @@ Recently added models:
 * From the [`kernlab`](http://cran.r-project.org/package=kernlab) package, SVM models using string kernels were added: `svmBoundrangeString`, `svmExpoString`, `svmSpectrumString`
 * The model code for `ada` had a bug fix applied and the code was adapted to use the "sub-model trick" so it should train faster.
 
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2014/11/28/caret-update))

@@ -20,3 +20,5 @@ It looks like it will be broadcast live on YouTube. The link is [http://www.yout
 
 Update: Here are my [sldies](CIRUG.pdf) and [code](CIRUG.R) for the session
 
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2016/1/18/central-iowa-r-user-group-talk))

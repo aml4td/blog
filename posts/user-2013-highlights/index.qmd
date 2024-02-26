@@ -28,4 +28,4 @@ I'm hoping that the presentations will be posted on the website.
 
 Albacete was very nice, as was the food and beer. Next year, the conference will be in [Los Angeles](http://user2014.stat.ucla.edu/). It should be a lot of fun.
 
-
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/7/13/user-2013-highlights))

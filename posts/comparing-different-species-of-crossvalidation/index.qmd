@@ -101,8 +101,4 @@ The next post will look at:
 
 EDIT: based on the comments, [here](sim099_100.R) is one of the simulation files. I broke them up to run in parallel on our grid but they are all the same (except the seeds). [Here](cv1.Rmd) is the markdown file for the post if you want the plot code or are interested to see how I summarized the results. 
 
-
-
-
-
-
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2014/11/27/vpuig01pqbklmi72b8lcl3ij5hj2qm))

@@ -82,3 +82,5 @@ The code and results can be found [here](https://github.com/topepo/par-caret-ben
 
 
 
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2018/1/17/parallel-processing))

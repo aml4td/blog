@@ -19,3 +19,5 @@ resources: "adaptive.pdf"
 * [Revolution Analytics](https://github.com/RevolutionAnalytics/RRT) and [RStudio](http://rstudio.github.io/packrat/) proposed two similar techniques for preserving versions for better reproducibility.
 * The [subsemble](http://cran.r-project.org/web/packages/subsemble/index.html) package by Erin LeDell was impressive.
 * I had dinner with John Chambers, which was pretty cool too.  
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2014/7/2/pa84uk1g16yeglv9dw1499p46lucas))

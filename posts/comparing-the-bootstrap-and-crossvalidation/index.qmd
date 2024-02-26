@@ -73,9 +73,4 @@ The _bad news_ is that:
 * There are a limited number of performance estimates where the OOB estimate can be computed. This is mostly due to software limitations (as opposed to theoretical concerns). For the `caret` package, we can compute RMSE and R<sup>2</sup> for regression and accuracy and the Kappa statistic for classification but this is mostly by taking the output that the `randomForest` function provides. If you want to get the area under the ROC curve or some other measure, you are out of luck. 
 * If you are comparing random forest’s OOB error rate with the CV error rate from another model, it may not be a very fair comparison. 
 
-
-
-
-
-
-
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2014/11/27/08ks7leh0zof45zpf5vqe56d1sahb0))

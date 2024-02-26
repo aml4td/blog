@@ -53,4 +53,4 @@ Alternatively, for applications where there is a tight boundary
 between two classes, mislabeling could markedly affect the
 perceived class divide."
 
-
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2014/2/18/p7ekgrnv5rme1r0t7kq5p5egu8h9se))

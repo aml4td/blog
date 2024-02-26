@@ -316,5 +316,4 @@ The code for these analyses can be found [here](GA2.Rmd).
 
 The next post in this series looks at another wrapper-based feature selection algorithm: particle swarm optimization. 
 
-
-
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/5/8/feature-selection-strikes-back-part-2))

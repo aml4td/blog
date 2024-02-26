@@ -31,3 +31,5 @@ Two **new** packages:
 
 * [`tidyposterior`](https://topepo.github.io/tidyposterior) is a Bayesian version of `caret`'s `resamples` function. It can be used to take the resampling results from multiple models and do more formal statistical comparisons. It is similar _in spirit_ to [Benavoli et al (2017)](http://jmlr.org/papers/v18/16-305.html). We are looking for [***nominations for the hex logo***](https://twitter.com/dataandme/status/930820142900174848) so please offer your suggestions (but keep it clean). 
 
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2017/11/15/some-package-updates))

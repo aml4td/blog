@@ -67,3 +67,5 @@ So the results here indicate that:
 
 Accuracy is arguably a much better quality to have relative to correlation. 
 
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2017/4/24/do-resampling-estimates-have-low-correlation-to-the-truth-the-answer-may-shock-you))

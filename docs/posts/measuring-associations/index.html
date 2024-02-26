@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.4">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Max Kuhn">
 <meta name="dcterms.date" content="2013-06-21">
-
 <title>Applied Predictive Modeling Blog – Measuring Associations</title>
 <style>
 code{white-space: pre-wrap;}
@@ -58,7 +55,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
@@ -74,8 +70,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -102,16 +97,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-
-
 </head>
-
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Applied Predictive Modeling Blog</span>
@@ -123,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
@@ -133,24 +123,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text"></span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
+</div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">Measuring Associations</h1>
   <div class="quarto-categories">
     <div class="quarto-category">R</div>
@@ -184,55 +168,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header>
-
-
-<p>In Chapter 18, we discuss a relatively new method for measuring predictor importance called the maximal information coefficient (MIC). The original paper is by <a href="http://scholar.google.com/scholar?q=%22DETECTING+NOVEL+ASSOCIATIONS+IN+LARGE+DATA+SETS%22">Reshef at al (2011)</a>.</p>
+</header><p>In Chapter 18, we discuss a relatively new method for measuring predictor importance called the maximal information coefficient (MIC). The original paper is by <a href="http://scholar.google.com/scholar?q=%22DETECTING+NOVEL+ASSOCIATIONS+IN+LARGE+DATA+SETS%22">Reshef at al (2011)</a>.</p>
 <p>A summary of the initial reactions to the MIC are <a href="http://www.sciencemag.org/content/334/6062/1502.short">Speed</a> and <a href="http://www-stat.stanford.edu/~tibs/reshef/comment.pdf">Tibshirani</a> (and others can be found <a href="http://scholar.google.com/scholar?cites=17152416007763542209&amp;as_sdt=8005&amp;sciodt=0,7&amp;hl=en">here</a>). My (minor) beef with it is the lack of a probabilistic motivation. The authors have some general criteria (generality and equitability) and created an algorithm that seems to good in terms of these properties. The MIC clearly works, but what is it really optimizing and why?</p>
 <p>It reminds me of partial least squares. The algorithm made intuitive sense and obviously worked, but it was a while before anyone actually figured out what mathematical problem it was solving. A similar statement could be made about boosting when it was first developed.</p>
 <p><a href="http://arxiv.org/abs/1303.1828">Murrell et al (2013)</a> (or Murrell<sup>3</sup>?) has a similar generalized measure of association between continuous variables. There’s is based on a generalized notion of R<sup>2</sup> that I’d never heard of. At first glance, it has a lot of attractive properties. One is that is has a probabilistic genesis. Another nice quality is that the association can be computed while controlling for other data. That is a big deal for me, since we often have experiments where we need to control for nuisance factors. For example, if you were trying to measure the relationship between the selling price of a house and the acerage of the lot, you might want to control for other factors, such as the type of terrain or geography (e.g.&nbsp;urban, rural etc).</p>
 <p>Despite the probabilistic motivation, they take a randomization approach to making formal statistical inferences on significance of the measure. The same could be done for the MIC measure (and in the book, we used the same idea for Relief scores). I think a confidence interval would be better for everyone since it directly tells you the uncertainty and the size of the association (that’s another post for another time for a topic that has been <a href="http://news.sciencemag.org/sciencenow/2009/10/30-01.html">discussed</a> <a href="http://www.reanimacao.com.br/biblioteca/a_20100121_04.pdf">quite</a> <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2352195/pdf/bmj00561-0050.pdf">a</a> <a href="http://www.physther.org/content/81/8/1464.full">bit</a>).</p>
 <p>Let’s look at some data. I like the blood-brain barrier data a lot. It has measurements on 208 drugs to see how much (if at all) they enter the brain. The predictors are molecular descriptors (similar to the solubility example in the book). To get the data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/topepo/caret/">caret</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: ggplot2</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: lattice</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(BloodBrain)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">## remove zero variance columns</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>isZV <span class="ot">&lt;-</span> <span class="fu">apply</span>(bbbDescr, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">length</span>(<span class="fu">unique</span>(x)) <span class="sc">==</span> <span class="dv">1</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>bbbDescr <span class="ot">&lt;-</span> bbbDescr[, <span class="sc">!</span>isZV]</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(bbbDescr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">BloodBrain</span><span class="op">)</span></span>
+<span><span class="co">## remove zero variance columns</span></span>
+<span><span class="va">isZV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">bbbDescr</span>, <span class="fl">2</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">bbbDescr</span> <span class="op">&lt;-</span> <span class="va">bbbDescr</span><span class="op">[</span>, <span class="op">!</span><span class="va">isZV</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">bbbDescr</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 134</code></pre>
 </div>
 </div>
 <p>First, I’ll measure association using the <em>A</em> measure discussed in Murrell<sup>3</sup>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(matie)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Compute the associations across all columns of the predictors</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Avalues <span class="ot">&lt;-</span> <span class="fu">apply</span>(bbbDescr, <span class="dv">2</span>, <span class="cf">function</span>(x, y) <span class="fu">ma</span>(<span class="fu">cbind</span>(x, y))<span class="sc">$</span>A, <span class="at">y =</span> logBBB)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>Avalues <span class="ot">&lt;-</span> <span class="fu">sort</span>(Avalues, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Avalues)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">matie</span><span class="op">)</span></span>
+<span><span class="co">## Compute the associations across all columns of the predictors</span></span>
+<span><span class="va">Avalues</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">bbbDescr</span>, <span class="fl">2</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/matie/man/ma.html">ma</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">A</span>, y <span class="op">=</span> <span class="va">logBBB</span><span class="op">)</span></span>
+<span><span class="va">Avalues</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">Avalues</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">Avalues</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     fnsa3   psa_npsa polar_area       tpsa      scaa3       tcnp 
- 0.4391562  0.4137334  0.4132176  0.3919149  0.3773555  0.3697039 </code></pre>
+ 0.4394103  0.4145948  0.4128770  0.3864214  0.3762745  0.3692587 </code></pre>
 </div>
 </div>
 <p>So the best predictor only explains 43.9% of the variation in the outcome. Most of the predictors shown above are related to surface area, which makes sense: the larger the molecule the less likely it is to physically fit through the barrier.</p>
 <p>What does MIC tell us?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(minerva)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="do">## There are three predictors whose scales have very low variances. We</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">## need to reset the threshold that checks for this</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>mic <span class="ot">&lt;-</span> <span class="fu">mine</span>(bbbDescr, logBBB, <span class="at">var.thr =</span> <span class="fl">1e-10</span>)<span class="sc">$</span>MIC</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>mic <span class="ot">&lt;-</span> mic[, <span class="st">"Y"</span>]</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mic) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(bbbDescr)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>mic <span class="ot">&lt;-</span> mic[<span class="fu">order</span>(mic, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)]</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">minerva</a></span><span class="op">)</span></span>
+<span><span class="co">## There are three predictors whose scales have very low variances. We</span></span>
+<span><span class="co">## need to reset the threshold that checks for this</span></span>
+<span><span class="va">mic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/minerva/man/mine.html">mine</a></span><span class="op">(</span><span class="va">bbbDescr</span>, <span class="va">logBBB</span>, var.thr <span class="op">=</span> <span class="fl">1e-10</span><span class="op">)</span><span class="op">$</span><span class="va">MIC</span></span>
+<span><span class="va">mic</span> <span class="op">&lt;-</span> <span class="va">mic</span><span class="op">[</span>, <span class="st">"Y"</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">mic</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">bbbDescr</span><span class="op">)</span></span>
+<span><span class="va">mic</span> <span class="op">&lt;-</span> <span class="va">mic</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">mic</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mic</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    fnsa3      rpcg     fpsa3     scaa1     scaa3  psa_npsa 
 0.5248916 0.4806339 0.4761844 0.4758696 0.4711854 0.4650277 </code></pre>
@@ -241,10 +222,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>There are some differences but the top predictor from <em>A</em> is still at the top. The MIC values is sort of a correlation-like measure and our best value was 0.52.</p>
 <p>I also have a measure of importance that is based on scatterplot smoothers. A loess smoother is fit between the outcome and the predictor and the R<sup>2</sup> statistic is calculated for this model against the intercept only null model. I don’t claim that there is any justification (which is why I’ve never published it) for this but it has worked for me in the past. This is similar to my statements about MIC and PLS. I still use them because they tend to work, but I’ve no theoretical leg to stand on.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">## A measure based on regression smoothers</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gamImp <span class="ot">&lt;-</span> <span class="fu">filterVarImp</span>(bbbDescr, logBBB, <span class="at">nonpara =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>gamImp <span class="ot">&lt;-</span> gamImp[<span class="fu">order</span>(gamImp<span class="sc">$</span>Overall, <span class="at">decreasing =</span> <span class="cn">TRUE</span>), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gamImp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## A measure based on regression smoothers</span></span>
+<span><span class="va">gamImp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/filterVarImp.html">filterVarImp</a></span><span class="op">(</span><span class="va">bbbDescr</span>, <span class="va">logBBB</span>, nonpara <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">gamImp</span> <span class="op">&lt;-</span> <span class="va">gamImp</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">gamImp</span><span class="op">$</span><span class="va">Overall</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, , drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gamImp</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Overall
 fnsa3      0.3970318
@@ -257,17 +238,17 @@ tpsa.1     0.3474503</code></pre>
 </div>
 <p>Finally, I’ll compute the RRelief scores. We discuss this in the book and the a good reference is <a href="http://lkm.fri.uni-lj.si/xaigor/slo/clanki/MLJ2003-FinalPaper.pdf">here</a>. It uses a nearest-neighbor approach and measures the importance of each predictors simultaneously (all of the other methods show here measure each association in isolation).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(CORElearn)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="do">## The function only uses the formula interface</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>bbbData <span class="ot">&lt;-</span> bbbDescr</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>bbbData<span class="sc">$</span>logBBB <span class="ot">&lt;-</span> logBBB</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>RRelief <span class="ot">&lt;-</span> <span class="fu">attrEval</span>(logBBB <span class="sc">~</span> ., <span class="at">data =</span> bbbData, <span class="at">estimator =</span> <span class="st">"RReliefFbestK"</span>, </span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ReliefIterations =</span> <span class="dv">100</span>)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>RRelief <span class="ot">&lt;-</span> RRelief[<span class="fu">order</span>(RRelief, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)]</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(RRelief)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://lkm.fri.uni-lj.si/rmarko/software/">CORElearn</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## The function only uses the formula interface</span></span>
+<span><span class="va">bbbData</span> <span class="op">&lt;-</span> <span class="va">bbbDescr</span></span>
+<span><span class="va">bbbData</span><span class="op">$</span><span class="va">logBBB</span> <span class="op">&lt;-</span> <span class="va">logBBB</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">RRelief</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/CORElearn/man/attrEval.html">attrEval</a></span><span class="op">(</span><span class="va">logBBB</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">bbbData</span>, estimator <span class="op">=</span> <span class="st">"RReliefFbestK"</span>, </span>
+<span>                    ReliefIterations <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">RRelief</span> <span class="op">&lt;-</span> <span class="va">RRelief</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">RRelief</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">RRelief</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     smr_vsa7      smr_vsa1 dipole_moment    peoe_vsa.0           pol 
     0.2622103     0.2577087     0.2524930     0.2452446     0.2366486 
@@ -278,22 +259,20 @@ tpsa.1     0.3474503</code></pre>
 <p>This score ranks the variables differently than the other methods. This is most likely due to the difference in philosophy in measuring association between this method and the others as well as the high degree of correlation between the predictors in these data.</p>
 <p>Overall, do these metrics correlate?</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="splom.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<figure class="figure"><p><img src="splom.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p>If you ignore RRelief, there is some association between measures of association. Interestingly, there are a few predictors that have zero association using the <em>A</em> measure but non-zero correlation using MIC. The variables, and their MIC values are: <code>peoe_vsa.2</code> (0.22), <code>slogp_vsa4</code> (0.2), <code>peoe_vsa.0</code> (0.19), <code>smr_vsa1</code> (0.18), <code>a_acid</code> (0.18), <code>peoe_vsa.2.1</code> (0.14) and <code>negative</code> (0.04). What do these look like? Here are scatterplots between these predictions and the outcome (with scatterplot smoother fits):</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="scat.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<figure class="figure"><p><img src="scat.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p>Several of these are “near zero variance” predictors and probably shouldn’t be evaluated. For this image, it is difficult for me to see the association between the response and <code>peoe_vsa.0</code> (MIC = 0.19) or <code>smr_vsa1</code> (MIC = 0.18).</p>
+<p>(This article was originally posted at <a href="https://appliedpredictivemodeling.com/blog/2013/6/6/jmt8dw6egtv977chpxs1oulmgy7ubx"><code>http://appliedpredictivemodeling.com</code></a>)</p>
 
 
 
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -681,7 +660,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-
 
 
 

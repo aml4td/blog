@@ -13,3 +13,5 @@ See [this](https://github.com/topepo/APM_Exercises) page. We're not done with th
 The `Rnw` files (using [knitr](http://yihui.name/knitr/) LaTeX) are there along with the corresponding pdf files. 
 
 You may have better solutions than we have here and we would love to see them. You can do so by [creating a pull request](https://help.github.com/articles/using-pull-requests/) or, if you are not git-savvy, drop an email to Max (max.kuhn@pfizer.com) and/or Kjell (kjell@arboranalytics.com).
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2014/11/12/solutions-on-github))

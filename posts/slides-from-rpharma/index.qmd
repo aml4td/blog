@@ -18,3 +18,5 @@ resources:
 My slides from the R/Pharma conference on "Modeling in the Tidyverse" are in [pdf format](RPharma_18_Kuhn.pdf) as well as the [HTML version](RPharma_18_Kuhn.zip). 
 
 (Joe Cheng just killed it in his shiny presentation - see [this repo](https://github.com/jcheng5/rpharma-demo))
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](http://appliedpredictivemodeling.com/blog/rpharma18))

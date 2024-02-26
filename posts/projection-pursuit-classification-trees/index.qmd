@@ -34,3 +34,4 @@ The bad news: the method is available in an [R package](http://cran.r-project.or
 I've [ranted about these issues before](https://stat.ethz.ch/pipermail/r-devel/2012-January/062935.html) and the package violates most of my checklist. Maybe this is just part of someone's dissertation and maybe they didn't know about this list etc. However, most of the items above should have been avoided. 
 
 
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/5/14/projection-pursuit-classification-trees))

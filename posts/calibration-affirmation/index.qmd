@@ -124,4 +124,4 @@ Much better! Looking at the right-hand side of the plot, the event rate of sampl
 
 This is a good example because, by most measures,the model performance is almost identical. However, one generates much more realistic values than the other.
 
-
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2014/1/4/1vhzbkjxf1bt757xymsiucqmunj3m4))

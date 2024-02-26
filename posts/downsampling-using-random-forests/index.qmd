@@ -152,3 +152,4 @@ rfDownIntRoc <- roc(evalResults$CARAVAN,
                     levels = rev(levels(training$CARAVAN)))
 ```
 
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/12/8/28rmc2lv96h8fw8700zm4nl50busep))

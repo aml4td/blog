@@ -139,3 +139,5 @@ One great thing about this code is that it will automatically apply the optimize
 ```
 
 However we should be careful because the probability values are not consistent with our usual notion of a 50-50 cut off.
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2014/2/1/lw6har9oewknvus176q4o41alqw2ow))

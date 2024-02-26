@@ -97,4 +97,4 @@ If you ignore RRelief, there is some association between measures of association
 
 Several of these are "near zero variance" predictors and probably shouldn't be evaluated. For this image, it is difficult for me to see the association between the response and `peoe_vsa.0` (MIC = 0.19) or `smr_vsa1` (MIC = 0.18).
 
-
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/6/6/jmt8dw6egtv977chpxs1oulmgy7ubx))

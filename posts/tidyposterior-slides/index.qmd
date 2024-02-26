@@ -17,3 +17,5 @@ resources: "Comparing_Models_Using_Resampling_and_Bayesian_Methods.pdf"
 [`tidyposterior`](https://topepo.github.io/tidyposterior/) is an R package for comparing models based on their resampling statistics. There are a few case studies on the webpage to illustrate the process. 
 
 I gave a talk at the [Open Data Science Conference (ODSC)](https://odsc.com/boston) yesterday. A pdf of the slides are [here](Comparing_Models_Using_Resampling_and_Bayesian_Methods.pdf). 
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/odsc18))

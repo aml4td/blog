@@ -23,3 +23,5 @@ There will be at least one other workshop for this year on these topics. When th
 
 (the image above is from the workshop and is from [`tidyposterior`](https://topepo.github.io/tidyposterior/))
 
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2018/3/4/rstudio-2018-conference-presentation-and-materials))

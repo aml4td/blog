@@ -108,7 +108,4 @@ Another plus for feature extraction is related to correlation. The predictors in
 Last year, in one of the R&D groups that I support, there was a bit of a war being waged between the scientists who focused on _biased_ analysis (i.e. we model what we know) versus the _unbiased_ crowd (i.e. just let the machine figure it out). I fit somewhere in-between and believe that there is a feedback loop between the two. The machine can flag potentially new and interesting features that, once explored, become part of the standard book of "known stuff". 
 
 
-
-
-
-
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2015/7/28/feature-engineering-versus-feature-extraction))

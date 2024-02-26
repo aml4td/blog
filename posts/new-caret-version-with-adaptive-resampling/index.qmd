@@ -34,4 +34,4 @@ The manuscript has more details about the other factors in the graph. One nice p
 
 These features should be considered experimental. Send me any feedback on them that you may have.
 
-
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2014/5/28/new-caret-version-with-adaptive-resampling))

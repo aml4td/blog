@@ -13,3 +13,4 @@ draft: false
 
 [Hugo Bowne-Anderson](https://twitter.com/hugobowne) and I spoke about about data science in pharmaceuticals, the tidyverse, and more for the excellent [DataFramed](https://www.datacamp.com/community/podcast) podcast from DataCamp. Listen to it [here](https://www.datacamp.com/community/podcast/data-science-pharmaceuticals) or through your favorite blogging app.  
 
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](http://appliedpredictivemodeling.com/blog/2018/7/30/podcast-on-nonclinical-statistics))

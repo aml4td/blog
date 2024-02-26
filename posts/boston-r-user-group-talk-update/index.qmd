@@ -19,3 +19,4 @@ The image above is the training/test set split for the data that I'll be using t
 
 Slides can be found [here](cubist_BRUG.pdf). Someone took video and I will link to that if it is posted soemwhere. 
 
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2016/3/4/boston-r-user-group-talk))

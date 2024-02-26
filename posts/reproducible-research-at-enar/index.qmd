@@ -18,3 +18,5 @@ I gave a talk at the Spring ENAR meetings this morning on some of the technical 
 I was dinged for not using git for version control (we used dropbox for simplicity) but overall the comments were good. There was a small panel at the end for answering questions, which were mostly related to proprietary systems (e.g. SAS).
 
 I was also approached by an editor for Computational Statistics in regards to writing all of this up, which I will when I get a free moment. 
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/3/11/reproducible-research-at-enar))

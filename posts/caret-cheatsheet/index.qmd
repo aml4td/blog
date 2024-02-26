@@ -11,3 +11,5 @@ draft: false
 ![](cheatsheet-thumb.png){fig-align="center"}
 
 It can be found on the [RStudio cheatsheet page](https://www.rstudio.com/resources/cheatsheets/). Suggestions and [pull requests](https://github.com/rstudio/cheatsheets/blob/master/source/caret-cheatsheet.key) are always welcome.
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2017/9/12/caret-cheatsheet))

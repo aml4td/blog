@@ -12,3 +12,5 @@ I'll be giving a [talk on predictive modeling](http://nycasa.org/nov_14_2013_nyc
 > **Predictive Modeling: An Introduction and a Disquisition in Three Parts**
 >
 > The primary goal of predictive modeling (aka machine learning) (aka pattern recognition) is to produce the most accurate prediction for some quantity of interest. In this talk, I will give a brief introduction as well as as a discussion on three topics: the friction between interpretability and accuracy, the role of Big Data and the current unmet needs.
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/11/9/asa-talk-in-new-york))

@@ -41,3 +41,4 @@ The [conference website](http://user2014.stat.ucla.edu) has updated their websit
 <font color = "red">UPDATE!</font> Since this is the case, I won't be giving out the book to all the attendees as I originally intended. However, the conference does supply tutorial presenters with a stipend so I will be using that to purchase about a dozen copies that I will randomly distribute to whoever attends. 
 
 Sorry for the confusion...
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2014/5/12/a-tutorial-and-talk-at-user-2014-important-update))

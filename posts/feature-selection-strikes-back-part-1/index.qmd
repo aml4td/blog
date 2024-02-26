@@ -259,7 +259,4 @@ The next blog post will look at modifications of the genetic algorithm that will
 The R packages loaded at the time of the analysis were: base (2.15.2), caret (5.15-87), cluster (1.14.3), datasets (2.15.2), doMC (1.2.5), foreach (1.4.0), GA (1.3), ggplot2 (0.9.2.1), graphics (2.15.2), grDevices (2.15.2), iterators (1.0.6), knitr (0.8), lattice (0.20-10), latticeExtra (0.6-24), MASS (7.3-22), methods (2.15.2), multicore (0.1-7), nlme (3.1-105), plyr (1.7.1), pROC (1.5.4), RColorBrewer (1.0-5), reshape2 (1.2.1), stats (2.15.2) and utils (2.15.2)
 
 
-
-
-
-
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/4/29/feature-selection-strikes-back-part-1))

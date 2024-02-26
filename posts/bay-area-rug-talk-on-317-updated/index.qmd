@@ -18,3 +18,5 @@ I'll also be giving a short talk at the [Bay Area R Users Group](http://www.meet
 It is at 7:00 PM on Monday March 17th at San Francisco Marriott Marquis
 
 The slide deck is [here](caret.pdf).
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2014/3/9/bay-area-rug-talk-on-315))

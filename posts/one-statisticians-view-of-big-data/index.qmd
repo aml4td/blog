@@ -35,3 +35,4 @@ My presentation has other examples of adding new information to increase the dim
 
 > The availability of Big Data should be a trigger to really re-evaluate what we are trying to solve and why this will help.
 
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/5/20/one-statisticians-view-of-big-data))

@@ -22,3 +22,5 @@ The 2 day course is a blend of `caret` and the newer tidy modeling pacakges (`re
 
 > The course focuses on both high-level approaches to modeling (e.g., the caret package) and newer modeling packages in the tidyverse: recipes, rsample, yardstick, and tidyposterior. **Basic familiarity with R and the tidyverse is required.**
 
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2018/4/10/new-workshop-in-washington-dc-august))

@@ -9,3 +9,4 @@ Kjell and I are putting together solutions to the exercise sections. It is a lot
 
 If you are teaching a class and are interested in using the book for a class, please drop me an email (`mxkuhn@gmail.com`). We would like to hear more about possible specifics. For example, we would like feedback on the format (e.g. pdf or web page), availability (e.g. password protected website?) or any other aspect.
 
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/8/30/exercises-and-solutions))

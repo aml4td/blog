@@ -185,3 +185,5 @@ And here are the large-sample ROC curves so far:
 For the simulated data, the GA and PSO procedures effectively reduced the number of predictors. After reading the last few posts, one could easily remark that I was only able to do this since I knew what the answers should be. If the optimal subset size was not small, would these approaches have been effective? The next (and final) post in this series will apply these methods to a real data set. 
 
 The code for these analyses are [here](pso.Rmd) and the modified PSO code is [here](binary_pso.R). Thanks to Claus Bendtsen for the original `pso` code and for answering my email.
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/6/4/feature-selection-3-swarm-mentality))

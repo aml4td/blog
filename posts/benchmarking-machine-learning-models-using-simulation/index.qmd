@@ -259,5 +259,4 @@ Code to create this can be found [here](sim.Rmd) and will end up making its way 
 
 Any suggestions for simulation systems?
 
-
-
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/4/11/a-classification-simulation-system))

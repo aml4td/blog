@@ -19,3 +19,5 @@ The approach that this paper takes is to create a local root mean squared error 
 We examine confidence in prediction methods in our book in the section "When Should You Trust Your Model’s Prediction?"
 
 Source: http://pubs.acs.org/doi/abs/10.1021/ci300554t
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/2/12/confidence-in-prediction))

@@ -266,3 +266,6 @@ From here, we could use a bunch of `mutate` commands like the one shown above or
 Any suggestions? I'm on twitter [`@topepos`](https://twitter.com/topepos)!
 
 (edit - fix fixed the formula call!)
+
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2018/3/12/2s3j82ctkrhxugq7hf3myoeeb49k8u))

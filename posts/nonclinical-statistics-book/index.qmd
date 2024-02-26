@@ -33,3 +33,5 @@ The hardcopy format will be released on February 14, 2016. I couldn't say whethe
 
 
  
+
+ (This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2016/2/6/nonclinical-statistics-book))
