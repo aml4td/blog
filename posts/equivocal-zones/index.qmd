@@ -14,7 +14,7 @@ In molecular diagnostics, many assays are required to have these zones for FDA a
 
 Does this actually work with a classification model? How would we do it in R?
 
-To illustrate this, I will use the two-class simulation system outlined [here](http://appliedpredictivemodeling.com/blog/2013/4/11/a-classification-simulation-system).
+To illustrate this, I will use the two-class simulation system outlined [here](../benchmarking-machine-learning-models-using-simulation/.
 
 For example:
 

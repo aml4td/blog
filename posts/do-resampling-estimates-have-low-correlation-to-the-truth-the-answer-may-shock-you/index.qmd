@@ -17,7 +17,7 @@ Let's look at this with some simulated data. While this assertion is often corre
 
 ### The Setup
 
-First, I simulated some 2-class data using [this simulation system](http://appliedpredictivemodeling.com/blog/2013/4/11/a-classification-simulation-system). There are 15 predictors in the data set. Many nonlinear classification models can achieve an area under the ROC curve in the low 0.90's on these data. The training set contained 500 samples and a 125 sample test set was also simulated. 
+First, I simulated some 2-class data using [this simulation system](../benchmarking-machine-learning-models-using-simulation/). There are 15 predictors in the data set. Many nonlinear classification models can achieve an area under the ROC curve in the low 0.90's on these data. The training set contained 500 samples and a 125 sample test set was also simulated. 
 
 I used a radial basis function support vector machine to model the data with a single estimate of the kernel parameter `sigma` and 10 values of the SVM cost parameter (on the log2 scale). The code for this set of simulations can be found [here](TODO) so that you can reproduce the results. 
 

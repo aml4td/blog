@@ -14,7 +14,7 @@ draft: false
 
 One of the toughest problems in predictive model occurs when the classes have a severe imbalance. We spend [an entire chapter](http://rd.springer.com/chapter/10.1007/978-1-4614-6849-3_16) on this subject itself. One consequence of this is that the performance is generally very biased against the class with the smallest frequencies. For example, if the data have a majority of samples belonging to the first class and very few in the second class, most predictive models will maximize accuracy by predicting everything to be the first class. As a result there's usually great sensitivity but poor specificity.
 
-As a demonstration will use a simulation system [described here](http://appliedpredictivemodeling.com/blog/2013/4/11/a-classification-simulation-system). By default it has about a 50-50 class frequency but we can change this by altering the function argument called <tt>intercept</tt>:
+As a demonstration will use a simulation system [described here](../benchmarking-machine-learning-models-using-simulation/). By default it has about a 50-50 class frequency but we can change this by altering the function argument called <tt>intercept</tt>:
 
 ```r
 library(caret)

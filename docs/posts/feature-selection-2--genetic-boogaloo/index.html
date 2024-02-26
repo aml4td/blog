@@ -189,7 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Previously, I talked about genetic algorithms (GA) for feature selection and illustrated the algorithm using a modified version of the <a href="http://cran.r-project.org/web/packages/GA/index.html">GA</a> R package and <a href="http://appliedpredictivemodeling.com/blog/2013/4/11/a-classification-simulation-system">simulated data</a>. The data were simulated with 200 non-informative predictors and 12 linear effects and three non-linear effects. Quadratic discriminant analysis (QDA) was used to model the data. The <a href="http://appliedpredictivemodeling.com/blog/2013/4/29/feature-selection-strikes-back-part-1">last set of analyses</a> showed, <em>for these data</em>, that:</p>
+<p>Previously, I talked about genetic algorithms (GA) for feature selection and illustrated the algorithm using a modified version of the <a href="http://cran.r-project.org/web/packages/GA/index.html">GA</a> R package and <a href="../benchmarking-machine-learning-models-using-simulation/">simulated data</a>. The data were simulated with 200 non-informative predictors and 12 linear effects and three non-linear effects. Quadratic discriminant analysis (QDA) was used to model the data. The <a href="http://appliedpredictivemodeling.com/blog/2013/4/29/feature-selection-strikes-back-part-1">last set of analyses</a> showed, <em>for these data</em>, that:</p>
 <ul>
 <li>The performance of QDA suffered from including the irrelevant terms.</li>
 <li>Using a resampled estimate area under the ROC curve resulted in selection bias and severely over-fit to the predictor set.</li>
@@ -448,7 +448,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 <p>The results indicate that a single FDA model does better than the best possible QDA model and the model fitting process was much model simplistic and straight-forward <em>for these data</em>. This may not always be true. This simulation system has non-linear terms that QDA should not be able to model (and FDA/MARS can), so it is not a completely fair comparison.</p>
-<p>The code for these analyses can be found <a href="../../posts/feature-selection-2--genetic-boogaloo/GA2.html">here</a>.</p>
+<p>The code for these analyses can be found <a href="GA2.Rmd">here</a>.</p>
 <p>The next post in this series looks at another wrapper-based feature selection algorithm: particle swarm optimization.</p>
 
 

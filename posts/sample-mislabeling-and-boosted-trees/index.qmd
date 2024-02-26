@@ -11,9 +11,9 @@ categories:
 draft: false
 ---
 
-A while back, I saw [this post](https://psportal.pfizer.com/psp/p88prod/?cmd=login&errorPg=ckreq&languageCd=ENG) on StackExchange/Crossvalidated: "Does anyone know how well C5.0 boosting performs in the presence of mislabeled data?" I did some simulations in order to make a comparison with gradient boosting machines (GBM).
+A while back, I saw [this post](https://stats.stackexchange.com/questions/77281/c5-0-boosting-and-mislabeled-data) on StackExchange/Crossvalidated: "Does anyone know how well C5.0 boosting performs in the presence of mislabeled data?" I did some simulations in order to make a comparison with gradient boosting machines (GBM).
 
-Some publications simulate mislabelling by sampling from distinct multivariate distirbutions for each class. I simulated two class data based on [this post](http://appliedpredictivemodeling.com/blog/2013/4/11/a-classification-simulation-system). Each simulated sample has an associated probability of being in class #1. A random uniform number is generated to assign each sample and observed class label. To mislabel X% of the data, a random set of samples are selected and the probability of being in class #1 is reversed.
+Some publications simulate mislabelling by sampling from distinct multivariate distirbutions for each class. I simulated two class data based on [this post](../benchmarking-machine-learning-models-using-simulation/). Each simulated sample has an associated probability of being in class #1. A random uniform number is generated to assign each sample and observed class label. To mislabel X% of the data, a random set of samples are selected and the probability of being in class #1 is reversed.
 
 
 Simulated data sets were simulated with training set sizes between 100 and 1000. The amount of mislabeled data also varied (at 5%, 10%, 15% and 20%). For each mislabeled data set, there is a matched training set (form the same random number seed) with no intentional mislabeling. For each of these configurations, 500 simulations were conducted.

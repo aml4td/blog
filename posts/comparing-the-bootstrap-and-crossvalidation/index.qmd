@@ -11,7 +11,7 @@ categories:
 draft: false
 ---
 
-This is the second of two posts about the performance characteristics of resampling methods. The [first post](http://appliedpredictivemodeling.com/blog/2014/11/27/vpuig01pqbklmi72b8lcl3ij5hj2qm) focused on the cross-validation techniques and this post mostly concerns the bootstrap. 
+This is the second of two posts about the performance characteristics of resampling methods. The [first post](../comparing-different-species-of-crossvalidation/) focused on the cross-validation techniques and this post mostly concerns the bootstrap. 
 
 
 Recall from the last post: we have some simulations to evaluate the precision and bias of these methods. I simulated some regression data (so that I know the real answers and compute the _true_ estimate of RMSE). The model that I used was random forest with 1000 trees in the forest and the default value of the tuning parameter. I simulated 100 different data sets with 500 training set instances. For each data set, I also used each of the resampling methods listed above 25 times using different random number seeds. In the end, we can compute the precision and average bias of each of these resampling methods. 

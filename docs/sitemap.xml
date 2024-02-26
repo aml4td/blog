@@ -34,7 +34,7 @@
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/sample-mislabeling-and-boosted-trees/index.html</loc>
-    <lastmod>2024-01-18T12:22:17.671Z</lastmod>
+    <lastmod>2024-02-26T20:28:57.739Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/rmedicine-conference/index.html</loc>
@@ -46,11 +46,11 @@
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/projection-pursuit-classification-trees/index.html</loc>
-    <lastmod>2024-01-18T12:22:17.669Z</lastmod>
+    <lastmod>2024-02-26T20:30:53.477Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/optimizing-probability-thresholds-for-class-imbalances/index.html</loc>
-    <lastmod>2024-01-18T12:22:17.668Z</lastmod>
+    <lastmod>2024-02-26T20:31:26.581Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/nonclinical-statistics-position-in-new-england/index.html</loc>
@@ -66,7 +66,7 @@
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/nested-resampling-with-rsample/index.html</loc>
-    <lastmod>2024-02-26T20:08:46.947Z</lastmod>
+    <lastmod>2024-02-26T20:20:48.903Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/measuring-associations/index.html</loc>
@@ -78,7 +78,7 @@
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/feature-selection-3--swarm-mentality/index.html</loc>
-    <lastmod>2024-02-26T19:35:16.831Z</lastmod>
+    <lastmod>2024-02-26T20:25:06.626Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/exercises-and-solutions/index.html</loc>
@@ -86,7 +86,7 @@
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/equivocal-zones/index.html</loc>
-    <lastmod>2024-01-18T12:22:17.652Z</lastmod>
+    <lastmod>2024-02-26T20:39:05.925Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/downsampling-using-random-forests/index.html</loc>
@@ -98,7 +98,7 @@
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/comparing-the-bootstrap-and-crossvalidation/index.html</loc>
-    <lastmod>2024-01-18T12:22:17.649Z</lastmod>
+    <lastmod>2024-02-26T20:29:54.014Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/central-iowa-r-user-group-talk-updated/index.html</loc>
@@ -186,7 +186,7 @@
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/do-resampling-estimates-have-low-correlation-to-the-truth-the-answer-may-shock-you/index.html</loc>
-    <lastmod>2024-01-18T12:22:17.650Z</lastmod>
+    <lastmod>2024-02-26T20:39:25.559Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/early-draft-of-our-feature-engineering-and-selection-book/index.html</loc>
@@ -202,7 +202,7 @@
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/feature-selection-strikes-back-part-1/index.html</loc>
-    <lastmod>2024-01-18T12:22:17.661Z</lastmod>
+    <lastmod>2024-02-26T20:37:04.835Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/lots-of-package-news/index.html</loc>
@@ -246,7 +246,7 @@
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/simulated-annealing-feature-selection/index.html</loc>
-    <lastmod>2024-02-26T19:58:25.240Z</lastmod>
+    <lastmod>2024-02-26T20:26:50.081Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/slides-from-rpharma/index.html</loc>
@@ -279,5 +279,13 @@
   <url>
     <loc>https://blog.aml4td.org/posts/user-2014-highlights/index.html</loc>
     <lastmod>2024-02-26T19:53:20.155Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/new-version-of-caret-on-cran/index.html</loc>
+    <lastmod>2024-01-18T12:22:17.667Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/feature-selection-2--genetic-boogaloo/index.html</loc>
+    <lastmod>2024-02-26T20:39:17.681Z</lastmod>
   </url>
 </urlset>

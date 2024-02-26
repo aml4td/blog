@@ -20,7 +20,7 @@ It is similar to [oblique trees](http://scholar.google.com/scholar?q=oblique+dec
 
 My intuition tells me that the `PPtree` model is somewhat less likely to over-flit the data. While it lacks a pruning algorithm, the nature of the splitting method might make it more robust to small fluctuations in the data. One way to diagnose this is using more comprehensive cross-validation and also assessing whether bagging helps this model. The splitting approach should also reduce the potential problem of bias towards predictors that are more granular. One other consequence of their tree-growing phase is that it eliminates the standard method of generating class probabilities (since it splits until purity).
 
-`PPtree`s might do a better job when there are a few linear predictors that drive classification accuracy. This could have been demonstrated [using simulation of some sort](http://appliedpredictivemodeling.com/blog/2013/4/11/a-classification-simulation-system). 
+`PPtree`s might do a better job when there are a few linear predictors that drive classification accuracy. This could have been demonstrated [using simulation of some sort](../benchmarking-machine-learning-models-using-simulation/). 
 
 A lot of tree methods have sub-algorithms for grouping categorical predictors. This model only works with such data as a set of disconnected dummy variables. This isn't good or bad since I have found a lot of variation in which type of encoding works with different tree methods.
 

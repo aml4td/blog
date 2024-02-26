@@ -1,0 +1,563 @@
+```{r startup,echo=FALSE,results='hide',message=FALSE}
+library(caret)
+library(ggplot2)
+library(reshape2)
+library(RColorBrewer)
+library(GA)
+library(latticeExtra)
+library(pROC)
+library(doMC)
+
+## for running in parallel
+##registerDoMC(15)
+ 
+twoClassSim <- function(n = 100, 
+                        intercept = -5,
+                        linearVars = 10,
+                        noiseVars = 0,    ## Number of uncorrelated x's
+                        corrVars = 0,     ## Number of correlated x's
+                        corrType = "AR1", ## Corr structure ('AR1' or 'exch')
+                        corrValue = 0)    ## Corr parameter)
+  {
+  require(MASS)
+  sigma <- matrix(c(2,1.3,1.3,2),2,2)
+  
+  tmpData <- data.frame(mvrnorm(n=n, c(0,0), sigma))
+  names(tmpData) <- paste("TwoFactor", 1:2, sep = "")
+  if(linearVars > 0)
+    {
+    tmpData <- cbind(tmpData, matrix(rnorm(n*linearVars), ncol = linearVars))
+    colnames(tmpData)[(1:linearVars)+2] <- paste("Linear", gsub(" ", "0", format(1:linearVars)), sep = "")
+    }
+  tmpData$Nonlinear1 <- runif(n, min = -1)
+  tmpData <- cbind(tmpData, matrix(runif(n*2), ncol = 2))
+  colnames(tmpData)[(ncol(tmpData)-1):ncol(tmpData)] <- paste("Nonlinear", 2:3, sep = "")
+  
+  tmpData <- as.data.frame(tmpData)
+  p <- ncol(tmpData)
+  
+  if(noiseVars > 0)
+    {
+    tmpData <- cbind(tmpData, matrix(rnorm(n * noiseVars), ncol = noiseVars))
+    colnames(tmpData)[(p+1):ncol(tmpData)] <- paste("Noise", 
+                                                    gsub(" ", "0", format(1:noiseVars)), 
+                                                    sep = "")
+    }
+  if(corrVars > 0)
+    {
+    p <- ncol(tmpData)
+    library(nlme)
+    library(MASS)
+    if(corrType == "exch")
+      {
+      vc <- corCompSymm(value = corrValue, form = ~ 1 | vars)
+      vc <- Initialize(vc, data = data.frame(vars = rep(letters[1], each = noiseVars)))
+      vc <- as.matrix(vc)
+      }
+    if(corrType == "AR1")
+      {
+      vc <- corAR1(value = corrValue, form = ~ 1 | vars)
+      vc <- Initialize(vc, data = data.frame(vars = rep(letters[1], each = corrVars)))
+      vc <- as.matrix(vc)
+      }    
+    tmpData <- cbind(tmpData, mvrnorm(n, mu = rep(0, corrVars), Sigma = vc))
+    colnames(tmpData)[(p+1):ncol(tmpData)] <- paste("Corr", 
+                                                    gsub(" ", "0", format(1:corrVars)), 
+                                                    sep = "")
+    }  
+  lp <- intercept -
+    4 * tmpData$TwoFactor1 + 4*tmpData$TwoFactor2 + 
+    2*tmpData$TwoFactor1*tmpData$TwoFactor2 + 
+    (tmpData$Nonlinear1^3) + 2 * exp(-6*(tmpData$Nonlinear1 - 0.3)^2) +
+    2*sin(pi*tmpData$Nonlinear2* tmpData$Nonlinear3) 
+  
+  if(linearVars > 0)
+    {
+    lin <- seq(10, 1, length = linearVars)/4 
+    lin <- lin * rep(c(-1, 1), floor(linearVars)+1)[1:linearVars] 
+    for(i in seq(along = lin)) lp <- lp + tmpData[, i+3]*lin[i]
+    }
+  
+  prob <- binomial()$linkinv(lp)
+  tmpData$Class <- ifelse(prob <= runif(n), "Class1", "Class2")
+  tmpData$Class <- factor(tmpData$Class, levels = c("Class1", "Class2"))
+  
+  tmpData
+  }
+getLarge <- function(ind, x, y, large, test, cntrl)
+  {
+  cntrl$verboseIter <- FALSE
+  cntrl$allowParallel <- TRUE
+  modFit <- train(x[,ind], y,
+                  method = "qda",
+                  metric = "ROC",
+                  trControl = cntrl)
+  testROC <- roc(test$Class, 
+                 predict(modFit,test[,ind,drop = FALSE],type = "prob")[,1], 
+                 levels = rev(levels(y)))
+  
+  largeROC <- roc(large$Class, 
+                  predict(modFit, large[,ind,drop = FALSE], type = "prob")[,1], 
+                  levels = rev(levels(y)))                 
+  c(Resampling = caret:::getTrainPerf(modFit)[1,"TrainROC"],
+    Test = as.vector(auc(testROC)), 
+    Large_Sample = as.vector(auc(largeROC)),
+    Size = length(ind),
+    NumLin = sum(ind %in% 1:12),
+    NumNonLin = sum(ind %in% 13:15),
+    NumUnCorr = sum(ind %in% 16:115),
+    NumCorr = sum(ind %in% 116:215))
+  }
+getLarge_test <- function(ind, x, y, large, test)
+  {
+  modFit <- qda(x[,ind], y)
+  testROC <- roc(test$Class, 
+                 predict(modFit, test[,ind,drop = FALSE])$posterior[,1], 
+                 levels = rev(levels(y)))
+  
+  largeROC <- roc(large$Class, 
+                  predict(modFit, large[,ind,drop = FALSE])$posterior[,1], 
+                  levels = rev(levels(y)))                 
+  c(Test = as.vector(auc(testROC)), 
+    Large_Sample = as.vector(auc(largeROC)),
+    Size = length(ind),
+    NumLin = sum(ind %in% 1:12),
+    NumNonLin = sum(ind %in% 13:15),
+    NumUnCorr = sum(ind %in% 16:115),
+    NumCorr = sum(ind %in% 116:215))
+  }
+
+rocColors <- c("black", "grey", brewer.pal(8,"Dark2"))
+```
+
+ 
+
+# Feature Selection Strikes Back (Part 1)
+
+In the feature selection chapter, we describe several search procedures ("wrappers") that can be used to optimize the number of predictors. Some techniques were described in more detail than others. Although we do describe genetic algorithms and how they can be used for reducing the dimensions of the data, this is the first of series of blog posts that look at them in practice using simulated data [described in a previous post](http://appliedpredictivemodeling.com/blog/2013/4/11/a-classification-simulation-system).
+
+Genetic algorithms are optimization tools that search for the best solution by mimicking the evolution of a population. A set of predictor subsets are evaluated in terms of their model performance and the best sets combine randomly to form new subsets. In the GA lingo, each iteration has a collection of subsets (i.e.  _population_ of _chromosomes_) with a corresponding model performance value (i.e. their _fitness_ values). At each step of reproduction, there is some probability of random mutations. This has the effect of randomly turning some predictors off or on in each subset. The algorithm  continues for a set number of generations. 
+
+One question is how to evaluate the fitness function. There are a few options:
+
+* For each subset, employ the same cross-validation approach used with the full data set. [We know from the literature](http://www.pnas.org/content/99/10/6562.abstract) that this will not be a good estimate of future performance because of over-fitting to the predictor set. However, can it be used to differentiate good subsets from bad subsets?
+* Use the test set. This is a poor choice since the data can no longer provide an unbiased view of model performance. Single test sets usually have more noise than resampled estimates. 
+* Set aside some data from the training set for calculating model performance for a given subset. We may eventually end up over-fitting to these data, so should we randomly select a different hold-out set each time? This will add some noise to the fitness values.
+
+In the literature, how is this usually handled? From what I've found,  _internal_ cross-validated accuracy is used, meaning that the model is cross-validated within the feature selection. For this reason, there is a high likelihood that the estimate of the model's performance will be optimistic (since it does not reflect the uncertainty induced by the search procedure). 
+
+To illustrate the methodology, we use a two class simulation system described earlier. 
+
+For this example, we'll simulate 500 training set samples and add a total of 200 non-informative predictors. For the extra predictors, 100 will be a set of uncorrelated standard normal random variables while 100 will be multivariate normal with a pre-defined correlation structure. The correlated set will have variances of 1 and an auto-regressive structure (AR1). While the is no time component to this model, using this structure will simulate predictors with various levels of correlation. To do this, a function called `twoClassSim` is used. 
+
+Three sets of data were simulated: a training set of 500 samples, a test set of 200 samples and a very large set that will help us approximate the true error rate. 
+
+```{r data,cache=TRUE}
+set.seed(468)
+training <- twoClassSim(  500, noiseVars = 100, corrVar = 100, corrValue = .75)
+testing  <- twoClassSim(  200, noiseVars = 100, corrVar = 100, corrValue = .75)
+large    <- twoClassSim(10000, noiseVars = 100, corrVar = 100, corrValue = .75)
+## Get the names of the truly active predictors
+realVars <- names(training)
+realVars <- realVars[!grepl("(Corr)|(Noise)", realVars)]
+## We will use cross-validation later, so we setup the 
+## folds here so we can make sure all of the model fits
+## use the same data (not really required, but helpful)
+cvIndex <- createMultiFolds(training$Class, times = 2)
+ctrl <- trainControl(method = "repeatedcv",
+                     repeats = 2,
+                     classProbs = TRUE,
+                     summaryFunction = twoClassSummary,
+                     allowParallel = FALSE,
+                     index = cvIndex)
+```
+
+For these data, one model that has fairly good performance is (QDA) quadratic discriminant analysis. This model can generate non-linear class boundaries (i.e. quadratic patterns) and models the covariance matrix of the predictors differently for each class. This means that for _p_ predictors, a total of  _p_ (_p_+1) parameters are estimated (and these are just the variance parameters). With a large number of non-informative predictors, this can negatively affect model performance.
+
+If we knew the true predictor set, what would we expect in terms of performance? Although QDA has no tuning parameters, I'll use two repeats of 10-fold cross-validation to estimate the area under the ROC curve. Additionally, the AUC will also be derived from the test set and using the large sample set too.
+
+```{r TrueModel,echo=FALSE,results='hide',message=FALSE,cache=TRUE}
+trueModel <- train(Class ~ ., 
+                   data = training[, realVars],
+                   method = "qda",
+                   metric = "ROC",
+                   trControl = ctrl)
+trueModel
+
+trueTest <- roc(testing$Class, 
+                predict(trueModel, testing, type = "prob")[,1], 
+                levels = rev(levels(testing$Class)))
+trueTest
+
+trueLarge <- roc(large$Class, 
+                 predict(trueModel, large, type = "prob")[,1], 
+                 levels = rev(levels(testing$Class)))
+trueLarge 
+
+```
+
+The resampled area under the curve was the area under the ROC curve was `r I(signif(caret:::getTrainPerf(trueModel)[,"TrainROC"], 3))` and the test set estimate was `r I(signif(auc(trueTest), 3))`. There some difference there and the large sample estimate of the AUC is `r I(signif(auc(trueLarge), 3))`. Overall, performance is pretty good.
+
+Now, what happens when you use all the available predictors?
+
+```{r FullModel,results='hide',message=FALSE,echo=FALSE,cache=TRUE}
+fullModel <- train(Class ~ ., 
+                   data = training,
+                   method = "qda",
+                   metric = "ROC",
+                   trControl = ctrl)
+fullModel
+
+fullTest <- roc(testing$Class, 
+                predict(fullModel, testing, type = "prob")[,1], 
+                levels = rev(levels(testing$Class)))
+fullTest
+
+fullLarge <- roc(large$Class, 
+                 predict(fullModel, large, type = "prob")[,1], 
+                 levels = rev(levels(testing$Class)))
+fullLarge 
+
+```
+
+The estimates of performance for the AUC were: `r I(signif(caret:::getTrainPerf(fullModel)[,"TrainROC"], 3))` (resampling), `r I(signif(auc(fullTest), 3))` (test set) and `r I(signif(auc(fullLarge), 3))` (large-sample). All of these indicate that QDA tanked because of the excess variables.
+
+The ROC curves for the large-sample predictions are:
+
+```{r rocPlot,results='hide',message=FALSE,echo=FALSE}
+plot(trueLarge, col = rocColors[1], lwd = 2)
+plot(fullLarge, col = rocColors[2], lwd = 2, lty = 2, add = TRUE)
+legend(.4, .5, c("Correct Predictors", "All Predictors"), 
+       col = rocColors[1:2],
+       lwd = c(2, 2), lty = c(1, 2))
+```
+
+
+Another nasty side-effect when you have a large number of predictors (`r I(ncol(training)-1)`) with a relatively small set of training set data (`r I(nrow(training))`) with several of the classical discriminant models is that the class probabilities become extremely polarized. We demonstrate this in the book and the same issue occurs here. The plot below shows histograms of the Class 1 probability for the large-sample set for each model. There are panels for each of the true classes.
+
+```{r histPlot1,results='hide',message=FALSE,echo=FALSE}
+prb1 <- data.frame(Class = paste("True Class:", large$Class),
+                   Prob = predict(trueModel, large, type = "prob")[,1],
+                   Model = "Model: Correct Predictors")
+prb2 <- data.frame(Class = paste("True Class:", large$Class),
+                   Prob = predict(fullModel, large, type = "prob")[,1],
+                   Model = "Model: All Predictors")
+largeProbs <- rbind(prb1, prb2)
+
+
+trellis.par.set(caretTheme())
+print(
+  useOuterStrips(
+    histogram(~Prob|Model*Class, data = largeProbs, nint = 50,
+              scales = list(y = list(relation = "free")),
+              between = list(x = 1, y = 1))))
+```
+
+The model with the true predictors has fairly well-calibrated class probabilities while the probabilities for the model with all the predictors are concentrated near zero and one. This can occur for both linear and quadratic discriminant analysis as well as naive Bayes models. In the book, we also show that this is independent of the amount of signal in the data.  
+
+Clearly, there is a need for some feature selection. To start, I used a genetic algorithm to maximize performance of the MDA model. The search procedure for these data used most of the defaults from the [GA](http://cran.r-project.org/web/packages/GA/index.html) package:
+
+* 400 generations
+* an initial population of 50 chromosomes
+* a mutation probability of 10%
+* a cross-over probability of 80%
+* elitism of 2
+* the area under the ROC curve was estimated using two repeats of 10-fold cross-validation was used
+
+
+In total, about 400 * 50 * 20 = 400,000 QDA models were evaluated. I also ran the generations in parallel, which makes a good dent in the computation time. 
+
+To do this, I used a slightly modified version of the [GA R package](http://cran.r-project.org/web/packages/GA/index.html). Our changes enabled us to save the chromosome value for the best result per generation (for further analysis) and use parallel processing. I've sent the changes to the package maintainer.
+
+I have to define a fitness function that defines what should be maximized. I'll use [caret](http://cran.r-project.org/web/packages/caret/index.html) to tune the model and return the resampled estimate of the area under the ROC curve:
+
+```{r cv_print}
+## 'ind' will be a vector of 0/1 data denoting which predictors are
+## being evaluated.
+ROCcv <- function(ind, x, y, cntrl)
+  {
+  library(caret)
+  library(MASS)
+  ind <- which(ind == 1)
+  ## In case no predictors are selected:
+  if(length(ind) == 0) return(0)
+  out <- train(x[,ind], y, method = "qda",
+               metric = "ROC", trControl = cntrl)
+  caret:::getTrainPerf(out)[, "TrainROC"]
+  }
+```
+
+Now, to run the algorithm with the [GA](http://cran.r-project.org/web/packages/GA/index.html) package:
+
+```{r BalancedGA,message=FALSE,results='hide',cache=TRUE}
+library(GA)
+set.seed(137)
+ga_resampled <- ga(type = "binary",
+                   fitness = ROCcv,
+                   min = 0, max = 1,
+                   maxiter = 400,
+                   nBits = ncol(training) - 1,
+                   names = names(training)[-ncol(training)],
+                   x = training[,-ncol(training)],
+                   y = training$Class,
+                   cntrl = ctrl,
+                   keepBest = TRUE,
+                   parallel = TRUE)
+```
+
+```{r balancedResults,message=FALSE,results='hide',cache=TRUE}
+resamp_results <- lapply(ga_resampled@bestBinary, 
+                         getLarge, 
+                         x = training[,-ncol(training)], 
+                         y = training$Class, 
+                         large = large, 
+                         test = testing, 
+                         cntrl = ctrl)
+resamp_results <- do.call("rbind", resamp_results)
+resamp_results <- as.data.frame(resamp_results)
+resamp_results$Generation <- 1:nrow(resamp_results)
+resamp_vert <- melt(resamp_results, 
+                    measure.vars = c("Resampling", "Test", "Large_Sample"))
+```
+
+The results are summarized in the image below, where the three estimates of the area under the ROC curve is shown. The size of the points is indicative of the number of predictors used in the best chromosome of each generation. 
+
+```{r plot,fig.height=6,fig.width=10,echo=FALSE}
+qplot(Generation, value, 
+      data = resamp_vert, 
+      color = variable, 
+      size = Size,
+      ylab = "Area Under the ROC Curve")
+```
+
+The resampled estimate has no idea that it is embedded inside of a feature selection routine, so it does not factor in that variability. The search steadily increases the AUC until it converges. However, the test set AUC (as well as the large-sample version) initially increase but then converge to a much smaller value that the cross-validation results would lead one to believe. These two pessimistic estimates of the AUC appear to be in-line with one another although the large-sample results are slightly lower ion many generations. It looks at though the model is over-fitting to the predictors and the resampling procedure is not picking up on this. 
+
+As previously mentioned, another tactic is to utilize a separate test set to measure the area under the ROC curve. If we have a lot of data, it may be a good idea to have an "evaluation" set of samples to measure performance during feature selection and keep a different (true) test set to only use at the end. 
+
+Let's sacrifice our test set for the genetic algorithm and see if this helps.
+
+
+```{r test_print}
+ROCtest <- function(ind, x, y, cntrl, test)
+  {
+  library(MASS)
+  ind <- which(ind == 1)
+  if(length(ind) == 0) return(0)
+  modFit <- qda(x[,ind], y)
+  testROC <- roc(test$Class, 
+                 predict(modFit, test[,ind,drop = FALSE])$posterior[,1], 
+                 levels = rev(levels(y)))
+  as.vector(auc(testROC))
+  }
+```
+
+
+```{r ga_with_test_set,message=FALSE,results='hide',cache=TRUE}
+set.seed(137)
+ga_test <- ga(type = "binary",
+              fitness = ROCtest,
+              min = 0, max = 1,
+              maxiter = 1000,
+              nBits = ncol(training) - 1,
+              names = names(training)[-ncol(training)],
+              x = training[,-ncol(training)],
+              y = training$Class,
+              cntrl = ctrl,
+              test = testing,
+              keepBest = TRUE,
+              parallel = TRUE)
+```
+
+
+```{r test_results,message=FALSE,results='hide',cache=TRUE}
+test_results <- lapply(ga_test@bestBinary, 
+                       getLarge_test, 
+                       x = training[,-ncol(training)], 
+                       y = training$Class, 
+                       large = large, 
+                       test = testing)
+test_results <- do.call("rbind", test_results)
+test_results <- as.data.frame(test_results)
+test_results$Generation <- 1:nrow(test_results)
+test_vert <- melt(test_results, measure.vars = c("Test", "Large_Sample"))
+test_vert$variable <- as.character(test_vert$variable)
+test_vert$variable <- ifelse(test_vert$variable == "Test", "Evaluation", test_vert$variable)
+test_vert$variable <-  factor(test_vert$variable,
+                             levels = c("Resampling", "Evaluation", "Large_Sample"))
+
+## factor levels are dropped by ggplot2!
+## see http://tinyurl.com/co6e9fv
+myColors2 <- brewer.pal(5,"Set1")
+names(myColors2) <- c("Resampling", "Large_Sample", "Evaluation")
+colScale2 <- scale_colour_manual(name = "grp",values = myColors2)
+```
+
+Here are the results:
+
+```{r plot_test,fig.height=6,fig.width=10,echo=FALSE}
+qplot(Generation, value, 
+      data = test_vert, 
+      color = variable, 
+      size = Size,
+      ylab = "Area Under the ROC Curve") + colScale2
+```
+
+
+
+```{r test_model_results}
+total_vars_test <- sum(ga_test@solution[1,]==1)
+num_lin_test <- sum(ga_test@solution[1,grepl("Linear", colnames(ga_test@solution))]==1)
+num_nlin_test <- sum(ga_test@solution[1,grepl("Nonlinear", colnames(ga_test@solution))]==1)
+num_int_test <- sum(ga_test@solution[1,grepl("TwoFactor", colnames(ga_test@solution))]==1)
+if(num_int_test == 2) num_int_test <- "both"
+
+noiseTrends <- melt(test_results[,c("Generation", "NumUnCorr", "NumCorr")], 
+                    id.vars = "Generation")
+noiseTrends$variable <- as.character(noiseTrends$variable)
+noiseTrends$variable <- ifelse(noiseTrends$variable == "NumCorr", 
+                               "Correlated", 
+                               "Uncorrelated")
+```
+
+The genetic algorithm converged on a subset size of `r I(total_vars_test)` predictors. This included `r I(num_lin_test)` of the 10 linear predictors, `r I(num_nlin_test)` of the non-linear terms and `r I(num_int_test)` of the terms that have an interaction effect in the model. Looking across the generations, the algorithm had a more difficult time discarding the correlated predictors than the uncorrelated ones:
+
+```{r noiseVarPlot,fig.height=6,fig.width=10,echo=FALSE}
+qplot(Generation, value, data = noiseTrends, 
+      color = variable, geom = "line",
+      ylab = "% In Model")
+```
+
+Let's now fit a QDA model based on these predictors and see what the large-sample ROC curve looks like:
+
+```{r final_test_model,cache=TRUE}
+finalVars <- ga_test@bestBinary[[length(ga_test@bestBinary)]]
+finalFit <- qda(training[,finalVars], training$Class)
+finalLarge <- roc(large$Class, 
+                  predict(finalFit, large[, finalVars])$posterior[,1], 
+                  levels = rev(levels(large$Class)))
+finalLarge
+```
+
+The large-sample estimate of the area under the ROC curve is `r I(round(as.vector(auc(finalLarge)),3))`, which is not as good as the true model (`r I(signif(auc(trueLarge), 3))`) but better than the worst-case scenario (`r I(signif(auc(fullLarge), 3))`). The ROC curves are:
+
+```{r rocPlotFinal,results='hide',message=FALSE,echo=FALSE}
+plot(trueLarge, col = rocColors[1], lwd = 2)
+plot(fullLarge, col = rocColors[2], lwd = 2, lty = 2, add = TRUE)
+plot(finalLarge, col = rocColors[3], lwd = 2, add = TRUE)
+legend(.4, .5, c("Correct Predictors", "All Predictors", "Genetic Algo"), 
+       col = rocColors[1:3],
+       lwd = c(2, 2, 2), lty = c(1, 2, 1))
+```
+
+In the next blog post, I'll look at other ways of improving the genetic algorithm. Before we do that though, let's make a comparison to another feature selection procedure: recursive feature elimination (RFE).  RFE is basically a backwards selection procedure that uses a some variable importance metric to rank the predictors. If will use the area under the ROC curve for each predictor to quantify its relative importance.
+
+Here, all subset sizes were evaluated and the procedure was cross-validated using the same two repeats of ten-fold cross-validation. The QDA models were trained in the same manner:
+
+
+```{r rfe,message=FALSE,results='hide',cache=TRUE}
+qdaFuncs <- ldaFuncs
+qdaFuncs$fit <- function (x, y, first, last, ...) 
+{
+    library(MASS)
+    qda(x, y, ...)
+}
+qdaFuncs$summary <- twoClassSummary
+
+qdaRfe <- rfe(training[,-ncol(training)], training$Class,
+              sizes = 1:(ncol(training) - 1),
+              metric = "ROC",
+              rfeControl = rfeControl(method = "repeatedcv",
+                                      repeats = 2,
+                                      index = cvIndex, 
+                                      functions = qdaFuncs))
+```
+
+Here, there are a maximum of `r I(ncol(training)-1)` * 20  = 4,300 models being evaluated. In comparison to the genetic algorithm, not only is this fewer models, but many of them have smaller subset sizes than those shown in the figures above. 
+
+The potential down-side to this feature selection technique is that it is _greedy_; once a predictor is discarded, it is never considered again in a subset. For this reason, RFE may achieve a local optimum where as the genetic algorithm has the ability to find a global optimum.
+
+```{r rfe_estimates,message=FALSE,results='hide',cache=TRUE}
+
+rocValues <- filterVarImp(training[,-ncol(training)], training$Class)
+rocValues <- rocValues[order(-rocValues$Class1),]
+
+qdaRfe$results$Test <- NA
+qdaRfe$results$Large_Sample <- NA
+
+for(i in 1:nrow(rocValues))
+  {
+  prd <- rownames(rocValues)[1:i]
+  qdaTmp <- qda(training[,prd,drop = FALSE], training$Class)
+  testTmp <- roc(testing$Class, 
+                 predict(qdaTmp, testing[,prd,drop = FALSE])$posterior[,1], 
+                 levels = rev(levels(training$Class)))
+  
+  largeTmp <- roc(large$Class, 
+                  predict(qdaTmp, large[,prd,drop = FALSE])$posterior[,1], 
+                  levels = rev(levels(training$Class)))   
+  qdaRfe$results[which(qdaRfe$results$Variables == i), "Test"] <- as.vector(auc(testTmp))
+  qdaRfe$results[which(qdaRfe$results$Variables == i), "Large_Sample"] <- as.vector(auc(largeTmp)) 
+  }
+
+rfe_vert <- melt(qdaRfe$results[, c("Variables", "ROC", "Test", "Large_Sample")],
+                                id.vars = "Variables")
+rfe_vert$variable <- as.character(rfe_vert$variable)
+rfe_vert$variable <- ifelse(rfe_vert$variable == "ROC", "Resampling", rfe_vert$variable)
+
+```
+
+
+
+```{r rfe_model_results,message=FALSE,results='hide',cache=TRUE}
+total_vars_rfe <- length(predictors(qdaRfe))
+num_lin_rfe <- length(grep("Linear", predictors(qdaRfe)))
+num_nlin_rfe <- length(grep("Nonlinear", predictors(qdaRfe)))
+if(num_nlin_rfe == 0) num_nlin_rfe <- "none"
+num_int_rfe <- length(grep("TwoFactor", predictors(qdaRfe)))
+if(num_int_rfe == 2) num_int_rfe <- "both"
+num_corr_rfe <- length(grep("^Corr", predictors(qdaRfe)))
+num_uncorr_rfe <- length(grep("Noise", predictors(qdaRfe)))
+
+bestROC <- subset(qdaRfe$results, Variables == qdaRfe$bestSubset)[, c("ROC", "Test", "Large_Sample")]
+
+```
+
+This approach filtered far more predictors. The profile of the area under the ROC curve (with all three estimates of the area under the ROC curve):
+ 
+
+```{r rfePlot,fig.height=6,fig.width=10,echo=FALSE}
+myColors <- brewer.pal(5,"Set1")
+names(myColors) <- levels(rfe_vert$variable)
+colScale <- scale_colour_manual(name = "grp",values = myColors)
+qplot(Variables, value, 
+      data = rfe_vert, 
+      color = variable, 
+      geom = "line",
+      ylab = "Area Under the ROC Curve")  + colScale
+
+```
+
+The RFE algorithm fit the final QDA model to `r I(total_vars_rfe)` predictors, including `r I(num_lin_rfe)` linear effects and `r I(num_int_rfe)` predictors associated with the interaction. However, it did not capture any of the non-linear terms and picked up `r I(num_corr_rfe + num_uncorr_rfe)` non-informative predictors. Of the noise predictors, it was not biased towards the correlated set (only `r I(num_corr_rfe)` of the `r I(num_corr_rfe + num_uncorr_rfe)` were correlated). The estimates were consistent with one another and the area under the ROC curve was estimated as `r I(round(bestROC[1,"ROC"],3))` using resampling, `r I(round(bestROC[1,"Test"],3))` using the test set and `r I(round(bestROC[1,"Large_Sample"],3))` using the large-sample holdout. The consistency of these values is probably due to the RFE procedure constructing _external_ resampling, meaning that each cross-validation did a separate feature elimination sequence and used held-out data to estimate performance. This prevented the type of overly optimistic estimates that were seen earlier.
+
+
+```{r final_rfe_model,message=FALSE,results='hide',cache=TRUE}
+rfeLarge <- roc(large$Class, 
+                predict(qdaRfe, large)$Class1, 
+                levels = rev(levels(large$Class)))
+
+```
+
+The large-sample ROC curves are:
+
+```{r rocPlotRfe,results='hide',message=FALSE,echo=FALSE}
+plot(trueLarge, col = rocColors[1], lwd = 2)
+plot(fullLarge, col = rocColors[2], lwd = 2, lty = 2, add = TRUE)
+plot(finalLarge, col = rocColors[3], lwd = 2, add = TRUE)
+plot(rfeLarge, col = rocColors[4], lwd = 2, add = TRUE)
+
+legend(.4, .5, c("Correct Predictors", "All Predictors", "Genetic Algo", "RFE"), 
+       col = rocColors[1:4],
+       lwd = c(2, 2, 2, 2), lty = c(1, 2, 1, 1))
+```
+
+So far, RFE is more effective than the genetic algorithm at sub-setting features for _these_ data.

@@ -14,7 +14,7 @@ draft: false
 resources: "GA2.Rmd"
 ---
 
-Previously, I talked about genetic algorithms (GA) for feature selection and illustrated the algorithm using a modified version of the [GA](http://cran.r-project.org/web/packages/GA/index.html) R package and [simulated data](http://appliedpredictivemodeling.com/blog/2013/4/11/a-classification-simulation-system). The data were simulated with 200 non-informative predictors and 12 linear effects and three non-linear effects. Quadratic discriminant analysis (QDA) was used to model the data. The [last set of analyses](http://appliedpredictivemodeling.com/blog/2013/4/29/feature-selection-strikes-back-part-1) showed, _for these data_, that:
+Previously, I talked about genetic algorithms (GA) for feature selection and illustrated the algorithm using a modified version of the [GA](http://cran.r-project.org/web/packages/GA/index.html) R package and [simulated data](../benchmarking-machine-learning-models-using-simulation/). The data were simulated with 200 non-informative predictors and 12 linear effects and three non-linear effects. Quadratic discriminant analysis (QDA) was used to model the data. The [last set of analyses](http://appliedpredictivemodeling.com/blog/2013/4/29/feature-selection-strikes-back-part-1) showed, _for these data_, that:
 
 * The performance of QDA suffered from including the irrelevant terms.
 * Using a resampled estimate area under the ROC curve resulted in selection bias and severely over-fit to the predictor set.

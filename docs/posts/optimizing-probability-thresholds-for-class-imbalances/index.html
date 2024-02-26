@@ -189,7 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>One of the toughest problems in predictive model occurs when the classes have a severe imbalance. We spend <a href="http://rd.springer.com/chapter/10.1007/978-1-4614-6849-3_16">an entire chapter</a> on this subject itself. One consequence of this is that the performance is generally very biased against the class with the smallest frequencies. For example, if the data have a majority of samples belonging to the first class and very few in the second class, most predictive models will maximize accuracy by predicting everything to be the first class. As a result there’s usually great sensitivity but poor specificity.</p>
-<p>As a demonstration will use a simulation system <a href="http://appliedpredictivemodeling.com/blog/2013/4/11/a-classification-simulation-system">described here</a>. By default it has about a 50-50 class frequency but we can change this by altering the function argument called <tt>intercept</tt>:</p>
+<p>As a demonstration will use a simulation system <a href="../benchmarking-machine-learning-models-using-simulation/">described here</a>. By default it has about a 50-50 class frequency but we can change this by altering the function argument called <tt>intercept</tt>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">442</span>)</span>

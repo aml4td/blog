@@ -9,9 +9,10 @@ categories:
   - genetic algorithms
   - R
 draft: false
+resources: "GA_blog.Rmd"
 ---
 
-In the feature selection chapter, we describe several search procedures ("wrappers") that can be used to optimize the number of predictors. Some techniques were described in more detail than others. Although we do describe genetic algorithms and how they can be used for reducing the dimensions of the data, this is the first of series of blog posts that look at them in practice using simulated data [described in a previous post](http://appliedpredictivemodeling.com/blog/2013/4/11/a-classification-simulation-system).
+In the feature selection chapter, we describe several search procedures ("wrappers") that can be used to optimize the number of predictors. Some techniques were described in more detail than others. Although we do describe genetic algorithms and how they can be used for reducing the dimensions of the data, this is the first of series of blog posts that look at them in practice using simulated data [described in a previous post](../benchmarking-machine-learning-models-using-simulation/). 
 
 Genetic algorithms are optimization tools that search for the best solution by mimicking the evolution of a population. A set of predictor subsets are evaluated in terms of their model performance and the best sets combine randomly to form new subsets. In the GA lingo, each iteration has a collection of subsets (i.e.  _population_ of _chromosomes_) with a corresponding model performance value (i.e. their _fitness_ values). At each step of reproduction, there is some probability of random mutations. This has the effect of randomly turning some predictors off or on in each subset. The algorithm  continues for a set number of generations. 
 
@@ -23,9 +24,7 @@ One question is how to evaluate the fitness function. There are a few options:
 
 In the literature, how is this usually handled? From what I've found,  _internal_ cross-validated accuracy is used, meaning that the model is cross-validated within the feature selection. For this reason, there is a high likelihood that the estimate of the model's performance will be optimistic (since it does not reflect the uncertainty induced by the search procedure). 
 
-For this example, we'll simulate 500 training set samples and add a total of 200 non-informative predictors. For the extra predictors, 100 will be a set of uncorrelated standard normal random variables while 100 will be multivariate normal with a pre-defined correlation structure. The correlated set will have variances of 1 and an auto-regressive structure (AR1). While the is no time component to this model, using this structure will simulate predictors with various levels of correlation. To do this, a function called `twoClassSim` is used. The code for this document is [here][1], so you can see and use this function yourself. 
-
-[1]: /s/GA_blog.Rmd
+For this example, we'll simulate 500 training set samples and add a total of 200 non-informative predictors. For the extra predictors, 100 will be a set of uncorrelated standard normal random variables while 100 will be multivariate normal with a pre-defined correlation structure. The correlated set will have variances of 1 and an auto-regressive structure (AR1). While the is no time component to this model, using this structure will simulate predictors with various levels of correlation. To do this, a function called `twoClassSim` is used. The code for this document is [here](GA_blog.Rmd), so you can see and use this function yourself. 
 
 Three sets of data were simulated: a training set of 500 samples, a test set of 200 samples and a very large set that will help us approximate the true error rate. 
 
