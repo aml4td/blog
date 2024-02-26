@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -157,64 +191,59 @@ ul.task-list li input[type="checkbox"] {
 <p>(I’ve heard the old wives tale that eskimos have 180 different words in their language for snow. I’m starting to think that statisticians have at least as many ways of saying “it depends”)</p>
 <p>BTW, we cover this in Sections 3.6, 14.1 and 14.7 of the book.</p>
 <p>My answer: <strong>it depends on the model</strong>. Some models can work with categorical predictors in their nature, non-numeric encodings. Trees, for example, can usually partition the predictor into distinct groups. For a predictor <code>X</code> with levels <code>a</code> through <code>e</code>, a split might look like</p>
-<pre>if X in {a, c, d} the class = 1
-else class = 2
-</pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> X <span class="cf">in</span> {a, c, d} the class <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> class <span class="ot">=</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Rule-based models operate similarly.</p>
 <p>Naive Bayes models are another method that does not need to re-encode the data. In the above example, the frequency distribution of the predictor is computed overall as well as within each of the classes (a good example of this is in Table 13.1 for those of you that are following along).</p>
 <p>However, these are the exceptions; most models require the predictors to be in some sort of numeric encoding to be used. For example, linear regression required numbers so that it can assign slopes to each of the predictors.</p>
 <p>The most common encoding is to make simple dummy variables. The there are <code>C</code> distinct values of the predictor (or <em>levels</em> of the <em>factor</em> in R terminology), a set of <code>C - 1</code> numeric predictors are created that identify which value that each data point had.</p>
 <p>These are called <em>dummy variables</em>. Why <code>C - 1</code> and not <code>C</code>? First, if you know the values of the first <code>C - 1</code> dummy variables, you know the last one too. It is more economical to use <code>C - 1</code>. Secondly, if the model has slopes and intercepts (e.g.&nbsp;linear regression), the sum of all of the dummy variables wil add up to the intercept (usually encoded as a “1”) and that is bad for the math involved.</p>
 <p>In R, a simple demonstration for the example above is:</p>
-<pre>&gt; pred1 &lt;- factor(letters[1:5])
-&gt; pred1
-
-[1] a b c d e
-Levels: a b c d e
-</pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> pred1 <span class="ot">&lt;-</span> <span class="fu">factor</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> pred1</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] a b c d e</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Levels<span class="sc">:</span> a b c d e</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The R function <code>model.matrix</code> is a good way to show the encodings:</p>
-<pre>&gt; model.matrix(~pred1)
-
-  (Intercept) pred1b pred1c pred1d pred1e
-1           1      0      0      0      0
-2           1      1      0      0      0
-3           1      0      1      0      0
-4           1      0      0      1      0
-5           1      0      0      0      1
-attr(,"assign")
-[1] 0 1 1 1 1
-attr(,"contrasts")
-attr(,"contrasts")$pred1
-[1] "contr.treatment"
-</pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">model.matrix</span>(<span class="sc">~</span>pred1)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  (Intercept) pred1b pred1c pred1d pred1e</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>           <span class="dv">1</span>      <span class="dv">0</span>      <span class="dv">0</span>      <span class="dv">0</span>      <span class="dv">0</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>           <span class="dv">1</span>      <span class="dv">1</span>      <span class="dv">0</span>      <span class="dv">0</span>      <span class="dv">0</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>           <span class="dv">1</span>      <span class="dv">0</span>      <span class="dv">1</span>      <span class="dv">0</span>      <span class="dv">0</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>           <span class="dv">1</span>      <span class="dv">0</span>      <span class="dv">0</span>      <span class="dv">1</span>      <span class="dv">0</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span>           <span class="dv">1</span>      <span class="dv">0</span>      <span class="dv">0</span>      <span class="dv">0</span>      <span class="dv">1</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(,<span class="st">"assign"</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(,<span class="st">"contrasts"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(,<span class="st">"contrasts"</span>)<span class="sc">$</span>pred1</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"contr.treatment"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>A column for the factor level <code>a</code> is removed (since it excludes the first level of the factor). This approach goes by the name of “full-rank” encoding since the dummy variables do not always add up to 1.</p>
 <p>We discuss different encodings for predictors in a few places but fairly extensively in Section 12.1. In that example, we have a predictor that is a date. Do we encode that as the day or the year (1 to 365) and include it as a numeric predictor? We could also add in predictors for the day of the week, the month, the season etc. There are a lot of options. This question of <em>feature engineering</em> is important. You want to find the encoding that captures the important patterns in the data. If there is a seasonal effect, the encoding should capture that information. Exploratory visualizations (perhaps with <code>lattice</code> or <code>ggplot2</code>) can go a long way to figuring out good ways to represent these data.</p>
 <p>Some of these options result in <em>ordered</em> encodings, such as the day of the week. It is possible that the trends in the data are best exposed if the ordering is preserved. R does have a way for dealing with this:</p>
-<pre>&gt; pred2 &lt;- ordered(letters[1:5])
-&gt; pred2
-
-[1] a b c d e
-Levels: a &lt; b &lt; c &lt; d &lt; e
-</pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> pred2 <span class="ot">&lt;-</span> <span class="fu">ordered</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> pred2</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] a b c d e</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>Levels<span class="sc">:</span> a <span class="sc">&lt;</span> b <span class="sc">&lt;</span> c <span class="sc">&lt;</span> d <span class="sc">&lt;</span> e</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Simple enough, right? Maybe not. If we need a numeric encoding here, what do we do?</p>
 <p>There are a few options. One simple way is to assign “scores” to each of the levels. We might assign a value of 1 to <code>a</code> and think that <code>b</code> should be twice that and <code>c</code> should be four times that and so on. It is arbitrary but there are whole branches of statistics dedicated to modeling data with (made up) scores. Trend tests are one example.</p>
 <p>If the data are ordered, one technique is to create a set of new variables similar to dummy variables. However, their values are not 0/1 but are created to reflect the possible trends that can be estimated.</p>
 <p>For example, if the predictor has two ordered levels, we can’t fit anything more sophisticated to a straight line. However, if there are three ordered levels, we could fit a linear effect as well as a quadratic effect and so on. There are some smart ways to do this (google “orthogonal polynomials” if you are bored).</p>
 <p>For each ordered factor in a model, R will create a set of polynomial scores for each (we could use the fancy label of “a set of basis functions” here). For example:</p>
-<pre>&gt; model.matrix(~pred2)
-
-  (Intercept) pred2.L pred2.Q    pred2.C pred2^4
-1           1 -0.6325  0.5345 -3.162e-01  0.1195
-2           1 -0.3162 -0.2673  6.325e-01 -0.4781
-3           1  0.0000 -0.5345 -4.096e-16  0.7171
-4           1  0.3162 -0.2673 -6.325e-01 -0.4781
-5           1  0.6325  0.5345  3.162e-01  0.1195
-attr(,"assign")
-[1] 0 1 1 1 1
-attr(,"contrasts")
-attr(,"contrasts")$pred2
-[1] "contr.poly"
-</pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">model.matrix</span>(<span class="sc">~</span>pred2)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  (Intercept) pred2.L pred2.Q    pred2.C pred2<span class="sc">^</span><span class="dv">4</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>           <span class="dv">1</span> <span class="sc">-</span><span class="fl">0.6325</span>  <span class="fl">0.5345</span> <span class="sc">-</span><span class="fl">3.162e-01</span>  <span class="fl">0.1195</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>           <span class="dv">1</span> <span class="sc">-</span><span class="fl">0.3162</span> <span class="sc">-</span><span class="fl">0.2673</span>  <span class="fl">6.325e-01</span> <span class="sc">-</span><span class="fl">0.4781</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>           <span class="dv">1</span>  <span class="fl">0.0000</span> <span class="sc">-</span><span class="fl">0.5345</span> <span class="sc">-</span><span class="fl">4.096e-16</span>  <span class="fl">0.7171</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>           <span class="dv">1</span>  <span class="fl">0.3162</span> <span class="sc">-</span><span class="fl">0.2673</span> <span class="sc">-</span><span class="fl">6.325e-01</span> <span class="sc">-</span><span class="fl">0.4781</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span>           <span class="dv">1</span>  <span class="fl">0.6325</span>  <span class="fl">0.5345</span>  <span class="fl">3.162e-01</span>  <span class="fl">0.1195</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(,<span class="st">"assign"</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(,<span class="st">"contrasts"</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(,<span class="st">"contrasts"</span>)<span class="sc">$</span>pred2</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"contr.poly"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here, “L” is for linear, “Q” is quadratic and “C” is cubic and so on. There are five levels of this factor and we can create four new encodings. Here is a plot of what those encodings look like:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">

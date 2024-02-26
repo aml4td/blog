@@ -22,13 +22,14 @@ Model performance was assessed using the area under the ROC curve. A test set of
 
 For the C5.0 and GBM models, models were tuned using cross-validation. For each technique, a model was trained on the mislabeled data and another on the correctly labeled data. In this way, we have a "control" model that reflects how well the model does for each data set if there were no added noise due to mislabeling. As a result, for C5.0 and GBM, a percentage of performance loss can be calculated against the correctly labelled control set:
 
-<pre>
+```r
 pct = (mislabeled - correct)/correct*100). 
-</pre>
+```
 
 This image contains the distributions of the percent loss across the configurations:
 
 ![](densities.png){fig-align="center"}
+
 Some other observations:
 
  * When there is no mislabeling, the results are almost identical
