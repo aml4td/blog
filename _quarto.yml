@@ -27,3 +27,7 @@ format:
     tbl-cap-location: bottom
     fig-cap-location: bottom
     keep-md: false
+    highlight-style: arrow
+    code-link: true
+    code-block-bg: "#f9fafd"
+    code-block-border-left: "#e1e7f6"

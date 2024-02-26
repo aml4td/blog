@@ -92,9 +92,9 @@ I was talking to someone recently who was describing their research with ~150 sa
 
 So when I'm trying to evaluate any sort of statistic method, I almost always find a good simulation system so that I can produce results where I know the truth. A good example of this are the "Friedman" simulations systems for regression modeling. For example, the '[Friedman 3](http://scholar.google.com/scholar?hl=en&q=Multivariate+adaptive+regression+splines&btnG=&as_sdt=1%2C7&as_sdtp=)' simulation system is a non-linear function of four predictors:
 
-<pre>
+```r
 y = atan ((x2 x3 - (1/(x2 x4)))/x1) + error
-</pre> 
+``` 
 
 The the [mlbench](http://cran.r-project.org/web/packages/mlbench/index.html) package has this in R code as well as other simulation systems.
 
@@ -107,20 +107,20 @@ I've been looking for a system that can be used to test a few different aspects 
 
 I spent a few hours developing up with one. It models the log-odds of a binary event as a function of informative and non-informative predictors. The true signals are additive "sets" of a few different types. First, there are two main effects and an interaction:
 
-<pre>
+```r
 intercept - 4A + 4B + 2AB 
-</pre>
+```
 
 The intercept is a parameter for the simulation and can be used to control the amount of class imbalance. The second set of effects are linear with coefficients that alternate signs and have values between 2.5 and 0.025. For example, if there were six predictors in this set, the contribution to the log-odds would be 
 
-<pre>
+```r
 -2.50C + 2.05D -1.60E + 1.15F -0.70G + 0.25H
-</pre>
+```
 
 The third set is a nonlinear function of a single predictor ranging between [0, 1] called J here:
-<pre>
+```r
 (J^3) + 2exp(-6(J-0.3)^2) 
-</pre>
+```
 I saw this in one of [Radford Neal](http://www.cs.utoronto.ca/~radford/)'s presentations but I couldn't find an exact reference for it. The equation produces an interesting trend:
 
 ```{r nonlin,message=FALSE,results='hide',fig.height=4.25,fig.width=6, echo = FALSE}
@@ -130,9 +130,9 @@ qplot(Predictor, Log_Odds, data = nonlinData, geom = "line")
 ```
 
 The fourth set of informative predictors are copied from one of Friedman's systems and use a set of two (`K` and `L`):
-<pre>
+```r
 2sin(KL)
-</pre>
+```
 
 All of these effects are added up to model the log-odds. This is used to calculate the probability of a sample being in the first class and a random uniform number is used to actually make the assignment of the actual class. 
 
@@ -164,7 +164,7 @@ The default for the number of informative linear predictors is 10 and the defaul
 table(large$Class)/nrow(large)
 ```
 
-We'll use the <pre>train</pre> function to tune and train the model:
+We'll use the `train` function to tune and train the model:
 
 ```{r fullSet,cache=TRUE}
 library(caret)

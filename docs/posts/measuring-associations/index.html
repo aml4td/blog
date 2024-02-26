@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -159,69 +193,90 @@ ul.task-list li input[type="checkbox"] {
 <p><a href="http://arxiv.org/abs/1303.1828">Murrell et al (2013)</a> (or Murrell<sup>3</sup>?) has a similar generalized measure of association between continuous variables. There’s is based on a generalized notion of R<sup>2</sup> that I’d never heard of. At first glance, it has a lot of attractive properties. One is that is has a probabilistic genesis. Another nice quality is that the association can be computed while controlling for other data. That is a big deal for me, since we often have experiments where we need to control for nuisance factors. For example, if you were trying to measure the relationship between the selling price of a house and the acerage of the lot, you might want to control for other factors, such as the type of terrain or geography (e.g.&nbsp;urban, rural etc).</p>
 <p>Despite the probabilistic motivation, they take a randomization approach to making formal statistical inferences on significance of the measure. The same could be done for the MIC measure (and in the book, we used the same idea for Relief scores). I think a confidence interval would be better for everyone since it directly tells you the uncertainty and the size of the association (that’s another post for another time for a topic that has been <a href="http://news.sciencemag.org/sciencenow/2009/10/30-01.html">discussed</a> <a href="http://www.reanimacao.com.br/biblioteca/a_20100121_04.pdf">quite</a> <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2352195/pdf/bmj00561-0050.pdf">a</a> <a href="http://www.physther.org/content/81/8/1464.full">bit</a>).</p>
 <p>Let’s look at some data. I like the blood-brain barrier data a lot. It has measurements on 208 drugs to see how much (if at all) they enter the brain. The predictors are molecular descriptors (similar to the solubility example in the book). To get the data:</p>
-<pre>library(caret)
-data(BloodBrain)
-## remove zero variance columns
-isZV &lt;- apply(bbbDescr, 2, function(x) length(unique(x)) == 1)
-bbbDescr &lt;- bbbDescr[, !isZV]
-ncol(bbbDescr)
-
-|| [1] 134
-</pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: ggplot2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: lattice</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(BloodBrain)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">## remove zero variance columns</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>isZV <span class="ot">&lt;-</span> <span class="fu">apply</span>(bbbDescr, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">length</span>(<span class="fu">unique</span>(x)) <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>bbbDescr <span class="ot">&lt;-</span> bbbDescr[, <span class="sc">!</span>isZV]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(bbbDescr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 134</code></pre>
+</div>
+</div>
 <p>First, I’ll measure association using the <em>A</em> measure discussed in Murrell<sup>3</sup>:</p>
-<pre>library(matie)
-## Compute the associations across all columns of the predictors
-Avalues &lt;- apply(bbbDescr, 2, function(x, y) ma(cbind(x, y))$A, y = logBBB)
-Avalues &lt;- sort(Avalues, decreasing = TRUE)
-head(Avalues)
-
-||      fnsa3   psa_npsa polar_area       tpsa      scaa3       tcnp 
-||     0.4386     0.4126     0.4116     0.3924     0.3771     0.3672
-</pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(matie)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Compute the associations across all columns of the predictors</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Avalues <span class="ot">&lt;-</span> <span class="fu">apply</span>(bbbDescr, <span class="dv">2</span>, <span class="cf">function</span>(x, y) <span class="fu">ma</span>(<span class="fu">cbind</span>(x, y))<span class="sc">$</span>A, <span class="at">y =</span> logBBB)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>Avalues <span class="ot">&lt;-</span> <span class="fu">sort</span>(Avalues, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Avalues)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     fnsa3   psa_npsa polar_area       tpsa      scaa3       tcnp 
+ 0.4391562  0.4137334  0.4132176  0.3919149  0.3773555  0.3697039 </code></pre>
+</div>
+</div>
 <p>So the best predictor only explains 43.9% of the variation in the outcome. Most of the predictors shown above are related to surface area, which makes sense: the larger the molecule the less likely it is to physically fit through the barrier.</p>
 <p>What does MIC tell us?</p>
-<pre>library(minerva)
-## There are three predictors whose scales have very low variances. We
-## need to reset the threshold that checks for this
-mic &lt;- mine(bbbDescr, logBBB, var.thr = 1e-10)$MIC
-mic &lt;- mic[order(mic[, "Y"], decreasing = TRUE), ]
-head(mic)
-
-||    fnsa3     rpcg    fpsa3    scaa1    scaa3 psa_npsa 
-||   0.5249   0.4806   0.4762   0.4759   0.4712   0.4650
-</pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(minerva)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="do">## There are three predictors whose scales have very low variances. We</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">## need to reset the threshold that checks for this</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>mic <span class="ot">&lt;-</span> <span class="fu">mine</span>(bbbDescr, logBBB, <span class="at">var.thr =</span> <span class="fl">1e-10</span>)<span class="sc">$</span>MIC</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>mic <span class="ot">&lt;-</span> mic[, <span class="st">"Y"</span>]</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mic) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(bbbDescr)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>mic <span class="ot">&lt;-</span> mic[<span class="fu">order</span>(mic, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    fnsa3      rpcg     fpsa3     scaa1     scaa3  psa_npsa 
+0.5248916 0.4806339 0.4761844 0.4758696 0.4711854 0.4650277 </code></pre>
+</div>
+</div>
 <p>There are some differences but the top predictor from <em>A</em> is still at the top. The MIC values is sort of a correlation-like measure and our best value was 0.52.</p>
 <p>I also have a measure of importance that is based on scatterplot smoothers. A loess smoother is fit between the outcome and the predictor and the R<sup>2</sup> statistic is calculated for this model against the intercept only null model. I don’t claim that there is any justification (which is why I’ve never published it) for this but it has worked for me in the past. This is similar to my statements about MIC and PLS. I still use them because they tend to work, but I’ve no theoretical leg to stand on.</p>
-<pre>## A measure based on regression smoothers
-gamImp &lt;- filterVarImp(bbbDescr, logBBB, nonpara = TRUE)
-gamImp &lt;- gamImp[order(gamImp$Overall, decreasing = TRUE), , drop = FALSE]
-head(gamImp)
-
-||              Overall
-||   fnsa3       0.3970
-||   psa_npsa    0.3879
-||   polar_area  0.3806
-||   tcnp        0.3681
-||   tpsa        0.3584
-||   tpsa.1      0.3475
-</pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">## A measure based on regression smoothers</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gamImp <span class="ot">&lt;-</span> <span class="fu">filterVarImp</span>(bbbDescr, logBBB, <span class="at">nonpara =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>gamImp <span class="ot">&lt;-</span> gamImp[<span class="fu">order</span>(gamImp<span class="sc">$</span>Overall, <span class="at">decreasing =</span> <span class="cn">TRUE</span>), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gamImp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Overall
+fnsa3      0.3970318
+psa_npsa   0.3879014
+polar_area 0.3805523
+tcnp       0.3681280
+tpsa       0.3584280
+tpsa.1     0.3474503</code></pre>
+</div>
+</div>
 <p>Finally, I’ll compute the RRelief scores. We discuss this in the book and the a good reference is <a href="http://lkm.fri.uni-lj.si/xaigor/slo/clanki/MLJ2003-FinalPaper.pdf">here</a>. It uses a nearest-neighbor approach and measures the importance of each predictors simultaneously (all of the other methods show here measure each association in isolation).</p>
-<pre>library(CORElearn)
-## The function only uses the formula interface
-bbbData &lt;- bbbDescr
-bbbData$logBBB &lt;- logBBB
-set.seed(10)
-RRelief &lt;- attrEval(logBBB ~ ., data = bbbData, estimator = "RReliefFbestK", 
-    ReliefIterations = 100)
-RRelief &lt;- RRelief[order(RRelief, decreasing = TRUE)]
-head(RRelief)
-
-||      smr_vsa7      smr_vsa1 dipole_moment    peoe_vsa.0           pol 
-||        0.2622        0.2577        0.2525        0.2452        0.2366 
-||      smr_vsa6 
-||        0.2278
-</pre>
-<p>This score ranks the variables differently than the other methods. This is most likely due to the difference in philosophy in measuring association between this method and the others as well as the high degree of correlation between the predictors in these data. Overall, do these metrics correlate?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(CORElearn)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="do">## The function only uses the formula interface</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>bbbData <span class="ot">&lt;-</span> bbbDescr</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>bbbData<span class="sc">$</span>logBBB <span class="ot">&lt;-</span> logBBB</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>RRelief <span class="ot">&lt;-</span> <span class="fu">attrEval</span>(logBBB <span class="sc">~</span> ., <span class="at">data =</span> bbbData, <span class="at">estimator =</span> <span class="st">"RReliefFbestK"</span>, </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ReliefIterations =</span> <span class="dv">100</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>RRelief <span class="ot">&lt;-</span> RRelief[<span class="fu">order</span>(RRelief, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)]</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(RRelief)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     smr_vsa7      smr_vsa1 dipole_moment    peoe_vsa.0           pol 
+    0.2622103     0.2577087     0.2524930     0.2452446     0.2366486 
+     smr_vsa6 
+    0.2278432 </code></pre>
+</div>
+</div>
+<p>This score ranks the variables differently than the other methods. This is most likely due to the difference in philosophy in measuring association between this method and the others as well as the high degree of correlation between the predictors in these data.</p>
+<p>Overall, do these metrics correlate?</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="splom.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>

@@ -50,7 +50,7 @@
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/optimizing-probability-thresholds-for-class-imbalances/index.html</loc>
-    <lastmod>2024-02-26T20:31:26.581Z</lastmod>
+    <lastmod>2024-02-26T20:59:36.241Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/nonclinical-statistics-position-in-new-england/index.html</loc>
@@ -70,7 +70,7 @@
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/measuring-associations/index.html</loc>
-    <lastmod>2024-01-18T12:22:17.664Z</lastmod>
+    <lastmod>2024-02-26T20:53:44.416Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/in-search-of/index.html</loc>
@@ -287,5 +287,9 @@
   <url>
     <loc>https://blog.aml4td.org/posts/feature-selection-2--genetic-boogaloo/index.html</loc>
     <lastmod>2024-02-26T20:39:17.681Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/confidence-in-prediction/index.html</loc>
+    <lastmod>2024-01-18T12:22:17.650Z</lastmod>
   </url>
 </urlset>

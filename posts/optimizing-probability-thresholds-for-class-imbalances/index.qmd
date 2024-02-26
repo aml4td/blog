@@ -16,7 +16,7 @@ One of the toughest problems in predictive model occurs when the classes have a 
 
 As a demonstration will use a simulation system [described here](../benchmarking-machine-learning-models-using-simulation/). By default it has about a 50-50 class frequency but we can change this by altering the function argument called <tt>intercept</tt>:
 
-```r
+```{r}
 library(caret)
  
 set.seed(442)
@@ -26,7 +26,7 @@ testing <- twoClassSim(n = 1000, intercept = -16)
 
 In the training set the class frequency breakdown looks like this:
 
-```r
+```{r}
 table(training$Class)
 
 ## Class1 Class2 
