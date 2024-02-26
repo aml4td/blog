@@ -10,6 +10,7 @@ categories:
   - random forest
   - ROC curve
 draft: false
+resources: "code.R"
 ---
 
 One of the toughest problems in predictive model occurs when the classes have a severe imbalance. We spend [an entire chapter](http://rd.springer.com/chapter/10.1007/978-1-4614-6849-3_16) on this subject itself. One consequence of this is that the performance is generally very biased against the class with the smallest frequencies. For example, if the data have a majority of samples belonging to the first class and very few in the second class, most predictive models will maximize accuracy by predicting everything to be the first class. As a result there's usually great sensitivity but poor specificity.
@@ -61,9 +62,9 @@ One of the most common ways to deal with this is to determine an alternate proba
 
 Alternatively the model can be tuned, using resampling, to determine any model tuning parameters as well as an appropriate cut off for the probabilities. 
 
-The latest update to the [caret][1] package allows users to define their own modeling and prediction components. This also gives us a huge amount of flexibility for creating your own models or doing some things that were originally intended by the package. [This page][2] shows a lot of the details for creating custom models.
+The latest update to the [caret](https://stat.ethz.ch/pipermail/r-packages/2014/001395.html) package allows users to define their own modeling and prediction components. This also gives us a huge amount of flexibility for creating your own models or doing some things that were originally intended by the package. [This page](https://stat.ethz.ch/pipermail/r-packages/2014/001395.html) shows a lot of the details for creating custom models.
 
-Suppose the model has one tuning parameter and we want to look at four candidate values for tuning. Suppose we also want to tune the probability cut off over 20 different thresholds. Now we have to look at 20×4=80 different models (and that is for each resample). One other feature that has been opened up his ability to use sequential parameters: these are tuning parameters that don't require a completely new model fit to produce predictions. In this case, we can fit one random forest model and get it's predicted class probabilities and evaluate the candidate probability cutoffs using these same hold-out samples. Again, there's a lot of details on [this page][2] and, without going into them, our code for these analyses can be found [here][3]. 
+Suppose the model has one tuning parameter and we want to look at four candidate values for tuning. Suppose we also want to tune the probability cut off over 20 different thresholds. Now we have to look at 20×4=80 different models (and that is for each resample). One other feature that has been opened up his ability to use sequential parameters: these are tuning parameters that don't require a completely new model fit to produce predictions. In this case, we can fit one random forest model and get it's predicted class probabilities and evaluate the candidate probability cutoffs using these same hold-out samples. Again, there's a lot of details on [this page](http://caret.r-forge.r-project.org/custom_models.html) and, without going into them, our code for these analyses can be found [here](code.R). 
 
 [3]: /s/code-3ljn.R
 

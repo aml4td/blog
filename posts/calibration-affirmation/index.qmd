@@ -79,9 +79,7 @@ plot(calibration(Class ~ Softmax, data = testProbs), type = "l")
 
 This isn't very close to the 45 degree reference line so we shouldn't expect the probabilities to be very realistic. 
 
-Another approach for PLS models is to use [Bayes' rule][1] to estimate the class probabilities. This is a little more complicated but at least it is based on probability theory. We can fit the model this way using the option `probMethod = "Bayes"`:
-
-[1]: http://en.wikipedia.org/wiki/Bayes'_rule
+Another approach for PLS models is to use [Bayes' rule](http://en.wikipedia.org/wiki/Bayes'_rule) to estimate the class probabilities. This is a little more complicated but at least it is based on probability theory. We can fit the model this way using the option `probMethod = "Bayes"`:
 
 ```r
 set.seed(1)
