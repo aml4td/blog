@@ -20,7 +20,13 @@
 
 
 
-<p>Since the last update on 2023-11-20, we have a few new sections and chapters. The goal is to have good first drafts of the “Preparation” chapters. As of 2024-02-26, they are:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.aml4td.org/posts/2024-02-progress-update/preproc.png" class="quarto-figure quarto-figure-center figure-img" height="150"></p>
+</figure>
+</div>
+<p>Since the last update on 2023-11-20, we have a few new sections and chapters.</p>
+<p>The short-term goal is to have good first drafts of all of the “Preparation” chapters. As of 2024-02-26, they are:</p>
 <ul>
 <li>Initial Data Splitting (<a href="https://aml4td.org/chapters/initial-data-splitting.html">drafted</a>)</li>
 <li>Transforming Numeric Predictors (<a href="https://github.com/aml4td/website/blob/main/chapters/numeric-predictors.qmd">drafted</a> but not published)</li>
@@ -48,7 +54,7 @@
   <category>updates</category>
   <guid>https://blog.aml4td.org/posts/2024-02-progress-update/</guid>
   <pubDate>Tue, 27 Feb 2024 05:00:00 GMT</pubDate>
-  <media:content url="https://blog.aml4td.org/posts/2024-02-progress-update/prep.png" medium="image" type="image/png" height="190" width="144"/>
+  <media:content url="https://blog.aml4td.org/posts/2024-02-progress-update/preproc.png" medium="image" type="image/png" height="55" width="144"/>
 </item>
 <item>
   <title>New Location, Same Content</title>
