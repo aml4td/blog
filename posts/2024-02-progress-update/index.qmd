@@ -9,7 +9,7 @@ draft: false
 image: "prep.png"
 ---
 
-Since the last update on 2023-11-20, we have a few new sections and chapters. The goal is to have good first drafts of the “Preparation” chapters. As of 2024-03-01, they are:
+Since the last update on 2023-11-20, we have a few new sections and chapters. The goal is to have good first drafts of the “Preparation” chapters. As of 2024-02-26, they are:
 
  - Initial Data Splitting ([drafted](https://aml4td.org/chapters/initial-data-splitting.html))
  - Transforming Numeric Predictors ([drafted](https://github.com/aml4td/website/blob/main/chapters/numeric-predictors.qmd) but not published)

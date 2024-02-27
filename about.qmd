@@ -2,7 +2,7 @@
 title: "About"
 ---
 
-The main contributors to this blog are Max Kuhn and Kjell Johnson. Together, they wrote the book [_Applied Predictive Modeling_](http://appliedpredictivemodeling.com/), which won the Ziegel award from the American Statistical Association, recognizing the best book reviewed in Technometrics in 2015. They have also co-written [_Feature Engineering and Selection_](https://bookdown.org/max/FES/). 
+The main contributors to this blog are Max Kuhn and Kjell Johnson. Together, they wrote the book [_Applied Predictive Modeling_](http://appliedpredictivemodeling.com/), which won the Ziegel award from the American Statistical Association, recognizing the best book reviewed in Technometrics in 2014. They have also co-written [_Feature Engineering and Selection_](https://bookdown.org/max/FES/). 
 
 ### Max Kuhn
 
