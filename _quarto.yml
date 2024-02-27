@@ -12,6 +12,12 @@ website:
   site-url: "https://blog.aml4td.org"
   navbar:
     right:
+      - text: "Home"
+        file: index.qmd
+      - text: "Book"
+        href: https://aml4td.org/
+      - text: "Computing: R"
+        href: https://tidymodels.aml4td.org/        
       - about.qmd
       - icon: github
         href: https://github.com/aml4td/blog
