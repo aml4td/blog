@@ -10,38 +10,7 @@
 <atom:link href="https://blog.aml4td.org/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.4</generator>
-<lastBuildDate>Wed, 28 Feb 2024 05:00:00 GMT</lastBuildDate>
-<item>
-  <title>New Location, Same Content</title>
-  <dc:creator>Max Kuhn</dc:creator>
-  <link>https://blog.aml4td.org/posts/new-location-same-content/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>This is the new home for the Applied Predictive Modeling blog.</p>
-<p>We’ve moved it here, along with the previous blog posts, because we’re now using a format that is much easier to work with (<a href="https://quarto.org/">Quarto</a>). This will make it a lot easier to create posts<sup>1</sup>.</p>
-<p>The blog is starting back up since we are actively developing our new (third) book called <em>Applied Machine Learning for Tabular Data</em> (<a href="https://aml4td.org/">aml4td</a>). We’ll post progress updates, requests for community help, discussions of technical matters, and other topics.</p>
-<p>We kept the old blog name, which might be a little confusing since we are focusing on a different book. First, we wanted our posts in the same location; adding content in a new place was awkward. Second, the new book has similar topics and I’d expect we’d put similar content here.</p>
-<p>Instead of having discussions inside the blog posts, we’ll create <a href="https://github.com/aml4td/blog/issues">GitHub issues</a> when we ask for community feedback and folks can respond there.</p>
-<p>(The banner image is by <a href="https://unsplash.com/photos/tree-leaves-macro-photography-Jq3WI9IQgEs?utm_content=creditShareLink&amp;utm_medium=referral&amp;utm_source=unsplash">Dmytro Tolokonov</a>)</p>
-
-
-
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>Our old site was started around 2010. GitHub was barely a thing and we were years away from R’s markdown/rmarkdown/blogdown packages. We used Squarespace to host the blog, and it was fine but unwieldy for what we were doing.↩︎</p></li>
-</ol>
-</section></div> ]]></description>
-  <category>books</category>
-  <category>blog</category>
-  <guid>https://blog.aml4td.org/posts/new-location-same-content/</guid>
-  <pubDate>Wed, 28 Feb 2024 05:00:00 GMT</pubDate>
-  <media:content url="https://blog.aml4td.org/posts/new-location-same-content/dmytro-tolokonov-Jq3WI9IQgEs-unsplash.jpg" medium="image" type="image/jpeg"/>
-</item>
+<lastBuildDate>Tue, 27 Feb 2024 05:00:00 GMT</lastBuildDate>
 <item>
   <title>Progress Update (February 2024)</title>
   <dc:creator>Max Kuhn</dc:creator>
@@ -80,6 +49,37 @@
   <guid>https://blog.aml4td.org/posts/2024-02-progress-update/</guid>
   <pubDate>Tue, 27 Feb 2024 05:00:00 GMT</pubDate>
   <media:content url="https://blog.aml4td.org/posts/2024-02-progress-update/prep.png" medium="image" type="image/png" height="190" width="144"/>
+</item>
+<item>
+  <title>New Location, Same Content</title>
+  <dc:creator>Max Kuhn</dc:creator>
+  <link>https://blog.aml4td.org/posts/new-location-same-content/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>This is the new home for the Applied Predictive Modeling blog.</p>
+<p>We’ve moved it here, along with the previous blog posts, because we’re now using a format that is much easier to work with (<a href="https://quarto.org/">Quarto</a>). This will make it a lot easier to create posts<sup>1</sup>.</p>
+<p>The blog is starting back up since we are actively developing our new (third) book called <em>Applied Machine Learning for Tabular Data</em> (<a href="https://aml4td.org/">aml4td</a>). We’ll post progress updates, requests for community help, discussions of technical matters, and other topics.</p>
+<p>We kept the old blog name, which might be a little confusing since we are focusing on a different book. First, we wanted our posts in the same location; adding content in a new place was awkward. Second, the new book has similar topics and I’d expect we’d put similar content here.</p>
+<p>Instead of having discussions inside the blog posts, we’ll create <a href="https://github.com/aml4td/blog/issues">GitHub issues</a> when we ask for community feedback and folks can respond there.</p>
+<p>(The banner image is by <a href="https://unsplash.com/photos/tree-leaves-macro-photography-Jq3WI9IQgEs?utm_content=creditShareLink&amp;utm_medium=referral&amp;utm_source=unsplash">Dmytro Tolokonov</a>)</p>
+
+
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Our old site was started around 2010. GitHub was barely a thing and we were years away from R’s markdown/rmarkdown/blogdown packages. We used Squarespace to host the blog, and it was fine but unwieldy for what we were doing.↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>books</category>
+  <category>blog</category>
+  <guid>https://blog.aml4td.org/posts/new-location-same-content/</guid>
+  <pubDate>Mon, 26 Feb 2024 05:00:00 GMT</pubDate>
+  <media:content url="https://blog.aml4td.org/posts/new-location-same-content/dmytro-tolokonov-Jq3WI9IQgEs-unsplash.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>2022 tidymodels user survey</title>

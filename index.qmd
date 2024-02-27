@@ -2,6 +2,7 @@
 listing:
   contents: posts
   date-format: YYYY-MM-DD
+  image-height: 220px
   sort: "date desc"
   type: default
   categories: false

@@ -22,7 +22,7 @@
   </url>
   <url>
     <loc>https://blog.aml4td.org/index.html</loc>
-    <lastmod>2024-02-27T01:23:06.169Z</lastmod>
+    <lastmod>2024-02-27T01:37:22.792Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/2022-tidymodels-user-survey/index.html</loc>
@@ -102,7 +102,7 @@
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/new-location-same-content/index.html</loc>
-    <lastmod>2024-02-27T01:23:06.258Z</lastmod>
+    <lastmod>2024-02-27T01:31:45.132Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/new-caret-version-6052/index.html</loc>
@@ -283,5 +283,9 @@
   <url>
     <loc>https://blog.aml4td.org/posts/working-at-rstudio/index.html</loc>
     <lastmod>2024-02-27T01:23:06.287Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/2024-02-progress-update/index.html</loc>
+    <lastmod>2024-02-27T01:31:14.020Z</lastmod>
   </url>
 </urlset>
