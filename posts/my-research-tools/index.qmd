@@ -137,3 +137,5 @@ In no particular order:
 * [Journal of the Royal Statistical Society: Series B (Statistical Methodology)](http://bit.ly/1zG0QC7)
 * [Nature Reviews Drug Discovery - Issue - nature.com science feeds](http://feeds.nature.com/nrd/rss/current)
 * [Drug Discovery Today](http://rss.sciencedirect.com/publication/science/5020)
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2014/11/29/my-research-tools))

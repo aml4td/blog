@@ -27,3 +27,6 @@ The current TOC is:
 1. _Handling Missing Data_ 
 1.  _Feature Engineering Without Overfitting_ 
 1.  _Feature Selection_ 
+
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](http://appliedpredictivemodeling.com/blog/2018/5/13/early-draft-of-our-feature-engineering-and-selection-book))

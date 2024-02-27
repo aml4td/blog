@@ -18,3 +18,5 @@ I've had a great time doing drug discovery at Pfizer for the last 12ish years an
 
 My contact info has been changed on my existing R packages and you can find me either using my personal email (`mxkuhn@gmail.com`), RStudio address (`max@rstudio.com`), or [github page](https://github.com/topepo)
 
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2016/11/28/working-at-rstudio))

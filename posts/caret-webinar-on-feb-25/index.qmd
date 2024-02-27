@@ -14,3 +14,5 @@ I"ll be doing a webinar with the Orange County R User Group on the [caret packag
 Here is the url in case you are interested: https://www3.gotomeeting.com/register/673845982
 
 Thanks to Ray DiGiacomo for setting this up.
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2014/2/2/caret-webinar-on))

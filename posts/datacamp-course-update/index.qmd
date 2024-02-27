@@ -14,3 +14,5 @@ The really cool thing about the course is that their system lets you execute the
 (Disclosure: I contributed some videos to the course but I don't make any money from it or DataCamp)
 
 [update] As much as I'd love recommend Zach's work, please avoid using DataCamp because of the [sexual assult issues](https://www.businessinsider.com/datacamp-ceo-made-uninvited-physical-contact-with-employee-sources-say-2019-4) and [cover up](https://www.buzzfeednews.com/article/daveyalba/datacamp-sexual-harassment-metoo-tech-startup). 
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2016/9/26/datacamp-course))

@@ -7,6 +7,9 @@ categories:
   - R
   - presentations
 draft: false
+resources:
+  - "CIRUG.R"
+  - "CIRUG.pdf"
 ---
 
 ![](bounds.png){fig-align="center"}
@@ -15,5 +18,7 @@ I'll be giving a talk ("Applied Predictive Modeling") to the [Central Iowa R Use
 
 It looks like it will be broadcast live on YouTube. The link is [http://www.youtube.com/watch?v=99lnTku75Pc](http://www.youtube.com/watch?v=99lnTku75Pc).  
 
-Update: Here are my [sldies](TODO) and [code](TODO) for the session
+Update: Here are my [sldies](CIRUG.pdf) and [code](CIRUG.R) for the session
 
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2016/1/18/central-iowa-r-user-group-talk))

@@ -161,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This is the second of two posts about the performance characteristics of resampling methods. The <a href="http://appliedpredictivemodeling.com/blog/2014/11/27/vpuig01pqbklmi72b8lcl3ij5hj2qm">first post</a> focused on the cross-validation techniques and this post mostly concerns the bootstrap.</p>
+<p>This is the second of two posts about the performance characteristics of resampling methods. The <a href="../comparing-different-species-of-crossvalidation/">first post</a> focused on the cross-validation techniques and this post mostly concerns the bootstrap.</p>
 <p>Recall from the last post: we have some simulations to evaluate the precision and bias of these methods. I simulated some regression data (so that I know the real answers and compute the <em>true</em> estimate of RMSE). The model that I used was random forest with 1000 trees in the forest and the default value of the tuning parameter. I simulated 100 different data sets with 500 training set instances. For each data set, I also used each of the resampling methods listed above 25 times using different random number seeds. In the end, we can compute the precision and average bias of each of these resampling methods.</p>
 <section id="question-3-how-do-the-variance-and-bias-change-in-the-bootstrap" class="level3">
 <h3 class="anchored" data-anchor-id="question-3-how-do-the-variance-and-bias-change-in-the-bootstrap">Question 3: How do the variance and bias change in the bootstrap?</h3>
@@ -221,6 +221,7 @@ ul.task-list li input[type="checkbox"] {
 <li>There are a limited number of performance estimates where the OOB estimate can be computed. This is mostly due to software limitations (as opposed to theoretical concerns). For the <code>caret</code> package, we can compute RMSE and R<sup>2</sup> for regression and accuracy and the Kappa statistic for classification but this is mostly by taking the output that the <code>randomForest</code> function provides. If you want to get the area under the ROC curve or some other measure, you are out of luck.</li>
 <li>If you are comparing random forest’s OOB error rate with the CV error rate from another model, it may not be a very fair comparison.</li>
 </ul>
+<p>(This article was originally posted at <a href="https://appliedpredictivemodeling.com/blog/2014/11/27/08ks7leh0zof45zpf5vqe56d1sahb0"><code>http://appliedpredictivemodeling.com</code></a>)</p>
 
 
 </section>

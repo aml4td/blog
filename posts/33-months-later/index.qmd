@@ -14,3 +14,5 @@ On top of that, I just sent the first version of the `AppliedPredictiveModeling`
 > diff(ymd(c("2010-09-01", "2013-05-29")))
 ## Time difference of 1001 days
 ```
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/5/29/about-33-months-later))

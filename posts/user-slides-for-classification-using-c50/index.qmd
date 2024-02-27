@@ -7,8 +7,9 @@ categories:
   - useR!
   - C5.0
 draft: false
+resources: "user_C5.0.pdf"
 ---
 
-I've had a lot of requests, so here they are. Hopefully, all of the slides will be posted on the conference website.
+I've had a lot of requests, so [here](user_C5.0.pdf) they are. Hopefully, all of the slides will be posted on the conference website.
 
-EDIT: The PDF for the LaTeX slides appear to be unreadable by some. Here is a new link: Classification Using C5.0
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/7/17/user-slides-for-classification-using-c50))

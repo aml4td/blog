@@ -33,4 +33,6 @@ In the meantime, Kjell and I have made some progress on the exercise solutions. 
 > 
 > Thanks, and we look forward to hearing from you.
 
-> Best regards,Kjell(`kjell@arboranalytics.com`) and Max (`max.kuhn@pfizer.com`)
+> Best regards,Kjell(`kjell@arboranalytics.com`) and Max (`mxkuhn@gmail.com`)
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2014/10/1/99llu2mu6uvm0d6em8ubvezit2focu))

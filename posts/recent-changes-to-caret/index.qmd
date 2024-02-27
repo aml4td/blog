@@ -29,3 +29,4 @@ Numerous bugs were also fixed in the last few releases.
 The new version is [5.16-04](http://cran.r-project.org/web/packages/caret/index.html).
 Feel free to email me at <mxkuhn@gmail.com> if you have any feature requests or questions. 
 
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/5/18/recent-changes-to-caret))

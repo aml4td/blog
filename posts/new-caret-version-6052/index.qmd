@@ -24,3 +24,5 @@ On-deck for upcoming versions:
 * Enabling prediction intervals (for models that support this) using `predict.train`. To be clear, `caret` isn't generating these but if you fit an `lm` model, you will be able to generate intervals from `predict.lm` and pass them through `predict.train`. 
 
 
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2015/7/16/new-caret-version))

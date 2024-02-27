@@ -29,3 +29,4 @@ My thoughts:
 
 * Despite the number of models used, it would have been nice to see more emphasis on recent deep-learning models and boosting via the [gbm](https://github.com/harrysouthworth/gbm) package. 
 
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2014/11/11/some-thoughts-on-do-we-need-hundreds-of-classifiers-to-solve-real-world-classification-problems))

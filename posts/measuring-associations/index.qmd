@@ -23,85 +23,70 @@ Despite the probabilistic motivation, they take a randomization approach to maki
 
 Let's look at some data. I like the blood-brain barrier data a lot. It has measurements on 208 drugs to see how much (if at all) they enter the brain. The predictors are molecular descriptors (similar to the solubility example in the book). To get the data:
 
-<pre>
+```{r}
 library(caret)
 data(BloodBrain)
 ## remove zero variance columns
 isZV <- apply(bbbDescr, 2, function(x) length(unique(x)) == 1)
 bbbDescr <- bbbDescr[, !isZV]
 ncol(bbbDescr)
-
-|| [1] 134
-</pre>
+```
 
 First, I'll measure association using the _A_ measure discussed in Murrell<sup>3</sup>:
 
-<pre>
+```{r}
+#| warning: false
 library(matie)
 ## Compute the associations across all columns of the predictors
 Avalues <- apply(bbbDescr, 2, function(x, y) ma(cbind(x, y))$A, y = logBBB)
 Avalues <- sort(Avalues, decreasing = TRUE)
 head(Avalues)
-
-||      fnsa3   psa_npsa polar_area       tpsa      scaa3       tcnp 
-||     0.4386     0.4126     0.4116     0.3924     0.3771     0.3672
-</pre>
+```
 
 So the best predictor only explains 43.9% of the variation in the outcome. Most of the predictors shown above are related to surface area, which makes sense: the larger the molecule the less likely it is to physically fit through the barrier. 
 
 What does MIC tell us?
 
-<pre>
+```{r}
 library(minerva)
 ## There are three predictors whose scales have very low variances. We
 ## need to reset the threshold that checks for this
 mic <- mine(bbbDescr, logBBB, var.thr = 1e-10)$MIC
-mic <- mic[order(mic[, "Y"], decreasing = TRUE), ]
+mic <- mic[, "Y"]
+names(mic) <- colnames(bbbDescr)
+mic <- mic[order(mic, decreasing = TRUE)]
 head(mic)
-
-||    fnsa3     rpcg    fpsa3    scaa1    scaa3 psa_npsa 
-||   0.5249   0.4806   0.4762   0.4759   0.4712   0.4650
-</pre>
+```
 
 There are some differences but the top predictor from _A_ is still at the top. The MIC values is sort of a correlation-like measure and our best value was 0.52.
 
 I also have a measure of importance that is based on scatterplot smoothers. A loess smoother is fit between the outcome and the predictor and the R<sup>2</sup> statistic is calculated for this model against the intercept only null model. I don't claim that there is any justification (which is why I've never published it) for this but it has worked for me in the past. This is similar to my statements about MIC and PLS. I still use them because they tend to work, but I've no theoretical leg to stand on. 
 
-<pre>
+```{r}
 ## A measure based on regression smoothers
 gamImp <- filterVarImp(bbbDescr, logBBB, nonpara = TRUE)
 gamImp <- gamImp[order(gamImp$Overall, decreasing = TRUE), , drop = FALSE]
 head(gamImp)
-
-||              Overall
-||   fnsa3       0.3970
-||   psa_npsa    0.3879
-||   polar_area  0.3806
-||   tcnp        0.3681
-||   tpsa        0.3584
-||   tpsa.1      0.3475
-</pre>
+```
 
 Finally, I'll compute the RRelief scores. We discuss this in the book and the a good reference is [here](http://lkm.fri.uni-lj.si/xaigor/slo/clanki/MLJ2003-FinalPaper.pdf). It uses a nearest-neighbor approach and measures the importance of each predictors simultaneously (all of the other methods show here measure each association in isolation).  
 
-<pre>
+```{r}
 library(CORElearn)
+
 ## The function only uses the formula interface
 bbbData <- bbbDescr
 bbbData$logBBB <- logBBB
+
 set.seed(10)
 RRelief <- attrEval(logBBB ~ ., data = bbbData, estimator = "RReliefFbestK", 
-    ReliefIterations = 100)
+                    ReliefIterations = 100)
 RRelief <- RRelief[order(RRelief, decreasing = TRUE)]
 head(RRelief)
-
-||      smr_vsa7      smr_vsa1 dipole_moment    peoe_vsa.0           pol 
-||        0.2622        0.2577        0.2525        0.2452        0.2366 
-||      smr_vsa6 
-||        0.2278
-</pre>
+```
 
 This score ranks the variables differently than the other methods. This is most likely due to the difference in philosophy in measuring association between this method and the others as well as the high degree of correlation between the predictors in these data. 
+
 Overall, do these metrics correlate?
 
 ![](splom.png){fig-align="center"}
@@ -112,4 +97,4 @@ If you ignore RRelief, there is some association between measures of association
 
 Several of these are "near zero variance" predictors and probably shouldn't be evaluated. For this image, it is difficult for me to see the association between the response and `peoe_vsa.0` (MIC = 0.19) or `smr_vsa1` (MIC = 0.18).
 
-
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/6/6/jmt8dw6egtv977chpxs1oulmgy7ubx))

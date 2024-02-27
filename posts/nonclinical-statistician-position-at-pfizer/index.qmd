@@ -45,3 +45,5 @@ The position is posted at [http://pfizercareers.com/](http://pfizercareers.com/)
 - Go to "Search jobs" on the green tab
 - Choose "SEARCH and APPLY for Jobs"
 - In the "Advanced Search" bar, search on Job Id 1024297
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2015/12/14/nonclinical-statistician-position-at-pfizer))

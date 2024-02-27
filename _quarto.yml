@@ -3,15 +3,27 @@ project:
   output-dir: docs
   preview:
     port: 4202
+  render:
+    - "*.qmd" 
+    - "!*.Rmd"
 
 website:
   title: "Applied Predictive Modeling Blog"
   site-url: "https://blog.aml4td.org"
   navbar:
     right:
+      - text: "Home"
+        file: index.qmd
+      - text: "Book"
+        href: https://aml4td.org/
+      - text: "Computing: R"
+        href: https://tidymodels.aml4td.org/        
       - about.qmd
       - icon: github
         href: https://github.com/aml4td/blog
+
+resources:
+  - CNAME
 
 format:
   html:
@@ -24,3 +36,7 @@ format:
     tbl-cap-location: bottom
     fig-cap-location: bottom
     keep-md: false
+    highlight-style: arrow
+    code-link: true
+    code-block-bg: "#f9fafd"
+    code-block-border-left: "#e1e7f6"

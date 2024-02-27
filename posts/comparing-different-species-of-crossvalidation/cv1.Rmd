@@ -1,0 +1,260 @@
+
+```{r, load_data,message=FALSE,warning=FALSE,echo=FALSE,results='hide',cache = TRUE}
+setwd("/Volumes//gnlstats/users/kuhna03/Resample_Sim/")
+
+library(ggplot2)
+library(plyr)
+library(reshape2)
+
+sim_files <- list.files(pattern = "^all_results")
+sim_files <- sim_files[!grepl("_100", sim_files)]
+
+out <- vector(mode = "list", length = length(sim_files))
+
+for(i in seq(along = sim_files)) {
+  load(sim_files[i])
+  bias_est <- ddply(all_results, 
+                    .(data_seed, method, number, pct, n), 
+                    function(x)  c(bias = median((x$RMSE- x$Test_RMSE), na.rm = TRUE),
+                                   bias2 = median((x$RMSE- x$Test_RMSE)^2, na.rm = TRUE),
+                                   seeds = nrow(x)))
+  var_est <- ddply(all_results, 
+                   .(data_seed, method, number, pct, n), 
+                   function(x) c(variance = var(x$RMSE, na.rm = TRUE), reps = nrow(x)))
+  time_est <- ddply(all_results, 
+                    .(data_seed, method, number, pct, n), 
+                    function(x) c(time = median(x$time, na.rm = TRUE)))
+  
+  summaries <- merge(var_est, bias_est)
+  summaries <- merge(summaries, time_est)
+  summaries <- subset(summaries, !(method %in% c("Test", "LOO")))
+  
+  out[[i]] <- summaries
+  rm(summaries, all_results, bias_est, time_est, var_est)
+  }
+
+out <- do.call("rbind", out)
+out$pct <- (1 - out$pct)*100
+
+medians <- ddply(out, .(method, number, pct),
+                 function(x) c(bias = median(x$bias, na.rm = TRUE),
+                               variance = median(x$variance, na.rm = TRUE),
+                               data_sets = sum(complete.cases(x))))
+medians$number2 <- factor(format(medians$number))
+theme_set(theme_bw())
+```
+
+This is the first of two posts about the performance characteristics of resampling methods. 
+
+First, a review: 
+
+* Resampling methods, such as cross-validation (CV) and the bootstrap, can be used with predictive models to get estimates of model performance using the training set. 
+* These estimates can be made to tune the model or to get a good sense of how the model works without touching the test set. 
+
+There are quite a few methods for resampling. Here is a short summary (more in Chapter 4 of the book):
+
+* _k_-fold cross-validation randomly divides the data into _k_ blocks of roughly equal size. Each of the blocks is left out in turn and the other _k_-1 blocks are used to train the model. The held out block is predicted and these predictions are summarized into some type of performance measure (e.g. accuracy, root mean squared error (RMSE), etc.). The _k_ estimates of performance are averaged to get the overall resampled estimate. _k_ is 10 or sometimes 5. Why? Who knows? When _k_ is equal to the sample size, this procedure is known as Leave-One-Out CV. I generally don't use it and won't consider it here. 
+
+* Repeated _k_-fold CV does the same as above but more than once. For example, five repeats of 10-fold CV would give 50 total resamples that are averaged. Note this is not the same as 50-fold CV. 
+
+* Leave Group Out cross-validation (LGOCV), aka Monte Carlo CV, randomly leaves out some set percentage of the data _B_ times. It is similar to min-training and hold-out splits but only uses the training set. 
+
+* The bootstrap takes a random sample _with replacement_ from the training set _B_ times. Since the sample is with replacement, there is a very stonily likelihood that some training set samples will be represented more than once. As a consequence of this, some training set data points will not be contained in the bootstrap sample. The model is trained on the bootstrap sample and those data points not in that sample are predicted as hold outs. 
+
+Which one should you use? It depends on the data set size and a few other factors. We statisticians tend to think about the operating characteristics of these procedures. For example, each of the methods above can be characterized in terms of their _bias_ and _precision_. 
+
+Suppose that you have a regression problem and you are interested in measuring RMSE. Imagine that, for your data, there is some “true” RMSE value that a particular model could achieve. The bias is the difference between what the resampling procedure estimates your RMSE to be for that model and the true RMSE. Basically, you can think of it as accuracy of estimation. The precision measures how variable the result is. Some types of resampling have higher bias than others and the same is true for precision. 
+
+Imagine that the true RMSE is the target we are trying to hit and suppose that we have four different types of resampling. This graphic is typically used when we discuss accuracy versus precision. 
+
+```{r, target, fig.height=4, fig.width=4, echo=FALSE}
+library(ggplot2)
+
+n <- 10
+
+set.seed(14)
+na_np <- data.frame(x1 = rnorm(10, mean = -2, sd = 1),
+                    x2 = rnorm(10, mean = 2, sd = 1),
+                    Acc = "Not Accurate",
+                    Pre = "Not Precise")
+set.seed(2)
+a_np <- data.frame(x1 = rnorm(10, mean = 0, sd = 1),
+                   x2 = rnorm(10, mean = 0, sd = 1),
+                   Acc = "Accurate",
+                   Pre = "Not Precise")
+set.seed(3)
+a_p <- data.frame(x1 = rnorm(10, mean = 0, sd = .35),
+                  x2 = rnorm(10, mean = 0, sd = .35),
+                  Acc = "Accurate",
+                  Pre = "Precise")
+set.seed(12)
+na_p <- data.frame(x1 = rnorm(10, mean = 2, sd = .35),
+                   x2 = rnorm(10, mean = 2, sd = .35),
+                   Acc = "Not Accurate",
+                   Pre = "Precise")
+
+plot_dat <- rbind(na_np, a_p, a_np, na_p)
+
+ggplot(plot_dat, aes(x = x1, y = x2)) +
+  facet_grid(Acc ~ Pre) +
+  xlim(c(-5, 5)) + ylim(c(-5, 5)) +
+  xlab("") + ylab("") + 
+  theme_bw() + 
+  theme(axis.ticks = element_blank(),
+        axis.text.y = element_blank(),
+        axis.text.x = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        #panel.border = theme_blank(),
+        panel.background = element_blank())  + 
+  annotate("path",
+           x=.25*cos(seq(0,2*pi,length.out=100)),
+           y=.25*sin(seq(0,2*pi,length.out=100)),
+           col = rgb(.2, .2, .2, .5)) +    
+  annotate("path",
+           x=1*cos(seq(0,2*pi,length.out=100)),
+           y=1*sin(seq(0,2*pi,length.out=100)),
+           col = rgb(.2, .2, .2, .5)) + 
+  annotate("path",
+           x=2*cos(seq(0,2*pi,length.out=100)),
+           y=2*sin(seq(0,2*pi,length.out=100)),
+           col = rgb(.2, .2, .2, .5)) +   
+  annotate("path",
+           x=3*cos(seq(0,2*pi,length.out=100)),
+           y=3*sin(seq(0,2*pi,length.out=100)),
+           col = rgb(.2, .2, .2, .5)) +   
+  annotate("path",
+           x=4*cos(seq(0,2*pi,length.out=100)),
+           y=4*sin(seq(0,2*pi,length.out=100)),
+           col = rgb(.2, .2, .2, .5)) +   
+  geom_point() 
+```
+
+Clearly we want to be in the lower right. 
+
+Generally speaking, the bias of a resampling procedure is thought to be related to how much data is held out. If you hold-out 50% of your data using 2-fold CV, the thinking is that your final RMSE estimate will be more biased than one that held out 10%. On the other hand, the conventional wisdom is that holding less data out decreases precision since each hold-out sample has less data to get a stable estimate of performance (i.e. RMSE). 
+
+I ran some simulations to evaluate the precision and bias of these methods. I simulated some regression data (so that I know the real answers and compute the _true_ estimate of RMSE). The model that I used was random forest with 1000 trees in the forest and the default value of the tuning parameter. I simulated 100 different data sets with 500 training set instances. For each data set, I also used each of the resampling methods listed above 25 times using different random number seeds. In the end, we can compute the precision and average bias of each of these resampling methods. 
+
+I won’t show the distributions of the precision and bias values across the simulations but use the median of these values. The median represents the distributions well and are simpler to visualize. 
+
+Question 1a and 1b: How do the variance and bias change in basic CV? Also, Is it worth repeating CV?  
+---
+
+First, let’s look at how the precision changes over the amount of data held-out and the training set size. We use the variance of the resampling estimates to measure precision. 
+
+```{r, cv_var, fig.height=4, fig.width=6.5, echo=FALSE}
+medians$method0 <- medians$method
+medians$method <- as.character(medians$method)
+medians$method[medians$method0 == "CV" & medians$number == 5] <-  " 5-Fold CV"
+medians$method[medians$method0 == "CV" & medians$number == 10] <- "10-Fold CV"
+medians$method[medians$method0 == "rCV" & medians$number > 10] <- "10-Fold CV (repeated)"
+medians$method[medians$method0 == "lgo"] <- "Leave Group Out CV"
+ggplot(subset(medians, method0 %in% c("CV", "rCV")), 
+       aes(x= number, y = variance, color = method)) + 
+  geom_point() +
+  theme_bw()  +  scale_y_log10() + 
+  xlab("Number of Held-Out Data Sets") +
+  ylab("Median Variance") +
+   theme(legend.position="top", legend.title=element_blank())
+```
+
+First, a value of 5 on the x-axis is 5-fold CV and 10 is 10-fold CV. Values greater than 10 are repeated 10-fold (i.e. a 60 is six repeats of 10-fold CV). For on the left-hand side of the graph (i.e. 5-fold CV), the median variance is `r round(subset(medians, method0 %in% c("CV", "rCV") & number == 5)$variance, 3)`. This measures how variable 5-fold CV is across all the simulated data sets.  
+
+There probably isn't any surprise here: if your measure additional replicates, the measured variance goes down. At some point the variance will level off but we are still gaining precision by repeating 10-fold CV more than once. Looking at the first two data points on the (single 5-fold and 10-fold CV), the reduction in variance is probably due to how much is being left out (10% versus 80%) as well as the number of resamples (5 versus 10).  
+
+What about bias? The conventional wisdom is that the bias should be better for the 10-fold CV replicates since less is being left out in those cases. Here are the results:
+
+```{r, cv_bias, fig.height=4, fig.width=6.5, echo=FALSE}
+ggplot(subset(medians, method0 %in% c("CV", "rCV")), 
+       aes(x= number, y = bias, color = method)) + geom_point() +
+  theme_bw()  + 
+  xlab("Number of Held-Out Data Sets") +
+  ylab("Median Bias") +
+   theme(legend.position="top", legend.title=element_blank())
+```
+
+From this, 5-fold CV is pessimistically biased and that bias is reduced by moving to 10-fold CV. Perhaps it is within the noise, but it would also appear that repeating 10-fold CV a few times can also marginally reduce the bias. 
+
+Question 2a and 2b: How does the amount held back affect LGOCV? Is it better than basic CV?
+---
+
+Looking at the leave-group-out CV results, the variance analysis shows an interesting pattern:
+
+```{r, lgo_variance, fig.height=4, fig.width=6.5, echo=FALSE}
+ggplot(subset(medians, method0 == "lgo"), 
+       aes(x= pct, y = variance, color = number2, group = number2)) + geom_point() + geom_line() +
+  theme_bw()  + xlab("Percentage of Data Held-Out") + scale_y_log10() +
+  ylab("Median Variance") +
+   theme(legend.position="top", legend.title=element_blank())
+```
+
+Visually at least, it appears that the amount held-out has a slightly a bigger influence on the variance of the results than the number of times that the process is repeated. Leaving more out buys you better individual resampled RMSE values (i.e. more precision). 
+
+That's one side of the coin. What about the bias?
+
+```{r, lgo_bias, fig.height=4, fig.width=6.5, echo=FALSE}
+ggplot(subset(medians, method0 == "lgo"), 
+       aes(x= pct, y = bias, color = number2, group = number2)) + geom_point() + geom_line() +
+  theme_bw()  + xlab("Percentage of Data Held-Out") +
+  ylab("Median Bias") +
+   theme(legend.position="top", legend.title=element_blank()) 
+```
+
+From this, LGOCV is overly pessimistic as you increase the amount held out. This could be because, with less data used to training the model, the less substrate random forest has to create an accurate model. It is hard to say why the bias didn't flatten out towards zero when small amounts of data are left out. 
+
+Also, the number of held-out data sets doesn't appear to reduce the bias. 
+
+One these results alone, if you use LGOCV try to leave a small amount out (say 10%) and do a lot of replicates to control the variance. But... why not just do repeated 10-fold CV?
+
+We have simulations where both LGOCV and 10-fold CV left out 10%. We can do a head-to-head comparison of these results to see which procedure seems to work better. Recall that the main difference between these two procedures is that repeated 10-fold CV splits the hold-out data points evenly within a fold. LGOCV just randomly selects samples each time. In ease case, the same training set sample will show up in more than one of the hold-out data sets so the difference is more about configuration of samples. 
+
+Here are the variance curves:
+
+```{r, cv_lgo_variance, fig.height=4, fig.width=6.5, echo=FALSE}
+ggplot(subset(medians, method0 %in% c("lgo", "rCV") & pct < 11 & pct > 09), 
+       aes(x= number, y = variance, color = method, group = method)) +
+  geom_point() + geom_line()  + 
+  theme_bw() + scale_y_log10() +
+  xlab("Number of Held-Out Data Sets") +
+  ylab("Median Variance") +
+   theme(legend.position="top", legend.title=element_blank())  
+```
+
+That seems pretty definitive: all other things being equal, you gain about a log unit of precision using repeated 10-fold CV instead of LGOCV with a 10% hold-out. 
+
+The bias curves show a fair amount of noise (keeping in mind the scale of this graph compared to the other bias images above):
+
+```{r, cv_lgo_bias, fig.height=4, fig.width=6.5, echo=FALSE}
+ggplot(subset(medians, method0 %in% c("lgo", "rCV") & pct < 11 & pct > 09), 
+       aes(x= number, y = bias, color = method, group = method)) +
+  geom_point() + geom_line()  + 
+  theme_bw() + 
+  xlab("Number of Held-Out Data Sets") +
+  ylab("Median Bias")  +
+   theme(legend.position="top", legend.title=element_blank())
+```
+
+I would say that there is no real difference in bias and expected this prior to seeing the results. We are always leaving 10% behind and, if this is what drives bias, the two procedures should be about the same. 
+
+So my overall conclusion,  _so far_, is that repeated 10-fold CV is the best in terms of variance and bias. As always, caveats apply. For example, if you have a ton of data, the precision and bias of 10- or even 5-fold CV may be acceptable. Your mileage may vary. 
+
+The next post will look at:
+
+* the variance and bias of the nominal bootstrap estimate
+* a comparison of repeated 10-fold CV to the bootstrap
+* the out-of-bag estimate of RMSE from the individual random forest model and how it compares to the other procedures.
+
+I'm getting major shoulder surgery this month, but I've pre-seeded a few blog posts. More may come but this will test my one-handed typing and the effectiveness of my Mac's dictation features. 
+ 
+
+```{r, image, echo=FALSE}
+save.image(file = "cv1.RData")
+```
+
+
+
+
+
+
+

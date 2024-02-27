@@ -15,3 +15,5 @@ Figure 10 surprised me; I assumed that the precision in resampled estimates is m
 
 Finally, the article has an excellent historical summary of the pivotal papers on this subject and does a great job of labeling and articulating the different _goals_ that one might have when resampling predictive models. 
 
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2014/4/10/cross-validation-pitfalls-when-selecting-and-assessing-regression-and-classification-models))

@@ -19,3 +19,5 @@ Finally, ensembles of different models were not included. For example, for a par
 
 At least this gives us some topics for a potential second addition. 
 
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/2/10/what-was-left-out))

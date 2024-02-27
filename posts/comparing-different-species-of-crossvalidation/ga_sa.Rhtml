@@ -1,0 +1,420 @@
+<!--begin.rcode results='hide', echo=FALSE, message=FALSE
+library(caret)
+library(AppliedPredictiveModeling)
+library(plyr)
+hook_inline = knit_hooks$get('inline')
+knit_hooks$set(inline = function(x) {
+  if (is.character(x)) highr::hi_html(x) else hook_inline(x)
+  })
+opts_chunk$set(comment=NA, tidy = FALSE, digits = 3, 
+               warning=FALSE, message=FALSE)
+    end.rcode-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  <!--
+  Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Name       : Emerald 
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20120902
+
+-->
+  <html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <body>
+
+<p>
+As previously mentioned, caret has two new feature selection routines based on genetic algorithms (GA) and simulated annealing (SA). The <a href="http://topepo.github.io/caret/GA.html">help</a> <a href="http://topepo.github.io/caret/SA.html">pages</a> for the two new functions give a detailed account of the options, syntax etc. 
+</p>
+
+<p>
+The package already has functions to conduct feature selection using simple filters as well as recursive feature elimination (RFE). RFE can be very effective. It initially ranks the features, then removes them in sequence, starting with the least importance variables. It is a <i>greedy</i> method since it never backtracks to reevaluate a subset. Basically, it points itself in a direction and proceeds. The main question is how far to go in that direction. 
+</p>
+
+<p>
+These two new functions, <tt><span class="hl kwd">gafs</span></tt> and  <tt><span class="hl kwd">safs</span></tt>, conduct a global search over the feature set. This means that the direction of the search is constantly changing and may re-evaluate solutions that are similar to (or the same as) previously evaluated feature sets. This is good and bad. If a feature set is not easily "rankable" then it should do better than RFE. However, it will require a larger number of model fits and has a greater chance of overfitting the <i>features</i> to the training set. 
+</p>
+
+<p>
+I won't go over the details of <a href="http://en.wikipedia.org/wiki/Genetic_algorithm">GAs<a/> or <a href="http://en.wikipedia.org/wiki/Simulated_annealing">SA</a>. There are <a href="http://scholar.google.com/scholar?hl=en&q=%22genetic+algorithm%22+%22feature+selection%22">a lot</a> of <a href="http://scholar.google.com/scholar?hl=en&q=%22simulated+annealing%22+%22feature+selection%22">references on these</a> and you can always check out Chapter 19 of our book. Also, since there were <a href="http://appliedpredictivemodeling.com/blog/2013/4/29/feature-selection-strikes-back-part-1">two previous</a> <a href="http://appliedpredictivemodeling.com/blog/2013/5/8/feature-selection-strikes-back-part-2">blog posts</a> about genetic algorithms, I'll focus on simulated annealing in this one. 
+</p>
+
+<!--begin.rcode data, echo=FALSE
+library(caret)
+library(AppliedPredictiveModeling)
+
+data(AlzheimerDisease)
+bl <- c("Genotype", "age", "tau", "p_tau", "Ab_42", "male")
+newAssays <- colnames(predictors)
+newAssays <- newAssays[!(newAssays %in% c("Class", bl))]
+
+predictors$E2 <- predictors$E3 <- predictors$E4 <- 0
+predictors$E2[grepl("2", predictors$Genotype)] <- 1
+predictors$E3[grepl("3", predictors$Genotype)] <- 1
+predictors$E4[grepl("4", predictors$Genotype)] <- 1
+genotype <-  predictors$Genotype
+
+set.seed(730)
+split <- createDataPartition(diagnosis, p = .8, list = FALSE)
+
+adData <- predictors
+adData$Class <- diagnosis
+
+training <- adData[ split, ]
+testing  <- adData[-split, ]
+
+predVars <- names(adData)[!(names(adData) %in% c("Class",  "Genotype"))]
+    end.rcode-->
+
+<p>
+To demonstrate I'll use the Alzheimer's disease data from Section 19.6 (page 502). There are biomarker and patient demographic data that are being used to predict who will eventually have cognitive impairment. The original data contained instances for <!--rinline I(nrow(adData)) --> subjects and information on <!--rinline I(ncol(adData)-1) --> predictors.
+</p>
+
+<p>
+In the book, we fit a number of different models to these data and conducted feature selection. Using RFE, linear discriminant analysis and random forest seemed to benefit from removing non-informative predictors. However, K-nearest neighbors and support vector machines had worse performance as RFE proceeded to remove predictors.
+</p>
+
+
+<!--begin.rcode rfe, echo=FALSE,cache=TRUE
+## Manually create the folds to keep them consistent
+## with those used in the text
+
+set.seed(104)
+index <- createMultiFolds(training$Class, times = 5)
+
+## Add them to the control object for `train`
+ctrl <- rfeControl(method = "repeatedcv", 
+                   repeats = 5,
+                   saveDetails = TRUE,
+                   index = index)
+
+ctrl$functions <- caretFuncs
+ctrl$functions$summary <- twoClassSummary
+
+varSeq <- seq(1, length(predVars)-1, by = 2)
+
+set.seed(721)
+knn_rfe <- rfe(training[, predVars],
+               training$Class,
+               sizes = varSeq,
+               rfeControl = ctrl,
+               ## `rfe` options above and `train` options below
+               metric = "ROC",
+               method = "knn",
+               tuneLength = 20,
+               preProc = c("center", "scale"),
+               trControl = trainControl(method = "cv",
+                                        verboseIter = FALSE,
+                                        classProbs = TRUE))
+rfe_profile <- knn_rfe$results[, c("Variables", "ROC")]
+rfe_profile$Method <- "RFE"
+    end.rcode-->
+
+<p>
+Wiht KNN, there is no model-based method for measuring predictor importance. In these cases, the <tt><span class="hl kwd">gafs</span></tt> will use the area under the ROC curve for each individual predictor for ranking. Using that approach, here is the plot of KNN performance over subset sizes:
+</p>
+
+<!--begin.rcode rfe_profile, fig.height=4, fig.width=6.5, echo=FALSE
+ylim <- c(0.201250, 1.038036)
+ggplot(knn_rfe$results, 
+       aes(x = Variables, y = ROC)) + 
+  geom_point(alpha = .7) + geom_smooth(se = FALSE) + 
+  theme_bw() + 
+  ylab("ROC (Cross-Validation)") +
+  ylim(ylim)
+    end.rcode-->
+
+<p>
+The values shown on the plot are the average area under the ROC curve measured using 5 repeats of 10-fold cross-validation. This implies that the full set of predictors is required. I should also note that, even with the entire predictor set, the KNN model did worse than LDA and random forests. 
+</p>
+
+<p>
+While RFE couldn't find a better subset of predictors, that does not mean that one doesn't exist. For example, can simulated annealing do better? 
+</p>
+
+<p>
+The code to load and split the data are in the <a href="http://cran.r-project.org/web/packages/AppliedPredictiveModeling/index.html"><strong>AppliedPredictiveModeling</strong></a> package and you can find the markdown for this blog post here. We have a data frame called <tt><span class="hl std">training</span></tt> that has all the data used to fit the models. The outcome is a factor called <tt><span class="hl std">Class</span></tt> and the predictor names are in a character vector called <tt><span class="hl std">predVars</span></tt>. First, let's define the resampling folds. 
+</p>
+
+<p>
+Let's define the <i>control</i> object that will specify many of the important options for the search. There are a lot of details to spell out, such as how to train the model, how new samples are predicted etc. There is a pre-made list called <tt><span class="hl std">caretSA</span></tt> that contains a starting template. 
+</p>
+
+<!--begin.rcode caretSA
+names(caretSA)
+    end.rcode-->
+
+<p>
+These functions are detailed on the packages <a href="http://topepo.github.io/caret/SA.html#custom">web page</a>. We will make a copy of this and change the method of measuring performance using hold-out samples:
+</p>
+
+<!--begin.rcode  knnSA
+knnSA <- caretSA
+knnSA$fitness_extern <- twoClassSummary
+    end.rcode-->
+
+<p>
+This will compute the area under the ROC curve and the sensitivity and specificity using the default 50% probability cutoff. These functions will be passed into the <tt><span class="hl kwd">safs</span></tt> function (see below)
+</p>
+
+<p>
+<tt><span class="hl kwd">safs</span></tt> will conduct the SA search inside a resampling wrapper as defined by the <tt><span class="hl std">index</span></tt> object that we created above (50 total times). For each subset, it computed and out-of-sample (i.e. "external") performance estimate to make sure that we are not overfitting to the feature set. This code should reproduce the same folds as those used in the book:
+</p>
+
+<!--begin.rcode folds
+library(caret)
+set.seed(104)
+index <- createMultiFolds(training$Class, times = 5)
+    end.rcode-->
+<p>
+Here is the control object that we will use:
+</p>
+
+<!--begin.rcode control
+ctrl <- safsControl(functions = knnSA, 
+                    method = "repeatedcv",
+                    repeats = 5,
+                    ## Here are the exact folds to used:
+                    index = index,
+                    ## What should we optimize? 
+                    metric = c(internal = "ROC",
+                               external = "ROC"),
+                    maximize = c(internal = TRUE,
+                                 external = TRUE),
+                    improve = 25,
+                    allowParallel = TRUE)
+    end.rcode-->
+
+<p>
+The option <tt><span class="hl kwc">improve</span></tt> specifies how many SA iterations can occur without improvement. Here, the search restarts at the last known improvement after 25 iterations. The <tt><span class="hl kwc">allowParallel</span></tt> options tells the package that it can parallelize the external resampling loops (if parallel processing is available).
+</p>
+
+<p>
+The <tt><span class="hl kwc">metric</span></tt> argument above is a little different than it would for <tt><span class="hl kwd">train</span></tt> or <tt><span class="hl kwd">rfe</span></tt>. SA needs an <i>internal</i> estimate of performance to help guide the search. To that end, we will also use cross-validation to tune the KNN model and measure performance. Normally, we would use the <tt><span class="hl kwd">train</span></tt> function to do this. For example, using the full set of predictors, this could might work to tune the model:
+</p>
+
+<!--begin.rcode full, eval=FALSE
+train(x = training[, predVars],
+      y = training$Class,    
+      method = "knn",
+      metric = "ROC",
+      tuneLength = 20,
+      preProc = c("center", "scale"),
+      trControl = trainControl(method = "repeatedcv",
+                               ## Produce class prob predictions
+                               classProbs = TRUE,
+                               summaryFunction = twoClassSummary,))
+    end.rcode-->
+
+<p>
+The beauty of using the <tt><span class="hl kwd">caretSA</span></tt> functions is that the <tt><span class="hl kwc">...</span></tt> are available. 
+</p>
+
+<p>
+<i>A short explanation of why you should care...</i>
+</p>
+
+<p>
+<tt>R</tt> has this great feature where you can seamlessly pass arguments between functions. Suppose we have this function that computes the means of the columns in a matrix or data frame: 
+</p>
+
+<!--begin.rcode dots1
+mean_by_column <- function(x, ...) {
+  results <- rep(NA, ncol(x))
+  for(i in 1:ncol(x)) results[i] <- mean(x[, i], ...)
+  results
+  }
+    end.rcode-->
+
+<p>
+(aside: don't loop over columns with <tt><span class="hl kwd">for</span></tt>. See <tt><span class="hl std">?</span><span class="hl kwd">apply</span></tt>, or <tt><span class="hl std">?</span><span class="hl kwd">colMeans</span></tt>, instead)
+</p>
+
+<p>
+There might be some options to the <tt><span class="hl kwd">mean</span></tt> function that we want to pass in but those options might change for different applications. Rather than making different versions of the function for different option combinations, any argument that we pass to <tt><span class="hl kwd">mean_by_column</span></tt> that is not one it its arguments (<tt><span class="hl kwc">x</span></tt>, in this case) is passed to wherever the three dots appear inside the function. For the function above, they go to <tt><span class="hl kwd">mean</span></tt>. Suppose there are missing values in <tt><span class="hl kwc">x</span></tt>:
+</p>
+
+<!--begin.rcode dots2
+example <- matrix(runif(100), ncol = 5)
+example[1, 5] <- NA
+example[16, 1] <- NA
+mean_by_column(example)
+    end.rcode-->
+
+<p>
+<tt><span class="hl kwd">mean</span></tt> has an option called <tt><span class="hl kwc">na.rm</span></tt> that will compute the mean on the complete data. Now, we can pass this into <tt><span class="hl kwd">mean_by_column</span></tt> <i>even though this is not one of its options</i>.
+</p>
+
+<!--begin.rcode dots3
+mean_by_column(example, na.rm = TRUE)
+    end.rcode-->
+
+<p>
+Here's why this is relevant. <tt><span class="hl kwd">caretSA<span class="hl std">$fit</span></tt> uses <tt><span class="hl kwd">train</span></tt> to fit and possibly tune the model. 
+</p>
+
+<!--begin.rcode fit
+caretSA$fit
+    end.rcode-->
+
+<p>
+Any options that we pass to <tt><span class="hl kwd">safs</span></tt> that are not <tt><span class="hl kwc">x</span></tt>, <tt><span class="hl kwc">y</span></tt>, <tt><span class="hl kwc">iters</span></tt>, <tt><span class="hl kwc">differences</span></tt>, or <tt><span class="hl kwc">safsControl</span></tt> will be passed to <tt><span class="hl kwd">train</span></tt>. 
+</p>
+
+<p>
+So, putting it all together:
+</p>
+
+<!--begin.rcode safs, cache = TRUE
+set.seed(721)
+knn_sa <- safs(x = training[, predVars],
+               y = training$Class,
+               iters = 500, 
+               safsControl = ctrl,
+               
+               ## Now we pass options to `train` via "knnSA":               
+               method = "knn",
+               metric = "ROC",
+               tuneLength = 20,
+               preProc = c("center", "scale"),
+               trControl = trainControl(method = "repeatedcv", 
+                                        repeats = 2,
+                                        classProbs = TRUE,
+                                        summaryFunction = twoClassSummary,
+                                        allowParallel = FALSE))
+    end.rcode-->
+
+<p>
+To recap: 
+</p>
+
+<ul>
+ <li> 
+ the SA is conducted many times inside of resampling to get an external estimate of performance. 
+ </li>
+ <li> inside of this external resampling loop, the KNN model is tuned using another, <i>internal</i> resampling procedure. 
+ </li> 
+ <li> the area under the ROC curve is used to guide the search (internally) and to know if the SA has overfit to the features (externally)
+ </li> 
+ <li> in the code above, when <tt><span class="hl kwd">safs</span></tt> is called with other options (e.g. <tt><span class="hl kwc">method</span> <span class="hl std">=</span> <span class="hl str">&quot;knn&quot;</span></tt>),
+ <ul>
+  <li> <tt><span class="hl kwd">safs</span></tt> passes the <tt><span class="hl kwc">method</span></tt>, <tt><span class="hl kwc">metric</span></tt>, <tt><span class="hl kwc">tuneLength</span></tt>, <tt><span class="hl kwc">preProc</span></tt>, and <tt><span class="hl kwc">tuneLength</span></tt>, <tt><span class="hl kwc">trControl</span></tt> options to <tt><span class="hl kwd">caretSA<span class="hl std">$fit</span></tt>
+  </li> 
+   <ul>
+     <li> <tt><span class="hl kwd">caretSA<span class="hl std">$fit</span></tt> passes these options to <tt><span class="hl kwd">train</span></tt>
+     </li> 
+   </ul> 
+ </ul>  
+</ul>
+
+<p>
+After external resampling, the optimal number of search iterations is determined and one last SA is run using all of the training data. 
+</p>
+
+<p>
+Needless to say, this executes a lot of KNN models. When I ran this, I used parallel processing to speed things up using the <strong>doMC</strong> package. 
+</p>
+
+<p>
+Here are the results of the search:
+</p>
+
+<!--begin.rcode print
+knn_sa
+    end.rcode-->
+
+<p>
+The algorithm automatically chose the subset created at iteration <!--rinline I(knn_sa$optIter) --> of the SA (based on the external ROC) which contained <!--rinline I(length(knn_sa$optVariables)) --> out of <!--rinline I(ncol(adData)-1) --> predictors. 
+</p>
+
+<p>
+We can also plot the performance values over iterations using the <tt><span class="hl kwd">plot</span></tt> function. By default, this uses the <a href="http://cran.r-project.org/web/packages/ggplot2/index.html"><strong>ggplot2</strong></a> package, so we can add a theme at the end of the call:
+</p>
+
+<!--begin.rcode profile, fig.height=4, fig.width=6.5, echo=FALSE
+plot(knn_sa) + theme_bw()
+    end.rcode-->
+
+<p>
+The most improvement was found in the first 200 iterations. The internal estimate is generally more optimistic than the external estimate. It also tends to increase while the external estimate is relatively flat, indicating some overfitting. The plot above indicates that less iterations might probably give us equivalent performance. Instead of repeating the SA with fewer iterations, the <tt><span class="hl kwd">update</span></tt> function can be used to pick a different subset size.
+</p>
+
+<p>
+Let's compare the RFE and SA profiles. For RFE and SA, the ROC values are averaged over the 50 resamples. In the case of SA, the number of predictors is also an average. For example, at iteration 100 of the SA, here is the subset size distribution across the 50 resamples:
+</p>
+
+<!--begin.rcode size, fig.height=4, fig.width=6.5, echo=FALSE
+iter_100 <- subset(knn_sa$internal, Iter == 100)
+ggplot(iter_100, aes(x = Size)) + geom_histogram(binwidth = 1) + theme_bw()
+    end.rcode-->
+
+<p>
+Here are superimposed smoothed trend lines for the resampling profiles of each search method:
+</p>
+
+<!--begin.rcode profiles, fig.height=4, fig.width=6.5, echo=FALSE, echo = FALSE
+sa_profile <- merge(knn_sa$external[, c("Resample", "Iter", "ROC")],
+                    knn_sa$internal[, c("Resample", "Iter", "Size")])
+
+sa_profile <- ddply(sa_profile, .(Iter),
+                    function(x) {
+                      c(Variables = mean(x$Size), ROC = mean(x$ROC))
+                      })
+sa_profile$Iter <- NULL
+sa_profile$Method <- "SA"
+profiles <- rbind(rfe_profile, sa_profile)
+ggplot(profiles, aes(x = Variables, y = ROC, color = Method)) +
+  geom_smooth(se = FALSE) + 
+  theme_bw()+ 
+  ylab("ROC (Cross-Validation)") +
+  ylim(ylim)
+    end.rcode-->
+
+<p>
+SA searched a smaller range of subset sizes over the iterations in comparison to RFE. The code here starts the initial subset with a random 20% of the possible features and tended to increase as the search continued and then stabilized at a size of about 55. 
+</p>
+
+<p>
+How does this predictor subset perform on the test data?
+</p>
+
+<!--begin.rcode sa_test
+library(pROC)
+roc(testing$Class, 
+    predict(knn_sa, testing)$Impaired, 
+    levels = rev(levels(testing$Class)))
+    end.rcode-->
+
+<p>
+This is better than the test set results for the RFE procedure. Note that this number is much more in-line with the external estimate of the area under the ROC curve. The bad new is that we evaluated many more models than the RFE procedure and the SA process was slightly more than <!--rinline I(round(knn_sa$times$everything[3]/knn_rfe$times$everything[3],0)) -->-fold slower than RFE to complete. Good things take time. Here is a parallel-coordinate plot of the individual resampling results, match by fold:
+</p>
+
+<!--begin.rcode parallel, fig.height=4, fig.width=6.5, echo=FALSE, echo = FALSE
+rs <- resamples(list(RFE = knn_rfe, SA = knn_sa))
+parallelplot(rs, metric = "ROC")
+    end.rcode-->
+
+<p>
+The difference is statistically signficant too:
+</p>
+
+<!--begin.rcode rs_test
+summary(diff(rs, metric = "ROC"))
+    end.rcode-->
+
+<p>
+The genetic algorithm code in <tt><span class="hl kwd">gafs</span></tt> has very similar syntax to <tt><span class="hl kwd">safs</span></tt> and also has pre-made functions. 
+</p>
+
+
+</body>
+  </html>
+
+

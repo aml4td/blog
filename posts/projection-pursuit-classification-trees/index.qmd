@@ -20,7 +20,7 @@ It is similar to [oblique trees](http://scholar.google.com/scholar?q=oblique+dec
 
 My intuition tells me that the `PPtree` model is somewhat less likely to over-flit the data. While it lacks a pruning algorithm, the nature of the splitting method might make it more robust to small fluctuations in the data. One way to diagnose this is using more comprehensive cross-validation and also assessing whether bagging helps this model. The splitting approach should also reduce the potential problem of bias towards predictors that are more granular. One other consequence of their tree-growing phase is that it eliminates the standard method of generating class probabilities (since it splits until purity).
 
-`PPtree`s might do a better job when there are a few linear predictors that drive classification accuracy. This could have been demonstrated [using simulation of some sort](http://appliedpredictivemodeling.com/blog/2013/4/11/a-classification-simulation-system). 
+`PPtree`s might do a better job when there are a few linear predictors that drive classification accuracy. This could have been demonstrated [using simulation of some sort](../benchmarking-machine-learning-models-using-simulation/). 
 
 A lot of tree methods have sub-algorithms for grouping categorical predictors. This model only works with such data as a set of disconnected dummy variables. This isn't good or bad since I have found a lot of variation in which type of encoding works with different tree methods.
 
@@ -34,3 +34,4 @@ The bad news: the method is available in an [R package](http://cran.r-project.or
 I've [ranted about these issues before](https://stat.ethz.ch/pipermail/r-devel/2012-January/062935.html) and the package violates most of my checklist. Maybe this is just part of someone's dissertation and maybe they didn't know about this list etc. However, most of the items above should have been avoided. 
 
 
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/5/14/projection-pursuit-classification-trees))

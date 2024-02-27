@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -152,7 +186,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>“Bees don’t swarm in a mango grove for nothing. Where can you see a wisp of smoke without a fire?” - Hla Stavhana</p>
-<p>In the <a href="http://appliedpredictivemodeling.com/blog/2013/4/29/feature-selection-strikes-back-part-1">last</a> <a href="http://appliedpredictivemodeling.com/blog/2013/5/8/feature-selection-strikes-back-part-2">two</a> posts, genetic algorithms were used as feature wrappers to search for more effective subsets of predictors. Here, I will do the same with another type of search algorithm: particle swarm optimization.</p>
+<p>In the <a href="../feature-selection-strikes-back-part-1/">last</a> <a href="../feature-selection-2--genetic-boogaloo/">two</a> posts, genetic algorithms were used as feature wrappers to search for more effective subsets of predictors. Here, I will do the same with another type of search algorithm: particle swarm optimization.</p>
 <p>Like genetic algorithms, this search procedure is motivated by a natural phenomenon, such as the movements of bird flocks. An excellent reference for this technique is <a href="http://scholar.google.com/scholar?q=%22Particle+swarm+optimization%22+author%3APoli">Poli et al (2007)</a>. The methodology was originally developed for optimizing real valued parameters, but was later adapted for discrete optimization by <a href="http://scholar.google.com/scholar?q=%22A+discrete+binary+version+of+the+particle+swarm+algorithm%22+author%3AKennedy">Kennedy and Eberhart (1997)</a>.</p>
 <p>The optimization is initiated with configurations (i.e.&nbsp;multiple particles). In our case, the particles will be different predictor subsets. For now, let’s stick with the parameters being real-valued variables. A particular value of a particle is taken to be it’s <em>position</em>. In addition to a position, each particle has an associated <em>velocity</em>. For the first iteration, these are based on random numbers.</p>
 <p>Each particle produces a fitness value. As with genetic algorithms, this is some measure of model fit. The next candidate set of predictors that a particle evaluates is based on it’s last position and it’s current velocity.</p>
@@ -164,121 +198,126 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 <p>There are other parameters of the search procedure, such as the number of particles or how much relative weight the positions of the individual and best particle are used to determine the next candidate point, but this is the basic algorithm in a nutshell.</p>
 <p>As an example, consider optimzing the Rosenbrock function with two real-valued variables (<em>A</em> and <em>B</em>):</p>
-<pre>fitness = 100*(B - A^2)^2 + (A - 1)^2
-</pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>fitness <span class="ot">=</span> <span class="dv">100</span><span class="sc">*</span>(B <span class="sc">-</span> A<span class="sc">^</span><span class="dv">2</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (A <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The best value is at (<em>A</em> = 1, <em>B</em> = 1). The movie below shows a particle swarm optimization using 100 iterations. The predicted best (solid white dot) is consistently in the neighborhood of the optimum value at around 50 iterations. You may need to refresh your browser to re-start the animation.</p>
-<p><img src="pso.gif" class="img-fluid quarto-figure quarto-figure-center"> When searching for subsets, the quantities that we search over are binary (i.e.&nbsp;the predictor is used or excluded from the model). The description above implies that the position is a real valued quantity. If the positions are centered around zero, <a href="http://scholar.google.com/scholar?q=%22A+discrete+binary+version+of+the+particle+swarm+algorithm%22+author%3AKennedy">Kennedy and Eberhart (1997)</a> suggested using a sigmoidal function to translate this value be between zero and one. A uniform random number is used to determine the binary version of the position that is evaluated. Other strategies have been proposed, including the application of a simple threshold to the translated position (i.e.&nbsp;if the translated position is above 0.5, include the predictor).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pso.gif" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>When searching for subsets, the quantities that we search over are binary (i.e.&nbsp;the predictor is used or excluded from the model). The description above implies that the position is a real valued quantity. If the positions are centered around zero, <a href="http://scholar.google.com/scholar?q=%22A+discrete+binary+version+of+the+particle+swarm+algorithm%22+author%3AKennedy">Kennedy and Eberhart (1997)</a> suggested using a sigmoidal function to translate this value be between zero and one. A uniform random number is used to determine the binary version of the position that is evaluated. Other strategies have been proposed, including the application of a simple threshold to the translated position (i.e.&nbsp;if the translated position is above 0.5, include the predictor).</p>
 <p><code>R</code> has the <a href="http://cran.r-project.org/web/packages/pso/index.html"><code>pso</code></a> package that implements this algorithm. It does not work for discrete optimization that we need for feature selection. Since its licensed under the GPL, I took the code and removed the parts specific to real valued optimization. That code is linked that the bottom of the page. I structured it to be similar to the R code for genetic algorithms. One input into the modified <code>pso</code> function is a list that has modules for fitting the model, generating predictions, evaluating the fitness function and so on. I’ve made some changes so that each particle can return multiple values and will treat the first as the fitness function. I’ll fit the same QDA model as before to the same simulated data set. First, here are the QDA functions:</p>
-<pre>qda_pso &lt;- list(
-  fit = function(x, y, ...)
-    {
-    ## Check to see if the subset has no members
-    if(ncol(x) &gt; 0)
-      {
-      mod &lt;- train(x, y, "qda", 
-                   metric = "ROC",
-                   trControl = trainControl(method = "repeatedcv", 
-                                            repeats = 1,
-                                            summaryFunction = twoClassSummary,
-                                            classProbs = TRUE))
-      } else mod &lt;- nullModel(y = y) ## A model with no predictors 
-    mod
-    },
-  fitness = function(object, x, y)
-    {
-    if(ncol(x) &gt; 0)
-      {
-      testROC &lt;- roc(y, predict(object, x, type = "prob")[,1], 
-                     levels = rev(levels(y)))
-      largeROC &lt;- roc(large$Class, 
-                      predict(object, 
-                              large[,names(x),drop = FALSE], 
-                              type = "prob")[,1], 
-                      levels = rev(levels(y)))  
-      out &lt;- c(Resampling = caret:::getTrainPerf(object)[, "TrainROC"],
-               Test = as.vector(auc(testROC)), 
-               Large_Sample = as.vector(auc(largeROC)),
-               Size = ncol(x))
-      } else {
-        out &lt;- c(Resampling = .5,
-                 Test = .5, 
-                 Large_Sample = .5,
-                 Size = ncol(x))
-        print(out)
-        }
-    out
-    },
-  predict = function(object, x)
-    {
-    library(caret)
-    predict(object, newdata = x)
-    }
-  )
-</pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>qda_pso <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">fit =</span> <span class="cf">function</span>(x, y, ...)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Check to see if the subset has no members</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">ncol</span>(x) <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      {</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      mod <span class="ot">&lt;-</span> <span class="fu">train</span>(x, y, <span class="st">"qda"</span>, </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">metric =</span> <span class="st">"ROC"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"repeatedcv"</span>, </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">repeats =</span> <span class="dv">1</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">summaryFunction =</span> twoClassSummary,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">classProbs =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> mod <span class="ot">&lt;-</span> <span class="fu">nullModel</span>(<span class="at">y =</span> y) <span class="do">## A model with no predictors </span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    mod</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">fitness =</span> <span class="cf">function</span>(object, x, y)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">ncol</span>(x) <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>      {</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>      testROC <span class="ot">&lt;-</span> <span class="fu">roc</span>(y, <span class="fu">predict</span>(object, x, <span class="at">type =</span> <span class="st">"prob"</span>)[,<span class="dv">1</span>], </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>                     <span class="at">levels =</span> <span class="fu">rev</span>(<span class="fu">levels</span>(y)))</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>      largeROC <span class="ot">&lt;-</span> <span class="fu">roc</span>(large<span class="sc">$</span>Class, </span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">predict</span>(object, </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                              large[,<span class="fu">names</span>(x),<span class="at">drop =</span> <span class="cn">FALSE</span>], </span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                              <span class="at">type =</span> <span class="st">"prob"</span>)[,<span class="dv">1</span>], </span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>                      <span class="at">levels =</span> <span class="fu">rev</span>(<span class="fu">levels</span>(y)))  </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>      out <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Resampling =</span> caret<span class="sc">:::</span><span class="fu">getTrainPerf</span>(object)[, <span class="st">"TrainROC"</span>],</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>               <span class="at">Test =</span> <span class="fu">as.vector</span>(<span class="fu">auc</span>(testROC)), </span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>               <span class="at">Large_Sample =</span> <span class="fu">as.vector</span>(<span class="fu">auc</span>(largeROC)),</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>               <span class="at">Size =</span> <span class="fu">ncol</span>(x))</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>        out <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Resampling =</span> .<span class="dv">5</span>,</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Test =</span> .<span class="dv">5</span>, </span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Large_Sample =</span> .<span class="dv">5</span>,</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Size =</span> <span class="fu">ncol</span>(x))</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(out)</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    out</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">predict =</span> <span class="cf">function</span>(object, x)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(caret)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">predict</span>(object, <span class="at">newdata =</span> x)</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here is the familiar code to generate the simulated data:</p>
-<pre>set.seed(468)
-training &lt;- twoClassSim(  500, noiseVars = 100, 
-                        corrVar = 100, corrValue = .75)
-testing  &lt;- twoClassSim(  500, noiseVars = 100, 
-                        corrVar = 100, corrValue = .75)
-large    &lt;- twoClassSim(10000, noiseVars = 100, 
-                        corrVar = 100, corrValue = .75)
-realVars &lt;- names(training)
-realVars &lt;- realVars[!grepl("(Corr)|(Noise)", realVars)]
-cvIndex &lt;- createMultiFolds(training$Class, times = 2)
-ctrl &lt;- trainControl(method = "repeatedcv",
-                     repeats = 2,
-                     classProbs = TRUE,
-                     summaryFunction = twoClassSummary,
-                     ## We will parallel process within each PSO
-                     ## iteration, so don't double-up the number
-                     ## of sub-processes
-                     allowParallel = FALSE,
-                     index = cvIndex)
-</pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">468</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>training <span class="ot">&lt;-</span> <span class="fu">twoClassSim</span>(  <span class="dv">500</span>, <span class="at">noiseVars =</span> <span class="dv">100</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">corrVar =</span> <span class="dv">100</span>, <span class="at">corrValue =</span> .<span class="dv">75</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>testing  <span class="ot">&lt;-</span> <span class="fu">twoClassSim</span>(  <span class="dv">500</span>, <span class="at">noiseVars =</span> <span class="dv">100</span>, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">corrVar =</span> <span class="dv">100</span>, <span class="at">corrValue =</span> .<span class="dv">75</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>large    <span class="ot">&lt;-</span> <span class="fu">twoClassSim</span>(<span class="dv">10000</span>, <span class="at">noiseVars =</span> <span class="dv">100</span>, </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">corrVar =</span> <span class="dv">100</span>, <span class="at">corrValue =</span> .<span class="dv">75</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>realVars <span class="ot">&lt;-</span> <span class="fu">names</span>(training)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>realVars <span class="ot">&lt;-</span> realVars[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"(Corr)|(Noise)"</span>, realVars)]</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>cvIndex <span class="ot">&lt;-</span> <span class="fu">createMultiFolds</span>(training<span class="sc">$</span>Class, <span class="at">times =</span> <span class="dv">2</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"repeatedcv"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                     <span class="at">repeats =</span> <span class="dv">2</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                     <span class="at">classProbs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                     <span class="at">summaryFunction =</span> twoClassSummary,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                     <span class="do">## We will parallel process within each PSO</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                     <span class="do">## iteration, so don't double-up the number</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>                     <span class="do">## of sub-processes</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                     <span class="at">allowParallel =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                     <span class="at">index =</span> cvIndex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To run the optimization, the code will be similar to the GA code used in the last two posts:</p>
-<pre>set.seed(235)
-psoModel &lt;- psofs(x = training[,-ncol(training)],
-                  y = training$Class,
-                  iterations = 200,
-                  functions = qda_pso,
-                  verbose = FALSE,
-                  ## The PSO code uses foreach to parallelize
-                  parallel = TRUE,
-                  ## These are passed to the fitness function
-                  tx = testing[,-ncol(testing)],
-                  ty = testing$Class)
-</pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">235</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>psoModel <span class="ot">&lt;-</span> <span class="fu">psofs</span>(<span class="at">x =</span> training[,<span class="sc">-</span><span class="fu">ncol</span>(training)],</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> training<span class="sc">$</span>Class,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">iterations =</span> <span class="dv">200</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">functions =</span> qda_pso,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                  <span class="do">## The PSO code uses foreach to parallelize</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">parallel =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                  <span class="do">## These are passed to the fitness function</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">tx =</span> testing[,<span class="sc">-</span><span class="fu">ncol</span>(testing)],</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ty =</span> testing<span class="sc">$</span>Class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Since this is simulated data, we can evaluate how well the search went using estimates of the fitness (the area under the ROC curve) calculated using different data sets: resampling, a test set of 500 samples and large set of 10,000 samples that we use to approximate the truth.</p>
 <p>The swarm did not consistently move to smaller subsets and, as with the original GA, it overfits to the predictors. This is demonstrated by the increase in the resampled fitness estimates and mediocre test/large sample estimates:</p>
-<p><img src="pso_ROC.png" class="img-fluid quarto-figure quarto-figure-center"> One tactic that helped the GA was to bias the algorithm towards smaller subsets. For PSO, this can be accomplished during the conversion from real valued positions to binary encodings. The previous code used a value of 1 for a predictor if the “squashed” version (i.e.&nbsp;after applying a sigmoidal function) was greater than 0.5. We can bias the subsets by increasing the threshold. This should start the process with smaller subsets and, since we raise the criteria for activating a predictor, only increase the subset size if there is a considerable increase in the fitness function. Here is the code for that conversion and another run of the PSO:</p>
-<pre>smallerSubsets &lt;- function(x)
-{  
-  ## 'x' is a matrix of positions centered around zero. The
-  ## code below uses a logistic function to "squash" then to
-  ## be between (0, 1). 
-  binary &lt;- binomial()$linkinv(x)
-  ## We could use ranom numbers to translate between the 
-  ## squashed version of the position and the binary version.
-  ## In the last application of PSO, I used a simple threshold of
-  ## 0.5. Now, increase the threshold a little to force the 
-  ## subsets to be smaller.
-  binary &lt;- ifelse(binary &gt;= .7, 1, 0)
-  ## 'x' has particles in columns and predicors in rows, 
-  ## so use apply() to threshold the positions
-  apply(binary, 2, function(x) which(x == 1))
-}
-set.seed(235)
-psoSmallModel &lt;- psofs(x = training[,-ncol(training)],
-                       y = training$Class,
-                       iterations = 200,
-                       convert = smallerSubsets,
-                       functions = qda_pso,
-                       verbose = FALSE,
-                       parallel = TRUE,
-                       tx = testing[,-ncol(testing)],
-                       ty = testing$Class)
-</pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pso_ROC.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>One tactic that helped the GA was to bias the algorithm towards smaller subsets. For PSO, this can be accomplished during the conversion from real valued positions to binary encodings. The previous code used a value of 1 for a predictor if the “squashed” version (i.e.&nbsp;after applying a sigmoidal function) was greater than 0.5. We can bias the subsets by increasing the threshold. This should start the process with smaller subsets and, since we raise the criteria for activating a predictor, only increase the subset size if there is a considerable increase in the fitness function. Here is the code for that conversion and another run of the PSO:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>smallerSubsets <span class="ot">&lt;-</span> <span class="cf">function</span>(x)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>{  </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="do">## 'x' is a matrix of positions centered around zero. The</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">## code below uses a logistic function to "squash" then to</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="do">## be between (0, 1). </span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  binary <span class="ot">&lt;-</span> <span class="fu">binomial</span>()<span class="sc">$</span><span class="fu">linkinv</span>(x)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="do">## We could use ranom numbers to translate between the </span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="do">## squashed version of the position and the binary version.</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="do">## In the last application of PSO, I used a simple threshold of</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="do">## 0.5. Now, increase the threshold a little to force the </span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="do">## subsets to be smaller.</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  binary <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(binary <span class="sc">&gt;=</span> .<span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="do">## 'x' has particles in columns and predicors in rows, </span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="do">## so use apply() to threshold the positions</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">apply</span>(binary, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">which</span>(x <span class="sc">==</span> <span class="dv">1</span>))</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">235</span>)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>psoSmallModel <span class="ot">&lt;-</span> <span class="fu">psofs</span>(<span class="at">x =</span> training[,<span class="sc">-</span><span class="fu">ncol</span>(training)],</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> training<span class="sc">$</span>Class,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                       <span class="at">iterations =</span> <span class="dv">200</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                       <span class="at">convert =</span> smallerSubsets,</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>                       <span class="at">functions =</span> qda_pso,</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>                       <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>                       <span class="at">parallel =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>                       <span class="at">tx =</span> testing[,<span class="sc">-</span><span class="fu">ncol</span>(testing)],</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ty =</span> testing<span class="sc">$</span>Class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The results are much better:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -298,7 +337,8 @@ psoSmallModel &lt;- psofs(x = training[,-ncol(training)],
 </figure>
 </div>
 <p>For the simulated data, the GA and PSO procedures effectively reduced the number of predictors. After reading the last few posts, one could easily remark that I was only able to do this since I knew what the answers should be. If the optimal subset size was not small, would these approaches have been effective? The next (and final) post in this series will apply these methods to a real data set.</p>
-<p>The code for these analyses are [here][1] and the modified PSO code is [here][2]. Thanks to Claus Bendtsen for the original <code>pso</code> code and for answering my email.</p>
+<p>The code for these analyses are <a href="pso.Rmd">here</a> and the modified PSO code is <a href="binary_pso.R">here</a>. Thanks to Claus Bendtsen for the original <code>pso</code> code and for answering my email.</p>
+<p>(This article was originally posted at <a href="https://appliedpredictivemodeling.com/blog/2013/6/4/feature-selection-3-swarm-mentality"><code>http://appliedpredictivemodeling.com</code></a>)</p>
 
 
 

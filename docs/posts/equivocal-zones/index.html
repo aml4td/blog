@@ -186,7 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In Chapter 11, equivocal zones were briefly discussed. The idea is that some classification errors are close to the probability boundary (i.e.&nbsp;50% for two class outcomes). If this is the case, we can create a zone where we the samples are predicted as “equivocal” or “indeterminate” instead of one of the class levels. This only works if the model does not incorrectly classify samples with complete (but wrong) confidence.</p>
 <p>In molecular diagnostics, many assays are required to have these zones for FDA approval and great care goes into their determination. If the assay returns an equivocal result, a recommendation would be made to repeat the assay or to obtain another sample.</p>
 <p>Does this actually work with a classification model? How would we do it in R?</p>
-<p>To illustrate this, I will use the two-class simulation system outlined <a href="http://appliedpredictivemodeling.com/blog/2013/4/11/a-classification-simulation-system">here</a>.</p>
+<p>To illustrate this, I will use the two-class simulation system outlined [here](../benchmarking-machine-learning-models-using-simulation/.</p>
 <p>For example:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> </span>
@@ -293,6 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">eZoned</span>(rfPred, <span class="at">lev =</span> <span class="fu">levels</span>(rfPred<span class="sc">$</span>obs))</span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="do">##        ROC       Sens       Spec   Accuracy      Kappa Reportable </span></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  0.9678054  0.9361702  0.9239437  0.9305913  0.8601139  0.7780000 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>(This article was originally posted at <a href="https://appliedpredictivemodeling.com/blog/2013/8/15/equivocal-zones"><code>http://appliedpredictivemodeling.com</code></a>)</p>
 
 
 

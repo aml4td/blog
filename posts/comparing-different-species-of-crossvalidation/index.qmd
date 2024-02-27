@@ -8,6 +8,9 @@ categories:
   - cross-validation
   - resampling
 draft: false
+resources:
+  - "sim099_100.R"
+  - "cv1.Rmd"
 ---
 
 This is the first of two posts about the performance characteristics of resampling methods. I just had major shoulder surgery, but I've pre-seeded a few blog posts. More will come as I get better at one-handed typing.
@@ -96,10 +99,6 @@ The next post will look at:
 * a comparison of repeated 10-fold CV to the bootstrap
 * the out-of-bag estimate of RMSE from the individual random forest model and how it compares to the other procedures.
 
-EDIT: based on the comments, [here](TODO) is one of the simulation files. I broke them up to run in parallel on our grid but they are all the same (except the seeds). [Here](TODO) is the markdown file for the post if you want the plot code or are interested to see how I summarized the results. 
+EDIT: based on the comments, [here](sim099_100.R) is one of the simulation files. I broke them up to run in parallel on our grid but they are all the same (except the seeds). [Here](cv1.Rmd) is the markdown file for the post if you want the plot code or are interested to see how I summarized the results. 
 
-
-
-
-
-
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2014/11/27/vpuig01pqbklmi72b8lcl3ij5hj2qm))

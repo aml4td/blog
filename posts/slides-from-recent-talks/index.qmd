@@ -7,11 +7,16 @@ categories:
   - R user group
   - presentations
 draft: false
+resources:
+  - "BARUG15.pdf"
+  - "ASA_Kuhn.pdf"
 ---
 
 ![](rmse.png){fig-align="center"}
 
-I've been buried in work lately but thought I'd share the slides from two recent talks. The first is from the [Bay Area RUG](http://www.meetup.com/R-Users/). Since someone [filmed the talks](http://begriffs.com), I was waiting to post the slides. The video of my talk ("Greatest Hits R Mixtape") isn't availible yet, so [here are the slides](TODO). 
+I've been buried in work lately but thought I'd share the slides from two recent talks. The first is from the [Bay Area RUG](http://www.meetup.com/R-Users/). Since someone [filmed the talks](http://begriffs.com), I was waiting to post the slides. The video of my talk ("Greatest Hits R Mixtape") isn't availible yet, so [here are the slides](BARUG15.pdf). 
 
 
-The second talk is from last week's Thirteenth Annual ASA CT Chapter Mini-Conference. Here are the [slides from "Three Aspects of Predictive Modeling"](TODO).
+The second talk is from last week's Thirteenth Annual ASA CT Chapter Mini-Conference. Here are the [slides from "Three Aspects of Predictive Modeling"](ASA_Kuhn.pdf).
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2015/4/19/slides-from-recent-talks))

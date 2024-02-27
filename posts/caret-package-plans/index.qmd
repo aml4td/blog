@@ -19,3 +19,5 @@ More specifically:
 * `caret` is fairly focused (myopic?) since it concentrates on prediction. There are similar things that people might want to do  where the quantities of interest might not be prediction of a number or class. For example, while you might want to make inferences on your linear mixed model, you might also want to report your resampled RMSE to prove that your model has some fidelity to the actual data. 
 * There are some features that I want(ed) for `caret` that would be invasive changes or might break backwards compatibility. Those are more likely to end up in a new package. 
 * While you might now want a tidyverse solution to modeling (and that's fine), there will be some features in new pacakges that will be incentives. It is easier to add new stuff in a new system than to redefine the old. Hopefully, I've learned my lessons in regards to extensibility; while the user may not realize it, the innards of `caret` have been refactored more than once. 
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2017/2/2/caret-package-plans))

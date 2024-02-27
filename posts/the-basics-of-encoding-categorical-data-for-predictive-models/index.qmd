@@ -19,10 +19,10 @@ BTW, we cover this in Sections 3.6, 14.1 and 14.7 of the book.
 
 My answer: __it depends on the model__. Some models can work with categorical predictors in their nature, non-numeric encodings. Trees, for example, can usually partition the predictor into distinct groups. For a predictor `X` with levels `a` through `e`, a split might look like
 
-<pre>
+```r
 if X in {a, c, d} the class = 1
 else class = 2
-</pre>
+```
 
 Rule-based models operate similarly. 
 
@@ -37,19 +37,19 @@ These are called _dummy variables_. Why `C - 1` and not `C`? First, if you know 
 In R, a simple demonstration for the example above is:
 
 
-<pre>
+```r
 > pred1 <- factor(letters[1:5])
 > pred1
 
 [1] a b c d e
 Levels: a b c d e
-</pre>
+```
 
 
 The R function `model.matrix` is a good way to show the encodings:
 
 
-<pre>
+```r
 > model.matrix(~pred1)
 
   (Intercept) pred1b pred1c pred1d pred1e
@@ -63,7 +63,7 @@ attr(,"assign")
 attr(,"contrasts")
 attr(,"contrasts")$pred1
 [1] "contr.treatment"
-</pre>
+```
 
 
 A column for the factor level `a` is removed (since it excludes the first level of the factor). This approach goes by the name of  "full-rank" encoding since the dummy variables do not always add up to 1. 
@@ -73,13 +73,13 @@ We discuss different encodings for predictors in a few places but fairly extensi
 Some of these options result in _ordered_ encodings, such as the day of the week. It is possible that the trends in the data are best exposed if the ordering is preserved. R does have a way for dealing with this:
 
 
-<pre>
+```r
 > pred2 <- ordered(letters[1:5])
 > pred2
 
 [1] a b c d e
 Levels: a < b < c < d < e
-</pre>
+```
 
 
 Simple enough, right? Maybe not. If we need a numeric encoding here, what do we do? 
@@ -93,7 +93,7 @@ For example, if the predictor has two ordered levels, we can't fit anything more
 For each ordered factor in a model, R will create a set of polynomial scores for each (we could use the fancy label of "a set of basis functions" here). For example:
 
 
-<pre>
+```r
 > model.matrix(~pred2)
 
   (Intercept) pred2.L pred2.Q    pred2.C pred2^4
@@ -107,7 +107,7 @@ attr(,"assign")
 attr(,"contrasts")
 attr(,"contrasts")$pred2
 [1] "contr.poly"
-</pre>
+```
 
 Here, "L" is for linear, "Q" is quadratic and "C" is cubic and so on. There are five levels of this factor and we can create four new encodings. Here is a plot of what those encodings look like:
 
@@ -117,3 +117,4 @@ The nice thing here is that, if the underlying relationship between the ordered 
 
 One other way of encoding ordered factors is to treat them as unordered. Again, depending on the model and the data, this could work just as well.
 
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/10/23/the-basics-of-encoding-categorical-data-for-predictive-models))

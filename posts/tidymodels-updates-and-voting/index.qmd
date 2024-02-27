@@ -15,3 +15,5 @@ While I'm still supporting `caret`, the majority of my development effort has go
 If you've never heard of this, we have just made an excellent learning resources at [`tidymodels.org`](https://www.tidymodels.org/). You might consider focusing on the [_Get Started_](https://www.tidymodels.org/start/) pages.
 
 Another item of note: help us _guide development_ of this ecosystem by voting for new features! Vote [here](https://twitter.com/juliasilge/status/1254879555979849729?s=20&t=FhcmAZLKtfBvp_P7PDkzkw).
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](http://appliedpredictivemodeling.com/blog/2020/4/27/tidymodels-updates-and-voting))

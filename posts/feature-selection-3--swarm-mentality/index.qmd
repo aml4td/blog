@@ -7,11 +7,14 @@ categories:
   - feature selection
   - particle swarm optimization
 draft: false
+resources:
+  - "pso.Rmd"
+  - "binary_pso.R"
 ---
 
 "Bees don't swarm in a mango grove for nothing. Where can you see a wisp of smoke without a fire?" - Hla Stavhana
 
-In the [last](http://appliedpredictivemodeling.com/blog/2013/4/29/feature-selection-strikes-back-part-1) [two](http://appliedpredictivemodeling.com/blog/2013/5/8/feature-selection-strikes-back-part-2) posts, genetic algorithms were used as feature wrappers to search for more effective subsets of predictors. Here, I will do the same with another type of search algorithm: particle swarm optimization. 
+In the [last](../feature-selection-strikes-back-part-1/) [two](../feature-selection-2--genetic-boogaloo/) posts, genetic algorithms were used as feature wrappers to search for more effective subsets of predictors. Here, I will do the same with another type of search algorithm: particle swarm optimization. 
 
 Like genetic algorithms, this search procedure is motivated by a natural phenomenon, such as the movements of bird flocks. An excellent reference for this technique is [Poli et al (2007)](http://scholar.google.com/scholar?q=%22Particle+swarm+optimization%22+author%3APoli). The methodology was originally developed for optimizing real valued parameters, but was later adapted for discrete optimization by [Kennedy and Eberhart (1997)](http://scholar.google.com/scholar?q=%22A+discrete+binary+version+of+the+particle+swarm+algorithm%22+author%3AKennedy). 
 
@@ -29,18 +32,19 @@ There are other parameters of the search procedure, such as the number of partic
 
 As an example, consider optimzing the Rosenbrock function with two real-valued variables (_A_ and _B_):
 
-<pre>
+```r
 fitness = 100*(B - A^2)^2 + (A - 1)^2
-</pre>
+```
 
 The best value is at (_A_ = 1, _B_ = 1). The movie below shows a particle swarm optimization using 100 iterations. The predicted best (solid white dot) is consistently in the neighborhood of the optimum value at around 50 iterations. You may need to refresh your browser to re-start the animation.  
 
 ![](pso.gif){fig-align="center"}
+
 When searching for subsets, the quantities that we search over are binary (i.e. the predictor is used or excluded from the model). The description above implies that the position is a real valued quantity. If the positions are centered around zero, [Kennedy and Eberhart (1997)](http://scholar.google.com/scholar?q=%22A+discrete+binary+version+of+the+particle+swarm+algorithm%22+author%3AKennedy) suggested using a sigmoidal function to translate this value be between zero and one. A uniform random number is used to determine the binary version of the position that is evaluated. Other strategies have been proposed, including the application of a simple threshold to the translated position (i.e. if the translated position is above 0.5, include the predictor).
 
 `R` has the [`pso`](http://cran.r-project.org/web/packages/pso/index.html) package that implements this algorithm. It does not work for discrete optimization that we need for feature selection. Since its licensed under the GPL, I took the code and removed the parts specific to real valued optimization. That code is linked that the bottom of the page. I structured it to be similar to the R code for genetic algorithms. One input into the modified `pso` function is a list that has modules for fitting the model, generating predictions, evaluating the fitness function and so on. I've made some changes so that each particle can return multiple values and will treat the first as the fitness function. I'll fit the same QDA model as before to the same simulated data set. First, here are the QDA functions:
 
-<pre>
+```r
 qda_pso <- list(
   fit = function(x, y, ...)
     {
@@ -86,11 +90,11 @@ qda_pso <- list(
     predict(object, newdata = x)
     }
   )
-</pre>
+```
 
 Here is the familiar code to generate the simulated data:
 
-<pre>
+```r
 set.seed(468)
 training <- twoClassSim(  500, noiseVars = 100, 
                         corrVar = 100, corrValue = .75)
@@ -110,12 +114,11 @@ ctrl <- trainControl(method = "repeatedcv",
                      ## of sub-processes
                      allowParallel = FALSE,
                      index = cvIndex)
-</pre>
-
+```
 
 To run the optimization, the code will be similar to the GA code used in the last two posts:
 
-<pre>
+```r
 set.seed(235)
 psoModel <- psofs(x = training[,-ncol(training)],
                   y = training$Class,
@@ -127,16 +130,17 @@ psoModel <- psofs(x = training[,-ncol(training)],
                   ## These are passed to the fitness function
                   tx = testing[,-ncol(testing)],
                   ty = testing$Class)
-</pre>
+```
 
 Since this is simulated data, we can evaluate how well the search went using estimates of the fitness (the area under the ROC curve)  calculated using different data sets: resampling, a test set of 500 samples and large set of 10,000 samples that we use to approximate the truth. 
 
 The swarm did not consistently move to smaller subsets and, as with the original GA, it overfits to the predictors. This is demonstrated by the increase in the resampled fitness estimates and mediocre test/large sample estimates: 
 
 ![](pso_ROC.png){fig-align="center"}
+
 One tactic that helped the GA was to bias the algorithm towards smaller subsets. For PSO, this can be accomplished during the conversion from real valued positions to binary encodings. The previous code used a value of 1 for a predictor if the "squashed" version (i.e. after applying a sigmoidal function) was greater than 0.5. We can bias the subsets by increasing the threshold. This should start the process with smaller subsets and, since we raise the criteria for activating a predictor, only increase the subset size if there is a considerable increase in the fitness function. Here is the code for that conversion and another run of the PSO:
 
-<pre>
+```r
 smallerSubsets <- function(x)
 {  
   ## 'x' is a matrix of positions centered around zero. The
@@ -163,7 +167,7 @@ psoSmallModel <- psofs(x = training[,-ncol(training)],
                        parallel = TRUE,
                        tx = testing[,-ncol(testing)],
                        ty = testing$Class)
-</pre>
+```
 
 The results are much better:
 
@@ -179,4 +183,6 @@ And here are the large-sample ROC curves so far:
 
 For the simulated data, the GA and PSO procedures effectively reduced the number of predictors. After reading the last few posts, one could easily remark that I was only able to do this since I knew what the answers should be. If the optimal subset size was not small, would these approaches have been effective? The next (and final) post in this series will apply these methods to a real data set. 
 
-The code for these analyses are [here][1] and the modified PSO code is [here][2]. Thanks to Claus Bendtsen for the original `pso` code and for answering my email.
+The code for these analyses are [here](pso.Rmd) and the modified PSO code is [here](binary_pso.R). Thanks to Claus Bendtsen for the original `pso` code and for answering my email.
+
+(This article was originally posted at [`http://appliedpredictivemodeling.com`](https://appliedpredictivemodeling.com/blog/2013/6/4/feature-selection-3-swarm-mentality))
