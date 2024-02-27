@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.4">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Max Kuhn">
+<meta name="dcterms.date" content="2014-12-02">
+
+<title>Applied Predictive Modeling Blog – Comparing Different Species of Cross-Validation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Applied Predictive Modeling Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/aml4td/blog"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#question-1a-and-1b-how-do-the-variance-and-bias-change-in-basic-cv-also-is-it-worth-repeating-cv" id="toc-question-1a-and-1b-how-do-the-variance-and-bias-change-in-basic-cv-also-is-it-worth-repeating-cv" class="nav-link active" data-scroll-target="#question-1a-and-1b-how-do-the-variance-and-bias-change-in-basic-cv-also-is-it-worth-repeating-cv">Question 1a and 1b: How do the variance and bias change in basic CV? Also, Is it worth repeating CV?</a></li>
+  <li><a href="#question-2a-and-2b-how-does-the-amount-held-back-affect-lgocv-is-it-better-than-basic-cv" id="toc-question-2a-and-2b-how-does-the-amount-held-back-affect-lgocv-is-it-better-than-basic-cv" class="nav-link" data-scroll-target="#question-2a-and-2b-how-does-the-amount-held-back-affect-lgocv-is-it-better-than-basic-cv">Question 2a and 2b: How does the amount held back affect LGOCV? Is it better than basic CV?</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Comparing Different Species of Cross-Validation</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">R</div>
+    <div class="quarto-category">random forest</div>
+    <div class="quarto-category">cross-validation</div>
+    <div class="quarto-category">resampling</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Max Kuhn </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 2, 2014</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This is the first of two posts about the performance characteristics of resampling methods. I just had major shoulder surgery, but I’ve pre-seeded a few blog posts. More will come as I get better at one-handed typing.</p>
+<p>First, a review:</p>
+<ul>
+<li>Resampling methods, such as cross-validation (CV) and the bootstrap, can be used with predictive models to get estimates of model performance using the training set.</li>
+<li>These estimates can be made to tune the model or to get a good sense of how the model works without touching the test set.</li>
+</ul>
+<p>There are quite a few methods for resampling. Here is a short summary (more in Chapter 4 of the book):</p>
+<ul>
+<li><em>k</em>-fold cross-validation randomly divides the data into <em>k</em> blocks of roughly equal size. Each of the blocks is left out in turn and the other <em>k</em>-1 blocks are used to train the model. The held out block is predicted and these predictions are summarized into some type of performance measure (e.g.&nbsp;accuracy, root mean squared error (RMSE), etc.). The <em>k</em> estimates of performance are averaged to get the overall resampled estimate. <em>k</em> is 10 or sometimes 5. Why? I have no idea. When <em>k</em> is equal to the sample size, this procedure is known as Leave-One-Out CV. I generally don’t use it and won’t consider it here.</li>
+<li>Repeated <em>k</em>-fold CV does the same as above but more than once. For example, five repeats of 10-fold CV would give 50 total resamples that are averaged. Note this is not the same as 50-fold CV.</li>
+<li>Leave Group Out cross-validation (LGOCV), aka Monte Carlo CV, randomly leaves out some set percentage of the data <em>B</em> times. It is similar to min-training and hold-out splits but only uses the training set.</li>
+<li>The bootstrap takes a random sample <em>with replacement</em> from the training set <em>B</em> times. Since the sampling is with replacement, there is a very strong likelihood that some training set samples will be represented more than once. As a consequence of this, some training set data points will not be contained in the bootstrap sample. The model is trained on the bootstrap sample and those data points not in that sample are predicted as hold-outs.</li>
+</ul>
+<p>Which one should you use? It depends on the data set size and a few other factors. We statisticians tend to think about the operating characteristics of these procedures. For example, each of the methods above can be characterized in terms of their <em>bias</em> and <em>precision</em>.</p>
+<p>Suppose that you have a regression problem and you are interested in measuring RMSE. Imagine that, for your data, there is some “true” RMSE value that a particular model could achieve. The bias is the difference between what the resampling procedure estimates your RMSE to be for that model and the true RMSE. Basically, you can think of it as accuracy of estimation. The precision measures how variable the result is. Some types of resampling have higher bias than others and the same is true for precision.</p>
+<p>Imagine that the true RMSE is the target we are trying to hit and suppose that we have four different types of resampling. This graphic is typically used when we discuss accuracy versus precision.</p>
+<p><img src="targets.png" class="img-fluid quarto-figure quarto-figure-center"> Clearly we want to be in the lower right.</p>
+<p>Generally speaking, the bias of a resampling procedure is thought to be related to how much data is held out. If you hold-out 50% of your data using 2-fold CV, the thinking is that your final RMSE estimate will be more biased than one that held out 10%. On the other hand, the conventional wisdom is that holding less data out decreases precision since each hold-out sample has less data to get a stable estimate of performance (i.e.&nbsp;RMSE).</p>
+<p>I ran some simulations to evaluate the precision and bias of these methods. I simulated some regression data (so that I know the real answers and compute the <em>true</em> estimate of RMSE). The model that I used was random forest with 1000 trees in the forest and the default value of the tuning parameter. I simulated 100 different data sets with 500 training set instances. For each data set, I also used each of the resampling methods listed above 25 times using different random number seeds. In the end, we can compute the precision and average bias of each of these resampling methods.</p>
+<p>I won’t show the distributions of the precision and bias values across the simulations but use the median of these values. The median represents the distributions well and are simpler to visualize.</p>
+<section id="question-1a-and-1b-how-do-the-variance-and-bias-change-in-basic-cv-also-is-it-worth-repeating-cv" class="level2">
+<h2 class="anchored" data-anchor-id="question-1a-and-1b-how-do-the-variance-and-bias-change-in-basic-cv-also-is-it-worth-repeating-cv">Question 1a and 1b: How do the variance and bias change in basic CV? Also, Is it worth repeating CV?</h2>
+<p>First, let’s look at how the precision changes over the amount of data held-out and the training set size. We use the variance of the resampling estimates to measure precision.</p>
+<p>First, a value of 5 on the x-axis is 5-fold CV and 10 is 10-fold CV. Values greater than 10 are repeated 10-fold (i.e.&nbsp;a 60 is six repeats of 10-fold CV). For on the left-hand side of the graph (i.e.&nbsp;5-fold CV), the median variance is 0.019. This measures how variable 5-fold CV is across all the simulated data sets.</p>
+<p><img src="median_variance_cv.png" class="img-fluid quarto-figure quarto-figure-center"> There probably isn’t any surprise here: if your measure additional replicates, the measured variance goes down. At some point the variance will level off but we are still gaining precision by repeating 10-fold CV more than once. Looking at the first two data points on the (single 5-fold and 10-fold CV), the reduction in variance is probably due to how much is being left out (10% versus 80%) as well as the number of resamples (5 versus 10).</p>
+<p>What about bias? The conventional wisdom is that the bias should be better for the 10-fold CV replicates since less is being left out in those cases. Here are the results:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="median_bias_cv.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>From this, 5-fold CV is pessimistically biased and that bias is reduced by moving to 10-fold CV. Perhaps it is within the noise, but it would also appear that repeating 10-fold CV a few times can also marginally reduce the bias.</p>
+</section>
+<section id="question-2a-and-2b-how-does-the-amount-held-back-affect-lgocv-is-it-better-than-basic-cv" class="level2">
+<h2 class="anchored" data-anchor-id="question-2a-and-2b-how-does-the-amount-held-back-affect-lgocv-is-it-better-than-basic-cv">Question 2a and 2b: How does the amount held back affect LGOCV? Is it better than basic CV?</h2>
+<p>Looking at the leave-group-out CV results, the variance analysis shows an interesting pattern:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="median_variance_mc.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Visually at least, it appears that the amount held-out has a slightly a bigger influence on the variance of the results than the number of times that the process is repeated. Leaving more out buys you better individual resampled RMSE values (i.e.&nbsp;more precision).</p>
+<p>That’s one side of the coin. What about the bias?</p>
+<p><img src="median_bias_mc.png" class="img-fluid quarto-figure quarto-figure-center"> From this, LGOCV is overly pessimistic as you increase the amount held out. This could be because, with less data used to training the model, the less substrate random forest has to create an accurate model. It is hard to say why the bias didn’t flatten out towards zero when small amounts of data are left out.</p>
+<p>Also, the number of held-out data sets doesn’t appear to reduce the bias.</p>
+<p>One these results alone, if you use LGOCV try to leave a small amount out (say 10%) and do a lot of replicates to control the variance. But… why not just do repeated 10-fold CV?</p>
+<p>We have simulations where both LGOCV and 10-fold CV left out 10%. We can do a head-to-head comparison of these results to see which procedure seems to work better. Recall that the main difference between these two procedures is that repeated 10-fold CV splits the hold-out data points evenly within a fold. LGOCV just randomly selects samples each time. In ease case, the same training set sample will show up in more than one of the hold-out data sets so the difference is more about configuration of samples.</p>
+<p>Here are the variance curves:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="median_variance.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>That seems pretty definitive: all other things being equal, you gain about a log unit of precision using repeated 10-fold CV instead of LGOCV with a 10% hold-out.</p>
+<p>The bias curves show a fair amount of noise (keeping in mind the scale of this graph compared to the other bias images above):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="median_bias.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>I would say that there is no real difference in bias and expected this prior to seeing the results. We are always leaving 10% behind and, if this is what drives bias, the two procedures should be about the same.</p>
+<p>So my overall conclusion, <em>so far</em>, is that repeated 10-fold CV is the best in terms of variance and bias. As always, caveats apply. For example, if you have a ton of data, the precision and bias of 10- or even 5-fold CV may be acceptable. Your mileage may vary.</p>
+<p>The next post will look at:</p>
+<ul>
+<li>the variance and bias of the nominal bootstrap estimate</li>
+<li>a comparison of repeated 10-fold CV to the bootstrap</li>
+<li>the out-of-bag estimate of RMSE from the individual random forest model and how it compares to the other procedures.</li>
+</ul>
+<p>EDIT: based on the comments, <a href="sim099_100.R">here</a> is one of the simulation files. I broke them up to run in parallel on our grid but they are all the same (except the seeds). <a href="cv1.Rmd">Here</a> is the markdown file for the post if you want the plot code or are interested to see how I summarized the results.</p>
+<p>(This article was originally posted at <a href="https://appliedpredictivemodeling.com/blog/2014/11/27/vpuig01pqbklmi72b8lcl3ij5hj2qm"><code>http://appliedpredictivemodeling.com</code></a>)</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

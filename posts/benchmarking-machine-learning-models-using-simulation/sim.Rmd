@@ -1,0 +1,241 @@
+```{r startup,echo=FALSE,results='hide',message=FALSE}
+library(caret)
+library(corrplot)
+library(ggplot2)
+library(MASS)
+library(pROC)
+
+options(scipen = 0, digits = 4)
+
+twoClassSim <- function(n = 100, 
+                        intercept = -5,
+                        linearVars = 10,
+                        noiseVars = 0,    ## Number of uncorrelated x's
+                        corrVars = 0,     ## Number of correlated x's
+                        corrType = "AR1", ## Corr structure ('AR1' or 'exch')
+                        corrValue = 0)    ## Corr parameter)
+{
+  require(MASS)
+  sigma <- matrix(c(2,1.3,1.3,2),2,2)
+  
+  tmpData <- data.frame(mvrnorm(n=n, c(0,0), sigma))
+  names(tmpData) <- paste("TwoFactor", 1:2, sep = "")
+  if(linearVars > 0)
+  {
+    tmpData <- cbind(tmpData, matrix(rnorm(n*linearVars), ncol = linearVars))
+    colnames(tmpData)[(1:linearVars)+2] <- paste("Linear", gsub(" ", "0", format(1:linearVars)), sep = "")
+  }
+  tmpData$Nonlinear1 <- runif(n, min = -1)
+  tmpData <- cbind(tmpData, matrix(runif(n*2), ncol = 2))
+  colnames(tmpData)[(ncol(tmpData)-1):ncol(tmpData)] <- paste("Nonlinear", 2:3, sep = "")
+  
+  tmpData <- as.data.frame(tmpData)
+  p <- ncol(tmpData)
+  
+  if(noiseVars > 0)
+  {
+    tmpData <- cbind(tmpData, matrix(rnorm(n * noiseVars), ncol = noiseVars))
+    colnames(tmpData)[(p+1):ncol(tmpData)] <- paste("Noise", 
+                                                    gsub(" ", "0", format(1:noiseVars)), 
+                                                    sep = "")
+  }
+  if(corrVars > 0)
+  {
+    p <- ncol(tmpData)
+    library(nlme)
+    library(MASS)
+    if(corrType == "exch")
+    {
+      vc <- corCompSymm(value = corrValue, form = ~ 1 | vars)
+      vc <- Initialize(vc, data = data.frame(vars = rep(letters[1], each = noiseVars)))
+      vc <- as.matrix(vc)
+    }
+    if(corrType == "AR1")
+    {
+      vc <- corAR1(value = corrValue, form = ~ 1 | vars)
+      vc <- Initialize(vc, data = data.frame(vars = rep(letters[1], each = corrVars)))
+      vc <- as.matrix(vc)
+    }    
+    tmpData <- cbind(tmpData, mvrnorm(n, mu = rep(0, corrVars), Sigma = vc))
+    colnames(tmpData)[(p+1):ncol(tmpData)] <- paste("Corr", 
+                                                    gsub(" ", "0", format(1:corrVars)), 
+                                                    sep = "")
+  }  
+  lp <- intercept -
+    4 * tmpData$TwoFactor1 + 4*tmpData$TwoFactor2 + 
+    2*tmpData$TwoFactor1*tmpData$TwoFactor2 + 
+    (tmpData$Nonlinear1^3) + 2 * exp(-6*(tmpData$Nonlinear1 - 0.3)^2) +
+    2*sin(pi*tmpData$Nonlinear2* tmpData$Nonlinear3) 
+  
+  if(linearVars > 0)
+  {
+    lin <- seq(10, 1, length = linearVars)/4 
+    lin <- lin * rep(c(-1, 1), floor(linearVars)+1)[1:linearVars] 
+    for(i in seq(along = lin)) lp <- lp + tmpData[, i+3]*lin[i]
+  }
+  
+  prob <- binomial()$linkinv(lp)
+  tmpData$Class <- ifelse(prob <= runif(n), "Class1", "Class2")
+  tmpData$Class <- factor(tmpData$Class, levels = c("Class1", "Class2"))
+  
+  tmpData
+}
+```
+
+"If you torture the data long enough, it will confess" - source unknown
+
+What is the objective of most data analysis? One way I think about it is that we are trying to discover or approximate what is really going on in our data (and in general, nature). However, I occasionally run into people think that if one model fulfills our expectations (e.g. higher number of significant p-values or accuracy) than it must be better than any other model that does not. For most data sets, we don't know what the truth is, so this attitude can be problematic. 
+
+Computational biology/bioinformatics are particularly bad in this way. In many cases, the cost, time and complexity of high dimensional biology experiments means that there will be a solid, methodical validation of analysis of the initial data set. This is has be verified by at least one publication. 
+
+I was talking to someone recently who was describing their research with ~150 samples and ~50,000 predictors. They used the same sample set to do feature selection and then build predictive models. The results was a random forest model based on about 150 predictors. The validation was based on running some of the same samples using a different technology. When I asked if there there would be any external validation, their response was "we're never going to get a 5,000 sample clinical trial to check the results." While true (and a bit dramatic), it is not an excuse to throw out good methodology.  In fact, you would think that a lack of a clear path to validation would make people be more dogmatic about methodology, but that's not the case sometimes. 
+
+So when I'm trying to evaluate any sort of statistic method, I almost always find a good simulation system so that I can produce results where I know the truth. A good example of this are the "Friedman" simulations systems for regression modeling. For example, the '[Friedman 3](http://scholar.google.com/scholar?hl=en&q=Multivariate+adaptive+regression+splines&btnG=&as_sdt=1%2C7&as_sdtp=)' simulation system is a non-linear function of four predictors:
+
+```r
+y = atan ((x2 x3 - (1/(x2 x4)))/x1) + error
+``` 
+
+The the [mlbench](http://cran.r-project.org/web/packages/mlbench/index.html) package has this in R code as well as other simulation systems.
+
+I've been looking for a system that can be used to test a few different aspects of classification models:
+
+* class imbalances
+* non-informative predictors
+* correlation amoung the predictors
+* linear and nonlinear signals
+
+I spent a few hours developing up with one. It models the log-odds of a binary event as a function of informative and non-informative predictors. The true signals are additive "sets" of a few different types. First, there are two main effects and an interaction:
+
+```r
+intercept - 4A + 4B + 2AB 
+```
+
+The intercept is a parameter for the simulation and can be used to control the amount of class imbalance. The second set of effects are linear with coefficients that alternate signs and have values between 2.5 and 0.025. For example, if there were six predictors in this set, the contribution to the log-odds would be 
+
+```r
+-2.50C + 2.05D -1.60E + 1.15F -0.70G + 0.25H
+```
+
+The third set is a nonlinear function of a single predictor ranging between [0, 1] called J here:
+```r
+(J^3) + 2exp(-6(J-0.3)^2) 
+```
+I saw this in one of [Radford Neal](http://www.cs.utoronto.ca/~radford/)'s presentations but I couldn't find an exact reference for it. The equation produces an interesting trend:
+
+```{r nonlin,message=FALSE,results='hide',fig.height=4.25,fig.width=6, echo = FALSE}
+nonlinData <- data.frame(Predictor = seq(-1, 1, length = 500))
+nonlinData$Log_Odds <- (nonlinData$Predictor^3) + 2 * exp(-6*(nonlinData$Predictor - 0.3)^2)
+qplot(Predictor, Log_Odds, data = nonlinData, geom = "line")
+```
+
+The fourth set of informative predictors are copied from one of Friedman's systems and use a set of two (`K` and `L`):
+```r
+2sin(KL)
+```
+
+All of these effects are added up to model the log-odds. This is used to calculate the probability of a sample being in the first class and a random uniform number is used to actually make the assignment of the actual class. 
+
+We can also add non-informative predictors to the data. These are random standard normal predictors and can be optionally added to the data in two ways: a specified number of independent predictors or a set number of predictors that follow a particular correlation structure. The only two correlation structure that I've implemented are 
+
+* compound-symmetry (aka exchangeable) where there is a constant correlation between all the predictors
+
+* auto-regressive 1 [AR(1)]. While there is no time component to these data, we can use this structure to add predictors of varying levels of correlation. For example, simulating ten predictors with a correlation parameter of 0.75 yields the following between-predictor correlation structure:
+
+
+```{r corrplot,message=FALSE,results='hide',fig.height=5,fig.width=5, echo = FALSE}
+set1 <- twoClassSim(2000, corrVars = 10, corrValue = .75)
+cor1 <- cor(set1[, grepl("Corr", names(set1))])
+corrplot(cor1)
+```
+
+To demonstrate, let's take a set of data and see how a support vector machine performs:
+
+```{r sim,cache=TRUE}
+set.seed(468)
+training <- twoClassSim(  300, noiseVars = 100, corrVar = 100, corrValue = .75)
+testing  <- twoClassSim(  300, noiseVars = 100, corrVar = 100, corrValue = .75)
+large    <- twoClassSim(10000, noiseVars = 100, corrVar = 100, corrValue = .75)
+```
+
+The default for the number of informative linear predictors is 10 and the default intercept of -5 makes the class frequencies fairly balanced:
+
+```{r class,cache=TRUE}
+table(large$Class)/nrow(large)
+```
+
+We'll use the `train` function to tune and train the model:
+
+```{r fullSet,cache=TRUE}
+library(caret)
+
+ctrl <- trainControl(method = "repeatedcv",
+                     repeats = 3,
+                     classProbs = TRUE,
+                     summaryFunction = twoClassSummary)
+
+set.seed(1254)
+fullModel <- train(Class ~ .,
+                   data = training,
+                   method = "svmRadial",
+                   preProc = c("center", "scale"),
+                   tuneLength = 8,
+                   metric = "ROC",
+                   trControl = ctrl)
+print(fullModel, digits = 3)
+```
+
+Cross-validation estimates the best area under the ROC curve to be `r I(round(caret:::getTrainPerf(fullModel)["TrainROC"], 3)[,1])`. Is this an accurate estimate? The test set has:
+
+```{r fullSetTest,cache=TRUE}
+fullTest <- roc(testing$Class, 
+                predict(fullModel, testing, type = "prob")[,1], 
+                levels = rev(levels(testing$Class)))
+fullTest
+```
+
+For this small test set, the estimate is `r I(round(abs(caret:::getTrainPerf(fullModel)["TrainROC"][,1] - as.vector(auc(fullTest))), 3))` larger than the resampled version. How do both of these compare to our approximation of the truth?
+
+```{r fullSetLArge,cache=TRUE}
+fullLarge <- roc(large$Class, 
+                 predict(fullModel, large, type = "prob")[,1], 
+                 levels = rev(levels(testing$Class)))
+fullLarge
+```
+
+How much did the presence of the non-informative predictors affect this model? We know the true model, so we can fit that and evaluate it in the same way:
+
+```{r trueSet,cache=TRUE}
+realVars <- names(training)
+realVars <- realVars[!grepl("(Corr)|(Noise)", realVars)]
+
+set.seed(1254)
+trueModel <- train(Class ~ .,
+                   data = training[, realVars],
+                   method = "svmRadial",
+                   preProc = c("center", "scale"),
+                   tuneLength = 8,
+                   metric = "ROC",
+                   trControl = ctrl)
+print(trueModel, digits = 3)
+```
+
+Much higher! Is this verified by the other estimates?
+
+```{r trueSetred}
+trueTest <- roc(testing$Class, 
+                predict(trueModel, testing, type = "prob")[,1], 
+                levels = rev(levels(testing$Class)))
+trueTest
+
+trueLarge <- roc(large$Class, 
+                 predict(trueModel, large, type = "prob")[,1], 
+                 levels = rev(levels(testing$Class)))
+trueLarge
+```
+
+At this point, we might want to look and see what would happen if all 200 non-informative predictors were uncorrelated etc. At least we have a testing tool to make objective statements. 
+
+Code to create this can be found here and will end up making its way into the [caret](http://cran.r-project.org/web/packages/caret/index.html) package.
+
+Any suggestions for simulation systems? 
