@@ -43,37 +43,6 @@
   <media:content url="https://blog.aml4td.org/posts/new-location-same-content/dmytro-tolokonov-Jq3WI9IQgEs-unsplash.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
-  <title>New Location, Same Content</title>
-  <dc:creator>Max Kuhn</dc:creator>
-  <link>https://blog.aml4td.org/posts/new_location_same_content/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>This is the new home for the Applied Predictive Modeling blog.</p>
-<p>We’ve moved it here, along with the previous blog posts, because we’re now using a format that is much easier to work with (<a href="https://quarto.org/">Quarto</a>). This will make it a lot easier to create posts<sup>1</sup>.</p>
-<p>The blog is starting back up since we are actively developing our new (third) book called <em>Applied Machine Learning for Tabular Data</em> (aml4td). We’ll post progress updates, requests for community help, discussions of technical matters, and other topics.</p>
-<p>We kept the old blog name, which might be a little confusing since we are focusing on a different book. First, we wanted our posts in the same location; adding content in a new place was awkward. Second, the new book has similar topics and I’d expect we’d put similar content here.</p>
-<p>Instead of having discussions inside the blog posts, we’ll create <a href="https://github.com/aml4td/blog/issues">GitHub issues</a> when we ask for community feedback and folks can respond there.</p>
-<p>(The banner image is by <a href="https://unsplash.com/photos/tree-leaves-macro-photography-Jq3WI9IQgEs?utm_content=creditShareLink&amp;utm_medium=referral&amp;utm_source=unsplash">Dmytro Tolokonov</a></p>
-
-
-
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>Our old site was started around 2010. GitHub was barely a thing and we were years away from R’s markdown/rmarkdown/blogdown packages. We used Squarespace to host the blog, and it was fine but unwieldy for what we were doing.↩︎</p></li>
-</ol>
-</section></div> ]]></description>
-  <category>books</category>
-  <category>blog</category>
-  <guid>https://blog.aml4td.org/posts/new_location_same_content/</guid>
-  <pubDate>Fri, 01 Mar 2024 05:00:00 GMT</pubDate>
-  <media:content url="https://blog.aml4td.org/posts/new_location_same_content/dmytro-tolokonov-Jq3WI9IQgEs-unsplash.jpg" medium="image" type="image/jpeg"/>
-</item>
-<item>
   <title>2022 tidymodels user survey</title>
   <dc:creator>Max Kuhn</dc:creator>
   <link>https://blog.aml4td.org/posts/2022-tidymodels-user-survey/</link>
@@ -2049,6 +2018,38 @@ font-style: italic;">##  withr         2.0.0    2017-07-28 CRAN (R 3.3.2)</span>
   <category>RStudio</category>
   <guid>https://blog.aml4td.org/posts/working-at-rstudio/</guid>
   <pubDate>Mon, 28 Nov 2016 05:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>2016 UK Tour</title>
+  <dc:creator>Max Kuhn</dc:creator>
+  <link>https://blog.aml4td.org/posts/2016-uk-tour/</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.aml4td.org/posts/2016-uk-tour/banner.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>I’ll be in the UK next week doing three talks in three days:</p>
+<ul>
+<li>First, I’ll be giving a talk at the <a href="http://www.meetup.com/rladies-london/events/233061594/">London R-Ladies meetup</a> on Monday October 3rd with perhaps the best title yet: <strong><em>Whose Scat Is That? An ‘Easily Digestible’ Introduction to Predictive Modeling and <code>caret</code></em></strong>.</li>
+<li>On Tuesday, October 4th I’m giving a talk at the <a href="https://www.meetup.com/Cambridge-R-Users-Group-Meetup/events/234302826/">Cambridge RUG</a> on tuning hyperparameters using optimization algorithms. This is an extension of <a href="http://blog.revolutionanalytics.com/2016/06/bayesian-optimization-of-machine-learning-models.html">this blog post</a>.<br>
+</li>
+<li>Finally, on Wednesday (the 5th) at the fantastic <a href="http://www.ncs-conference.org/">Nonclinical Statistics Conference</a>, I’ll be speaking on <strong><em>Statistical Mediation in Early Discovery by Bayesian Analysis and Visualization</em></strong>. The banner image above is from this talk. Lots of priors and <a href="http://shiny.rstudio.com">shiny apps</a>.</li>
+</ul>
+<p>(This article was originally posted at <a href="https://appliedpredictivemodeling.com/blog/2016/9/26/2016-uk-tour"><code>http://appliedpredictivemodeling.com</code></a>)</p>
+
+
+
+ ]]></description>
+  <category>R user group</category>
+  <category>R</category>
+  <category>presentations</category>
+  <guid>https://blog.aml4td.org/posts/2016-uk-tour/</guid>
+  <pubDate>Mon, 26 Sep 2016 04:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
