@@ -1,7 +1,7 @@
 ---
 title: "New Location, Same Content"
 author: "Max Kuhn"
-date: "2024-02-28"
+date: "2024-02-26"
 categories:
   - books
   - blog
