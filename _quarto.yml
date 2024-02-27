@@ -16,6 +16,9 @@ website:
       - icon: github
         href: https://github.com/aml4td/blog
 
+resources:
+  - CNAME
+
 format:
   html:
     toc: true
