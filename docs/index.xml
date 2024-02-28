@@ -10,7 +10,52 @@
 <atom:link href="https://blog.aml4td.org/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.4</generator>
-<lastBuildDate>Mon, 26 Feb 2024 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 27 Feb 2024 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Progress Update (February 2024)</title>
+  <dc:creator>Max Kuhn</dc:creator>
+  <link>https://blog.aml4td.org/posts/2024-02-progress-update/</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.aml4td.org/posts/2024-02-progress-update/preproc.png" class="quarto-figure quarto-figure-center figure-img" height="150"></p>
+</figure>
+</div>
+<p>Since the last update on 2023-11-20, we have a few new sections and chapters.</p>
+<p>The short-term goal is to have good first drafts of all of the “Preparation” chapters. As of 2024-02-26, they are:</p>
+<ul>
+<li>Initial Data Splitting (<a href="https://aml4td.org/chapters/initial-data-splitting.html">drafted</a>)</li>
+<li>Transforming Numeric Predictors (<a href="https://github.com/aml4td/website/blob/main/chapters/numeric-predictors.qmd">drafted</a> but not published)</li>
+<li>Working with Categorical Predictors (<a href="https://github.com/aml4td/website/pull/11">waiting for review</a>)</li>
+<li>Embeddings
+<ul>
+<li>Linear methods (PCA, PLS, etc) not drafted</li>
+<li>MDS sections (<a href="https://github.com/aml4td/website/pull/11">waiting for review</a>)</li>
+<li>Other methods (nearest shrunken centroids, etc) in progress</li>
+</ul></li>
+<li>Interactions and Nonlinear Features
+<ul>
+<li>Interactions (<a href="https://github.com/aml4td/website/pull/32">waiting for review</a>)</li>
+<li>Spline section (in progress, almost finished)</li>
+<li>Discretization (in progress, almost finished)</li>
+</ul></li>
+<li>Missing Data (started)</li>
+</ul>
+<p>We’ll update the website once the first three chapters listed above have good drafts. Another update will follow when the others are done.</p>
+
+
+
+ ]]></description>
+  <category>preprocessing</category>
+  <category>updates</category>
+  <guid>https://blog.aml4td.org/posts/2024-02-progress-update/</guid>
+  <pubDate>Tue, 27 Feb 2024 05:00:00 GMT</pubDate>
+  <media:content url="https://blog.aml4td.org/posts/2024-02-progress-update/preproc.png" medium="image" type="image/png" height="55" width="144"/>
+</item>
 <item>
   <title>New Location, Same Content</title>
   <dc:creator>Max Kuhn</dc:creator>
@@ -2018,38 +2063,6 @@ font-style: italic;">##  withr         2.0.0    2017-07-28 CRAN (R 3.3.2)</span>
   <category>RStudio</category>
   <guid>https://blog.aml4td.org/posts/working-at-rstudio/</guid>
   <pubDate>Mon, 28 Nov 2016 05:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>2016 UK Tour</title>
-  <dc:creator>Max Kuhn</dc:creator>
-  <link>https://blog.aml4td.org/posts/2016-uk-tour/</link>
-  <description><![CDATA[ 
-
-
-
-
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://blog.aml4td.org/posts/2016-uk-tour/banner.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-<p>I’ll be in the UK next week doing three talks in three days:</p>
-<ul>
-<li>First, I’ll be giving a talk at the <a href="http://www.meetup.com/rladies-london/events/233061594/">London R-Ladies meetup</a> on Monday October 3rd with perhaps the best title yet: <strong><em>Whose Scat Is That? An ‘Easily Digestible’ Introduction to Predictive Modeling and <code>caret</code></em></strong>.</li>
-<li>On Tuesday, October 4th I’m giving a talk at the <a href="https://www.meetup.com/Cambridge-R-Users-Group-Meetup/events/234302826/">Cambridge RUG</a> on tuning hyperparameters using optimization algorithms. This is an extension of <a href="http://blog.revolutionanalytics.com/2016/06/bayesian-optimization-of-machine-learning-models.html">this blog post</a>.<br>
-</li>
-<li>Finally, on Wednesday (the 5th) at the fantastic <a href="http://www.ncs-conference.org/">Nonclinical Statistics Conference</a>, I’ll be speaking on <strong><em>Statistical Mediation in Early Discovery by Bayesian Analysis and Visualization</em></strong>. The banner image above is from this talk. Lots of priors and <a href="http://shiny.rstudio.com">shiny apps</a>.</li>
-</ul>
-<p>(This article was originally posted at <a href="https://appliedpredictivemodeling.com/blog/2016/9/26/2016-uk-tour"><code>http://appliedpredictivemodeling.com</code></a>)</p>
-
-
-
- ]]></description>
-  <category>R user group</category>
-  <category>R</category>
-  <category>presentations</category>
-  <guid>https://blog.aml4td.org/posts/2016-uk-tour/</guid>
-  <pubDate>Mon, 26 Sep 2016 04:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
