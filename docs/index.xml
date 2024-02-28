@@ -10,7 +10,29 @@
 <atom:link href="https://blog.aml4td.org/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.4</generator>
-<lastBuildDate>Tue, 27 Feb 2024 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 01 Mar 2024 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>WTF Article</title>
+  <dc:creator>Max Kuhn</dc:creator>
+  <link>https://blog.aml4td.org/posts/wtf-article/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Kjell and I have a new paper called “What They Forgot to Tell You about Machine Learning with an Application to Pharmaceutical Manufacturing.”</p>
+<p>It is in the <a href="https://doi.org/10.1002/pst.2366"><em>Pharmaceutical Statistics</em></a> journal, but you can read the preprint <a href="https://kjell-stattenacity.github.io/Tutorial/">on the GitHub page</a>.</p>
+<p>I co-opted the “WTF” aspect of it from a workshop that our friends called <a href="https://rstats.wtf/">“What They Forgot to Teach You About R”</a>. I thought a reviewer or two might balk, but all we got was a comment about the novel use of that acronym.</p>
+<p>The article was written while we were gearing up for the <code>aml4td</code> book, and you can get a sampling of many of the points we’ll be making there. We’ll also use a similar data set in a few chapters.</p>
+
+
+
+ ]]></description>
+  <category>publications</category>
+  <guid>https://blog.aml4td.org/posts/wtf-article/</guid>
+  <pubDate>Fri, 01 Mar 2024 05:00:00 GMT</pubDate>
+  <media:content url="https://blog.aml4td.org/posts/wtf-article/wtf.png" medium="image" type="image/png" height="105" width="144"/>
+</item>
 <item>
   <title>Progress Update (February 2024)</title>
   <dc:creator>Max Kuhn</dc:creator>
@@ -2035,34 +2057,6 @@ font-style: italic;">##  withr         2.0.0    2017-07-28 CRAN (R 3.3.2)</span>
   <category>caret</category>
   <guid>https://blog.aml4td.org/posts/caret-package-plans/</guid>
   <pubDate>Thu, 02 Feb 2017 05:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Working at RStudio</title>
-  <dc:creator>Max Kuhn</dc:creator>
-  <link>https://blog.aml4td.org/posts/working-at-rstudio/</link>
-  <description><![CDATA[ 
-
-
-
-
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://blog.aml4td.org/posts/working-at-rstudio/RStudio-Ball.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-<p>I’ve joined Hadley’s team at <a href="https://www.rstudio.com/">RStudio</a>.</p>
-<p>Unsurprisingly, I’ll be working on some modeling related R packages and infrastructure. It is very exciting and I’m looking forward to learning a lot and creating some cool things.</p>
-<p>I’ve had a great time doing drug discovery at Pfizer for the last 12ish years and I’ll miss working with everyone there.</p>
-<p>My contact info has been changed on my existing R packages and you can find me either using my personal email (<code>mxkuhn@gmail.com</code>), RStudio address (<code>max@rstudio.com</code>), or <a href="https://github.com/topepo">github page</a></p>
-<p>(This article was originally posted at <a href="https://appliedpredictivemodeling.com/blog/2016/11/28/working-at-rstudio"><code>http://appliedpredictivemodeling.com</code></a>)</p>
-
-
-
- ]]></description>
-  <category>R</category>
-  <category>RStudio</category>
-  <guid>https://blog.aml4td.org/posts/working-at-rstudio/</guid>
-  <pubDate>Mon, 28 Nov 2016 05:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
