@@ -9,8 +9,32 @@
 <link>https://blog.aml4td.org/</link>
 <atom:link href="https://blog.aml4td.org/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.5.4</generator>
-<lastBuildDate>Tue, 27 Feb 2024 05:00:00 GMT</lastBuildDate>
+<generator>quarto-1.5.22</generator>
+<lastBuildDate>Sat, 02 Mar 2024 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>2024 Tidymodels User Survey</title>
+  <dc:creator>Max Kuhn</dc:creator>
+  <link>https://blog.aml4td.org/posts/2024-tidymodels-user-survey/</link>
+  <description><![CDATA[ 
+
+
+
+
+<hr>
+<p>In the tidymodels group, we re-evaluate our development roadmap after a major development epoch. In this case, we are finishing up extended support for censored data models (more on that later).</p>
+<p>We always want community input into our direction. So please take a look at our tidymodels survey for 2024 priorities <a href="https://www.tidyverse.org/blog/2024/02/tidymodels-2024-survey/">blog post</a> and <strong>then take the</strong> <a href="https://conjoint.qualtrics.com/jfe/form/SV_aWw8ocGN5aPgeZE"><strong>survey</strong></a>.</p>
+<p>While it’s not a guarantee, we do take it into account. For example, I was not really interested in creating a stacking ensemble package. However, it was rated very high in past surveys (here’s an example of some of those results). That helped lead one of our <del>former interns</del> group members to make the <a href="https://stacks.tidymodels.org/">stacks package</a>.</p>
+<p>A few things are somewhat in process now, so we left those off the list. Our original list of possibilities had almost two dozen entries; we’ve whittled it down to less than ten for the survey.</p>
+<p>(Photo by <a href="https://unsplash.com/@thepaintedsquarejessica?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Jessica Lewis 🦋 thepaintedsquare</a> on <a href="https://unsplash.com/photos/person-writing-on-white-paper-SrJuOjX2qso?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a>)</p>
+
+
+
+ ]]></description>
+  <category>tidymodels</category>
+  <guid>https://blog.aml4td.org/posts/2024-tidymodels-user-survey/</guid>
+  <pubDate>Sat, 02 Mar 2024 05:00:00 GMT</pubDate>
+  <media:content url="https://blog.aml4td.org/posts/2024-tidymodels-user-survey/listing.png" medium="image" type="image/png" height="96" width="144"/>
+</item>
 <item>
   <title>Progress Update (February 2024)</title>
   <dc:creator>Max Kuhn</dc:creator>
@@ -481,6 +505,7 @@ font-style: inherit;">1</span>]])</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(split, ...) {</span>
 <span id="cb10-2">  <span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -633,6 +658,7 @@ font-style: inherit;"># MSE = 2.675 in the blog post</span></span></code></pre><
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(..., <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">degree =</span> <span class="dv" style="color: #AD0000;
@@ -675,6 +701,7 @@ font-style: inherit;"># predictor expressions</span></span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(arg, call, ...)</span>
 <span id="cb18-12">    <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -991,6 +1018,7 @@ font-style: inherit;">theme_bw</span>())</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(n) {</span>
 <span id="cb2-2">  tmp <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -1209,6 +1237,7 @@ font-style: inherit;"># `cost` is the tuning parameter</span></span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(object, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">cost =</span> <span class="dv" style="color: #AD0000;
@@ -1274,6 +1303,7 @@ font-style: inherit;"># In some case, we want to parameterize the function over 
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(cost, object) <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">svm_rmse</span>(object, cost)</span></code></pre></div>
@@ -1285,6 +1315,7 @@ font-style: inherit;"># `object` will be an `rsplit` object for the bootstrap sa
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(object) {</span>
 <span id="cb8-3">  results <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -1332,6 +1363,7 @@ font-style: inherit;"># `object` is an `rsplit` object in `results$inner_resampl
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(object) {</span>
 <span id="cb9-3">  <span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -1391,6 +1423,7 @@ font-style: inherit;">%&gt;%</span> bind_rows</span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(dat) dat[<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">which.min</span>(dat<span class="sc" style="color: #5E5E5E;
@@ -1433,8 +1466,10 @@ font-style: inherit;">"Inner RMSE"</span>)</span>
 <span id="cb11-8"></span>
 <span id="cb11-9"><span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span>(i <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
@@ -2035,34 +2070,6 @@ font-style: italic;">##  withr         2.0.0    2017-07-28 CRAN (R 3.3.2)</span>
   <category>caret</category>
   <guid>https://blog.aml4td.org/posts/caret-package-plans/</guid>
   <pubDate>Thu, 02 Feb 2017 05:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Working at RStudio</title>
-  <dc:creator>Max Kuhn</dc:creator>
-  <link>https://blog.aml4td.org/posts/working-at-rstudio/</link>
-  <description><![CDATA[ 
-
-
-
-
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://blog.aml4td.org/posts/working-at-rstudio/RStudio-Ball.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-<p>I’ve joined Hadley’s team at <a href="https://www.rstudio.com/">RStudio</a>.</p>
-<p>Unsurprisingly, I’ll be working on some modeling related R packages and infrastructure. It is very exciting and I’m looking forward to learning a lot and creating some cool things.</p>
-<p>I’ve had a great time doing drug discovery at Pfizer for the last 12ish years and I’ll miss working with everyone there.</p>
-<p>My contact info has been changed on my existing R packages and you can find me either using my personal email (<code>mxkuhn@gmail.com</code>), RStudio address (<code>max@rstudio.com</code>), or <a href="https://github.com/topepo">github page</a></p>
-<p>(This article was originally posted at <a href="https://appliedpredictivemodeling.com/blog/2016/11/28/working-at-rstudio"><code>http://appliedpredictivemodeling.com</code></a>)</p>
-
-
-
- ]]></description>
-  <category>R</category>
-  <category>RStudio</category>
-  <guid>https://blog.aml4td.org/posts/working-at-rstudio/</guid>
-  <pubDate>Mon, 28 Nov 2016 05:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

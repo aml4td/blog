@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.4">
-
+<meta name="generator" content="quarto-1.5.22">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Max Kuhn">
 <meta name="dcterms.date" content="2013-06-21">
-
 <title>Applied Predictive Modeling Blog – Measuring Associations</title>
 <style>
 code{white-space: pre-wrap;}
@@ -22,8 +19,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
-
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
@@ -40,8 +70,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -68,16 +97,11 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-
-
 </head>
-
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Applied Predictive Modeling Blog</span>
@@ -89,6 +113,18 @@ ul.task-list li input[type="checkbox"] {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://aml4td.org/"> 
+<span class="menu-text">Book</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://tidymodels.aml4td.org/"> 
+<span class="menu-text">Computing: R</span></a>
+  </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
@@ -99,24 +135,18 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text"></span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+</div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">Measuring Associations</h1>
   <div class="quarto-categories">
     <div class="quarto-category">R</div>
@@ -150,95 +180,111 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
-
-
-<p>In Chapter 18, we discuss a relatively new method for measuring predictor importance called the maximal information coefficient (MIC). The original paper is by <a href="http://scholar.google.com/scholar?q=%22DETECTING+NOVEL+ASSOCIATIONS+IN+LARGE+DATA+SETS%22">Reshef at al (2011)</a>.</p>
+</header><p>In Chapter 18, we discuss a relatively new method for measuring predictor importance called the maximal information coefficient (MIC). The original paper is by <a href="http://scholar.google.com/scholar?q=%22DETECTING+NOVEL+ASSOCIATIONS+IN+LARGE+DATA+SETS%22">Reshef at al (2011)</a>.</p>
 <p>A summary of the initial reactions to the MIC are <a href="http://www.sciencemag.org/content/334/6062/1502.short">Speed</a> and <a href="http://www-stat.stanford.edu/~tibs/reshef/comment.pdf">Tibshirani</a> (and others can be found <a href="http://scholar.google.com/scholar?cites=17152416007763542209&amp;as_sdt=8005&amp;sciodt=0,7&amp;hl=en">here</a>). My (minor) beef with it is the lack of a probabilistic motivation. The authors have some general criteria (generality and equitability) and created an algorithm that seems to good in terms of these properties. The MIC clearly works, but what is it really optimizing and why?</p>
 <p>It reminds me of partial least squares. The algorithm made intuitive sense and obviously worked, but it was a while before anyone actually figured out what mathematical problem it was solving. A similar statement could be made about boosting when it was first developed.</p>
 <p><a href="http://arxiv.org/abs/1303.1828">Murrell et al (2013)</a> (or Murrell<sup>3</sup>?) has a similar generalized measure of association between continuous variables. There’s is based on a generalized notion of R<sup>2</sup> that I’d never heard of. At first glance, it has a lot of attractive properties. One is that is has a probabilistic genesis. Another nice quality is that the association can be computed while controlling for other data. That is a big deal for me, since we often have experiments where we need to control for nuisance factors. For example, if you were trying to measure the relationship between the selling price of a house and the acerage of the lot, you might want to control for other factors, such as the type of terrain or geography (e.g.&nbsp;urban, rural etc).</p>
 <p>Despite the probabilistic motivation, they take a randomization approach to making formal statistical inferences on significance of the measure. The same could be done for the MIC measure (and in the book, we used the same idea for Relief scores). I think a confidence interval would be better for everyone since it directly tells you the uncertainty and the size of the association (that’s another post for another time for a topic that has been <a href="http://news.sciencemag.org/sciencenow/2009/10/30-01.html">discussed</a> <a href="http://www.reanimacao.com.br/biblioteca/a_20100121_04.pdf">quite</a> <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2352195/pdf/bmj00561-0050.pdf">a</a> <a href="http://www.physther.org/content/81/8/1464.full">bit</a>).</p>
 <p>Let’s look at some data. I like the blood-brain barrier data a lot. It has measurements on 208 drugs to see how much (if at all) they enter the brain. The predictors are molecular descriptors (similar to the solubility example in the book). To get the data:</p>
-<pre>library(caret)
-data(BloodBrain)
-## remove zero variance columns
-isZV &lt;- apply(bbbDescr, 2, function(x) length(unique(x)) == 1)
-bbbDescr &lt;- bbbDescr[, !isZV]
-ncol(bbbDescr)
-
-|| [1] 134
-</pre>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/topepo/caret/">caret</a></span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: ggplot2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: lattice</code></pre>
+</div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">BloodBrain</span><span class="op">)</span>
+<span class="co">## remove zero variance columns</span>
+<span class="va">isZV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">bbbDescr</span>, <span class="fl">2</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">bbbDescr</span> <span class="op">&lt;-</span> <span class="va">bbbDescr</span><span class="op">[</span>, <span class="op">!</span><span class="va">isZV</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">bbbDescr</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 134</code></pre>
+</div>
+</div>
 <p>First, I’ll measure association using the <em>A</em> measure discussed in Murrell<sup>3</sup>:</p>
-<pre>library(matie)
-## Compute the associations across all columns of the predictors
-Avalues &lt;- apply(bbbDescr, 2, function(x, y) ma(cbind(x, y))$A, y = logBBB)
-Avalues &lt;- sort(Avalues, decreasing = TRUE)
-head(Avalues)
-
-||      fnsa3   psa_npsa polar_area       tpsa      scaa3       tcnp 
-||     0.4386     0.4126     0.4116     0.3924     0.3771     0.3672
-</pre>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">matie</span><span class="op">)</span>
+<span class="co">## Compute the associations across all columns of the predictors</span>
+<span class="va">Avalues</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">bbbDescr</span>, <span class="fl">2</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="fu">ma</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">A</span>, y <span class="op">=</span> <span class="va">logBBB</span><span class="op">)</span>
+<span class="va">Avalues</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">Avalues</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">Avalues</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     fnsa3   psa_npsa polar_area       tpsa      scaa3       tcnp 
+ 0.4394103  0.4145948  0.4128770  0.3864214  0.3762745  0.3692587 </code></pre>
+</div>
+</div>
 <p>So the best predictor only explains 43.9% of the variation in the outcome. Most of the predictors shown above are related to surface area, which makes sense: the larger the molecule the less likely it is to physically fit through the barrier.</p>
 <p>What does MIC tell us?</p>
-<pre>library(minerva)
-## There are three predictors whose scales have very low variances. We
-## need to reset the threshold that checks for this
-mic &lt;- mine(bbbDescr, logBBB, var.thr = 1e-10)$MIC
-mic &lt;- mic[order(mic[, "Y"], decreasing = TRUE), ]
-head(mic)
-
-||    fnsa3     rpcg    fpsa3    scaa1    scaa3 psa_npsa 
-||   0.5249   0.4806   0.4762   0.4759   0.4712   0.4650
-</pre>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">minerva</a></span><span class="op">)</span>
+<span class="co">## There are three predictors whose scales have very low variances. We</span>
+<span class="co">## need to reset the threshold that checks for this</span>
+<span class="va">mic</span> <span class="op">&lt;-</span> <span class="fu">mine</span><span class="op">(</span><span class="va">bbbDescr</span>, <span class="va">logBBB</span>, var.thr <span class="op">=</span> <span class="fl">1e-10</span><span class="op">)</span><span class="op">$</span><span class="va">MIC</span>
+<span class="va">mic</span> <span class="op">&lt;-</span> <span class="va">mic</span><span class="op">[</span>, <span class="st">"Y"</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">mic</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">bbbDescr</span><span class="op">)</span>
+<span class="va">mic</span> <span class="op">&lt;-</span> <span class="va">mic</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">mic</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mic</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    fnsa3      rpcg     fpsa3     scaa1     scaa3  psa_npsa 
+0.5248916 0.4806339 0.4761844 0.4758696 0.4711854 0.4650277 </code></pre>
+</div>
+</div>
 <p>There are some differences but the top predictor from <em>A</em> is still at the top. The MIC values is sort of a correlation-like measure and our best value was 0.52.</p>
 <p>I also have a measure of importance that is based on scatterplot smoothers. A loess smoother is fit between the outcome and the predictor and the R<sup>2</sup> statistic is calculated for this model against the intercept only null model. I don’t claim that there is any justification (which is why I’ve never published it) for this but it has worked for me in the past. This is similar to my statements about MIC and PLS. I still use them because they tend to work, but I’ve no theoretical leg to stand on.</p>
-<pre>## A measure based on regression smoothers
-gamImp &lt;- filterVarImp(bbbDescr, logBBB, nonpara = TRUE)
-gamImp &lt;- gamImp[order(gamImp$Overall, decreasing = TRUE), , drop = FALSE]
-head(gamImp)
-
-||              Overall
-||   fnsa3       0.3970
-||   psa_npsa    0.3879
-||   polar_area  0.3806
-||   tcnp        0.3681
-||   tpsa        0.3584
-||   tpsa.1      0.3475
-</pre>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co">## A measure based on regression smoothers</span>
+<span class="va">gamImp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/filterVarImp.html">filterVarImp</a></span><span class="op">(</span><span class="va">bbbDescr</span>, <span class="va">logBBB</span>, nonpara <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">gamImp</span> <span class="op">&lt;-</span> <span class="va">gamImp</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">gamImp</span><span class="op">$</span><span class="va">Overall</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, , drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gamImp</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Overall
+fnsa3      0.3970318
+psa_npsa   0.3879014
+polar_area 0.3805523
+tcnp       0.3681280
+tpsa       0.3584280
+tpsa.1     0.3474503</code></pre>
+</div>
+</div>
 <p>Finally, I’ll compute the RRelief scores. We discuss this in the book and the a good reference is <a href="http://lkm.fri.uni-lj.si/xaigor/slo/clanki/MLJ2003-FinalPaper.pdf">here</a>. It uses a nearest-neighbor approach and measures the importance of each predictors simultaneously (all of the other methods show here measure each association in isolation).</p>
-<pre>library(CORElearn)
-## The function only uses the formula interface
-bbbData &lt;- bbbDescr
-bbbData$logBBB &lt;- logBBB
-set.seed(10)
-RRelief &lt;- attrEval(logBBB ~ ., data = bbbData, estimator = "RReliefFbestK", 
-    ReliefIterations = 100)
-RRelief &lt;- RRelief[order(RRelief, decreasing = TRUE)]
-head(RRelief)
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://lkm.fri.uni-lj.si/rmarko/software/">CORElearn</a></span><span class="op">)</span>
 
-||      smr_vsa7      smr_vsa1 dipole_moment    peoe_vsa.0           pol 
-||        0.2622        0.2577        0.2525        0.2452        0.2366 
-||      smr_vsa6 
-||        0.2278
-</pre>
-<p>This score ranks the variables differently than the other methods. This is most likely due to the difference in philosophy in measuring association between this method and the others as well as the high degree of correlation between the predictors in these data. Overall, do these metrics correlate?</p>
+<span class="co">## The function only uses the formula interface</span>
+<span class="va">bbbData</span> <span class="op">&lt;-</span> <span class="va">bbbDescr</span>
+<span class="va">bbbData</span><span class="op">$</span><span class="va">logBBB</span> <span class="op">&lt;-</span> <span class="va">logBBB</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
+<span class="va">RRelief</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/CORElearn/man/attrEval.html">attrEval</a></span><span class="op">(</span><span class="va">logBBB</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">bbbData</span>, estimator <span class="op">=</span> <span class="st">"RReliefFbestK"</span>, 
+                    ReliefIterations <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
+<span class="va">RRelief</span> <span class="op">&lt;-</span> <span class="va">RRelief</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">RRelief</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">RRelief</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     smr_vsa7      smr_vsa1 dipole_moment    peoe_vsa.0           pol 
+    0.2622103     0.2577087     0.2524930     0.2452446     0.2366486 
+     smr_vsa6 
+    0.2278432 </code></pre>
+</div>
+</div>
+<p>This score ranks the variables differently than the other methods. This is most likely due to the difference in philosophy in measuring association between this method and the others as well as the high degree of correlation between the predictors in these data.</p>
+<p>Overall, do these metrics correlate?</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="splom.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<figure class="figure"><p><img src="splom.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p>If you ignore RRelief, there is some association between measures of association. Interestingly, there are a few predictors that have zero association using the <em>A</em> measure but non-zero correlation using MIC. The variables, and their MIC values are: <code>peoe_vsa.2</code> (0.22), <code>slogp_vsa4</code> (0.2), <code>peoe_vsa.0</code> (0.19), <code>smr_vsa1</code> (0.18), <code>a_acid</code> (0.18), <code>peoe_vsa.2.1</code> (0.14) and <code>negative</code> (0.04). What do these look like? Here are scatterplots between these predictions and the outcome (with scatterplot smoother fits):</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="scat.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<figure class="figure"><p><img src="scat.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p>Several of these are “near zero variance” predictors and probably shouldn’t be evaluated. For this image, it is difficult for me to see the association between the response and <code>peoe_vsa.0</code> (MIC = 0.19) or <code>smr_vsa1</code> (MIC = 0.18).</p>
+<p>(This article was originally posted at <a href="https://appliedpredictivemodeling.com/blog/2013/6/6/jmt8dw6egtv977chpxs1oulmgy7ubx"><code>http://appliedpredictivemodeling.com</code></a>)</p>
 
 
 
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -317,6 +363,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/blog\.aml4td\.org");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -351,7 +415,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -626,7 +694,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-
 
 
 
