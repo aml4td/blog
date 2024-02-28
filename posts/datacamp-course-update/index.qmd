@@ -3,7 +3,9 @@ title: "DataCamp Course [UPDATE]"
 author: "Max Kuhn"
 date: "2016-09-26"
 draft: false
----
+--- 
+
+<hr>
 
 Zachary Deane-Mayer, who collaborates on `caret`, has put together a DataCamp course on Machine Learning in R. 
 

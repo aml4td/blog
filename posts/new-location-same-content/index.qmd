@@ -7,7 +7,9 @@ categories:
   - blog
 draft: false
 image: "dmytro-tolokonov-Jq3WI9IQgEs-unsplash.jpg"
----
+--- 
+
+<hr>
 
 This is the new home for the Applied Predictive Modeling blog. 
 

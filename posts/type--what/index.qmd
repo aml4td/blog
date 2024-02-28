@@ -7,7 +7,9 @@ categories:
   - class probabilities
   - caret
 draft: false
----
+--- 
+
+<hr>
 
 One great thing about R is that has a wide diversity of packages written by many different people of many different viewpoints on how software should be designed. However, this does tend to bite us periodically.  
 

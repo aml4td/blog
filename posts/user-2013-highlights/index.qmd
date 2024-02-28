@@ -6,7 +6,9 @@ categories:
   - R
   - useR!
 draft: false
----
+--- 
+
+<hr>
 
 The conference was excellent this year. My highlights:
 

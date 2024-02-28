@@ -7,7 +7,9 @@ categories:
   - RStudio
   - tidymodels
 draft: false
----
+--- 
+
+<hr>
 
 ![](Screen+Shot+2021-10-07+at+1.25.38+PM.png){fig-align="center"}
 

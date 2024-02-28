@@ -6,7 +6,9 @@ categories:
   - R
   - RStudio
 draft: false
----
+--- 
+
+<hr>
 
 ![](cheatsheet-thumb.png){fig-align="center"}
 

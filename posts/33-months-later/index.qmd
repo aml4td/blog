@@ -3,7 +3,9 @@ title: "33 Months Later"
 author: "Max Kuhn"
 date: "2013-05-29"
 draft: false
----
+--- 
+
+<hr>
 
 After starting in September 2010, the book is now available from the publisher. The Kindle edition is available and Amazon will ship hard copies around July 1st. 
 

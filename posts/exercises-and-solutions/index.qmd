@@ -3,7 +3,9 @@ title: "Exercises and Solutions"
 author: "Max Kuhn"
 date: "2013-08-30"
 draft: false
----
+--- 
+
+<hr>
 
 Kjell and I are putting together solutions to the exercise sections. It is a lot of work, so it may take some time.  
 

@@ -9,7 +9,17 @@ categories:
   - MIC
   - RRelief
 draft: false
----
+--- 
+
+<hr>
+
+```{r}
+#| eval: false
+#| echo: false
+
+# No longer on CRAN
+pak::pak(c("cran/matie"), ask = FALSE)
+```
 
 In Chapter 18, we discuss a relatively new method for measuring predictor importance called the maximal information coefficient (MIC). The original paper is by [Reshef at al (2011)](http://scholar.google.com/scholar?q=%22DETECTING+NOVEL+ASSOCIATIONS+IN+LARGE+DATA+SETS%22). 
 

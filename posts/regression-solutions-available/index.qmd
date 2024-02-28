@@ -6,7 +6,9 @@ categories:
   - R
   - exercises
 draft: false
----
+--- 
+
+<hr>
 
 The github page for the APM exercises has been updated with three new files for Chapters 6-8 (the section on regression).
 

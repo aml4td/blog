@@ -11,7 +11,9 @@ draft: false
 resources: 
   - "RPharma_18_Kuhn.pdf"
   - "RPharma_18_Kuhn.zip"
----
+--- 
+
+<hr>
 
 ![](tpost_lung.png){fig-align="center"}
 

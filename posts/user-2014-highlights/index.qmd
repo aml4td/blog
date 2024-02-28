@@ -8,7 +8,9 @@ categories:
   - caret
 draft: false
 resources: "adaptive.pdf"
----
+--- 
+
+<hr>
 
 * My talk went well; here are the [slides](adaptive.pdf) and a link to the [paper pre-print](http://arxiv.org/abs/1405.6974).
 * Hadley Wickham gave an [excellent tutorial](http://bit.ly/dplyr-tutorial) on `dplyr`.

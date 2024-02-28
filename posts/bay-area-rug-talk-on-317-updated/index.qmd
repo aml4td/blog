@@ -9,7 +9,9 @@ categories:
   - PAW
 draft: false
 resources: "caret.pdf"
----
+--- 
+
+<hr>
 
 I'm making my yearly pilgrimage to San Fransico to [teach](http://www.predictiveanalyticsworld.com/sanfrancisco/2014/r_for_predictive_modeling.php) at [PAW](http://www.predictiveanalyticsworld.com/sanfrancisco/2014). 
 

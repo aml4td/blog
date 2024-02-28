@@ -9,7 +9,9 @@ categories:
   - errata
   - sampling
 draft: false
----
+--- 
+
+<hr>
 
 We discuss dealing with large class imbalances in Chapter 16. One approach is to sample the training set to coerce a more balanced class distribution. We discuss
 

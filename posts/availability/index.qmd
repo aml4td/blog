@@ -3,7 +3,9 @@ title: "Availability"
 author: "Max Kuhn"
 date: "2013-08-16"
 draft: false
----
+--- 
+
+<hr>
 
 After being on backorder for about 10 weeks, we are told that a larger batch of books have been printed and should be available shortly (despite the Amazon page's note about availability).
 

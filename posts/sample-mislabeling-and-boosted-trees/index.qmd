@@ -9,7 +9,9 @@ categories:
   - class mislabeling
   - gradient boosting machine
 draft: false
----
+--- 
+
+<hr>
 
 A while back, I saw [this post](https://stats.stackexchange.com/questions/77281/c5-0-boosting-and-mislabeled-data) on StackExchange/Crossvalidated: "Does anyone know how well C5.0 boosting performs in the presence of mislabeled data?" I did some simulations in order to make a comparison with gradient boosting machines (GBM).
 

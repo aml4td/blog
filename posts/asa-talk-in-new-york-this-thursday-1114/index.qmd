@@ -5,7 +5,9 @@ date: "2013-11-09"
 categories:
   - presentations
 draft: false
----
+--- 
+
+<hr>
 
 I'll be giving a [talk on predictive modeling](http://nycasa.org/nov_14_2013_nycasa.html) for the American Statistical Association next Thursday (the 14th) :
 

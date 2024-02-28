@@ -9,7 +9,9 @@ categories:
   - rule-based models
 draft: false
 resources: "cubist_BRUG.pdf"
----
+--- 
+
+<hr>
 
 ![](sacremento.png){fig-align="center"}
 

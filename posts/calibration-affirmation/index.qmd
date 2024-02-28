@@ -9,7 +9,9 @@ categories:
   - partial least squares
   - Bayes' rule
 draft: false
----
+--- 
+
+<hr>
 
 In the book, we discuss the notion of a probability model being "well calibrated". There are many different mathematical techniques that classification models use to produce class probabilities. Some of values are "probability-like" in that they are between zero and one and sum to one. This doesn't necessarily mean that the probability estimates are consistent with the true event rate seen with similar samples. Suppose a doctor told you that you have a model predicts that you have a 90% chance of having cancer. Is that number consistent with the actual likelihood of you being sick?
 

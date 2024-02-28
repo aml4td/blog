@@ -8,7 +8,9 @@ categories:
   - presentations
 draft: false
 resources: "webinar.pdf"
----
+--- 
+
+<hr>
 
 The webinar was recorded (thanks to Ray DiGiacomo and the Orange County RUG). The slides are [here](webinar.pdf) minus a few typos. 
 

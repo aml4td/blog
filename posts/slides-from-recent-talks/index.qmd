@@ -10,7 +10,9 @@ draft: false
 resources:
   - "BARUG15.pdf"
   - "ASA_Kuhn.pdf"
----
+--- 
+
+<hr>
 
 ![](rmse.png){fig-align="center"}
 

@@ -8,7 +8,9 @@ categories:
   - caret
   - resampling
 draft: false
----
+--- 
+
+<hr>
 
 A new version of [`caret`](http://caret.r-forge.r-project.org) is on [CRAN](http://cran.r-project.org/web/packages/caret/) now. 
 
