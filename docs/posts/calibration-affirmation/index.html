@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.22">
+<meta name="generator" content="quarto-1.5.4">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -146,7 +146,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+          <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -199,6 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<hr>
 <p>In the book, we discuss the notion of a probability model being “well calibrated”. There are many different mathematical techniques that classification models use to produce class probabilities. Some of values are “probability-like” in that they are between zero and one and sum to one. This doesn’t necessarily mean that the probability estimates are consistent with the true event rate seen with similar samples. Suppose a doctor told you that you have a model predicts that you have a 90% chance of having cancer. Is that number consistent with the actual likelihood of you being sick?</p>
 <p>As an example, we can look at the cell image segmentation data use in the text (<a href="http://www.biomedcentral.com/1471-2105/8/340">from this paper</a>). The data are in the caret package. The outcome is whether or not a cell in an image is well segmented (WS) or poorly segments (PS). We try to predict this using measured characteristics of the supposed cell.</p>
 <p>We can fit a partial least squares discriminant analysis model to these data. This model can use the basic PLS model for regression (based on binary dummy variables for the classes) and we can post-process the data into class probabilities and class predictions. One method to do this is the <a href="http://en.wikipedia.org/wiki/Softmax_activation_function">softmax function</a>. This simple mathematical formula can used but, in my experience, doesn’t lead to very realistic predictions. Let’s fit that model:</p>
@@ -376,24 +377,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/blog\.aml4td\.org");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -428,11 +411,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');

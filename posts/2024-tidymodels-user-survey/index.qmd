@@ -2,11 +2,12 @@
 title: "2024 Tidymodels User Survey"
 description: "Tell us which features are most important to you."
 author: "Max Kuhn"
-date: "2024-03-02"
+date: "2024-03-04"
 categories:
   - tidymodels
+  - R
 draft: false
-image: "listing.png"
+image: "saturn-hex.png"
 --- 
 
 <hr>
@@ -19,5 +20,5 @@ While it's not a guarantee, we do take it into account. For example, I was not r
 
 A few things are somewhat in process now, so we left those off the list. Our original list of possibilities had almost two dozen entries; we've whittled it down to less than ten for the survey. 
 
-(Photo by <a href="https://unsplash.com/@thepaintedsquarejessica?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Jessica Lewis 🦋 thepaintedsquare</a> on <a href="https://unsplash.com/photos/person-writing-on-white-paper-SrJuOjX2qso?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>)
+(The photo is a NASA/JPL/SSI image of the hexagon on Saturn’s north pole)
   

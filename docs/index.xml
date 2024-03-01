@@ -9,8 +9,8 @@
 <link>https://blog.aml4td.org/</link>
 <atom:link href="https://blog.aml4td.org/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.5.22</generator>
-<lastBuildDate>Sat, 02 Mar 2024 05:00:00 GMT</lastBuildDate>
+<generator>quarto-1.5.4</generator>
+<lastBuildDate>Mon, 04 Mar 2024 05:00:00 GMT</lastBuildDate>
 <item>
   <title>2024 Tidymodels User Survey</title>
   <dc:creator>Max Kuhn</dc:creator>
@@ -25,15 +25,16 @@
 <p>We always want community input into our direction. So please take a look at our tidymodels survey for 2024 priorities <a href="https://www.tidyverse.org/blog/2024/02/tidymodels-2024-survey/">blog post</a> and <strong>then take the</strong> <a href="https://conjoint.qualtrics.com/jfe/form/SV_aWw8ocGN5aPgeZE"><strong>survey</strong></a>.</p>
 <p>While it’s not a guarantee, we do take it into account. For example, I was not really interested in creating a stacking ensemble package. However, it was rated very high in past surveys (here’s an example of some of those results). That helped lead one of our <del>former interns</del> group members to make the <a href="https://stacks.tidymodels.org/">stacks package</a>.</p>
 <p>A few things are somewhat in process now, so we left those off the list. Our original list of possibilities had almost two dozen entries; we’ve whittled it down to less than ten for the survey.</p>
-<p>(Photo by <a href="https://unsplash.com/@thepaintedsquarejessica?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Jessica Lewis 🦋 thepaintedsquare</a> on <a href="https://unsplash.com/photos/person-writing-on-white-paper-SrJuOjX2qso?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a>)</p>
+<p>(The photo is a NASA/JPL/SSI image of the hexagon on Saturn’s north pole)</p>
 
 
 
  ]]></description>
   <category>tidymodels</category>
+  <category>R</category>
   <guid>https://blog.aml4td.org/posts/2024-tidymodels-user-survey/</guid>
-  <pubDate>Sat, 02 Mar 2024 05:00:00 GMT</pubDate>
-  <media:content url="https://blog.aml4td.org/posts/2024-tidymodels-user-survey/listing.png" medium="image" type="image/png" height="96" width="144"/>
+  <pubDate>Mon, 04 Mar 2024 05:00:00 GMT</pubDate>
+  <media:content url="https://blog.aml4td.org/posts/2024-tidymodels-user-survey/saturn-hex.png" medium="image" type="image/png" height="123" width="144"/>
 </item>
 <item>
   <title>Progress Update (February 2024)</title>
@@ -44,6 +45,7 @@
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/2024-02-progress-update/preproc.png" class="quarto-figure quarto-figure-center figure-img" height="150"></p>
@@ -89,6 +91,7 @@
 
 
 
+<hr>
 <p>This is the new home for the Applied Predictive Modeling blog.</p>
 <p>We’ve moved it here, along with the previous blog posts, because we’re now using a format that is much easier to work with (<a href="https://quarto.org/">Quarto</a>). This will make it a lot easier to create posts<sup>1</sup>.</p>
 <p>The blog is starting back up since we are actively developing our new (third) book called <em>Applied Machine Learning for Tabular Data</em> (<a href="https://aml4td.org/">aml4td</a>). We’ll post progress updates, requests for community help, discussions of technical matters, and other topics.</p>
@@ -120,6 +123,7 @@
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/2022-tidymodels-user-survey/Screen+Shot+2021-10-07+at+1.25.38+PM.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -147,6 +151,7 @@
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/tidymodels-updates-and-voting/tm-banner-small.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -174,6 +179,7 @@
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/slides-from-rpharma/tpost_lung.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -228,6 +234,7 @@
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/podcast-on-nonclinical-statistics/DjXIG2TV4AAHmX3.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -254,6 +261,7 @@
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/early-draft-of-our-feature-engineering-and-selection-book/model_process.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -295,6 +303,7 @@
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/tidyposterior-slides/repeats.gif" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -324,6 +333,7 @@
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/new-workshop-in-washington-dc-august/Ames_lat.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -361,6 +371,7 @@
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/tidy-resampling-redux-with-agricultural-economics-data/UNADJUSTEDNONRAW_thumb_265a.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -505,7 +516,6 @@ font-style: inherit;">1</span>]])</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">function</span>(split, ...) {</span>
 <span id="cb10-2">  <span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -658,7 +668,6 @@ font-style: inherit;"># MSE = 2.675 in the blog post</span></span></code></pre><
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">function</span>(..., <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">degree =</span> <span class="dv" style="color: #AD0000;
@@ -701,7 +710,6 @@ font-style: inherit;"># predictor expressions</span></span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">function</span>(arg, call, ...)</span>
 <span id="cb18-12">    <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -797,6 +805,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/rstudio-2018-conference-presentation-and-materials/bayes-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -830,6 +839,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 
 
 
+<hr>
 <p><code>caret</code> has been able to <a href="https://topepo.github.io/caret/parallel-processing.html">utilize parallel processing</a> for some time (before it was on CRAN in October 2007) using slightly different versions of the package. Around September of 2011, <code>caret</code> started using the <a href="https://cran.r-project.org/package=foreach"><code>foreach</code></a> package was used to “harmonize” the parallel processing technologies thanks to a super smart guy named Steve Weston.</p>
 <p>I’ve done a few benchmarks to quantify the benefits to parallel processing over the years. I just did another set since I just got a new iMacPro. This time, I put the code and results in a <a href="https://github.com/topepo/par-caret-bench">GitHub repo</a>. The main questions that I wanted to answer were:</p>
 <ul>
@@ -908,6 +918,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/lots-of-package-news/recipes_rsample.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -948,6 +959,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/caret-cheatsheet/cheatsheet-thumb.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -973,6 +985,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 
 
 
+<hr>
 <p>A typical scheme for splitting the data when developing a predictive model is to create an initial split of the data into a training and test set. If resampling is used, it is executed on the training set where a series of binary splits is created. In <code>rsample</code>, we use the term analysis set for the data that are used to fit the model and the assessment set is used to compute performance:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1018,7 +1031,6 @@ font-style: inherit;">theme_bw</span>())</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">function</span>(n) {</span>
 <span id="cb2-2">  tmp <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -1237,7 +1249,6 @@ font-style: inherit;"># `cost` is the tuning parameter</span></span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">function</span>(object, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">cost =</span> <span class="dv" style="color: #AD0000;
@@ -1303,7 +1314,6 @@ font-style: inherit;"># In some case, we want to parameterize the function over 
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">function</span>(cost, object) <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">svm_rmse</span>(object, cost)</span></code></pre></div>
@@ -1315,7 +1325,6 @@ font-style: inherit;"># `object` will be an `rsplit` object for the bootstrap sa
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">function</span>(object) {</span>
 <span id="cb8-3">  results <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -1363,7 +1372,6 @@ font-style: inherit;"># `object` is an `rsplit` object in `results$inner_resampl
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">function</span>(object) {</span>
 <span id="cb9-3">  <span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -1423,7 +1431,6 @@ font-style: inherit;">%&gt;%</span> bind_rows</span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">function</span>(dat) dat[<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">which.min</span>(dat<span class="sc" style="color: #5E5E5E;
@@ -1466,10 +1473,8 @@ font-style: inherit;">"Inner RMSE"</span>)</span>
 <span id="cb11-8"></span>
 <span id="cb11-9"><span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">for</span>(i <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
@@ -1946,6 +1951,7 @@ font-style: italic;">##  withr         2.0.0    2017-07-28 CRAN (R 3.3.2)</span>
 
 
 
+<hr>
 <p>I try to limit postings about jobs here, there is an interesting position in pharma for a statistician in New England.</p>
 <p>I’ve had this particular position before as a nonclinical statistician and really loved the work and the scientific collaborations. It is the kind of position that lets you use a wide set of skills; there is very little rote data analysis.</p>
 <p>Link: <a href="https://pfizer.wd1.myworkdayjobs.com/PfizerCareers/job/USA---MA---Cambridge-Kendall-Sq-700-Main/Associate-Director--Statistics_1603363">Nonclinical Statistician</a></p>
@@ -1966,6 +1972,7 @@ font-style: italic;">##  withr         2.0.0    2017-07-28 CRAN (R 3.3.2)</span>
 
 
 
+<hr>
 <p>One criticism that is often leveled against using resampling methods (such as cross-validation) to measure model performance is that there is no correlation between the CV results and the true error rate.</p>
 <p>Let’s look at this with some simulated data. While this assertion is often correct, there are a few reasons why you shouldn’t care.</p>
 <section id="the-setup" class="level3">
@@ -2051,6 +2058,7 @@ font-style: italic;">##  withr         2.0.0    2017-07-28 CRAN (R 3.3.2)</span>
 
 
 
+<hr>
 <p>A few people have asked if anything is going to happen to <a href="http://topepo.github.io/caret/"><code>caret</code></a> now that I’m working at RStudio.</p>
 <p>The answer is “very little will be different”.</p>
 <p>More specifically:</p>

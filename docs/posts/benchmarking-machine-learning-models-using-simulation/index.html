@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.22">
+<meta name="generator" content="quarto-1.5.4">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -146,7 +146,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+          <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -199,6 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<hr>
 <p>What is the objective of most data analysis? One way I think about it is that we are trying to discover or approximate what is really going on in our data (and in general, nature). However, I occasionally run into people think that if one model fulfills our expectations (e.g.&nbsp;higher number of significant p-values or accuracy) than it must be better than any other model that does not. For most data sets, we don’t know what the truth is, so this is a problem.</p>
 <p>Computational biology/bioinformatics are particularly bad in this way. In many cases, the cost, time and complexity of high dimensional biology experiments prevents a solid, methodical validation of analysis of the initial data set. This is has be verified by <a href="http://dx.doi.org/10.1038/srep01102">a</a> <a href="http://scholar.google.com/scholar?hl=en&amp;q=Deriving+Chemosensitivity+from+Cell+Lines&amp;btnG=&amp;as_sdt=1%2C7&amp;as_sdtp=">number</a> <a href="http://link.springer.com/article/10.1023/A%3A1009752403260">of</a> <a href="http://www.sciencemag.org/content/334/6060/1230.full.html">different</a> <a href="http://bib.oxfordjournals.org/content/12/3/189">publications</a>.</p>
 <p>I was talking to someone recently who was describing their research with ~150 samples and ~50,000 predictors. They used the same sample set to do feature selection and then build predictive models. The results was a random forest model based on about 150 predictors. The validation was based on running some of the same samples using a different technology. When I asked if there there would be any external validation, their response was “we’re never going to get a 5,000 sample clinical trial to check the results.” While true (and a bit dramatic), it is not an excuse to throw out good methodology. In fact, you would think that a lack of a clear path to validation would make people be more dogmatic about methodology…</p>
@@ -472,24 +473,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/blog\.aml4td\.org");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -524,11 +507,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
