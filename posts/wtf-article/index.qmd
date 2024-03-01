@@ -1,0 +1,17 @@
+---
+title: "WTF Article"
+author: "Max Kuhn"
+date: "2024-03-01"
+categories:
+  - publications
+draft: false
+image: "wtf.png"
+--- 
+
+Kjell and I have a new paper called "What They Forgot to Tell You about Machine Learning with an Application to Pharmaceutical Manufacturing.” 
+
+It is in the [_Pharmaceutical Statistics_](https://doi.org/10.1002/pst.2366) journal, but you can read the preprint [on the GitHub page](https://kjell-stattenacity.github.io/Tutorial/).
+
+I co-opted the "WTF" aspect of it from a workshop that our friends called ["What They Forgot to Teach You About R"](https://rstats.wtf/). I thought a reviewer or two might balk, but all we got was a comment about the novel use of that acronym. 
+
+The article was written while we were gearing up for the `aml4td` book, and you can get a sampling of many of the points we'll be making there. We'll also use a similar data set in a few chapters. 
