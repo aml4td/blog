@@ -37,6 +37,29 @@
   <media:content url="https://blog.aml4td.org/posts/2024-tidymodels-user-survey/saturn-hex.png" medium="image" type="image/png" height="123" width="144"/>
 </item>
 <item>
+  <title>WTF Article</title>
+  <dc:creator>Max Kuhn</dc:creator>
+  <link>https://blog.aml4td.org/posts/wtf-article/</link>
+  <description><![CDATA[ 
+
+
+
+
+<hr>
+<p>Kjell and I have a new paper called “What They Forgot to Tell You about Machine Learning with an Application to Pharmaceutical Manufacturing.”</p>
+<p>It is in the <a href="https://doi.org/10.1002/pst.2366"><em>Pharmaceutical Statistics</em></a> journal, but you can read the preprint <a href="https://kjell-stattenacity.github.io/Tutorial/">on the GitHub page</a>.</p>
+<p>I co-opted the “WTF” aspect of it from a workshop that our friends called <a href="https://rstats.wtf/">“What They Forgot to Teach You About R”</a>. I thought a reviewer or two might balk, but all we got was a comment about the novel use of that acronym.</p>
+<p>The article was written while we were gearing up for the <code>aml4td</code> book, and you can get a sampling of many of the points we’ll be making there. We’ll also use a similar data set in a few chapters.</p>
+
+
+
+ ]]></description>
+  <category>publications</category>
+  <guid>https://blog.aml4td.org/posts/wtf-article/</guid>
+  <pubDate>Fri, 01 Mar 2024 05:00:00 GMT</pubDate>
+  <media:content url="https://blog.aml4td.org/posts/wtf-article/wtf.png" medium="image" type="image/png" height="105" width="144"/>
+</item>
+<item>
   <title>Progress Update (February 2024)</title>
   <dc:creator>Max Kuhn</dc:creator>
   <link>https://blog.aml4td.org/posts/2024-02-progress-update/</link>
@@ -2048,36 +2071,6 @@ font-style: italic;">##  withr         2.0.0    2017-07-28 CRAN (R 3.3.2)</span>
   <category>cross-validation</category>
   <guid>https://blog.aml4td.org/posts/do-resampling-estimates-have-low-correlation-to-the-truth-the-answer-may-shock-you/</guid>
   <pubDate>Mon, 24 Apr 2017 04:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>caret package plans</title>
-  <dc:creator>Max Kuhn</dc:creator>
-  <link>https://blog.aml4td.org/posts/caret-package-plans/</link>
-  <description><![CDATA[ 
-
-
-
-
-<hr>
-<p>A few people have asked if anything is going to happen to <a href="http://topepo.github.io/caret/"><code>caret</code></a> now that I’m working at RStudio.</p>
-<p>The answer is “very little will be different”.</p>
-<p>More specifically:</p>
-<ul>
-<li><code>caret</code> will be around for a long time. I’m still using it for things too!</li>
-<li>There will still be hills and valleys for development/support. That pattern already exists and will continue since I still have a “day job”.</li>
-<li>As for new things coming out of Rstudio, there is likely to be a fair amount of overlap with <code>caret</code> (in terms of functionality). <code>caret</code> may be the most un<a href="http://tidyverse.org/">tidy</a> package out there; just take a look at any call to <code>train</code> or the other modeling functions. There wont be a <code>caret2</code> but probably a set of packages that overlap with <code>caret</code> in different ways (I thought about trolling and calling the first package <code>carrot</code>).</li>
-<li><code>caret</code> is fairly focused (myopic?) since it concentrates on prediction. There are similar things that people might want to do where the quantities of interest might not be prediction of a number or class. For example, while you might want to make inferences on your linear mixed model, you might also want to report your resampled RMSE to prove that your model has some fidelity to the actual data.</li>
-<li>There are some features that I want(ed) for <code>caret</code> that would be invasive changes or might break backwards compatibility. Those are more likely to end up in a new package.</li>
-<li>While you might now want a tidyverse solution to modeling (and that’s fine), there will be some features in new pacakges that will be incentives. It is easier to add new stuff in a new system than to redefine the old. Hopefully, I’ve learned my lessons in regards to extensibility; while the user may not realize it, the innards of <code>caret</code> have been refactored more than once.</li>
-</ul>
-<p>(This article was originally posted at <a href="https://appliedpredictivemodeling.com/blog/2017/2/2/caret-package-plans"><code>http://appliedpredictivemodeling.com</code></a>)</p>
-
-
-
- ]]></description>
-  <category>caret</category>
-  <guid>https://blog.aml4td.org/posts/caret-package-plans/</guid>
-  <pubDate>Thu, 02 Feb 2017 05:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
