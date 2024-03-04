@@ -165,6 +165,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<hr>
 <p><code>caret</code> has been able to <a href="https://topepo.github.io/caret/parallel-processing.html">utilize parallel processing</a> for some time (before it was on CRAN in October 2007) using slightly different versions of the package. Around September of 2011, <code>caret</code> started using the <a href="https://cran.r-project.org/package=foreach"><code>foreach</code></a> package was used to “harmonize” the parallel processing technologies thanks to a super smart guy named Steve Weston.</p>
 <p>I’ve done a few benchmarks to quantify the benefits to parallel processing over the years. I just did another set since I just got a new iMacPro. This time, I put the code and results in a <a href="https://github.com/topepo/par-caret-bench">GitHub repo</a>. The main questions that I wanted to answer were:</p>
 <ul>

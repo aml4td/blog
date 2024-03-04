@@ -163,6 +163,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<hr>
 <p>Damjan Krstajic and friends have a <a href="http://www.jcheminf.com/content/6/1/10/abstract">great paper</a> on pitfalls of cross-validation. Although the paper uses chemistry data, the meat of the article is broadly applicable. It does a great job of illustrating different resampling approaches and I learned more about double and nested cross-validation.</p>
 <p>Figure 10 surprised me; I assumed that the precision in resampled estimates is mostly driven by the number of resamples. For example, a resampled estimate of the RMSE using 64 resamples has a standard error of <code>sd/8</code> which is twice as good as one using 16 resamples (i.e.&nbsp;<code>sd/4</code>). In their work, the variation in 50 repeats of 10-fold CV are much better than 50 repeats of 10-fold <em>nested</em> CV.</p>
 <p>Finally, the article has an excellent historical summary of the pivotal papers on this subject and does a great job of labeling and articulating the different <em>goals</em> that one might have when resampling predictive models.</p>

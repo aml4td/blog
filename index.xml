@@ -10,7 +10,32 @@
 <atom:link href="https://blog.aml4td.org/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.4</generator>
-<lastBuildDate>Fri, 01 Mar 2024 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 04 Mar 2024 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>2024 Tidymodels User Survey</title>
+  <dc:creator>Max Kuhn</dc:creator>
+  <link>https://blog.aml4td.org/posts/2024-tidymodels-user-survey/</link>
+  <description><![CDATA[ 
+
+
+
+
+<hr>
+<p>In the tidymodels group, we re-evaluate our development roadmap after a major development epoch. In this case, we are finishing up extended support for censored data models (more on that later).</p>
+<p>We always want community input into our direction. So please take a look at our tidymodels survey for 2024 priorities <a href="https://www.tidyverse.org/blog/2024/02/tidymodels-2024-survey/">blog post</a> and <strong>then take the</strong> <a href="https://conjoint.qualtrics.com/jfe/form/SV_aWw8ocGN5aPgeZE"><strong>survey</strong></a>.</p>
+<p>While it’s not a guarantee, we do take it into account. For example, I was not really interested in creating a stacking ensemble package. However, it was rated very high in past surveys (here’s an example of some of those results). That helped lead one of our <del>former interns</del> group members to make the <a href="https://stacks.tidymodels.org/">stacks package</a>.</p>
+<p>A few things are somewhat in process now, so we left those off the list. Our original list of possibilities had almost two dozen entries; we’ve whittled it down to less than ten for the survey.</p>
+<p>(The photo is a NASA/JPL/SSI image of the hexagon on Saturn’s north pole)</p>
+
+
+
+ ]]></description>
+  <category>tidymodels</category>
+  <category>R</category>
+  <guid>https://blog.aml4td.org/posts/2024-tidymodels-user-survey/</guid>
+  <pubDate>Mon, 04 Mar 2024 05:00:00 GMT</pubDate>
+  <media:content url="https://blog.aml4td.org/posts/2024-tidymodels-user-survey/saturn-hex.png" medium="image" type="image/png" height="123" width="144"/>
+</item>
 <item>
   <title>WTF Article</title>
   <dc:creator>Max Kuhn</dc:creator>
@@ -20,6 +45,7 @@
 
 
 
+<hr>
 <p>Kjell and I have a new paper called “What They Forgot to Tell You about Machine Learning with an Application to Pharmaceutical Manufacturing.”</p>
 <p>It is in the <a href="https://doi.org/10.1002/pst.2366"><em>Pharmaceutical Statistics</em></a> journal, but you can read the preprint <a href="https://kjell-stattenacity.github.io/Tutorial/">on the GitHub page</a>.</p>
 <p>I co-opted the “WTF” aspect of it from a workshop that our friends called <a href="https://rstats.wtf/">“What They Forgot to Teach You About R”</a>. I thought a reviewer or two might balk, but all we got was a comment about the novel use of that acronym.</p>
@@ -42,6 +68,7 @@
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/2024-02-progress-update/preproc.png" class="quarto-figure quarto-figure-center figure-img" height="150"></p>
@@ -87,6 +114,7 @@
 
 
 
+<hr>
 <p>This is the new home for the Applied Predictive Modeling blog.</p>
 <p>We’ve moved it here, along with the previous blog posts, because we’re now using a format that is much easier to work with (<a href="https://quarto.org/">Quarto</a>). This will make it a lot easier to create posts<sup>1</sup>.</p>
 <p>The blog is starting back up since we are actively developing our new (third) book called <em>Applied Machine Learning for Tabular Data</em> (<a href="https://aml4td.org/">aml4td</a>). We’ll post progress updates, requests for community help, discussions of technical matters, and other topics.</p>
@@ -118,6 +146,7 @@
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/2022-tidymodels-user-survey/Screen+Shot+2021-10-07+at+1.25.38+PM.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -145,6 +174,7 @@
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/tidymodels-updates-and-voting/tm-banner-small.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -172,6 +202,7 @@
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/slides-from-rpharma/tpost_lung.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -226,6 +257,7 @@
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/podcast-on-nonclinical-statistics/DjXIG2TV4AAHmX3.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -252,6 +284,7 @@
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/early-draft-of-our-feature-engineering-and-selection-book/model_process.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -293,6 +326,7 @@
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/tidyposterior-slides/repeats.gif" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -322,6 +356,7 @@
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/new-workshop-in-washington-dc-august/Ames_lat.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -359,6 +394,7 @@
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/tidy-resampling-redux-with-agricultural-economics-data/UNADJUSTEDNONRAW_thumb_265a.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -792,6 +828,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/rstudio-2018-conference-presentation-and-materials/bayes-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -825,6 +862,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 
 
 
+<hr>
 <p><code>caret</code> has been able to <a href="https://topepo.github.io/caret/parallel-processing.html">utilize parallel processing</a> for some time (before it was on CRAN in October 2007) using slightly different versions of the package. Around September of 2011, <code>caret</code> started using the <a href="https://cran.r-project.org/package=foreach"><code>foreach</code></a> package was used to “harmonize” the parallel processing technologies thanks to a super smart guy named Steve Weston.</p>
 <p>I’ve done a few benchmarks to quantify the benefits to parallel processing over the years. I just did another set since I just got a new iMacPro. This time, I put the code and results in a <a href="https://github.com/topepo/par-caret-bench">GitHub repo</a>. The main questions that I wanted to answer were:</p>
 <ul>
@@ -903,6 +941,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/lots-of-package-news/recipes_rsample.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -943,6 +982,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 
 
 
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://blog.aml4td.org/posts/caret-cheatsheet/cheatsheet-thumb.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
@@ -968,6 +1008,7 @@ font-style: inherit;">3</span>)</span></code></pre></div>
 
 
 
+<hr>
 <p>A typical scheme for splitting the data when developing a predictive model is to create an initial split of the data into a training and test set. If resampling is used, it is executed on the training set where a series of binary splits is created. In <code>rsample</code>, we use the term analysis set for the data that are used to fit the model and the assessment set is used to compute performance:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1933,6 +1974,7 @@ font-style: italic;">##  withr         2.0.0    2017-07-28 CRAN (R 3.3.2)</span>
 
 
 
+<hr>
 <p>I try to limit postings about jobs here, there is an interesting position in pharma for a statistician in New England.</p>
 <p>I’ve had this particular position before as a nonclinical statistician and really loved the work and the scientific collaborations. It is the kind of position that lets you use a wide set of skills; there is very little rote data analysis.</p>
 <p>Link: <a href="https://pfizer.wd1.myworkdayjobs.com/PfizerCareers/job/USA---MA---Cambridge-Kendall-Sq-700-Main/Associate-Director--Statistics_1603363">Nonclinical Statistician</a></p>
@@ -1953,6 +1995,7 @@ font-style: italic;">##  withr         2.0.0    2017-07-28 CRAN (R 3.3.2)</span>
 
 
 
+<hr>
 <p>One criticism that is often leveled against using resampling methods (such as cross-validation) to measure model performance is that there is no correlation between the CV results and the true error rate.</p>
 <p>Let’s look at this with some simulated data. While this assertion is often correct, there are a few reasons why you shouldn’t care.</p>
 <section id="the-setup" class="level3">
@@ -2028,35 +2071,6 @@ font-style: italic;">##  withr         2.0.0    2017-07-28 CRAN (R 3.3.2)</span>
   <category>cross-validation</category>
   <guid>https://blog.aml4td.org/posts/do-resampling-estimates-have-low-correlation-to-the-truth-the-answer-may-shock-you/</guid>
   <pubDate>Mon, 24 Apr 2017 04:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>caret package plans</title>
-  <dc:creator>Max Kuhn</dc:creator>
-  <link>https://blog.aml4td.org/posts/caret-package-plans/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>A few people have asked if anything is going to happen to <a href="http://topepo.github.io/caret/"><code>caret</code></a> now that I’m working at RStudio.</p>
-<p>The answer is “very little will be different”.</p>
-<p>More specifically:</p>
-<ul>
-<li><code>caret</code> will be around for a long time. I’m still using it for things too!</li>
-<li>There will still be hills and valleys for development/support. That pattern already exists and will continue since I still have a “day job”.</li>
-<li>As for new things coming out of Rstudio, there is likely to be a fair amount of overlap with <code>caret</code> (in terms of functionality). <code>caret</code> may be the most un<a href="http://tidyverse.org/">tidy</a> package out there; just take a look at any call to <code>train</code> or the other modeling functions. There wont be a <code>caret2</code> but probably a set of packages that overlap with <code>caret</code> in different ways (I thought about trolling and calling the first package <code>carrot</code>).</li>
-<li><code>caret</code> is fairly focused (myopic?) since it concentrates on prediction. There are similar things that people might want to do where the quantities of interest might not be prediction of a number or class. For example, while you might want to make inferences on your linear mixed model, you might also want to report your resampled RMSE to prove that your model has some fidelity to the actual data.</li>
-<li>There are some features that I want(ed) for <code>caret</code> that would be invasive changes or might break backwards compatibility. Those are more likely to end up in a new package.</li>
-<li>While you might now want a tidyverse solution to modeling (and that’s fine), there will be some features in new pacakges that will be incentives. It is easier to add new stuff in a new system than to redefine the old. Hopefully, I’ve learned my lessons in regards to extensibility; while the user may not realize it, the innards of <code>caret</code> have been refactored more than once.</li>
-</ul>
-<p>(This article was originally posted at <a href="https://appliedpredictivemodeling.com/blog/2017/2/2/caret-package-plans"><code>http://appliedpredictivemodeling.com</code></a>)</p>
-
-
-
- ]]></description>
-  <category>caret</category>
-  <guid>https://blog.aml4td.org/posts/caret-package-plans/</guid>
-  <pubDate>Thu, 02 Feb 2017 05:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
