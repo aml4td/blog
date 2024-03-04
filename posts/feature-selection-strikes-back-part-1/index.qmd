@@ -10,7 +10,9 @@ categories:
   - R
 draft: false
 resources: "GA_blog.Rmd"
----
+--- 
+
+<hr>
 
 In the feature selection chapter, we describe several search procedures ("wrappers") that can be used to optimize the number of predictors. Some techniques were described in more detail than others. Although we do describe genetic algorithms and how they can be used for reducing the dimensions of the data, this is the first of series of blog posts that look at them in practice using simulated data [described in a previous post](../benchmarking-machine-learning-models-using-simulation/). 
 

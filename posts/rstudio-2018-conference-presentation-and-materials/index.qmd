@@ -11,7 +11,9 @@ categories:
   - tidyposterior
   - RStudio
 draft: false
----
+--- 
+
+<hr>
 
 ![](bayes-1.png){fig-align="center"}
 

@@ -10,7 +10,9 @@ draft: false
 resources:
   - "pso.Rmd"
   - "binary_pso.R"
----
+--- 
+
+<hr>
 
 "Bees don't swarm in a mango grove for nothing. Where can you see a wisp of smoke without a fire?" - Hla Stavhana
 

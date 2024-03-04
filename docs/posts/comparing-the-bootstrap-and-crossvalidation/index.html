@@ -173,6 +173,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<hr>
 <p>This is the second of two posts about the performance characteristics of resampling methods. The <a href="../comparing-different-species-of-crossvalidation/">first post</a> focused on the cross-validation techniques and this post mostly concerns the bootstrap.</p>
 <p>Recall from the last post: we have some simulations to evaluate the precision and bias of these methods. I simulated some regression data (so that I know the real answers and compute the <em>true</em> estimate of RMSE). The model that I used was random forest with 1000 trees in the forest and the default value of the tuning parameter. I simulated 100 different data sets with 500 training set instances. For each data set, I also used each of the resampling methods listed above 25 times using different random number seeds. In the end, we can compute the precision and average bias of each of these resampling methods.</p>
 <section id="question-3-how-do-the-variance-and-bias-change-in-the-bootstrap" class="level3">

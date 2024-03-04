@@ -9,7 +9,17 @@ categories:
   - MIC
   - RRelief
 draft: false
----
+--- 
+
+<hr>
+
+```{r}
+#| eval: false
+#| echo: false
+
+# No longer on CRAN
+pak::pak(c("cran/matie"), ask = FALSE)
+```
 
 In Chapter 18, we discuss a relatively new method for measuring predictor importance called the maximal information coefficient (MIC). The original paper is by [Reshef at al (2011)](http://scholar.google.com/scholar?q=%22DETECTING+NOVEL+ASSOCIATIONS+IN+LARGE+DATA+SETS%22). 
 
@@ -36,6 +46,7 @@ First, I'll measure association using the _A_ measure discussed in Murrell<sup>3
 
 ```{r}
 #| warning: false
+#| cache: true
 library(matie)
 ## Compute the associations across all columns of the predictors
 Avalues <- apply(bbbDescr, 2, function(x, y) ma(cbind(x, y))$A, y = logBBB)
@@ -48,6 +59,7 @@ So the best predictor only explains 43.9% of the variation in the outcome. Most 
 What does MIC tell us?
 
 ```{r}
+#| cache: true
 library(minerva)
 ## There are three predictors whose scales have very low variances. We
 ## need to reset the threshold that checks for this
@@ -63,6 +75,7 @@ There are some differences but the top predictor from _A_ is still at the top. T
 I also have a measure of importance that is based on scatterplot smoothers. A loess smoother is fit between the outcome and the predictor and the R<sup>2</sup> statistic is calculated for this model against the intercept only null model. I don't claim that there is any justification (which is why I've never published it) for this but it has worked for me in the past. This is similar to my statements about MIC and PLS. I still use them because they tend to work, but I've no theoretical leg to stand on. 
 
 ```{r}
+#| cache: true
 ## A measure based on regression smoothers
 gamImp <- filterVarImp(bbbDescr, logBBB, nonpara = TRUE)
 gamImp <- gamImp[order(gamImp$Overall, decreasing = TRUE), , drop = FALSE]
@@ -72,6 +85,7 @@ head(gamImp)
 Finally, I'll compute the RRelief scores. We discuss this in the book and the a good reference is [here](http://lkm.fri.uni-lj.si/xaigor/slo/clanki/MLJ2003-FinalPaper.pdf). It uses a nearest-neighbor approach and measures the importance of each predictors simultaneously (all of the other methods show here measure each association in isolation).  
 
 ```{r}
+#| cache: true
 library(CORElearn)
 
 ## The function only uses the formula interface

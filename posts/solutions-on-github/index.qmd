@@ -6,7 +6,9 @@ categories:
   - exercises
   - R
 draft: false
----
+--- 
+
+<hr>
 
 See [this](https://github.com/topepo/APM_Exercises) page. We're not done with them all but chapter 3 and 4 are there and the regression chapters are not too far behind.
 

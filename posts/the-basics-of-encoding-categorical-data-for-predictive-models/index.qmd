@@ -9,7 +9,9 @@ categories:
   - naive Bayes
   - feature engineering
 draft: false
----
+--- 
+
+<hr>
 
 Thomas Yokota asked a very straight-forward question about encodings for categorical predictors: "Is it bad to feed it non-numerical data such as factors?" As usual, I will try to make my answer as complex as possible.
 

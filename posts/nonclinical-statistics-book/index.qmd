@@ -7,7 +7,9 @@ categories:
   - nonclinical statistics
   - drug discovery
 draft: false
----
+--- 
+
+<hr>
 
 ![](cover.jpeg){fig-align="center"}
 

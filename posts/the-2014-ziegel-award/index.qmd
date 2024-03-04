@@ -3,7 +3,9 @@ title: "The 2014 Ziegel Award"
 author: "Max Kuhn"
 date: "2015-08-12"
 draft: false
----
+--- 
+
+<hr>
 
 ![](technometrics.jpeg){fig-align="center"}
 

@@ -5,7 +5,9 @@ date: "2017-02-02"
 categories:
   - caret
 draft: false
----
+--- 
+
+<hr>
 
 A few people have asked if anything is going to happen to [`caret`](http://topepo.github.io/caret/) now that I'm working at RStudio. 
 

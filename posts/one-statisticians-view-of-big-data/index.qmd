@@ -9,7 +9,9 @@ categories:
   - presentations
 draft: false
 resources: "KuhnYale.pdf"
----
+--- 
+
+<hr>
 
 Recently I've had several questions about using machine learning models with large data sets. [Here is a talk](KuhnYale.pdf) I gave at [Yale's Big Data Symposium](http://www.cs.yale.edu/calendars/schultz_symposium.html) on the subject.
 

@@ -199,6 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<hr>
 <p>“Feature engineering” is a fancy term for making sure that your predictors are encoded in the model in a manner that makes it as easy as possible for the model to achieve good performance. For example, if your have a date field as a predictor and there are larger differences in response for the weekends versus the weekdays, then encoding the date in this way makes it easier to achieve good results.</p>
 <p>However, this depends on a lot of things.</p>
 <p>First, it is model-dependent. For example, trees might have trouble with a classification data set if the class boundary is a diagonal line since their class boundaries are made using orthogonal slices of the data (oblique trees excepted).</p>

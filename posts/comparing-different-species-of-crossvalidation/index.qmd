@@ -11,7 +11,9 @@ draft: false
 resources:
   - "sim099_100.R"
   - "cv1.Rmd"
----
+--- 
+
+<hr>
 
 This is the first of two posts about the performance characteristics of resampling methods. I just had major shoulder surgery, but I've pre-seeded a few blog posts. More will come as I get better at one-handed typing.
 

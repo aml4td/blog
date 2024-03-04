@@ -7,7 +7,9 @@ categories:
   - Cubist
   - extrapolation
 draft: false
----
+--- 
+
+<hr>
 
 
 A few colleagues have just published a paper on measuring the confidence in prediction in regression models ("I[nterpretable, Probability-Based Confidence Metric for Continuous Quantitative Structure-Activity Relationship Models](http://pubs.acs.org/doi/abs/10.1021/ci300554t)"). The idea is related to applicability domains: the region of the predictor space were the model can create reliable predictions. 

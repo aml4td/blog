@@ -9,7 +9,9 @@ categories:
   - iMacPro
   - xgboost
 draft: false
----
+--- 
+
+<hr>
 
 `caret` has been able to [utilize parallel processing](https://topepo.github.io/caret/parallel-processing.html) for some time (before it was on CRAN in October 2007) using slightly different versions of the package. Around September of 2011, `caret` started using the [`foreach`](https://cran.r-project.org/package=foreach) package was used to "harmonize" the parallel processing technologies thanks to a super smart guy named Steve Weston. 
 

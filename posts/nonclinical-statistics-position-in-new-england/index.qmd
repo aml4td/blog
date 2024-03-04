@@ -3,7 +3,9 @@ title: "Nonclinical Statistics Position in New England"
 author: "Max Kuhn"
 date: "2017-07-27"
 draft: false
----
+--- 
+
+<hr>
 
 I try to limit postings about jobs here, there is an interesting position in pharma for a statistician in New England. 
 

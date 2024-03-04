@@ -10,7 +10,9 @@ categories:
   - Bayesian models
 draft: false
 resources: "Comparing_Models_Using_Resampling_and_Bayesian_Methods.pdf"
----
+--- 
+
+<hr>
 
 ![](repeats.gif){fig-align="center"}
 

@@ -9,7 +9,9 @@ categories:
   - feature extraction
   - high content screening
 draft: false
----
+--- 
+
+<hr>
 
 "Feature engineering" is a fancy term for making sure that your predictors are encoded in the model in a manner that makes it as easy as possible for the model to achieve good performance. For example, if your have a date field as a predictor and there are larger differences in response for the weekends versus the weekdays, then encoding the date in this way makes it easier to achieve good results. 
 

@@ -10,7 +10,9 @@ categories:
 draft: false
 resources:
   - "KuhnENAR.pdf"
----
+--- 
+
+<hr>
 
 
 I gave a talk at the Spring ENAR meetings this morning on some of the technical aspects of creating the book. The session was on reproducible research and the slides are [here](KuhnENAR.pdf).

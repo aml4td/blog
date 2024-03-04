@@ -7,7 +7,9 @@ categories:
   - caret
   - R user group
 draft: false
----
+--- 
+
+<hr>
 
 I"ll be doing a webinar with the Orange County R User Group on the [caret package](http://caret.r-forge.r-project.org/) on Tue, Feb 25, 2014 1:00 PM - 2:00 PM EST.
 

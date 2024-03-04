@@ -9,7 +9,9 @@ categories:
   - resampling
   - out-of-bag estimate
 draft: false
----
+--- 
+
+<hr>
 
 This is the second of two posts about the performance characteristics of resampling methods. The [first post](../comparing-different-species-of-crossvalidation/) focused on the cross-validation techniques and this post mostly concerns the bootstrap. 
 

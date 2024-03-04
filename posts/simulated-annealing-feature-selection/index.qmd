@@ -11,7 +11,9 @@ categories:
   - recursive feature elimination
 draft: false
 resources: "ga_sa.Rhtml"
----
+--- 
+
+<hr>
 
 As [previously mentioned](../new-version-of-caret-on-cran/), caret has two new feature selection routines based on genetic algorithms (GA) and simulated annealing (SA). The [help](http://topepo.github.io/caret/GA.html) [pages](http://topepo.github.io/caret/SA.html) for the two new functions give a detailed account of the options, syntax etc.
 

@@ -10,7 +10,9 @@ categories:
   - Cubist
   - Bayesian models
 draft: false
----
+--- 
+
+<hr>
 
 ![](recipes_rsample.png){fig-align="center"}
 

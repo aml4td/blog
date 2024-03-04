@@ -199,6 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<hr>
 <p>A while back, I saw <a href="https://stats.stackexchange.com/questions/77281/c5-0-boosting-and-mislabeled-data">this post</a> on StackExchange/Crossvalidated: “Does anyone know how well C5.0 boosting performs in the presence of mislabeled data?” I did some simulations in order to make a comparison with gradient boosting machines (GBM).</p>
 <p>Some publications simulate mislabelling by sampling from distinct multivariate distirbutions for each class. I simulated two class data based on <a href="../benchmarking-machine-learning-models-using-simulation/">this post</a>. Each simulated sample has an associated probability of being in class #1. A random uniform number is generated to assign each sample and observed class label. To mislabel X% of the data, a random set of samples are selected and the probability of being in class #1 is reversed.</p>
 <p>Simulated data sets were simulated with training set sizes between 100 and 1000. The amount of mislabeled data also varied (at 5%, 10%, 15% and 20%). For each mislabeled data set, there is a matched training set (form the same random number seed) with no intentional mislabeling. For each of these configurations, 500 simulations were conducted.</p>

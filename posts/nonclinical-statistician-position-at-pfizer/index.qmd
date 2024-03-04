@@ -8,7 +8,9 @@ categories:
   - Pfizer
   - nonclinical statistics
 draft: false
----
+--- 
+
+<hr>
 
 ![](groton.png){fig-align="center"}
 

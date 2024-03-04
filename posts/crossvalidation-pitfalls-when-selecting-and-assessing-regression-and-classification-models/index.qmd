@@ -7,7 +7,9 @@ categories:
   - cross-validation
   - articles
 draft: false
----
+--- 
+
+<hr>
 
 Damjan Krstajic and friends have a [great paper](http://www.jcheminf.com/content/6/1/10/abstract) on pitfalls of cross-validation.  Although the paper uses chemistry data, the meat of the article is broadly applicable. It does a great job of illustrating different resampling approaches and I learned more about double and nested cross-validation. 
 

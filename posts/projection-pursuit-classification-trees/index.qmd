@@ -8,7 +8,9 @@ categories:
   - oblique trees
   - rants
 draft: false
----
+--- 
+
+<hr>
 
 
 I've been looking at [this article](http://projecteuclid.org/euclid.ejs/1368193535) for a new tree-based method. It uses other classification methods (e.g. LDA) to find a single variable use in the split and builds a tree in that manner. The subtleties of the model are:

@@ -7,7 +7,9 @@ categories:
   - generalized additive models
   - ensembles
 draft: false
----
+--- 
+
+<hr>
 
 There were a few topics that just couldn't be added to the book due to time and, especially, space. For a project like this, the old saying is "you're never done, you just stop working on it". 
 

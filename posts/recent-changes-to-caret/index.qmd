@@ -6,7 +6,9 @@ categories:
   - R
   - caret
 draft: false
----
+--- 
+
+<hr>
 
 Here is a summary of some recent changes to [caret](http://caret.r-forge.r-project.org/). 
 

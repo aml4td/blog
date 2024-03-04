@@ -200,6 +200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<hr>
 <p>As <a href="../new-version-of-caret-on-cran/">previously mentioned</a>, caret has two new feature selection routines based on genetic algorithms (GA) and simulated annealing (SA). The <a href="http://topepo.github.io/caret/GA.html">help</a> <a href="http://topepo.github.io/caret/SA.html">pages</a> for the two new functions give a detailed account of the options, syntax etc.</p>
 <p>The package already has functions to conduct feature selection using simple filters as well as recursive feature elimination (RFE). RFE can be very effective. It initially ranks the features, then removes them in sequence, starting with the least importance variables. It is a greedy method since it never backtracks to reevaluate a subset. Basically, it points itself in a single direction and proceeds. The main question is how far to go in that direction.</p>
 <p>These two new functions, <code>gafs</code> and <code>safs</code>, conduct a global search over the feature set. This means that the direction of the search is constantly changing and may re-evaluate solutions that are similar to (or the same as) previously evaluated feature sets. This is good and bad. If a feature set is not easily “rankable” then it should do better than RFE. However, it will require a larger number of model fits and has a greater chance of overfitting the features to the training set.</p>

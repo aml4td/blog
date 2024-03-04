@@ -6,7 +6,9 @@ categories:
   - R
   - RStudio
 draft: false
----
+--- 
+
+<hr>
 
 ![](RStudio-Ball.png){fig-align="center"}
 

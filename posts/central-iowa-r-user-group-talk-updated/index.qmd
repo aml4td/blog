@@ -10,7 +10,9 @@ draft: false
 resources:
   - "CIRUG.R"
   - "CIRUG.pdf"
----
+--- 
+
+<hr>
 
 ![](bounds.png){fig-align="center"}
 

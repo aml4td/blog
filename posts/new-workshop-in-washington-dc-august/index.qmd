@@ -8,7 +8,9 @@ categories:
   - caret
   - tidyverse
 draft: false
----
+--- 
+
+<hr>
 
 ![](Ames_lat.jpeg){fig-align="center"}
 
