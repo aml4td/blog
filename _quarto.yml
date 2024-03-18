@@ -10,6 +10,11 @@ project:
 website:
   title: "Applied Predictive Modeling Blog"
   site-url: "https://blog.aml4td.org"
+  comments: 
+    utterances:
+      repo: aml4td/blog
+      label: utterances
+      theme: body-light  
   navbar:
     right:
       - text: "Home"
