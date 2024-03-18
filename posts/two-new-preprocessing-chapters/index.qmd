@@ -1,0 +1,27 @@
+---
+title: "Two New Preprocessing Chapters"
+author: "Max Kuhn"
+date: "2024-03-18"
+categories:
+  - transformations
+  - effect encodings
+  - indicator variables
+draft: false
+--- 
+
+<hr>
+
+
+![](encoded.svg){fig-align="center"}
+
+We just released two new chapters: “Transforming Numeric Predictors” and “Working with Categorical Predictors.”
+
+The first talks about simple transformations of scale and outlier mitigation. It also discusses the important topic of when and how preprocessors should be trained. 
+
+The second new chapter introduces basic indicator/dummy variables and more complex encoding methods using hashing and target encodings. 
+
+The [tidymodels code](https://tidymodels.aml4td.org/) for these chapters will be forthcoming in a few weeks; the tidymodels group has a series of CRAN releases underway, and there are some huge new features that we are documenting and writing technical materials for. 
+
+Also, we’ve moved some content out of our new chapter four and into an upcoming chapter on _embeddings_. That will discuss PCA, PLS, [multidimensional scaling](https://github.com/aml4td/website/pull/29), and other tools. 
+
+Finally, we are always interested in reviewers. If you are well-versed in a particular subject, let us know and we can add you as a reviewer for pull requests.
