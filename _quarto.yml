@@ -14,7 +14,7 @@ website:
     utterances:
       repo: aml4td/blog
       label: utterances
-      theme: body-light  
+      theme: github-light
   navbar:
     right:
       - text: "Home"
