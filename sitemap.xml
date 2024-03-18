@@ -1,44 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://blog.aml4td.org/posts/benchmarking-machine-learning-models-using-simulation/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.868Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/availability/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.867Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/a-tutorial-and-talk-at-user-2014-important-update/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.867Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/33-months-later/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.867Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/2016-uk-tour/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.864Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/index.html</loc>
-    <lastmod>2024-02-28T00:50:02.751Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/2022-tidymodels-user-survey/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.864Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/a-talk-and-course-in-nyc-next-week/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.867Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/asa-talk-in-new-york-this-thursday-1114/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.867Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/bay-area-rug-talk-on-317-updated/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.868Z</lastmod>
+    <loc>https://blog.aml4td.org/posts/wtf-article/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.883Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/while-you-wait-for-that-to-finish-can-i-interest-you-in-parallel-processing/index.html</loc>
@@ -81,12 +45,16 @@
     <lastmod>2024-03-04T15:35:49.879Z</lastmod>
   </url>
   <url>
-    <loc>https://blog.aml4td.org/posts/regression-solutions-available/index.html</loc>
+    <loc>https://blog.aml4td.org/posts/reproducible-research-at-enar/index.html</loc>
     <lastmod>2024-03-04T15:35:49.879Z</lastmod>
   </url>
   <url>
-    <loc>https://blog.aml4td.org/posts/projection-pursuit-classification-trees/index.html</loc>
+    <loc>https://blog.aml4td.org/posts/recent-changes-to-caret/index.html</loc>
     <lastmod>2024-03-04T15:35:49.879Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/podcast-on-nonclinical-statistics/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.878Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/one-statisticians-view-of-big-data/index.html</loc>
@@ -113,79 +81,23 @@
     <lastmod>2024-03-04T15:35:49.876Z</lastmod>
   </url>
   <url>
-    <loc>https://blog.aml4td.org/posts/in-search-of/index.html</loc>
+    <loc>https://blog.aml4td.org/posts/lots-of-package-news/index.html</loc>
     <lastmod>2024-03-04T15:35:49.875Z</lastmod>
   </url>
   <url>
-    <loc>https://blog.aml4td.org/posts/feature-selection-3--swarm-mentality/index.html</loc>
+    <loc>https://blog.aml4td.org/posts/feature-selection-strikes-back-part-1/index.html</loc>
     <lastmod>2024-03-04T15:35:49.874Z</lastmod>
   </url>
   <url>
-    <loc>https://blog.aml4td.org/posts/feature-engineering-versus-feature-extraction-game-on/index.html</loc>
+    <loc>https://blog.aml4td.org/posts/feature-selection-2--genetic-boogaloo/index.html</loc>
     <lastmod>2024-03-04T15:35:49.873Z</lastmod>
   </url>
   <url>
-    <loc>https://blog.aml4td.org/posts/exercise-solutions/index.html</loc>
+    <loc>https://blog.aml4td.org/posts/exercises-and-solutions/index.html</loc>
     <lastmod>2024-03-04T15:35:49.873Z</lastmod>
   </url>
   <url>
-    <loc>https://blog.aml4td.org/posts/early-draft-of-our-feature-engineering-and-selection-book/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.872Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/do-resampling-estimates-have-low-correlation-to-the-truth-the-answer-may-shock-you/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.872Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/crossvalidation-pitfalls-when-selecting-and-assessing-regression-and-classification-models/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.871Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/comparing-the-bootstrap-and-crossvalidation/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.871Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/central-iowa-r-user-group-talk-updated/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.870Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/caret-webinar-materials/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.870Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/caret-cheatsheet/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.869Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/c50-class-probability-shrinkage/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.869Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/boston-r-user-group-talk-update/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.869Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/calibration-affirmation/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.869Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/caret-package-plans/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.870Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/caret-webinar-on-feb-25/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.870Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/comparing-different-species-of-crossvalidation/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.870Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/confidence-in-prediction/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.871Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/datacamp-course-update/index.html</loc>
+    <loc>https://blog.aml4td.org/posts/equivocal-zones/index.html</loc>
     <lastmod>2024-03-04T15:35:49.872Z</lastmod>
   </url>
   <url>
@@ -193,23 +105,135 @@
     <lastmod>2024-03-04T15:35:49.872Z</lastmod>
   </url>
   <url>
-    <loc>https://blog.aml4td.org/posts/equivocal-zones/index.html</loc>
+    <loc>https://blog.aml4td.org/posts/datacamp-course-update/index.html</loc>
     <lastmod>2024-03-04T15:35:49.872Z</lastmod>
   </url>
   <url>
-    <loc>https://blog.aml4td.org/posts/exercises-and-solutions/index.html</loc>
+    <loc>https://blog.aml4td.org/posts/confidence-in-prediction/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.871Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/comparing-different-species-of-crossvalidation/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.870Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/caret-webinar-on-feb-25/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.870Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/caret-package-plans/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.870Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/calibration-affirmation/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.869Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/boston-r-user-group-talk-update/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.869Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/bay-area-rug-talk-on-317-updated/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.868Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/asa-talk-in-new-york-this-thursday-1114/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.867Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/a-talk-and-course-in-nyc-next-week/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.867Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/2024-tidymodels-user-survey/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.865Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/2022-tidymodels-user-survey/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.864Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/index.html</loc>
+    <lastmod>2024-02-28T00:50:02.751Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/about.html</loc>
+    <lastmod>2024-02-28T00:50:02.712Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/2016-uk-tour/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.864Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/2024-02-progress-update/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.864Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/33-months-later/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.867Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/a-tutorial-and-talk-at-user-2014-important-update/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.867Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/availability/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.867Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/benchmarking-machine-learning-models-using-simulation/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.868Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/c50-class-probability-shrinkage/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.869Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/caret-cheatsheet/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.869Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/caret-webinar-materials/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.870Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/central-iowa-r-user-group-talk-updated/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.870Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/comparing-the-bootstrap-and-crossvalidation/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.871Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/crossvalidation-pitfalls-when-selecting-and-assessing-regression-and-classification-models/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.871Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/do-resampling-estimates-have-low-correlation-to-the-truth-the-answer-may-shock-you/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.872Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/early-draft-of-our-feature-engineering-and-selection-book/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.872Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/exercise-solutions/index.html</loc>
     <lastmod>2024-03-04T15:35:49.873Z</lastmod>
   </url>
   <url>
-    <loc>https://blog.aml4td.org/posts/feature-selection-2--genetic-boogaloo/index.html</loc>
+    <loc>https://blog.aml4td.org/posts/feature-engineering-versus-feature-extraction-game-on/index.html</loc>
     <lastmod>2024-03-04T15:35:49.873Z</lastmod>
   </url>
   <url>
-    <loc>https://blog.aml4td.org/posts/feature-selection-strikes-back-part-1/index.html</loc>
+    <loc>https://blog.aml4td.org/posts/feature-selection-3--swarm-mentality/index.html</loc>
     <lastmod>2024-03-04T15:35:49.874Z</lastmod>
   </url>
   <url>
-    <loc>https://blog.aml4td.org/posts/lots-of-package-news/index.html</loc>
+    <loc>https://blog.aml4td.org/posts/in-search-of/index.html</loc>
+    <lastmod>2024-03-04T15:35:49.875Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/measuring-associations/index.html</loc>
     <lastmod>2024-03-04T15:35:49.875Z</lastmod>
   </url>
   <url>
@@ -233,16 +257,20 @@
     <lastmod>2024-03-04T15:35:49.878Z</lastmod>
   </url>
   <url>
-    <loc>https://blog.aml4td.org/posts/podcast-on-nonclinical-statistics/index.html</loc>
+    <loc>https://blog.aml4td.org/posts/optimizing-probability-thresholds-for-class-imbalances/index.html</loc>
     <lastmod>2024-03-04T15:35:49.878Z</lastmod>
   </url>
   <url>
-    <loc>https://blog.aml4td.org/posts/recent-changes-to-caret/index.html</loc>
+    <loc>https://blog.aml4td.org/posts/projection-pursuit-classification-trees/index.html</loc>
     <lastmod>2024-03-04T15:35:49.879Z</lastmod>
   </url>
   <url>
-    <loc>https://blog.aml4td.org/posts/reproducible-research-at-enar/index.html</loc>
+    <loc>https://blog.aml4td.org/posts/regression-solutions-available/index.html</loc>
     <lastmod>2024-03-04T15:35:49.879Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/rmedicine-conference/index.html</loc>
+    <lastmod>2024-02-27T00:39:41.406Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/sample-mislabeling-and-boosted-trees/index.html</loc>
@@ -282,34 +310,6 @@
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/working-at-rstudio/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.883Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/2024-02-progress-update/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.864Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/about.html</loc>
-    <lastmod>2024-02-27T01:43:45.006Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/measuring-associations/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.875Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/2024-tidymodels-user-survey/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.865Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/optimizing-probability-thresholds-for-class-imbalances/index.html</loc>
-    <lastmod>2024-03-04T15:35:49.878Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/rmedicine-conference/index.html</loc>
-    <lastmod>2022-11-06T23:38:36.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.aml4td.org/posts/wtf-article/index.html</loc>
     <lastmod>2024-03-04T15:35:49.883Z</lastmod>
   </url>
 </urlset>
