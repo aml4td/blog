@@ -10,7 +10,38 @@
 <atom:link href="https://blog.aml4td.org/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.4</generator>
-<lastBuildDate>Mon, 04 Mar 2024 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 18 Mar 2024 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Two New Preprocessing Chapters</title>
+  <dc:creator>Max Kuhn</dc:creator>
+  <link>https://blog.aml4td.org/posts/two-new-preprocessing-chapters/</link>
+  <description><![CDATA[ 
+
+
+
+
+<hr>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.aml4td.org/posts/two-new-preprocessing-chapters/encoded.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>We just released two new chapters: “Transforming Numeric Predictors” and “Working with Categorical Predictors.”</p>
+<p>The first talks about simple transformations of scale and outlier mitigation. It also discusses the important topic of when and how preprocessors should be trained.</p>
+<p>The second new chapter introduces basic indicator/dummy variables and more complex encoding methods using hashing and target encodings.</p>
+<p>The <a href="https://tidymodels.aml4td.org/">tidymodels code</a> for these chapters will be forthcoming in a few weeks; the tidymodels group has a series of CRAN releases underway, and there are some huge new features that we are documenting and writing technical materials for.</p>
+<p>Also, we’ve moved some content out of our new chapter four and into an upcoming chapter on <em>embeddings</em>. That will discuss PCA, PLS, <a href="https://github.com/aml4td/website/pull/29">multidimensional scaling</a>, and other tools.</p>
+<p>Finally, we are always interested in reviewers. If you are well-versed in a particular subject, let us know and we can add you as a reviewer for pull requests.</p>
+
+
+
+ ]]></description>
+  <category>transformations</category>
+  <category>effect encodings</category>
+  <category>indicator variables</category>
+  <guid>https://blog.aml4td.org/posts/two-new-preprocessing-chapters/</guid>
+  <pubDate>Mon, 18 Mar 2024 04:00:00 GMT</pubDate>
+</item>
 <item>
   <title>2024 Tidymodels User Survey</title>
   <dc:creator>Max Kuhn</dc:creator>
@@ -1985,92 +2016,6 @@ font-style: italic;">##  withr         2.0.0    2017-07-28 CRAN (R 3.3.2)</span>
  ]]></description>
   <guid>https://blog.aml4td.org/posts/nonclinical-statistics-position-in-new-england/</guid>
   <pubDate>Thu, 27 Jul 2017 04:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Do Resampling Estimates Have Low Correlation to the Truth? The Answer May Shock You.</title>
-  <dc:creator>Max Kuhn</dc:creator>
-  <link>https://blog.aml4td.org/posts/do-resampling-estimates-have-low-correlation-to-the-truth-the-answer-may-shock-you/</link>
-  <description><![CDATA[ 
-
-
-
-
-<hr>
-<p>One criticism that is often leveled against using resampling methods (such as cross-validation) to measure model performance is that there is no correlation between the CV results and the true error rate.</p>
-<p>Let’s look at this with some simulated data. While this assertion is often correct, there are a few reasons why you shouldn’t care.</p>
-<section id="the-setup" class="level3">
-<h3 class="anchored" data-anchor-id="the-setup">The Setup</h3>
-<p>First, I simulated some 2-class data using <a href="../benchmarking-machine-learning-models-using-simulation/">this simulation system</a>. There are 15 predictors in the data set. Many nonlinear classification models can achieve an area under the ROC curve in the low 0.90’s on these data. The training set contained 500 samples and a 125 sample test set was also simulated.</p>
-<p>I used a radial basis function support vector machine to model the data with a single estimate of the kernel parameter <code>sigma</code> and 10 values of the SVM cost parameter (on the log2 scale). The code for this set of simulations can be found <a href="TODO">here</a> so that you can reproduce the results.</p>
-<p>Models were fit for each of the 10 submodels and five repeats of 10-fold cross-validation were used to measure the areas under the ROC curve. The test set results were also calculated as well as a large sample test set that approximates the truth (and is labeled as such below). All the results were calculated for all of the 10 SVM submodels (over cost). This simulation was conducted 50 times. Here is one example of how the cost parameter relates to the area under the ROC curve:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://blog.aml4td.org/posts/do-resampling-estimates-have-low-correlation-to-the-truth-the-answer-may-shock-you/low_corr_example.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-</section>
-<section id="the-bad-news" class="level3">
-<h3 class="anchored" data-anchor-id="the-bad-news">The Bad News</h3>
-<p>When you look at the results, there is little to no correlation between the resampling ROC estimates and the true area under that curve:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://blog.aml4td.org/posts/do-resampling-estimates-have-low-correlation-to-the-truth-the-answer-may-shock-you/cv_est.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-<p>The correlations were highest (0.54) when the cost values were low (which is also where the model performed poorly). Under the best cost value, the correlation was even worse (0.01).</p>
-<p>However, note that the 125 sample test set estimates do not appear to have a high fidelity to the true values either:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://blog.aml4td.org/posts/do-resampling-estimates-have-low-correlation-to-the-truth-the-answer-may-shock-you/test_est.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-</section>
-<section id="the-good-news" class="level3">
-<h3 class="anchored" data-anchor-id="the-good-news">The Good News</h3>
-<p>We really shouldn’t care about this, or at least we are measuring the effectiveness in the wrong way. High correlation would be nice but could result in a strong relationship that does not reflect <em>accuracy</em> of the resampling procedure. This is basically the same argument that we make against using R<sup>2</sup>.</p>
-<p>Let’s look at the root mean squared error (RMSE) instead. The RMSE can be decomposed into two quantities:</p>
-<ul>
-<li>the <em>bias</em> reflects how far the resampling estimate is from the true value (which we can measure in our simulations).</li>
-<li>the <em>variance</em> of the resampling estimate</li>
-</ul>
-<p>RMSE is mostly the squared bias plus the variance.</p>
-<p>Two things can be seem in the bias graph below. First, the bias is getting better as cost increases. This shouldn’t be a surprise since increasing the cost value coerces the SVM model to be more adaptive to the (training) data. Second, the bias scale is <strong>exceedingly small</strong> (since the area under the ROC curve is typically between 0.50 and 1.00). This is true even at its worst.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://blog.aml4td.org/posts/do-resampling-estimates-have-low-correlation-to-the-truth-the-answer-may-shock-you/model_bias.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-<p>The standard deviation curve below shows that the <em>model noise</em> is minimized when performance is best and resembles an inverted version of the curve shown in the Bad News section. This is because the SVM model is pushing against the best performance. As Tolstoy said, “all good models resemble one another, each crappy model is crappy in its own way.” (actually, <strong><em>he did not say this</em></strong>). However, note the scale again. These are not large numbers.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://blog.aml4td.org/posts/do-resampling-estimates-have-low-correlation-to-the-truth-the-answer-may-shock-you/model_stdev.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-<p>Looking at the RMSE of the model, which is the in the same units as the AUC values, the curve movies around a lot but the magnitude of the values are very low. This can obviously be affected by the size of the training set, but 500 samples is not massive for this particular simulation system.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://blog.aml4td.org/posts/do-resampling-estimates-have-low-correlation-to-the-truth-the-answer-may-shock-you/low_corr_rmse.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-<p>So the results here indicate that:</p>
-<ol type="1">
-<li>yes the correlation is low but</li>
-<li>the overall RMSE is very good.</li>
-</ol>
-<p>Accuracy is arguably a much better quality to have relative to correlation.</p>
-<p>(This article was originally posted at <a href="https://appliedpredictivemodeling.com/blog/2017/4/24/do-resampling-estimates-have-low-correlation-to-the-truth-the-answer-may-shock-you"><code>http://appliedpredictivemodeling.com</code></a>)</p>
-
-
-</section>
-
- ]]></description>
-  <category>R</category>
-  <category>resampling</category>
-  <category>simulation</category>
-  <category>support vector machines</category>
-  <category>cross-validation</category>
-  <guid>https://blog.aml4td.org/posts/do-resampling-estimates-have-low-correlation-to-the-truth-the-answer-may-shock-you/</guid>
-  <pubDate>Mon, 24 Apr 2017 04:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
