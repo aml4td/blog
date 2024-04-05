@@ -1,0 +1,38 @@
+---
+title: "Predictive survival analysis"
+description: "Predictive survival models come to tidymodels."
+author: "Max Kuhn"
+date: "2024-04-06"
+categories:
+  - tidymodels
+  - survival analysis
+  - censoring
+  - R
+draft: false
+image: "brier-scores-1.svg"
+--- 
+
+The tidymodels group just released new versions of the core packages that enable (among other things) models for outcomes with censoring. 
+
+[Censoring](https://en.wikipedia.org/wiki/Censoring_(statistics)) is a situation, usually seen in time-to-event data, where we have _partial information_. For example, suppose we order something online that is expected to be delivered in 2 days. After a day, we don’t know the actual delivery time, but we know that the value is at least a day. This data point is *right censored* at a value of 1 day. 
+
+[tidymodels.org](https://www.tidymodels.org/learn/#category=survival%20analysis) has a few articles on modeling these data with the new functionality. 
+
+The main distinction for these models is how you quantify model performance. Most modern survival models don't focus on the predicted event time but emphasize predicting the probability of the event not occurring (e.g., surviving) up to time point $t_0$. Because of this, we need to use dynamic performance metrics: these are metrics that judge performance at different points in time. Here's a plot from an analysis where the Brier statistic is computed over a relevant time range: 
+
+```{r}
+#| label: brier
+#| fig.align: "center"
+#| out-width: "70%"
+#| echo: false
+knitr::include_graphics("brier-scores-1.svg")
+```
+
+There weren't many syntax changes: 
+
+ - Many functions now have an `eval_time` argument to take a vector of time points to evaluate performance measures. 
+ - There are some new [performance statistics](https://yardstick.tidymodels.org/reference/index.html#dynamic-survival-metrics).
+ - Before modeling, you should probably create a [`Surv`](https://rdrr.io/cran/survival/man/Surv.html) object. 
+
+Hopefully, we will soon be doing specific tidymodels tutorials on this subject. We also have two talks accepted at [Posit Conf](https://posit.co/conference/) later this year. 
+
