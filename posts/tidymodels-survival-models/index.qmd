@@ -1,8 +1,8 @@
 ---
-title: "Predictive survival analysis"
+title: "Predictive Survival Analysis"
 description: "Predictive survival models come to tidymodels."
 author: "Max Kuhn"
-date: "2024-04-06"
+date: "2024-04-07"
 categories:
   - tidymodels
   - survival analysis
@@ -28,11 +28,13 @@ The main distinction for these models is how you quantify model performance. Mos
 knitr::include_graphics("brier-scores-1.svg")
 ```
 
-There weren't many syntax changes: 
+In this case, the large Brier score values at the first time point indicates mediocre performance. As the _evaluation time_ progresses, the score becomes smaller (which is good) and the model does very well. 
+
+To include this type of model, there weren't many syntax changes: 
 
  - Many functions now have an `eval_time` argument to take a vector of time points to evaluate performance measures. 
  - There are some new [performance statistics](https://yardstick.tidymodels.org/reference/index.html#dynamic-survival-metrics).
  - Before modeling, you should probably create a [`Surv`](https://rdrr.io/cran/survival/man/Surv.html) object. 
 
-Hopefully, we will soon be doing specific tidymodels tutorials on this subject. We also have two talks accepted at [Posit Conf](https://posit.co/conference/) later this year. 
+Hopefully, we will soon be doing specific tidymodels tutorials on this subject (perhaps at useR). We also have two talks accepted at [Posit Conf](https://posit.co/conference/) later this year. 
 
