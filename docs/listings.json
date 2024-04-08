@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/tidymodels-survival-models/index.html",
       "/posts/two-new-preprocessing-chapters/index.html",
       "/posts/2024-tidymodels-user-survey/index.html",
       "/posts/wtf-article/index.html",

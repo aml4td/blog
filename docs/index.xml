@@ -9,8 +9,44 @@
 <link>https://blog.aml4td.org/</link>
 <atom:link href="https://blog.aml4td.org/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.5.4</generator>
-<lastBuildDate>Mon, 18 Mar 2024 04:00:00 GMT</lastBuildDate>
+<generator>quarto-1.5.28</generator>
+<lastBuildDate>Sun, 07 Apr 2024 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Predictive Survival Analysis</title>
+  <dc:creator>Max Kuhn</dc:creator>
+  <link>https://blog.aml4td.org/posts/tidymodels-survival-models/</link>
+  <description><![CDATA[ <p>The tidymodels group just released new versions of the core packages that enable (among other things) models for outcomes with censoring.</p>
+<p><a href="https://en.wikipedia.org/wiki/Censoring_(statistics)">Censoring</a> is a situation, usually seen in time-to-event data, where we have <em>partial information</em>. For example, suppose we order something online that is expected to be delivered in 2 days. After a day, we don’t know the actual delivery time, but we know that the value is at least a day. This data point is <em>right censored</em> at a value of 1 day.</p>
+<p><a href="https://www.tidymodels.org/learn/#category=survival%20analysis">tidymodels.org</a> has a few articles on modeling these data with the new functionality.</p>
+<p>The main distinction for these models is how you quantify model performance. Most modern survival models don’t focus on the predicted event time but emphasize predicting the probability of the event not occurring (e.g., surviving) up to time point <img src="https://latex.codecogs.com/png.latex?t_0">. Because of this, we need to use dynamic performance metrics: these are metrics that judge performance at different points in time. Here’s a plot from an analysis where the Brier statistic is computed over a relevant time range:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://blog.aml4td.org/posts/tidymodels-survival-models/brier-scores-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this case, the large Brier score values at the first time point indicates mediocre performance. As the <em>evaluation time</em> progresses, the score becomes smaller (which is good) and the model does very well.</p>
+<p>To include this type of model, there weren’t many syntax changes:</p>
+<ul>
+<li>Many functions now have an <code>eval_time</code> argument to take a vector of time points to evaluate performance measures.</li>
+<li>There are some new <a href="https://yardstick.tidymodels.org/reference/index.html#dynamic-survival-metrics">performance statistics</a>.</li>
+<li>Before modeling, you should probably create a <a href="https://rdrr.io/cran/survival/man/Surv.html"><code>Surv</code></a> object.</li>
+</ul>
+<p>Hopefully, we will soon be doing specific tidymodels tutorials on this subject (perhaps at useR). We also have two talks accepted at <a href="https://posit.co/conference/">Posit Conf</a> later this year.</p>
+
+
+
+ ]]></description>
+  <category>tidymodels</category>
+  <category>survival analysis</category>
+  <category>censoring</category>
+  <category>R</category>
+  <guid>https://blog.aml4td.org/posts/tidymodels-survival-models/</guid>
+  <pubDate>Sun, 07 Apr 2024 04:00:00 GMT</pubDate>
+  <media:content url="https://blog.aml4td.org/posts/tidymodels-survival-models/brier-scores-1.svg" medium="image" type="image/svg+xml"/>
+</item>
 <item>
   <title>Two New Preprocessing Chapters</title>
   <dc:creator>Max Kuhn</dc:creator>
@@ -570,6 +606,7 @@ font-style: inherit;">1</span>]])</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(split, ...) {</span>
 <span id="cb10-2">  <span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -722,6 +759,7 @@ font-style: inherit;"># MSE = 2.675 in the blog post</span></span></code></pre><
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(..., <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">degree =</span> <span class="dv" style="color: #AD0000;
@@ -764,6 +802,7 @@ font-style: inherit;"># predictor expressions</span></span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(arg, call, ...)</span>
 <span id="cb18-12">    <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1085,6 +1124,7 @@ font-style: inherit;">theme_bw</span>())</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(n) {</span>
 <span id="cb2-2">  tmp <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -1303,6 +1343,7 @@ font-style: inherit;"># `cost` is the tuning parameter</span></span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(object, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">cost =</span> <span class="dv" style="color: #AD0000;
@@ -1368,6 +1409,7 @@ font-style: inherit;"># In some case, we want to parameterize the function over 
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(cost, object) <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">svm_rmse</span>(object, cost)</span></code></pre></div>
@@ -1379,6 +1421,7 @@ font-style: inherit;"># `object` will be an `rsplit` object for the bootstrap sa
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(object) {</span>
 <span id="cb8-3">  results <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -1426,6 +1469,7 @@ font-style: inherit;"># `object` is an `rsplit` object in `results$inner_resampl
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(object) {</span>
 <span id="cb9-3">  <span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -1485,6 +1529,7 @@ font-style: inherit;">%&gt;%</span> bind_rows</span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(dat) dat[<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">which.min</span>(dat<span class="sc" style="color: #5E5E5E;
@@ -1527,8 +1572,10 @@ font-style: inherit;">"Inner RMSE"</span>)</span>
 <span id="cb11-8"></span>
 <span id="cb11-9"><span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">for</span>(i <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
@@ -1995,27 +2042,6 @@ font-style: italic;">##  withr         2.0.0    2017-07-28 CRAN (R 3.3.2)</span>
   <category>R</category>
   <guid>https://blog.aml4td.org/posts/nested-resampling-with-rsample/</guid>
   <pubDate>Mon, 04 Sep 2017 04:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Nonclinical Statistics Position in New England</title>
-  <dc:creator>Max Kuhn</dc:creator>
-  <link>https://blog.aml4td.org/posts/nonclinical-statistics-position-in-new-england/</link>
-  <description><![CDATA[ 
-
-
-
-
-<hr>
-<p>I try to limit postings about jobs here, there is an interesting position in pharma for a statistician in New England.</p>
-<p>I’ve had this particular position before as a nonclinical statistician and really loved the work and the scientific collaborations. It is the kind of position that lets you use a wide set of skills; there is very little rote data analysis.</p>
-<p>Link: <a href="https://pfizer.wd1.myworkdayjobs.com/PfizerCareers/job/USA---MA---Cambridge-Kendall-Sq-700-Main/Associate-Director--Statistics_1603363">Nonclinical Statistician</a></p>
-<p>(This article was originally posted at <a href="https://appliedpredictivemodeling.com/blog/2017/7/27/nonclinical-statistics-position-in-new-england"><code>http://appliedpredictivemodeling.com</code></a>)</p>
-
-
-
- ]]></description>
-  <guid>https://blog.aml4td.org/posts/nonclinical-statistics-position-in-new-england/</guid>
-  <pubDate>Thu, 27 Jul 2017 04:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
