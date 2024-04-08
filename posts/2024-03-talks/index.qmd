@@ -1,0 +1,22 @@
+---
+title: "February 2024 Talks"
+author: "Max Kuhn"
+date: "2024-04-09"
+categories:
+  - R
+  - presentations
+draft: false
+--- 
+<hr>
+
+![](pdp-1.svg){fig-align="center"}
+
+One keynote and one tutorial last month (both new). 
+
+On March 19th, I gave the final keynote at the inaugural _Pharmaceutical Data Science Conference_ at the University of Connecticut. The talk was called "What Happens After the Model?”  
+
+> Machine learning models are everywhere now. We must spend more time on what happens before and after the model fit to build higher-quality algorithms. This talk will describe a set of post-model activities that can improve the fit and also ensure that, when deployed, it is used effectively.
+
+You can find the slides at [`topepo.github.io/2024_PharmaDS/`](https://topepo.github.io/2024_PharmaDS/)  and these contain a link to the sources. 
+
+Second was tutorial for the Statistical Society of Australia called “Introduction to Machine Learning with tidymodels”. The slides are at [`topepo.github.io/2024_SSA_SCV/`](https://topepo.github.io/2024_SSA_SCV/) and the sources are at [`github.com/topepo/2024_SSA_SCV`](https://github.com/topepo/2024_SSA_SCV). A huge thanks go to [Simon Couch](https://www.simonpcouch.com/) who write the first (very slick) section of the slides. 
