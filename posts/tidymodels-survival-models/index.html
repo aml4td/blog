@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.28">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Max Kuhn">
-<meta name="dcterms.date" content="2024-03-18">
-
-<title>Applied Predictive Modeling Blog – Two New Preprocessing Chapters</title>
+<meta name="dcterms.date" content="2024-04-07">
+<meta name="description" content="Predictive survival models come to tidymodels.">
+<title>Applied Predictive Modeling Blog – Predictive Survival Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,7 +21,6 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 </style>
-
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
@@ -40,8 +37,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -67,17 +63,37 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-
-
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 </head>
-
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Applied Predictive Modeling Blog</span>
@@ -89,7 +105,7 @@ ul.task-list li input[type="checkbox"] {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
@@ -111,32 +127,32 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text"></span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
+</div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Two New Preprocessing Chapters</h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">Predictive Survival Analysis</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">transformations</div>
-    <div class="quarto-category">effect encodings</div>
-    <div class="quarto-category">indicator variables</div>
+    <div class="quarto-category">tidymodels</div>
+    <div class="quarto-category">survival analysis</div>
+    <div class="quarto-category">censoring</div>
+    <div class="quarto-category">R</div>
   </div>
   </div>
 
+<div>
+  <div class="description">
+    Predictive survival models come to tidymodels.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -151,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 18, 2024</p>
+      <p class="date">April 7, 2024</p>
     </div>
   </div>
   
@@ -160,26 +176,30 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
-
-
-<hr>
+</header><p>The tidymodels group just released new versions of the core packages that enable (among other things) models for outcomes with censoring.</p>
+<p><a href="https://en.wikipedia.org/wiki/Censoring_(statistics)">Censoring</a> is a situation, usually seen in time-to-event data, where we have <em>partial information</em>. For example, suppose we order something online that is expected to be delivered in 2 days. After a day, we don’t know the actual delivery time, but we know that the value is at least a day. This data point is <em>right censored</em> at a value of 1 day.</p>
+<p><a href="https://www.tidymodels.org/learn/#category=survival%20analysis">tidymodels.org</a> has a few articles on modeling these data with the new functionality.</p>
+<p>The main distinction for these models is how you quantify model performance. Most modern survival models don’t focus on the predicted event time but emphasize predicting the probability of the event not occurring (e.g., surviving) up to time point <span class="math inline">\(t_0\)</span>. Because of this, we need to use dynamic performance metrics: these are metrics that judge performance at different points in time. Here’s a plot from an analysis where the Brier statistic is computed over a relevant time range:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="encoded.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<figure class="figure"><p><img src="brier-scores-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
 </figure>
 </div>
-<p>We just released two new chapters: “Transforming Numeric Predictors” and “Working with Categorical Predictors.”</p>
-<p>The first talks about simple transformations of scale and outlier mitigation. It also discusses the important topic of when and how preprocessors should be trained.</p>
-<p>The second new chapter introduces basic indicator/dummy variables and more complex encoding methods using hashing and target encodings.</p>
-<p>The <a href="https://tidymodels.aml4td.org/">tidymodels code</a> for these chapters will be forthcoming in a few weeks; the tidymodels group has a series of CRAN releases underway, and there are some huge new features that we are documenting and writing technical materials for.</p>
-<p>Also, we’ve moved some content out of our new chapter four and into an upcoming chapter on <em>embeddings</em>. That will discuss PCA, PLS, <a href="https://github.com/aml4td/website/pull/29">multidimensional scaling</a>, and other tools.</p>
-<p>Finally, we are always interested in reviewers. If you are well-versed in a particular subject, let us know and we can add you as a reviewer for pull requests.</p>
+</div>
+</div>
+<p>In this case, the large Brier score values at the first time point indicates mediocre performance. As the <em>evaluation time</em> progresses, the score becomes smaller (which is good) and the model does very well.</p>
+<p>To include this type of model, there weren’t many syntax changes:</p>
+<ul>
+<li>Many functions now have an <code>eval_time</code> argument to take a vector of time points to evaluate performance measures.</li>
+<li>There are some new <a href="https://yardstick.tidymodels.org/reference/index.html#dynamic-survival-metrics">performance statistics</a>.</li>
+<li>Before modeling, you should probably create a <a href="https://rdrr.io/cran/survival/man/Surv.html"><code>Surv</code></a> object.</li>
+</ul>
+<p>Hopefully, we will soon be doing specific tidymodels tutorials on this subject (perhaps at useR). We also have two talks accepted at <a href="https://posit.co/conference/">Posit Conf</a> later this year.</p>
 
 
 
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -598,11 +618,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<script src="https://utteranc.es/client.js" repo="aml4td/blog" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script><script src="https://utteranc.es/client.js" repo="aml4td/blog" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
-
 
 
 
