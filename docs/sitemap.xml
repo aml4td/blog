@@ -154,7 +154,7 @@
   </url>
   <url>
     <loc>https://blog.aml4td.org/index.html</loc>
-    <lastmod>2024-02-28T00:50:02.751Z</lastmod>
+    <lastmod>2024-02-27T16:38:16.348Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/about.html</loc>
@@ -314,7 +314,19 @@
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/two-new-preprocessing-chapters/index.html</loc>
-    <lastmod>2024-03-18T20:44:10.880Z</lastmod>
+    <lastmod>2024-04-08T01:09:04.341Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/tidymodels-survival-models/index.html</loc>
+    <lastmod>2024-04-09T12:01:34.302Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/2024-03-talks/index.html</loc>
+    <lastmod>2024-04-08T01:35:07.804Z</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.aml4td.org/posts/2024-03-talks/index.html</loc>
+    <lastmod>2024-04-09T12:01:34.297Z</lastmod>
   </url>
   <url>
     <loc>https://blog.aml4td.org/posts/post-hoc-nearest-neighbors-prediction-adjustments/index.html</loc>

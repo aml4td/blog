@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Max Kuhn">
-<meta name="dcterms.date" content="2024-03-18">
+<meta name="dcterms.date" content="2024-04-09">
 
-<title>Applied Predictive Modeling Blog – Two New Preprocessing Chapters</title>
+<title>Applied Predictive Modeling Blog – February 2024 Talks</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -129,11 +129,10 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Two New Preprocessing Chapters</h1>
+<h1 class="title">February 2024 Talks</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">transformations</div>
-    <div class="quarto-category">effect encodings</div>
-    <div class="quarto-category">indicator variables</div>
+    <div class="quarto-category">R</div>
+    <div class="quarto-category">presentations</div>
   </div>
   </div>
 
@@ -151,7 +150,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 18, 2024</p>
+      <p class="date">April 9, 2024</p>
     </div>
   </div>
   
@@ -166,15 +165,16 @@ ul.task-list li input[type="checkbox"] {
 <hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="encoded.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="pdp-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
-<p>We just released two new chapters: “Transforming Numeric Predictors” and “Working with Categorical Predictors.”</p>
-<p>The first talks about simple transformations of scale and outlier mitigation. It also discusses the important topic of when and how preprocessors should be trained.</p>
-<p>The second new chapter introduces basic indicator/dummy variables and more complex encoding methods using hashing and target encodings.</p>
-<p>The <a href="https://tidymodels.aml4td.org/">tidymodels code</a> for these chapters will be forthcoming in a few weeks; the tidymodels group has a series of CRAN releases underway, and there are some huge new features that we are documenting and writing technical materials for.</p>
-<p>Also, we’ve moved some content out of our new chapter four and into an upcoming chapter on <em>embeddings</em>. That will discuss PCA, PLS, <a href="https://github.com/aml4td/website/pull/29">multidimensional scaling</a>, and other tools.</p>
-<p>Finally, we are always interested in reviewers. If you are well-versed in a particular subject, let us know and we can add you as a reviewer for pull requests.</p>
+<p>One keynote and one tutorial last month (both new).</p>
+<p>On March 19th, I gave the final keynote at the inaugural <em>Pharmaceutical Data Science Conference</em> at the University of Connecticut. The talk was called “What Happens After the Model?”</p>
+<blockquote class="blockquote">
+<p>Machine learning models are everywhere now. We must spend more time on what happens before and after the model fit to build higher-quality algorithms. This talk will describe a set of post-model activities that can improve the fit and also ensure that, when deployed, it is used effectively.</p>
+</blockquote>
+<p>You can find the slides at <a href="https://topepo.github.io/2024_PharmaDS/"><code>topepo.github.io/2024_PharmaDS/</code></a> and these contain a link to the sources.</p>
+<p>Second was tutorial for the Statistical Society of Australia called “Introduction to Machine Learning with tidymodels”. The slides are at <a href="https://topepo.github.io/2024_SSA_SCV/"><code>topepo.github.io/2024_SSA_SCV/</code></a> and the sources are at <a href="https://github.com/topepo/2024_SSA_SCV"><code>github.com/topepo/2024_SSA_SCV</code></a>. A huge thanks go to <a href="https://www.simonpcouch.com/">Simon Couch</a> who write the first (very slick) section of the slides.</p>
 
 
 
