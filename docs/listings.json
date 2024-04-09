@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/post-hoc-nearest-neighbors-prediction-adjustments/index.html",
       "/posts/2024-03-talks/index.html",
       "/posts/tidymodels-survival-models/index.html",
       "/posts/two-new-preprocessing-chapters/index.html",
