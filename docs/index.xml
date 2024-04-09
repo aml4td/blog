@@ -9,7 +9,7 @@
 <link>https://blog.aml4td.org/</link>
 <atom:link href="https://blog.aml4td.org/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.5.28</generator>
+<generator>quarto-1.5.4</generator>
 <lastBuildDate>Wed, 10 Apr 2024 04:00:00 GMT</lastBuildDate>
 <item>
   <title>
@@ -21,15 +21,15 @@ Post Hoc Nearest Neighbors Prediction Adjustments</title>
 <p>Let’s say you have some model with a numeric outcome <img src="https://latex.codecogs.com/png.latex?y"> and a vector of predictors <img src="https://latex.codecogs.com/png.latex?%5Cboldsymbol%7Bx%7D">. We’ve fit some model to the training set and we have a new observation with predictors <img src="https://latex.codecogs.com/png.latex?%5Cboldsymbol%7Bx%7D_0">; the model’s prediction is <img src="https://latex.codecogs.com/png.latex?%5Cwidehat%7By%7D_0">.</p>
 <p>This method finds the <img src="https://latex.codecogs.com/png.latex?K">-nearest neighbors to <img src="https://latex.codecogs.com/png.latex?%5Cboldsymbol%7Bx%7D_0"> from the training set (denotes as <img src="https://latex.codecogs.com/png.latex?%5Cboldsymbol%7Bx%7D_1%5Cldots%20%5Cboldsymbol%7Bx%7D_K">) and their corresponding predictions <img src="https://latex.codecogs.com/png.latex?%5Cwidehat%7By%7D_i">. The distances from the new sample to the training set points are <img src="https://latex.codecogs.com/png.latex?d_i">.</p>
 <p>For the new data point, the <img src="https://latex.codecogs.com/png.latex?K"> adjusted predictions are:</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cwidehat%7Ba%7D_i%20=%20y_i%20+%20(%5Cwidehat%7By%7D_i%20-%20%5Cwidehat%7By%7D_0)%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cwidehat%7Ba%7D_i%20=%20y_i%20+%20(%5Cwidehat%7By%7D_0%20-%20%5Cwidehat%7By%7D_i)%0A"></p>
 <p>for <img src="https://latex.codecogs.com/png.latex?i=1%5Cldots%20K">. The final prediction is the weighted average the <img src="https://latex.codecogs.com/png.latex?%5Cwidehat%7Ba%7D_i"> where the weights are <img src="https://latex.codecogs.com/png.latex?w_i%20=%201%20/%20(d_i%20+%20%5Cepsilon)">. <img src="https://latex.codecogs.com/png.latex?%5Cepsilon"> is there to prevent division by zero and Quinlan defaults this to 0.5.</p>
-<p>This adjustment is an integral part of the Cubist rule-based model ensemble that we talk about in <a href="http://appliedpredictivemodeling.com/"><em>APM</em></a>.</p>
+<p>Suppose the true value of the closest neighbor is 10 and its prediction is 11. If our new value <img src="https://latex.codecogs.com/png.latex?%5Cboldsymbol%7Bx%7D_0"> is over-predicted with a value of 15, we end up adjusting the prediction down to 14 (i.e., 10 + (15 - 11)).</p>
+<p>This adjustment is an integral part of the Cubist rule-based model ensemble that we discuss in <a href="http://appliedpredictivemodeling.com/"><em>APM</em></a> (and will later in this book). We’d like to apply it to any regression model.</p>
 <p>To do this in general, I’ve started a small R package called <a href="https://topepo.github.io/adjusted/">adjusted</a>. It requires a fitted tidymodels workflow object and uses <a href="https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C7&amp;q=Some+distance+properties+of+latent+root+and+vector+methods+used+in+multivariate+analysis&amp;btnG=">Gower distance</a> for calculations.</p>
 <p>Here’s an example using MARS on the <a href="https://aml4td.org/chapters/whole-game.html#sec-delivery-times">food delivery data</a>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
@@ -38,7 +38,7 @@ font-style: inherit;"><a href="https://tidymodels.tidymodels.org">tidymodels</a>
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>── Attaching packages ────────────────────────────────────── tidymodels 1.1.1 ──</code></pre>
+<pre><code>── Attaching packages ────────────────────────────────────── tidymodels 1.2.0 ──</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>✔ broom        1.0.5      ✔ recipes      1.0.10
@@ -56,14 +56,13 @@ font-style: inherit;">)</span></span></code></pre></div>
 ✖ dplyr::filter()  masks stats::filter()
 ✖ dplyr::lag()     masks stats::lag()
 ✖ recipes::step()  masks stats::step()
-• Use suppressPackageStartupMessages() to eliminate package startup messages</code></pre>
+• Learn how to get started at https://www.tidymodels.org/start/</code></pre>
 </div>
 <div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Found at https://github.com/topepo/adjusted</span></span>
 <span><span class="kw" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
@@ -84,11 +83,11 @@ background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">theme_set</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">theme_bw</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -127,7 +126,7 @@ font-style: inherit;">delivery_split</span> <span class="op" style="color: #5E5E
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">initial_validation_split</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rsample.tidymodels.org/reference/initial_validation_split.html">initial_validation_split</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -157,7 +156,7 @@ font-style: inherit;">delivery_train</span> <span class="op" style="color: #5E5E
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">training</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rsample.tidymodels.org/reference/initial_split.html">training</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -170,7 +169,7 @@ font-style: inherit;">delivery_test</span>  <span class="op" style="color: #5E5E
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">testing</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rsample.tidymodels.org/reference/initial_split.html">testing</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -183,7 +182,7 @@ font-style: inherit;">delivery_val</span>   <span class="op" style="color: #5E5E
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">validation</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rsample.tidymodels.org/reference/initial_validation_split.html">validation</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -200,7 +199,7 @@ background-color: null;
 font-style: inherit;">&lt;-</span>  </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">mars</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://parsnip.tidymodels.org/reference/mars.html">mars</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>prod_degree <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -213,7 +212,7 @@ background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">set_mode</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://parsnip.tidymodels.org/reference/set_args.html">set_mode</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="st" style="color: #20794D;
 background-color: null;
@@ -228,7 +227,7 @@ background-color: null;
 font-style: inherit;">&lt;-</span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">workflow</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://workflows.tidymodels.org/reference/workflow.html">workflow</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -237,7 +236,7 @@ background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">add_formula</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://workflows.tidymodels.org/reference/add_formula.html">add_formula</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -252,7 +251,7 @@ background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">add_model</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://workflows.tidymodels.org/reference/add_model.html">add_model</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span> <span class="va" style="color: #111111;
 background-color: null;
@@ -263,7 +262,7 @@ background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">fit</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -272,26 +271,17 @@ background-color: null;
 font-style: inherit;">delivery_train</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'plotrix'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:scales':
-
-    rescale</code></pre>
-</div>
 </div>
 <p>We can use the earth package’s <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> function to see the model terms/splits. It’s fairly long though:</p>
 <details><div class="cell">
-<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">mars_fit</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">extract_fit_engine</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://hardhat.tidymodels.org/reference/hardhat-extract.html">extract_fit_engine</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -358,10 +348,22 @@ font-style: inherit;">)</span></span></code></pre></div>
   -  0.546 * h(1-item_01)*h(1-item_09)</code></pre>
 </div>
 </div>
-</details><p><strong>Warning</strong> this syntax may change…</p>
+</details><div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I just made the package; it would probably be called “experimental.” The syntax below may change in the future.</p>
+</div>
+</div>
 <p>The adjusted package requires the use of the fitted model as well as the initial training set. The main function <code><a href="https://rdrr.io/pkg/adjusted/man/nn_adjust.html">nn_adjust()</a></code> has those two arguments:</p>
 <div class="cell">
-<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">adj_obj</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -381,7 +383,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 </div>
 <p>and pretty much does <em>nothing</em> at this point. We don’t even need to specifiy the number of neighbors until prediction/adjustment time:</p>
 <div class="cell">
-<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Predict the first validation row: </span></span>
 <span><span class="va" style="color: #111111;
@@ -394,7 +396,7 @@ font-style: inherit;">delivery_val</span> <span class="op" style="color: #5E5E5E
 background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">slice</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="fl" style="color: #AD0000;
 background-color: null;
@@ -422,7 +424,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   &lt;dbl&gt;
 1  29.1</code></pre>
 </div>
-<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Same:</span></span>
 <span><span class="fu" style="color: #4758AB;
@@ -446,7 +448,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   &lt;dbl&gt;
 1  29.1</code></pre>
 </div>
-<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;
+<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Adjust using 3 most similar samples</span></span>
 <span><span class="fu" style="color: #4758AB;
@@ -473,14 +475,14 @@ font-style: inherit;">)</span></span></code></pre></div>
 </div>
 <p>So how many neighbors should we use? Let’s try different values and compute the RMSE for the validation set:</p>
 <div class="cell">
-<div class="sourceCode" id="cb19" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">val_pred</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;-</span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">tibble</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>neighbors <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -497,14 +499,14 @@ background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">mutate</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span></span>
 <span>    .pred <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">map</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -513,7 +515,7 @@ font-style: inherit;">neighbors</span>, </span>
 background-color: null;
 font-style: inherit;">~</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -527,17 +529,6 @@ font-style: inherit;">=</span> <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">.x</span><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">)</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>                  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">bind_cols</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span><span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">delivery_val</span><span class="op" style="color: #5E5E5E;
-background-color: null;
 font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span>,</span>
@@ -545,7 +536,7 @@ font-style: inherit;">)</span>,</span>
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">map_dbl</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -553,7 +544,7 @@ font-style: inherit;">.pred</span>, <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">~</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">rmse_vec</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://yardstick.tidymodels.org/reference/rmse.html">rmse_vec</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -578,18 +569,18 @@ font-style: inherit;">)</span></span></code></pre></div>
 </div>
 <p>The RMSE profile looks fairly common (based on our experiences with Cubist). The 1-NN model is <em>awful</em> since it is over-fitting to a single data point. As we increase the number of neighbors the RMSE drops and eventually surpasses the results without any adjustment:</p>
 <div class="cell">
-<div class="sourceCode" id="cb20" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+<div class="sourceCode" id="cb18" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">val_pred</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">ggplot</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">aes</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -604,7 +595,7 @@ background-color: null;
 font-style: inherit;">+</span></span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">geom_point</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -613,7 +604,7 @@ background-color: null;
 font-style: inherit;">+</span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">geom_line</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -622,7 +613,7 @@ background-color: null;
 font-style: inherit;">+</span></span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">labs</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>y <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -640,7 +631,7 @@ font-style: inherit;">)</span></span></code></pre></div>
 </div>
 <p>Let’s compute the percent improvement relative to the no-adjustment case:</p>
 <div class="cell">
-<div class="sourceCode" id="cb21" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
+<div class="sourceCode" id="cb19" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">val_pred_0</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -650,7 +641,7 @@ font-style: inherit;">val_pred</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -664,7 +655,7 @@ font-style: inherit;">)</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">pluck</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://purrr.tidyverse.org/reference/pluck.html">pluck</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="st" style="color: #20794D;
 background-color: null;
@@ -679,7 +670,7 @@ background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">mutate</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>pct_imp <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -704,11 +695,11 @@ background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">ggplot</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">aes</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -723,7 +714,7 @@ background-color: null;
 font-style: inherit;">+</span></span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">geom_point</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -732,7 +723,7 @@ background-color: null;
 font-style: inherit;">+</span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">geom_line</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -741,7 +732,7 @@ background-color: null;
 font-style: inherit;">+</span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">scale_y_continuous</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>labels <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -758,7 +749,7 @@ background-color: null;
 font-style: inherit;">+</span></span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">labs</span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>y <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -774,7 +765,8 @@ font-style: inherit;">)</span></span></code></pre></div>
 </div>
 </div>
 </div>
-<p>I made this since the tidymodels group is finally focusing on <em>post-processing</em>: things that we can do to the model predictions to make them better. Another example is model calibration methods.</p>
+<p>For these data, the best case is a 1.9% improvement in the RMSE. That’s not a game changer, but it is certainly helpful if every little bit of performance is important.</p>
+<p>I made this package because the tidymodels group is finally focusing on <em>post-processing</em>: things that we can do to the model predictions to make them better. Another example is model calibration methods.</p>
 <p>Our goal is to let you add post-processing steps to the workflow and tune/optimize these in the same way as pre-processing parameters or model hyperparameters.</p>
 
 
@@ -783,6 +775,7 @@ font-style: inherit;">)</span></span></code></pre></div>
   <category>post-processing</category>
   <category>nearest neighbors</category>
   <category>regression</category>
+  <category>tidymodels</category>
   <guid>https://blog.aml4td.org/posts/post-hoc-nearest-neighbors-prediction-adjustments/</guid>
   <pubDate>Wed, 10 Apr 2024 04:00:00 GMT</pubDate>
 </item>
@@ -1345,7 +1338,6 @@ font-style: inherit;">1</span>]])</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">function</span>(split, ...) {</span>
 <span id="cb10-2">  <span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -1498,7 +1490,6 @@ font-style: inherit;"># MSE = 2.675 in the blog post</span></span></code></pre><
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">function</span>(..., <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">degree =</span> <span class="dv" style="color: #AD0000;
@@ -1541,7 +1532,6 @@ font-style: inherit;"># predictor expressions</span></span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">function</span>(arg, call, ...)</span>
 <span id="cb18-12">    <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1863,7 +1853,6 @@ font-style: inherit;">theme_bw</span>())</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">function</span>(n) {</span>
 <span id="cb2-2">  tmp <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -2082,7 +2071,6 @@ font-style: inherit;"># `cost` is the tuning parameter</span></span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">function</span>(object, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">cost =</span> <span class="dv" style="color: #AD0000;
@@ -2148,7 +2136,6 @@ font-style: inherit;"># In some case, we want to parameterize the function over 
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">function</span>(cost, object) <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">svm_rmse</span>(object, cost)</span></code></pre></div>
@@ -2160,7 +2147,6 @@ font-style: inherit;"># `object` will be an `rsplit` object for the bootstrap sa
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">function</span>(object) {</span>
 <span id="cb8-3">  results <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -2208,7 +2194,6 @@ font-style: inherit;"># `object` is an `rsplit` object in `results$inner_resampl
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">function</span>(object) {</span>
 <span id="cb9-3">  <span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -2268,7 +2253,6 @@ font-style: inherit;">%&gt;%</span> bind_rows</span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">function</span>(dat) dat[<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">which.min</span>(dat<span class="sc" style="color: #5E5E5E;
@@ -2311,10 +2295,8 @@ font-style: inherit;">"Inner RMSE"</span>)</span>
 <span id="cb11-8"></span>
 <span id="cb11-9"><span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">for</span>(i <span class="cf" style="color: #003B4F;
 background-color: null;
-font-weight: bold;
 font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;

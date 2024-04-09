@@ -6,6 +6,7 @@ categories:
   - post-processing
   - nearest neighbors
   - regression
+  - tidymodels
 ---
 
 <hr>
@@ -19,12 +20,14 @@ This method finds the $K$-nearest neighbors to $\boldsymbol{x}_0$ from the train
 For the new data point, the $K$ adjusted predictions are: 
 
 $$
-\widehat{a}_i = y_i + (\widehat{y}_i - \widehat{y}_0)
+\widehat{a}_i = y_i + (\widehat{y}_0 - \widehat{y}_i)
 $$
 
 for $i=1\ldots K$.  The final prediction is the weighted average the $\widehat{a}_i$ where the weights are $w_i = 1 / (d_i + \epsilon)$. $\epsilon$ is there to prevent division by zero and Quinlan defaults this to 0.5. 
 
-This adjustment is an integral part of the Cubist rule-based model ensemble that we talk about in [_APM_](http://appliedpredictivemodeling.com/). 
+Suppose the true value of the closest neighbor is 10 and its prediction is 11. If our new value $\boldsymbol{x}_0$ is over-predicted with a value of 15, we end up adjusting the prediction down to 14 (i.e., 10 + (15 - 11)).
+
+This adjustment is an integral part of the Cubist rule-based model ensemble that we discuss in [_APM_](http://appliedpredictivemodeling.com/) (and will later in this book).  We'd like to apply it to any regression model. 
 
 To do this in general, I've started a small R package called [adjusted](https://topepo.github.io/adjusted/). It requires a fitted tidymodels workflow object and uses [Gower distance](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C7&q=Some+distance+properties+of+latent+root+and+vector+methods+used+in+multivariate+analysis&btnG=) for calculations. 
 
@@ -62,6 +65,7 @@ Let's specify a [multivariate adaptive regression spline](https://scholar.google
 ```{r}
 #| label: fit
 #| results: hide
+#| warning: false
 mars_spec <-  
   mars(prod_degree = 2) %>% 
   set_mode("regression")
@@ -87,7 +91,11 @@ mars_fit %>%
 
 </details>
 
-**Warning** this syntax may change...
+
+::: {.callout-warning}
+I just made the package; it would probably be called “experimental.” The syntax below may change in the future. 
+:::
+
 
 The adjusted package requires the use of the fitted model as well as the initial training set. The main function `nn_adjust()` has those two arguments: 
 
@@ -124,8 +132,7 @@ val_pred <-
   tibble(neighbors = 0:20) %>% 
   mutate(
     .pred = map(neighbors, 
-                ~ predict(adj_obj, new_data = delivery_val, neighbors = .x) %>%
-                  bind_cols(delivery_val)),
+                ~ augment(adj_obj, new_data = delivery_val, neighbors = .x)),
     rmse = map_dbl(.pred, ~ rmse_vec(.x$time_to_delivery, .x$.pred))
   )
 ```
@@ -156,6 +163,8 @@ val_pred %>%
   labs(y = "Percent Imprvement (validation)")
 ```
 
-I made this since the tidymodels group is finally focusing on _post-processing_: things that we can do to the model predictions to make them better. Another example is model calibration methods. 
+For these data, the best case is a `r round(max((val_pred_0 - val_pred$rmse) / val_pred_0 * 100), 2)`% improvement in the RMSE. That's not a game changer, but it is certainly helpful if every little bit of performance is important.  
+
+I made this package because the tidymodels group is finally focusing on _post-processing_: things that we can do to the model predictions to make them better. Another example is model calibration methods. 
 
 Our goal is to let you add post-processing steps to the workflow and tune/optimize these in the same way as pre-processing parameters or model hyperparameters. 
