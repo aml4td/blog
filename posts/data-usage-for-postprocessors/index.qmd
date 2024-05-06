@@ -4,7 +4,8 @@ author: "Max Kuhn"
 date: "2024-05-07"
 categories:
   - preprocessing
-  - updates
+  - data-splitting
+  - resampling
 draft: false
 --- 
 
@@ -13,7 +14,9 @@ This document is used to discuss and test ideas for how have can estimate and ev
 
 - _Preprocessors_ are sequential operations that prepare predictor data for use in a supervised model. Examples are centering/scaling, PCA feature extraction, and so on. 
 - A _supervised ML model_ to translate the predictors to predictions of the outcome (e.g., logistic regression, random forest, etc.).
-- _Postprocessors_ that take the model's predictions and change them for the purpose of improving model performance. One example is choosing an alternate probability cutoff in binary classification to optimize for better true positive or true negative rates. 
+- _Postprocessors_ that take the model's predictions and change them for the purpose of improving model performance. One example is choosing an [alternate probability cutoff](https://blog.aml4td.org/posts/optimizing-probability-thresholds-for-class-imbalances/index.html) in binary classification to optimize for better true positive or true negative rates. 
+
+::: {.callout-note}
 
 We'll call the combination of these three components the _model pipeline_^[This document is intended to be independent of implementations. The phrase _model pipeline_ is based on sci-kit learn’s object type. tidymodels calls it a _model workflow_ and only uses different terminology to avoid confusion with the [magrittr pipeline](https://magrittr.tidyverse.org/reference/pipe.html).]: 
 
@@ -22,6 +25,8 @@ We'll call the combination of these three components the _model pipeline_^[This 
 ```
 
 The pipeline includes the model in the least; the pre and post model operations are added as needed. 
+
+:::
 
 We want feedback, so if you like our recommendations or have alternatives, **please comment below**. 
 
@@ -40,7 +45,7 @@ The number of potential postprocessors is probably in single digits. Some exampl
 * Post-hoc nearest neighbor adjustments such as [Quinlan (1993)](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C7&q=Combining+instance-based+and+model-based+learning&btnG=).
 * [Calibration](https://www.tidyverse.org/blog/2022/11/model-calibration/). 
 
-Each of these steps can involve tuning parameters that require optimization. For example, we can vary the cutoff value over a range for alternate probability cutoffs and measure the performance change in some statistic that uses the hard class predictions (such as accuracy or Kappa). These types of parameters are estimated _indirectly_ via gris search or some other tuning parameter optimization routine. There is no analytical formula where we plug in our predictor and outcome data to produce a point estimate to plug into the postprocessor.
+Each of these steps can involve tuning parameters that require optimization. For example, we can vary the cutoff value over a range for alternate probability cutoffs and measure the performance change in some statistic that uses the hard class predictions (such as accuracy or Kappa). These types of parameters are estimated _indirectly_ via grid search or some other tuning parameter optimization routine. There is no analytical formula where we plug in our predictor and outcome data to produce a point estimate to plug into the postprocessor.
 
 However, the last two in the list above might also have parameter values that require direct estimation (akin to slope parameters in a linear regression). Of these, let's focus on _model calibration_ for more discussion.  
 
@@ -354,7 +359,7 @@ During model development,
 That is a lot of splitting but our pipeline is pretty complex. One might think that we are significantly reducing the amount of data used to fit the supervised models. That’s correct, and hopefully, it emphasizes that as the complexity of our pipeline increases, our data usage strategy needs to be more extensive to avoid subtle overfitting errors. 
 
 
-## Conclusion
+## Summary (tl;dr)
 
 We’ve described how postprocessing operations can fit into the machine learning pipeline and the complications that occur in terms of data usage. From the viewpoint of the data, there are two main phases of pipeline training: 
 

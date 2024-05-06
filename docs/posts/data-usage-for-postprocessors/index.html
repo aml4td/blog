@@ -133,7 +133,7 @@ MathJax = {
 <li><a href="#more-about-postprocessors" id="toc-more-about-postprocessors" class="nav-link active" data-scroll-target="#more-about-postprocessors">More About Postprocessors</a></li>
   <li><a href="#initial-two-way-split" id="toc-initial-two-way-split" class="nav-link" data-scroll-target="#initial-two-way-split">Initial Two-Way Split</a></li>
   <li><a href="#initial-three-way-split" id="toc-initial-three-way-split" class="nav-link" data-scroll-target="#initial-three-way-split">Initial Three-Way Split</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#summary-tldr" id="toc-summary-tldr" class="nav-link" data-scroll-target="#summary-tldr">Summary (tl;dr)</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -141,7 +141,8 @@ MathJax = {
 <h1 class="title">Data Usage with Postprocessing</h1>
   <div class="quarto-categories">
     <div class="quarto-category">preprocessing</div>
-    <div class="quarto-category">updates</div>
+    <div class="quarto-category">data-splitting</div>
+    <div class="quarto-category">resampling</div>
   </div>
   </div>
 
@@ -174,11 +175,23 @@ MathJax = {
 <em>Preprocessors</em> are sequential operations that prepare predictor data for use in a supervised model. Examples are centering/scaling, PCA feature extraction, and so on.</li>
 <li>A <em>supervised ML model</em> to translate the predictors to predictions of the outcome (e.g., logistic regression, random forest, etc.).</li>
 <li>
-<em>Postprocessors</em> that take the model’s predictions and change them for the purpose of improving model performance. One example is choosing an alternate probability cutoff in binary classification to optimize for better true positive or true negative rates.</li>
+<em>Postprocessors</em> that take the model’s predictions and change them for the purpose of improving model performance. One example is choosing an <a href="https://blog.aml4td.org/posts/optimizing-probability-thresholds-for-class-imbalances/index.html">alternate probability cutoff</a> in binary classification to optimize for better true positive or true negative rates.</li>
 </ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>We’ll call the combination of these three components the <em>model pipeline</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
 <pre><code>   pipeline = preprocessor(s) + supervised model + postprocessor(s)</code></pre>
 <p>The pipeline includes the model in the least; the pre and post model operations are added as needed.</p>
+</div>
+</div>
 <p>We want feedback, so if you like our recommendations or have alternatives, <strong>please comment below</strong>.</p>
 <p>Let’s take some time to describe what postprocessors can do.</p>
 <section id="more-about-postprocessors" class="level2"><h2 class="anchored" data-anchor-id="more-about-postprocessors">More About Postprocessors</h2>
@@ -193,7 +206,7 @@ MathJax = {
 <li>
 <a href="https://www.tidyverse.org/blog/2022/11/model-calibration/">Calibration</a>.</li>
 </ul>
-<p>Each of these steps can involve tuning parameters that require optimization. For example, we can vary the cutoff value over a range for alternate probability cutoffs and measure the performance change in some statistic that uses the hard class predictions (such as accuracy or Kappa). These types of parameters are estimated <em>indirectly</em> via gris search or some other tuning parameter optimization routine. There is no analytical formula where we plug in our predictor and outcome data to produce a point estimate to plug into the postprocessor.</p>
+<p>Each of these steps can involve tuning parameters that require optimization. For example, we can vary the cutoff value over a range for alternate probability cutoffs and measure the performance change in some statistic that uses the hard class predictions (such as accuracy or Kappa). These types of parameters are estimated <em>indirectly</em> via grid search or some other tuning parameter optimization routine. There is no analytical formula where we plug in our predictor and outcome data to produce a point estimate to plug into the postprocessor.</p>
 <p>However, the last two in the list above might also have parameter values that require direct estimation (akin to slope parameters in a linear regression). Of these, let’s focus on <em>model calibration</em> for more discussion.</p>
 <section id="model-calibration" class="level4"><h4 class="anchored" data-anchor-id="model-calibration">Model Calibration</h4>
 <p>This article focuses largely on model calibration. This technique is not particularly significant, but we use it because it is a well-known postprocessing technique that requires direct parameter estimation.</p>
@@ -355,7 +368,7 @@ Note
 <li>The test set (20%) is evaluated once for verification of performance.</li>
 </ol>
 <p>That is a lot of splitting but our pipeline is pretty complex. One might think that we are significantly reducing the amount of data used to fit the supervised models. That’s correct, and hopefully, it emphasizes that as the complexity of our pipeline increases, our data usage strategy needs to be more extensive to avoid subtle overfitting errors.</p>
-</section></section><section id="conclusion" class="level2"><h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+</section></section><section id="summary-tldr" class="level2"><h2 class="anchored" data-anchor-id="summary-tldr">Summary (tl;dr)</h2>
 <p>We’ve described how postprocessing operations can fit into the machine learning pipeline and the complications that occur in terms of data usage. From the viewpoint of the data, there are two main phases of pipeline training:</p>
 <ul>
 <li>
