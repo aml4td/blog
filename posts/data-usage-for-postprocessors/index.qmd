@@ -1,7 +1,7 @@
 ---
 title: "Data Usage with Postprocessing"
 author: "Max Kuhn"
-date: "2024-05-08"
+date: "2024-05-07"
 categories:
   - preprocessing
   - updates
@@ -253,7 +253,7 @@ One possible approach is to resample the model (prior to the calibration set) us
 
 This raises the risk of overfitting and we don't have a data set to check how well this works until the test set (which should be used to verify performance). This is the approach that was used in the regression calibration example above. 
 
-One approach is to use a three-way split at the start instead of a basic training/test set. We could reserve some data strictly for calibration (assuming that we know that calibration is required). 
+Another approach is to use a three-way split at the start instead of a basic training/test set. We could reserve some data strictly for calibration (assuming that we know that calibration is required). 
 
 We can allocate a small fraction of data for postprocessing estimation. A diagram of this is before with 60% used for training the preprocessor and supervised model, 20% for estimating the postprocessor, and 20% for testing^[Again, we don't have to do this for all postprocessors, just those that require parameters to be estimated]. In the diagram below, the two shades of brown are meant to reflect that these data are used for estimation and the purple data are used strictly for model evaluation. 
 
@@ -266,7 +266,7 @@ We can allocate a small fraction of data for postprocessing estimation. A diagra
 knitr::include_graphics("premade/with-estimation-split.svg")
 ```
 
-The nomenclature is a little bit fuzzy here. For now, we'll call the darker brown data the training set (no different than before), the purple data the test set, and the light brown data the "potato set"^[Obviously, this is not going to be the real name. We need a placeholder until we come up with something that we all like. Potential candidate names are the "reserved data," auxiliary data," and "supplemental data. Why _potato_? Because it is easy to find/replace and you will probably remember it."]
+The nomenclature is a little bit fuzzy here. For now, we'll call the darker brown data the training set (no different than before), the purple data the standard test set, and the light brown data the "**potato set**"^[Obviously, this is not going to be the real name. We need a placeholder until we come up with something that we all like. Potential candidate names are the "reserved data," auxiliary data," and "supplemental data. Why _potato_? Because it is easy to find/replace and you will probably remember it."]
 
 This extra set is a simple solution that avoids potential data leakage but is reducing the amount of data used to train the preprocessors and the supervised model. 
 

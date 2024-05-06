@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.521">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Max Kuhn">
-<meta name="dcterms.date" content="2024-05-08">
+<meta name="dcterms.date" content="2024-05-07">
 <title>Applied Predictive Modeling Blog - Data Usage with Postprocessing</title>
 <style>
 code{white-space: pre-wrap;}
@@ -159,7 +159,7 @@ MathJax = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 8, 2024</p>
+      <p class="date">May 7, 2024</p>
     </div>
   </div>
   
@@ -284,7 +284,7 @@ Note
 <li>Estimate the calibration parameters.</li>
 </ol>
 <p>This raises the risk of overfitting and we don’t have a data set to check how well this works until the test set (which should be used to verify performance). This is the approach that was used in the regression calibration example above.</p>
-<p>One approach is to use a three-way split at the start instead of a basic training/test set. We could reserve some data strictly for calibration (assuming that we know that calibration is required).</p>
+<p>Another approach is to use a three-way split at the start instead of a basic training/test set. We could reserve some data strictly for calibration (assuming that we know that calibration is required).</p>
 <p>We can allocate a small fraction of data for postprocessing estimation. A diagram of this is before with 60% used for training the preprocessor and supervised model, 20% for estimating the postprocessor, and 20% for testing<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. In the diagram below, the two shades of brown are meant to reflect that these data are used for estimation and the purple data are used strictly for model evaluation.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -294,7 +294,7 @@ Note
 </div>
 </div>
 </div>
-<p>The nomenclature is a little bit fuzzy here. For now, we’ll call the darker brown data the training set (no different than before), the purple data the test set, and the light brown data the “potato set”<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>The nomenclature is a little bit fuzzy here. For now, we’ll call the darker brown data the training set (no different than before), the purple data the standard test set, and the light brown data the “<strong>potato set</strong>”<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <p>This extra set is a simple solution that avoids potential data leakage but is reducing the amount of data used to train the preprocessors and the supervised model.</p>
 <p>The next use-case is for situations where the model needs to be resampled for tuning or just to get some estimate of model performance.</p>
 </section><section id="case-4-tuning-postprocessing-estimation" class="level4"><h4 class="anchored" data-anchor-id="case-4-tuning-postprocessing-estimation">Case 4: Tuning, Postprocessing Estimation</h4>
