@@ -4,13 +4,13 @@ project:
   preview:
     port: 4202
   render:
-    - "*.qmd" 
+    - "*.qmd"
     - "!*.Rmd"
 
 website:
   title: "Applied Predictive Modeling Blog"
   site-url: "https://blog.aml4td.org"
-  comments: 
+  comments:
     utterances:
       repo: aml4td/blog
       label: utterances
@@ -22,13 +22,16 @@ website:
       - text: "Book"
         href: https://aml4td.org/
       - text: "Computing: R"
-        href: https://tidymodels.aml4td.org/        
+        href: https://tidymodels.aml4td.org/
       - about.qmd
       - icon: github
         href: https://github.com/aml4td/blog
 
 resources:
   - CNAME
+
+filters:
+  - pseudocode
 
 format:
   html:
@@ -45,3 +48,23 @@ format:
     code-link: true
     code-block-bg: "#f9fafd"
     code-block-border-left: "#e1e7f6"
+    include-in-header:
+      text: |
+        <script>
+        MathJax = {
+          loader: {
+            load: ['[tex]/boldsymbol']
+          },
+          tex: {
+            tags: "all",
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\\[','\\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            packages: {
+              '[+]': ['boldsymbol']
+            }
+          }
+        };
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
