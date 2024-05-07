@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xl="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="362.1608 1341.5 662.3763 662.5859" width="662.3763" height="662.5859">
+  <defs>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledBall_Marker" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-1 -4 8 8" markerWidth="8" markerHeight="8" color="black">
+      <g>
+        <circle cx="2.9999986" cy="0" r="2.99999734868332" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledBall_Marker_2" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-7 -4 8 8" markerWidth="8" markerHeight="8" color="black">
+      <g>
+        <circle cx="-2.9999986" cy="0" r="2.99999734868332" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+  </defs>
+  <g id="Canvas_1" fill="none" fill-opacity="1" stroke-dasharray="none" stroke-opacity="1" stroke="none">
+    <title>Canvas 1</title>
+    <g id="Canvas_1_Layer_1">
+      <title>Layer 1</title>
+      <g id="Graphic_1090">
+        <text transform="translate(524.5 1650)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="50" fill="black" x="74.6" y="48">5-fold CV</tspan>
+        </text>
+      </g>
+      <g id="Graphic_2089">
+        <ellipse cx="518.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" fill="#941651" fill-opacity=".59649214"/>
+        <ellipse cx="518.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2088">
+        <ellipse cx="633.75" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" fill="#941651" fill-opacity=".59649214"/>
+        <ellipse cx="633.75" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2087">
+        <ellipse cx="479.75" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" fill="#941651" fill-opacity=".59649214"/>
+        <ellipse cx="479.75" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2086">
+        <ellipse cx="556.75" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" fill="#941651" fill-opacity=".59649214"/>
+        <ellipse cx="556.75" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2085">
+        <ellipse cx="402.75" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" fill="#941651" fill-opacity=".59649214"/>
+        <ellipse cx="402.75" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2084">
+        <ellipse cx="595.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" fill="#941651" fill-opacity=".59649214"/>
+        <ellipse cx="595.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2083">
+        <ellipse cx="441.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" fill="#941651" fill-opacity=".59649214"/>
+        <ellipse cx="441.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2082">
+        <ellipse cx="672.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" fill="#941651" fill-opacity=".59649214"/>
+        <ellipse cx="672.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2081">
+        <ellipse cx="710.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" fill="#941651" fill-opacity=".59649214"/>
+        <ellipse cx="710.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2080">
+        <ellipse cx="748.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" fill="#941651" fill-opacity=".59649214"/>
+        <ellipse cx="748.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2079">
+        <ellipse cx="786.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" fill="#941651" fill-opacity=".59649214"/>
+        <ellipse cx="786.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2078">
+        <ellipse cx="824.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" fill="#941651" fill-opacity=".59649214"/>
+        <ellipse cx="824.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2077">
+        <ellipse cx="862.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" fill="#941651" fill-opacity=".59649214"/>
+        <ellipse cx="862.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2076">
+        <ellipse cx="900.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" fill="#941651" fill-opacity=".59649214"/>
+        <ellipse cx="900.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2075">
+        <ellipse cx="938.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" fill="#941651" fill-opacity=".59649214"/>
+        <ellipse cx="938.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2074">
+        <ellipse cx="976.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" fill="#941651" fill-opacity=".59649214"/>
+        <ellipse cx="976.25" cy="1824.25" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2069">
+        <ellipse cx="518.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" fill="#009193" fill-opacity=".7107047"/>
+        <ellipse cx="518.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2068">
+        <ellipse cx="633.75" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" fill="#009193" fill-opacity=".7107047"/>
+        <ellipse cx="633.75" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2067">
+        <ellipse cx="479.75" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" fill="#009193" fill-opacity=".7107047"/>
+        <ellipse cx="479.75" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2066">
+        <ellipse cx="556.75" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" fill="#009193" fill-opacity=".7107047"/>
+        <ellipse cx="556.75" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2065">
+        <ellipse cx="402.75" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" fill="#009193" fill-opacity=".7107047"/>
+        <ellipse cx="402.75" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2064">
+        <ellipse cx="595.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" fill="#009193" fill-opacity=".7107047"/>
+        <ellipse cx="595.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2063">
+        <ellipse cx="441.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" fill="#009193" fill-opacity=".7107047"/>
+        <ellipse cx="441.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2062">
+        <ellipse cx="672.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" fill="#009193" fill-opacity=".7107047"/>
+        <ellipse cx="672.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2061">
+        <ellipse cx="710.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" fill="#009193" fill-opacity=".7107047"/>
+        <ellipse cx="710.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2060">
+        <ellipse cx="748.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" fill="#009193" fill-opacity=".7107047"/>
+        <ellipse cx="748.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2059">
+        <ellipse cx="786.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" fill="#009193" fill-opacity=".7107047"/>
+        <ellipse cx="786.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2058">
+        <ellipse cx="824.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" fill="#009193" fill-opacity=".7107047"/>
+        <ellipse cx="824.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2057">
+        <ellipse cx="862.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" fill="#009193" fill-opacity=".7107047"/>
+        <ellipse cx="862.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2056">
+        <ellipse cx="900.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" fill="#009193" fill-opacity=".7107047"/>
+        <ellipse cx="900.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2055">
+        <ellipse cx="938.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" fill="#009193" fill-opacity=".7107047"/>
+        <ellipse cx="938.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2054">
+        <ellipse cx="976.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" fill="#009193" fill-opacity=".7107047"/>
+        <ellipse cx="976.25" cy="1862.15" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2049">
+        <ellipse cx="518.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" fill="#fffd78"/>
+        <ellipse cx="518.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2048">
+        <ellipse cx="633.75" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" fill="#fffd78"/>
+        <ellipse cx="633.75" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2047">
+        <ellipse cx="479.75" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" fill="#fffd78"/>
+        <ellipse cx="479.75" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2046">
+        <ellipse cx="556.75" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" fill="#fffd78"/>
+        <ellipse cx="556.75" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2045">
+        <ellipse cx="402.75" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" fill="#fffd78"/>
+        <ellipse cx="402.75" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2044">
+        <ellipse cx="595.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" fill="#fffd78"/>
+        <ellipse cx="595.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2043">
+        <ellipse cx="441.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" fill="#fffd78"/>
+        <ellipse cx="441.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2042">
+        <ellipse cx="672.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" fill="#fffd78"/>
+        <ellipse cx="672.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2041">
+        <ellipse cx="710.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" fill="#fffd78"/>
+        <ellipse cx="710.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2040">
+        <ellipse cx="748.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" fill="#fffd78"/>
+        <ellipse cx="748.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2039">
+        <ellipse cx="786.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" fill="#fffd78"/>
+        <ellipse cx="786.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2038">
+        <ellipse cx="824.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" fill="#fffd78"/>
+        <ellipse cx="824.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2037">
+        <ellipse cx="862.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" fill="#fffd78"/>
+        <ellipse cx="862.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2036">
+        <ellipse cx="900.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" fill="#fffd78"/>
+        <ellipse cx="900.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2035">
+        <ellipse cx="938.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" fill="#fffd78"/>
+        <ellipse cx="938.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2034">
+        <ellipse cx="976.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" fill="#fffd78"/>
+        <ellipse cx="976.25" cy="1899.625" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2029">
+        <ellipse cx="518.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" fill="#d6d6d6"/>
+        <ellipse cx="518.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2028">
+        <ellipse cx="633.75" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" fill="#d6d6d6"/>
+        <ellipse cx="633.75" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2027">
+        <ellipse cx="479.75" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" fill="#d6d6d6"/>
+        <ellipse cx="479.75" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2026">
+        <ellipse cx="556.75" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" fill="#d6d6d6"/>
+        <ellipse cx="556.75" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2025">
+        <ellipse cx="402.75" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" fill="#d6d6d6"/>
+        <ellipse cx="402.75" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2024">
+        <ellipse cx="595.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" fill="#d6d6d6"/>
+        <ellipse cx="595.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2023">
+        <ellipse cx="441.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" fill="#d6d6d6"/>
+        <ellipse cx="441.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2022">
+        <ellipse cx="672.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" fill="#d6d6d6"/>
+        <ellipse cx="672.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2021">
+        <ellipse cx="710.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" fill="#d6d6d6"/>
+        <ellipse cx="710.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2020">
+        <ellipse cx="748.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" fill="#d6d6d6"/>
+        <ellipse cx="748.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2019">
+        <ellipse cx="786.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" fill="#d6d6d6"/>
+        <ellipse cx="786.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2018">
+        <ellipse cx="824.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" fill="#d6d6d6"/>
+        <ellipse cx="824.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2017">
+        <ellipse cx="862.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" fill="#d6d6d6"/>
+        <ellipse cx="862.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2016">
+        <ellipse cx="900.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" fill="#d6d6d6"/>
+        <ellipse cx="900.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2015">
+        <ellipse cx="938.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" fill="#d6d6d6"/>
+        <ellipse cx="938.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2014">
+        <ellipse cx="976.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" fill="#d6d6d6"/>
+        <ellipse cx="976.25" cy="1936.9937" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2009">
+        <ellipse cx="518.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" fill="#945200" fill-opacity=".68527525"/>
+        <ellipse cx="518.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2008">
+        <ellipse cx="633.75" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" fill="#945200" fill-opacity=".68527525"/>
+        <ellipse cx="633.75" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2007">
+        <ellipse cx="479.75" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" fill="#945200" fill-opacity=".68527525"/>
+        <ellipse cx="479.75" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2006">
+        <ellipse cx="556.75" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" fill="#945200" fill-opacity=".68527525"/>
+        <ellipse cx="556.75" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2005">
+        <ellipse cx="402.75" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" fill="#945200" fill-opacity=".68527525"/>
+        <ellipse cx="402.75" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2004">
+        <ellipse cx="595.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" fill="#945200" fill-opacity=".68527525"/>
+        <ellipse cx="595.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2003">
+        <ellipse cx="441.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" fill="#945200" fill-opacity=".68527525"/>
+        <ellipse cx="441.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2002">
+        <ellipse cx="672.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" fill="#945200" fill-opacity=".68527525"/>
+        <ellipse cx="672.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2001">
+        <ellipse cx="710.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" fill="#945200" fill-opacity=".68527525"/>
+        <ellipse cx="710.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2000">
+        <ellipse cx="748.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" fill="#945200" fill-opacity=".68527525"/>
+        <ellipse cx="748.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_1999">
+        <ellipse cx="786.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" fill="#945200" fill-opacity=".68527525"/>
+        <ellipse cx="786.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_1998">
+        <ellipse cx="824.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" fill="#945200" fill-opacity=".68527525"/>
+        <ellipse cx="824.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_1997">
+        <ellipse cx="862.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" fill="#945200" fill-opacity=".68527525"/>
+        <ellipse cx="862.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_1996">
+        <ellipse cx="900.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" fill="#945200" fill-opacity=".68527525"/>
+        <ellipse cx="900.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_1995">
+        <ellipse cx="938.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" fill="#945200" fill-opacity=".68527525"/>
+        <ellipse cx="938.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_1994">
+        <ellipse cx="976.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" fill="#945200" fill-opacity=".68527525"/>
+        <ellipse cx="976.25" cy="1974.336" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Line_2196">
+        <line x1="366.69106" y1="1348.5" x2="366.00686" y2="1997.086" marker-end="url(#FilledBall_Marker)" marker-start="url(#FilledBall_Marker_2)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_2197">
+        <line x1="1020.691" y1="1348.5" x2="1020.0069" y2="1997.086" marker-end="url(#FilledBall_Marker)" marker-start="url(#FilledBall_Marker_2)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_3010">
+        <ellipse cx="484.75" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="484.75" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_3009">
+        <ellipse cx="407.75" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="407.75" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_3008">
+        <ellipse cx="446.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="446.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_3007">
+        <ellipse cx="523.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="523.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_3006">
+        <ellipse cx="561.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="561.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_3005">
+        <ellipse cx="599.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="599.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_3004">
+        <ellipse cx="637.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="637.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_3003">
+        <ellipse cx="675.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="675.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_3002">
+        <ellipse cx="713.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="713.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_3001">
+        <ellipse cx="751.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="751.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_3000">
+        <ellipse cx="789.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd19"/>
+        <ellipse cx="789.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2999">
+        <ellipse cx="827.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd19"/>
+        <ellipse cx="827.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2998">
+        <ellipse cx="865.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" fill="#ffe4b1"/>
+        <ellipse cx="865.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2997">
+        <ellipse cx="903.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" fill="#ffe4b1"/>
+        <ellipse cx="903.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2996">
+        <ellipse cx="941.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" fill="#ffe4b1"/>
+        <ellipse cx="941.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2995">
+        <ellipse cx="979.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" fill="#ffe4b1"/>
+        <ellipse cx="979.25" cy="1364.582" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2990">
+        <ellipse cx="484.75" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" fill="#ffbd1a"/>
+        <ellipse cx="484.75" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2989">
+        <ellipse cx="407.75" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" fill="#ffbd1a"/>
+        <ellipse cx="407.75" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2988">
+        <ellipse cx="446.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" fill="#ffbd1a"/>
+        <ellipse cx="446.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2987">
+        <ellipse cx="523.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" fill="#ffbd1a"/>
+        <ellipse cx="523.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2986">
+        <ellipse cx="561.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" fill="#ffbd1a"/>
+        <ellipse cx="561.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2985">
+        <ellipse cx="599.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" fill="#ffbd1a"/>
+        <ellipse cx="599.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2984">
+        <ellipse cx="637.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" fill="#ffbd1a"/>
+        <ellipse cx="637.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2983">
+        <ellipse cx="675.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" fill="#ffbd1a"/>
+        <ellipse cx="675.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2982">
+        <ellipse cx="713.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" fill="#ffbd1a"/>
+        <ellipse cx="713.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2981">
+        <ellipse cx="751.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" fill="#ffbd1a"/>
+        <ellipse cx="751.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2980">
+        <ellipse cx="789.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" fill="#ffbd19"/>
+        <ellipse cx="789.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2979">
+        <ellipse cx="827.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" fill="#ffbd19"/>
+        <ellipse cx="827.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2978">
+        <ellipse cx="865.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" fill="#ffe4b1"/>
+        <ellipse cx="865.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2977">
+        <ellipse cx="903.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" fill="#ffe4b1"/>
+        <ellipse cx="903.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2976">
+        <ellipse cx="941.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" fill="#ffe4b1"/>
+        <ellipse cx="941.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2975">
+        <ellipse cx="979.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" fill="#ffe4b1"/>
+        <ellipse cx="979.25" cy="1402.482" rx="16.7500267648568" ry="16.2500259659059" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2970">
+        <ellipse cx="484.75" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="484.75" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2969">
+        <ellipse cx="407.75" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="407.75" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2968">
+        <ellipse cx="446.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="446.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2967">
+        <ellipse cx="523.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="523.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2966">
+        <ellipse cx="561.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="561.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2965">
+        <ellipse cx="599.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="599.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2964">
+        <ellipse cx="637.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="637.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2963">
+        <ellipse cx="675.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="675.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2962">
+        <ellipse cx="713.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="713.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2961">
+        <ellipse cx="751.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="751.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2960">
+        <ellipse cx="789.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd19"/>
+        <ellipse cx="789.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2959">
+        <ellipse cx="827.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd19"/>
+        <ellipse cx="827.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2958">
+        <ellipse cx="865.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" fill="#ffe4b1"/>
+        <ellipse cx="865.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2957">
+        <ellipse cx="903.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" fill="#ffe4b1"/>
+        <ellipse cx="903.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2956">
+        <ellipse cx="941.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" fill="#ffe4b1"/>
+        <ellipse cx="941.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2955">
+        <ellipse cx="979.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" fill="#ffe4b1"/>
+        <ellipse cx="979.25" cy="1439.957" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2950">
+        <ellipse cx="484.75" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="484.75" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2949">
+        <ellipse cx="407.75" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="407.75" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2948">
+        <ellipse cx="446.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="446.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2947">
+        <ellipse cx="523.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="523.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2946">
+        <ellipse cx="561.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="561.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2945">
+        <ellipse cx="599.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="599.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2944">
+        <ellipse cx="637.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="637.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2943">
+        <ellipse cx="675.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="675.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2942">
+        <ellipse cx="713.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="713.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2941">
+        <ellipse cx="751.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="751.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2940">
+        <ellipse cx="789.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd19"/>
+        <ellipse cx="789.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2939">
+        <ellipse cx="827.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd19"/>
+        <ellipse cx="827.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2938">
+        <ellipse cx="865.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" fill="#ffe4b1"/>
+        <ellipse cx="865.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2937">
+        <ellipse cx="903.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" fill="#ffe4b1"/>
+        <ellipse cx="903.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2936">
+        <ellipse cx="941.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" fill="#ffe4b1"/>
+        <ellipse cx="941.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2935">
+        <ellipse cx="979.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" fill="#ffe4b1"/>
+        <ellipse cx="979.25" cy="1477.3258" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2930">
+        <ellipse cx="484.75" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="484.75" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2929">
+        <ellipse cx="407.75" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="407.75" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2928">
+        <ellipse cx="446.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="446.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2927">
+        <ellipse cx="523.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="523.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2926">
+        <ellipse cx="561.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="561.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2925">
+        <ellipse cx="599.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="599.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2924">
+        <ellipse cx="637.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="637.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2923">
+        <ellipse cx="675.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="675.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2922">
+        <ellipse cx="713.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="713.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2921">
+        <ellipse cx="751.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd1a"/>
+        <ellipse cx="751.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2920">
+        <ellipse cx="789.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd19"/>
+        <ellipse cx="789.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2919">
+        <ellipse cx="827.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" fill="#ffbd19"/>
+        <ellipse cx="827.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2918">
+        <ellipse cx="865.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" fill="#ffe4b1"/>
+        <ellipse cx="865.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2917">
+        <ellipse cx="903.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" fill="#ffe4b1"/>
+        <ellipse cx="903.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2916">
+        <ellipse cx="941.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" fill="#ffe4b1"/>
+        <ellipse cx="941.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+      <g id="Graphic_2915">
+        <ellipse cx="979.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" fill="#ffe4b1"/>
+        <ellipse cx="979.25" cy="1514.668" rx="16.7500267648568" ry="16.250025965906" stroke="black" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="1"/>
+      </g>
+    </g>
+  </g>
+</svg>
