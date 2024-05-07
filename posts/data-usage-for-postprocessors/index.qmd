@@ -375,4 +375,4 @@ We’ve described how postprocessing operations can fit into the machine learnin
 
 We recommend using two different partitions for each of these two stages. 
 
-Thaks to the tidymodels group for review of this post. 
+Thanks to the tidymodels group for review of this post, especially Simon Couch who also edited the [original source of this post](https://github.com/topepo/postprocessing-data). 

@@ -10,7 +10,247 @@
 <atom:link href="https://blog.aml4td.org/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.4.521</generator>
-<lastBuildDate>Wed, 10 Apr 2024 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 07 May 2024 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Data Usage with Postprocessing</title>
+  <dc:creator>Max Kuhn</dc:creator>
+  <link>https://blog.aml4td.org/posts/data-usage-for-postprocessors/</link>
+  <description><![CDATA[ <p>This document is used to discuss and test ideas for how have can estimate and evaluate machine learning models that have three potential components:</p>
+<ul>
+<li>
+<em>Preprocessors</em> are sequential operations that prepare predictor data for use in a supervised model. Examples are centering/scaling, PCA feature extraction, and so on.</li>
+<li>A <em>supervised ML model</em> to translate the predictors to predictions of the outcome (e.g., logistic regression, random forest, etc.).</li>
+<li>
+<em>Postprocessors</em> that take the model’s predictions and change them for the purpose of improving model performance. One example is choosing an <a href="https://blog.aml4td.org/posts/optimizing-probability-thresholds-for-class-imbalances/index.html">alternate probability cutoff</a> in binary classification to optimize for better true positive or true negative rates.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We’ll call the combination of these three components the <em>model pipeline</em><sup>1</sup>:</p>
+<pre><code>   pipeline = preprocessor(s) + supervised model + postprocessor(s)</code></pre>
+<p>The pipeline includes the model in the least; the pre and post model operations are added as needed.</p>
+</div>
+</div>
+<p>We want feedback, so if you like our recommendations or have alternatives, <strong>please comment below</strong>.</p>
+<p>Let’s take some time to describe what postprocessors can do.</p>
+<section id="more-about-postprocessors" class="level2"><h2 class="anchored" data-anchor-id="more-about-postprocessors">More About Postprocessors</h2>
+<p>The process of postprocessing the predicted values has not been thoroughly discussed, mostly because the software to operationalize the full pipeline process is not comprehensive.</p>
+<p>The number of potential postprocessors is probably in single digits. Some examples:</p>
+<ul>
+<li>Specifying an optimal probability cutoff (mentioned above).</li>
+<li>Restricting the range of possible predictions (e.g., greater than zero).</li>
+<li>Simple deterministic transformations (e.g., exponentiation of predicted values).</li>
+<li>Disqualifying predictions via an <a href="https://blog.aml4td.org/posts/equivocal-zones/index.html">equivocal zone</a>.</li>
+<li>Post-hoc nearest neighbor adjustments such as <a href="https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C7&amp;q=Combining+instance-based+and+model-based+learning&amp;btnG=">Quinlan (1993)</a>.</li>
+<li>
+<a href="https://www.tidyverse.org/blog/2022/11/model-calibration/">Calibration</a>.</li>
+</ul>
+<p>Each of these steps can involve tuning parameters that require optimization. For example, we can vary the cutoff value over a range for alternate probability cutoffs and measure the performance change in some statistic that uses the hard class predictions (such as accuracy or Kappa). These types of parameters are estimated <em>indirectly</em> via grid search or some other tuning parameter optimization routine. There is no analytical formula where we plug in our predictor and outcome data to produce a point estimate to plug into the postprocessor.</p>
+<p>However, the last two in the list above might also have parameter values that require direct estimation (akin to slope parameters in a linear regression). Of these, let’s focus on <em>model calibration</em> for more discussion.</p>
+<section id="model-calibration" class="level4"><h4 class="anchored" data-anchor-id="model-calibration">Model Calibration</h4>
+<p>This article focuses largely on model calibration. This technique is not particularly significant, but we use it because it is a well-known postprocessing technique that requires direct parameter estimation.</p>
+<p>Calibration is most often applied to classification models. To keep things relatively simple, we’ll demonstrate the problem with a regression model that predicts a numeric outcome.</p>
+<p>We’ll use a regression data set as a demonstration<sup>2</sup>. The data were split into a training set (n = 6004), a validation set (n = 2004), and a test set (n = 2004). This data splitting scheme corresponds to Case 5 below. The outcome is numeric and there are 30 predictors.</p>
+<p>Let’s deliberately fit a regression model that has poor predicted values: a boosted tree with only five members. The validation set statistics show an RMSE of 4.71 (units are minutes) and a corresponding R<sup>2</sup> of 85.4%. It’s hard to know if the RMSE is acceptable without context but the latter statistic seems pretty good.</p>
+<p>However, when we look at the data, the observed and predicted values are well correlated but very poorly calibrated:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://blog.aml4td.org/posts/data-usage-for-postprocessors/index_files/figure-html/bad-pred-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The predicted values are not realistic in the sense that they are not consistent with the original data. They should fall along the diagonal green line if the model is performing well.</p>
+<p>The solid blue curve above shows a linear regression line that is fit to these data. This measures the systematic miscalibration. If we were to use the validation set to quantify the pattern, the intercept was -39.2 minutes and the slope was 2.49 minutes. Now that we know this pattern, it might be possible to remove it from the predictions.</p>
+<p>The problem, more broadly described below in Case 3, is that we can’t use the validation set to measure this pattern and assess its effectiveness.</p>
+<p>As an alternative, we used a slightly risky approach described in Case 3 to estimate a slope of -38.7 minutes, and the slope was 2.48 minutes. When these values are used to correct the validation set predictions, RMSE decreases from 4.71 to 2.68 minutes. The R<sup>2</sup> stays the same.</p>
+<p>The plot of the calibrated predictions shows a moderately effective model that has much better calibration:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://blog.aml4td.org/posts/data-usage-for-postprocessors/index_files/figure-html/cal-pred-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="our-goals-here" class="level4"><h4 class="anchored" data-anchor-id="our-goals-here">Our Goals Here</h4>
+<p>In this article, we want to examine the nuances of data usage in situations where our pipeline is trained in two stages. To do this, we’ll show some diagrams that illustrate some different strategies. The discussion of different data spending schemes with an initial pool of 100 samples, assumed to be in a random order, is visualized using:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://blog.aml4td.org/posts/data-usage-for-postprocessors/premade/sample-pool.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Let’s start with the ordinary case where we use a simple two-way training/testing split of the data, then consider different analysis paths.</p>
+</section></section><section id="initial-two-way-split" class="level2"><h2 class="anchored" data-anchor-id="initial-two-way-split">Initial Two-Way Split</h2>
+<p>There are a few different scenarios to consider. The first two are very pedestrian and are only included to contrast with the more complex ones.</p>
+<section id="case-1-no-tuning-no-postprocessing-estimation" class="level4"><h4 class="anchored" data-anchor-id="case-1-no-tuning-no-postprocessing-estimation">Case 1: No Tuning, No Postprocessing Estimation</h4>
+<p>This is a simple case where a basic model will suffice with tuning parameters and no uncertainty about what predictors should be in the model.</p>
+<p>“No Postprocessing Estimation” means that there might be a postprocessor but it does not require any parameter estimation. For example, it might just change the probability cutoff for a binary classification to be something other than 50%.</p>
+<p>We split the data into a larger set (training, in orange), and the remainder goes into testing (purple). Any 80/20 split is used to demonstrate:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://blog.aml4td.org/posts/data-usage-for-postprocessors/premade/no-estimation-split.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>All of our estimation tasks use the training set and the test set is evaluated only once to quantify the efficacy of the model.</p>
+</section><section id="case-2-tuning-no-postprocessing-estimation" class="level4"><h4 class="anchored" data-anchor-id="case-2-tuning-no-postprocessing-estimation">Case 2: Tuning, No Postprocessing Estimation</h4>
+<p>Here, some aspects of the model, preprocessor, or postprocessor required optimization. Any postprocessor does not require estimation (but could require tuning).</p>
+<p>Using the same initial split from Case 1, we might use some resampling strategy like cross-validation, the bootstrap, or a time-series resampling scheme. Without loss of generalization, we’ll show a 5-fold cross-validation diagram:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://blog.aml4td.org/posts/data-usage-for-postprocessors/premade/training-to-5-fold.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As usual, we fit five model pipelines with different tuning parameter candidates. Each model uses 4/5 of the data for estimation and the remaining 1/5 to measure performance. The resulting five performance statistics are averaged into a single value, which is used to guide the user in picking which tuning parameters are optimal (or at least reasonable).</p>
+<p>Once the optimization phase is finished, the final model uses the optimized tuning parameter values and is fit to the 80 data points of the training set. The other 20 samples in the test set are used to verify performance.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that we use specific terminology to distinguish between the data used for modeling and evaluation at the two different levels of data partitioning. The initial split creates training and test sets. During resampling, the analogs to these data sets are called the <em>analysis</em> and <em>assessment</em> sets.</p>
+</div>
+</div>
+</section><section id="case-3-no-tuning-postprocessing-estimation" class="level4"><h4 class="anchored" data-anchor-id="case-3-no-tuning-postprocessing-estimation">Case 3: No Tuning, Postprocessing Estimation</h4>
+<p>Here our model pipeline requires no tuning but we do need to estimate parameters for our postprocessor.</p>
+<p>For example, perhaps our ordinary least squares linear regression model has some systematic bias in the predictions (and we have to use this model). We could attach a linear calibrator to the model pipeline that estimates the slope and intercept of a line defined by the observed and predicted outcomes (as shown above).</p>
+<p>We need data to estimate the slope and intercept. We should not touch the test set. Naively re-predicting the training set is a poor choice; for many black-box models, the fitted values will be unreasonably close to the true values. This means that the systematic bias that we are trying to remove will be less pronounced and the calibration may not help. It also leaves us with no other data to judge how well the model (and calibration) works without using the test set.</p>
+<p>One possible approach is to resample the model (prior to the calibration set) using the approach in Case 2. This can produce the out-of-sample predictions that were used to produce the resampled performance statistic. These values are not overfit to the training data and should be a reasonable substrate to fit the calibration model. The main downside to this approach is that we are “double dipping” on the training set but using it to</p>
+<ol type="1">
+<li>Estimate our model parameters, and</li>
+<li>Estimate the calibration parameters.</li>
+</ol>
+<p>This raises the risk of overfitting and we don’t have a data set to check how well this works until the test set (which should be used to verify performance). This is the approach that was used in the regression calibration example above.</p>
+<p>Another approach is to use a three-way split at the start instead of a basic training/test set. We could reserve some data strictly for calibration (assuming that we know that calibration is required).</p>
+<p>We can allocate a small fraction of data for postprocessing estimation. A diagram of this is before with 60% used for training the preprocessor and supervised model, 20% for estimating the postprocessor, and 20% for testing<sup>3</sup>. In the diagram below, the two shades of brown are meant to reflect that these data are used for estimation and the purple data are used strictly for model evaluation.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://blog.aml4td.org/posts/data-usage-for-postprocessors/premade/with-estimation-split.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The nomenclature is a little bit fuzzy here. For now, we’ll call the darker brown data the training set (no different than before), the purple data the standard test set, and the light brown data the “<strong>potato set</strong>”<sup>4</sup></p>
+<p>This extra set is a simple solution that avoids potential data leakage but is reducing the amount of data used to train the preprocessors and the supervised model.</p>
+<p>The next use-case is for situations where the model needs to be resampled for tuning or just to get some estimate of model performance.</p>
+</section><section id="case-4-tuning-postprocessing-estimation" class="level4"><h4 class="anchored" data-anchor-id="case-4-tuning-postprocessing-estimation">Case 4: Tuning, Postprocessing Estimation</h4>
+<p>Now our model and/or preprocessor have unknown parameters that need to be indirectly optimized via grid search, Bayesian optimization, or by some other means. The compare and choose between models, we require an out-of-sample performance estimate, just as in Case 2.</p>
+<p>The difference here is the existence of a postprocessor that needs estimation.</p>
+<p>Once we arrive at our final tuning parameter value(s), we still need to perform the “last fit” where we estimate all of the parameters for the entire model pipeline.</p>
+<p>Let’s say we use the three-way data splitting scheme shown above in Case 3. How do we resample the model? We suggest taking <em>all</em> data that are not used for the testing set as the substrate for resampling. Let’s again use 5-fold cross-validation to demonstrate. The 80 samples are allocated to one of five folds.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://blog.aml4td.org/posts/data-usage-for-postprocessors/premade/training-reserve-to-5-fold.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For the first iteration of cross-validation, we take out the first fold earmarked for performance estimation as the assessment set.</p>
+<p>Ordinarily, the other 4/5 would be used to estimate the preprocessor(s) and the model. However, doing so in this case would result in overly optimistic performance statistics; assuming we always retain 1/5 of this data for model assessment, using the remaining 4/5 to estimate the preprocessor(s) and model would require that we train the postprocessor on predictions generated on that same 4/5 of the fold. Instead, we allot some portion of that 4/5—say, 3/4 of it—to train the preprocessor(s) and model, then generate predictions on the held-out 1/4 from the trained preprocessor(s) and model, then use <em>those</em> predictions to train the postprocessor. Then, the trained preprocessor(s), model, and postprocessor generate predictions on the remaining 1/5 of the fold that are evaluated using performance metrics.</p>
+<p>We can emulate the same procedure used in our initial three-way split by randomly<sup>5</sup> selecting the same proportion of data to estimate the two estimation stages.</p>
+<p>Visually, the scheme for the first iteration of cross-validation is:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://blog.aml4td.org/posts/data-usage-for-postprocessors/premade/reserve-in-cv-iter-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this instance, five preprocessor/model fits are paired with five calibration models, and when combined in sequence, they produce five resampled performance statistics. This is a complete resampling of the process that avoids information leakage.</p>
+</section></section><section id="initial-three-way-split" class="level2"><h2 class="anchored" data-anchor-id="initial-three-way-split">Initial Three-Way Split</h2>
+<p>If we have a lot of data, we might choose to start with three partitions of our data pool. The standard training and test sets would be supplemented by a validation set. This serves as a separate group of points that are used to judge model effectiveness during model development. While we should only look at the test set once, the validation set is designed to be evaluated multiple times so that we can compare and/or optimize our pipeline. Here’s a view of a 65/15/20 split:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://blog.aml4td.org/posts/data-usage-for-postprocessors/premade/val-split.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>During model development, we can view the validation set as if it were a single iteration of resampling. Let’s look at that first.</p>
+<section id="case-5-no-postprocessing-estimation" class="level4"><h4 class="anchored" data-anchor-id="case-5-no-postprocessing-estimation">Case 5: No Postprocessing Estimation</h4>
+<p>During model development, we would train our pipeline on the 65% of the data reserved for that purpose. Assuming that we need to tune or compare models, we would predict the 15% validation set and compute performance statistics.</p>
+<p>Eventually, we determine the best model pipeline to finalize. At this point, we already have our model fit since we have been directly training our pipeline on the training set<sup>6</sup>. From here, we predict the test set and verify that our validation set statistics were accurate.</p>
+</section><section id="case-6-postprocessing-estimation" class="level4"><h4 class="anchored" data-anchor-id="case-6-postprocessing-estimation">Case 6: Postprocessing Estimation</h4>
+<p>The situation here is basically the same as the Case 3; we don’t want to re-use our training set to fit the postprocessor. As with Case 3, we advocate for splitting off a fourth partition of data for that purpose. Here is an example of a 50/15/15/20 split:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="https://blog.aml4td.org/posts/data-usage-for-postprocessors/premade/four-way-split.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>During model development,</p>
+<ol type="1">
+<li>The preprocessor and supervised model are training on the training set (50% here)</li>
+<li>The predictions on the potato set (15%) are used as inputs to estimate the postprocessing parameters.</li>
+<li>The completely fitted pipeline predicts the validation set (15%), and those performance statistics guide our decision to finalize the pipeline.</li>
+<li>The test set (20%) is evaluated once for verification of performance.</li>
+</ol>
+<p>That is a lot of splitting but our pipeline is pretty complex. One might think that we are significantly reducing the amount of data used to fit the supervised models. That’s correct, and hopefully, it emphasizes that as the complexity of our pipeline increases, our data usage strategy needs to be more extensive to avoid subtle overfitting errors.</p>
+</section></section><section id="summary-tldr" class="level2"><h2 class="anchored" data-anchor-id="summary-tldr">Summary (tl;dr)</h2>
+<p>We’ve described how postprocessing operations can fit into the machine learning pipeline and the complications that occur in terms of data usage. From the viewpoint of the data, there are two main phases of pipeline training:</p>
+<ul>
+<li>
+<p><strong>Stage 1</strong>: Use a single set of data to train the preprocessors (if any) and the supervised model.</p>
+<ul>
+<li>The inputs are predictors and outcome data.</li>
+<li>Outputs are model predictions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Stage 2</strong>: Use a separate set of training data to estimate any postprocessors (if any).</p>
+<ul>
+<li>Inputs are model predictions.</li>
+<li>Outputs are modified model predictions.</li>
+</ul>
+</li>
+</ul>
+<p>We recommend using two different partitions for each of these two stages.</p>
+<p>Thanks to the tidymodels group for review of this post, especially Simon Couch who also edited the <a href="https://github.com/topepo/postprocessing-data">original source of this post</a>.</p>
+
+
+</section><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<ol>
+<li id="fn1"><p>This document is intended to be independent of implementations. The phrase <em>model pipeline</em> is based on sci-kit learn’s object type. tidymodels calls it a <em>model workflow</em> and only uses different terminology to avoid confusion with the <a href="https://magrittr.tidyverse.org/reference/pipe.html">magrittr pipeline</a>.↩︎</p></li>
+<li id="fn2"><p>These data are originally from <a href="https://aml4td.org/chapters/whole-game.html">the <em>Whole Game</em> chapter</a>.↩︎</p></li>
+<li id="fn3"><p>Again, we don’t have to do this for all postprocessors, just those that require parameters to be estimated↩︎</p></li>
+<li id="fn4"><p>Obviously, this is not going to be the real name. We need a placeholder until we come up with something that we all like. Potential candidate names are the “reserved data,” auxiliary data,” and “supplemental data. Why <em>potato</em>? Because it is easy to find/replace and you will probably remember it.”↩︎</p></li>
+<li id="fn5"><p><em>Most of the time</em>, this will be done via random sampling. For time-series data, we would emulate the same non-random splitting strategy that does not break the correlation structure of the data. Also, if we are bootstrapping, the proportional splits are conducted on the distinct rows of the non-test data to avoid having some replicates of specific rows falling in both partitions of the data.↩︎</p></li>
+<li id="fn6"><p>Since the validation set is no longer required, some people might pool the training and validation set and fit the finalized pipeline on those data (80% in total in our example). I don’t think that it’s a good idea but it does happen.↩︎</p></li>
+</ol></section></div> ]]></description>
+  <category>preprocessing</category>
+  <category>data-splitting</category>
+  <category>resampling</category>
+  <guid>https://blog.aml4td.org/posts/data-usage-for-postprocessors/</guid>
+  <pubDate>Tue, 07 May 2024 04:00:00 GMT</pubDate>
+</item>
 <item>
   <title>
 Post Hoc Nearest Neighbors Prediction Adjustments</title>
@@ -1797,47 +2037,6 @@ font-style: inherit;">3</span>)</span></code></pre></div>
   <category>xgboost</category>
   <guid>https://blog.aml4td.org/posts/while-you-wait-for-that-to-finish-can-i-interest-you-in-parallel-processing/</guid>
   <pubDate>Wed, 17 Jan 2018 05:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Lots of Package News</title>
-  <dc:creator>Max Kuhn</dc:creator>
-  <link>https://blog.aml4td.org/posts/lots-of-package-news/</link>
-  <description><![CDATA[ 
-
-
-
-
-<hr>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://blog.aml4td.org/posts/lots-of-package-news/recipes_rsample.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-<p>I’ve sent a slew of packages to CRAN recently (thanks to Swetlana and Uwe). There are updates to:</p>
-<ul>
-<li><p><a href="https://topepo.github.io/caret"><code>caret</code></a> was primarily updated to deal with an issue introduced in the last version. It is a good idea to avoid fully loading the underlying modeling packages to avoid name conflicts. We made that change in the last version and it ended up being more complex than thought. A quirk in the regression tests missed it too but the whole thing can be avoided by <em>loading the modeling package</em>. <a href="https://cran.r-project.org/web/packages/caret/news.html"><code>news</code> file</a></p></li>
-<li><p><a href="https://topepo.github.io/rsample"><code>rsample</code></a> had some modest additions including bridges to <code>caret</code> and <code>recipes</code>. The website added more application examples (times series and survival analysis). <a href="https://topepo.github.io/rsample/news/"><code>news</code> file</a></p></li>
-<li><p><a href="https://topepo.github.io/recipes"><code>recipes</code></a> had more substantial enhancments including six new steps, a better interface for creating interactions (using <a href="https://topepo.github.io/recipes/reference/selections.html">selectors</a>), and the ability to save the processed data in a sparse format. <a href="topepo.github.io/recipes/news/"><code>news</code> file</a></p></li>
-<li><p><a href="https://topepo.github.io/Cubist/"><code>Cubist</code></a> and <a href="https://topepo.github.io/C5.0/"><code>C50</code></a> have been updated and brought into the age of <code>roxygen</code> and <code>pkgdown</code>. <code>C5.0</code> now has a nice plot method <em>a la</em> <code>partykit</code> and now has a vignette. I’ll be adding a few features to each over time.</p></li>
-</ul>
-<p>Two <strong>new</strong> packages:</p>
-<ul>
-<li><p><a href="https://topepo.github.io/yardstick"><code>yardstick</code></a> contains many of the performance measurement methods in <code>caret</code> but in a format that is easier to use with <code>dplyr</code> syntax and functional programming.</p></li>
-<li><p><a href="https://topepo.github.io/tidyposterior"><code>tidyposterior</code></a> is a Bayesian version of <code>caret</code>’s <code>resamples</code> function. It can be used to take the resampling results from multiple models and do more formal statistical comparisons. It is similar <em>in spirit</em> to <a href="http://jmlr.org/papers/v18/16-305.html">Benavoli et al (2017)</a>. We are looking for <a href="https://twitter.com/dataandme/status/930820142900174848"><strong><em>nominations for the hex logo</em></strong></a> so please offer your suggestions (but keep it clean).</p></li>
-</ul>
-<p>(This article was originally posted at <a href="https://appliedpredictivemodeling.com/blog/2017/11/15/some-package-updates"><code>http://appliedpredictivemodeling.com</code></a>)</p>
-
-
-
- ]]></description>
-  <category>R</category>
-  <category>caret</category>
-  <category>recipes</category>
-  <category>C5.0</category>
-  <category>Cubist</category>
-  <category>Bayesian models</category>
-  <guid>https://blog.aml4td.org/posts/lots-of-package-news/</guid>
-  <pubDate>Mon, 11 Dec 2017 05:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
