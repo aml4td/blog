@@ -9,11 +9,55 @@
 <link>https://blog.aml4td.org/</link>
 <atom:link href="https://blog.aml4td.org/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.521</generator>
-<lastBuildDate>Tue, 07 May 2024 04:00:00 GMT</lastBuildDate>
+<generator>quarto-1.4.555</generator>
+<lastBuildDate>Tue, 18 Jun 2024 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Progress Update (June 2024)</title>
+  <dc:creator>Max Kuhn</dc:creator>
+  <link>https://blog.aml4td.org/posts/2024-06-progress-update/</link>
+  <description><![CDATA[ 
+
+
+
+
+<hr>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.aml4td.org/posts/2024-06-progress-update/anime_barley_pca.gif" class="quarto-figure quarto-figure-center figure-img" height="350"></p>
+</figure>
+</div>
+<p>We just released a new set of chapters:</p>
+<ul>
+<li><em>Embeddings</em>: this encompasses feature extraction tools such as PCA, MDS, UMAP, and shrunken centroids.</li>
+<li><em>Interactions and Nonlinear Features</em>: interaction definitions and detection methods, basis expansions (polynomials, splines), and discretization.</li>
+<li><em>Overfitting</em>: the first chapter of the “Optimization” part of the book. This sets up the next few chapters on resampling and model tuning.</li>
+</ul>
+<p>We liberally used <a href="https://quarto.org/docs/blog/posts/2022-10-25-shinylive-extension/">shinylive</a> to include interactive demonstrations of a few concepts, such as <a href="http://localhost:5999/chapters/embeddings.html#fig-umap">UMAP parameters</a> and <a href="http://localhost:5999/chapters/interactions-nonlinear.html#fig-natural-cubic-spline">natural splines</a>. It will be interesting when we convert this to a pdf for publishing but, overall, it has been a <a href="https://topepo.github.io/2024_05_NYR/#/title-slide">great tool to work with</a> and we think that it is a great tool for learning.</p>
+<p>We still have one more chapter in the “Preparation” part on missing data. The chapter number for Overfitting will increment by one in the next release.</p>
+<section id="what-we-are-working-on-now" class="level2">
+<h2 class="anchored" data-anchor-id="what-we-are-working-on-now">What We Are Working On Now</h2>
+<ul>
+<li>Light/dark mode: <a href="https://www.karlton.org/2017/12/naming-things-hard/">Phil Karlton said</a> that “There are only two hard things in Computer Science: cache invalidation and naming things.” Maybe the third is getting an elegant framework for seemlessly going between light and dark mode. Quarto makes it a lot easier (and hopefully will become trival) but it is <em>not</em> easy. I have a <a href="https://topepo.github.io/light-dark-test/">test repo</a> started and a branch for this book to experiment with.</li>
+<li>A missing data chapter.</li>
+<li>A broad overview of resampling methods.</li>
+<li>Grid search (including nested resampling, racing).</li>
+<li>Iterative search.</li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>preprocessing</category>
+  <category>updates</category>
+  <guid>https://blog.aml4td.org/posts/2024-06-progress-update/</guid>
+  <pubDate>Tue, 18 Jun 2024 04:00:00 GMT</pubDate>
+  <media:content url="https://blog.aml4td.org/posts/2024-06-progress-update/anime_barley_pca.gif" medium="image" type="image/gif"/>
+</item>
 <item>
   <title>Data Usage with Postprocessing</title>
   <dc:creator>Max Kuhn</dc:creator>
+  <dc:creator>Simon Couch</dc:creator>
   <link>https://blog.aml4td.org/posts/data-usage-for-postprocessors/</link>
   <description><![CDATA[ <p>This document is used to discuss and test ideas for how have can estimate and evaluate machine learning models that have three potential components:</p>
 <ul>
@@ -234,6 +278,7 @@ Note
 </ul>
 <p>We recommend using two different partitions for each of these two stages.</p>
 <p>Thanks to the tidymodels group for review of this post, especially Simon Couch who also edited the <a href="https://github.com/topepo/postprocessing-data">original source of this post</a>.</p>
+<p>EDIT: Simon really deserved to be an author of this post since he was more involved in the development of these ideas than the original post made it sound. I’ve added him as an author.</p>
 
 
 </section><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
@@ -1958,85 +2003,6 @@ font-style: inherit;">3</span>)</span></code></pre></div>
   <category>RStudio</category>
   <guid>https://blog.aml4td.org/posts/rstudio-2018-conference-presentation-and-materials/</guid>
   <pubDate>Sun, 04 Mar 2018 05:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>While you wait for that to finish, can I interest you in parallel processing?</title>
-  <dc:creator>Max Kuhn</dc:creator>
-  <link>https://blog.aml4td.org/posts/while-you-wait-for-that-to-finish-can-i-interest-you-in-parallel-processing/</link>
-  <description><![CDATA[ 
-
-
-
-
-<hr>
-<p><code>caret</code> has been able to <a href="https://topepo.github.io/caret/parallel-processing.html">utilize parallel processing</a> for some time (before it was on CRAN in October 2007) using slightly different versions of the package. Around September of 2011, <code>caret</code> started using the <a href="https://cran.r-project.org/package=foreach"><code>foreach</code></a> package was used to “harmonize” the parallel processing technologies thanks to a super smart guy named Steve Weston.</p>
-<p>I’ve done a few benchmarks to quantify the benefits to parallel processing over the years. I just did another set since I just got a new iMacPro. This time, I put the code and results in a <a href="https://github.com/topepo/par-caret-bench">GitHub repo</a>. The main questions that I wanted to answer were:</p>
-<ul>
-<li>Is the benefit the same across computers and operating systems?</li>
-<li>Is there any performance difference between parallel processing technologies (or packages)?</li>
-<li>For my test cases, is it better to parallelize resampling loops or the individual model fit?</li>
-</ul>
-<p>The task I used was to tune a boosted classification tree model (via the <a href="https://cran.r-project.org/package=xgboost"><code>xgboost</code></a>) package over 25 random values of the seven tuning parameters. The data were simulated and contained 2,000 training set points and 115 numeric predictors. Five repeats of 10-fold cross-validation was used so that 1,250 separate models could be run in parallel. An example of the code is <a href="https://github.com/topepo/par-caret-bench/blob/master/macOS/2017%20iMacPro1%2C1%203%20GHz%20Intel%20Xeon%20W%2010core/xgb_01.R">here</a>.</p>
-<p>I tested this using three machines:</p>
-<ul>
-<li>A 2015 MacBookPro (version 11,4) with a 2.5 GHz Intel Core i7 processor. It has 4 physical cores.</li>
-<li>A <a href="https://pcpartpicker.com/list/4xzqr7">DIY machine</a> built in January of 2016 using a 3.4 GHz Intel Core i7 processor (6 cores).</li>
-<li>A 2017 iMacPro (1,1) with a 3 GHz Intel Xeon W processor. There are 10 cores.</li>
-</ul>
-<p>All the computers have &gt;=8GB of memory. The DIY machine was running Ubuntu 16.04 as well as Windows 10. All of the builds used R 3.4.2 or higher.</p>
-<p>The methods for parallelization were:</p>
-<ul>
-<li><p><strong>forking</strong> uses the <code>fork</code> system call to create new instances of the session (i.e.&nbsp;workers) that run parts of the computations. This is available on MacOS, unix, and linux. It is available to <code>foreach</code> via the <code>doMC</code> and <code>doParallel</code> packages. Historically, I have used <code>doMC</code> for my work but both were tested here.</p></li>
-<li><p><strong>sockets</strong> via the <code>doParallel</code> package. I don’t know a whole lot about socket connections but they have been around a long time via the <code>snow</code> package and can run on all major operating systems.</p></li>
-<li><p><strong>threading</strong>: <code>xgboost</code> has the option to use <a href="http://www.openmp.org/"><code>openMP</code></a> to parallelize the individual model fits.</p></li>
-</ul>
-<p>This <a href="https://www.jstatsoft.org/article/view/v031i01">JSS paper from 2009</a> might be helpful.</p>
-<p>Once nice thing about parallelism in <code>caret</code> is that you do not have to modify the package code. With <code>foreach</code>, you simply “register” a parallel backend and the <code>caret</code> functions automatically utilize the workers.</p>
-<p>To be clear, the forking/socket approaches split the 1,250 model fits across the workers while the threading affects each individual model fit (one-at-a-time).</p>
-<p>In each case, different number of workers were applied to the problems and the execution time was measured. Since these are all recent Intel processors, <a href="https://en.wikipedia.org/wiki/Hyper-threading">hyper-threading</a> can be used. This means that, even though you have <em>X</em> physical cores, there are <em>2X</em> “logical cores” that can perform independent operations. For that reason, we can add more workers than physical cores. The order of all runs were randomized and run in clear R sessions.</p>
-<p>First, let’s look at the non-threading results. The raw execution times were:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://blog.aml4td.org/posts/while-you-wait-for-that-to-finish-can-i-interest-you-in-parallel-processing/par-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-<p>When converted to <em>speed-ups</em>, we get:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://blog.aml4td.org/posts/while-you-wait-for-that-to-finish-can-i-interest-you-in-parallel-processing/par-plot-su-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-<p>The speed-up is the sequential time divided by the parallel time; a speed-up of 3 means that the parallel execution took a third less time than the sequential code.</p>
-<p>My observations:</p>
-<ul>
-<li>As expected, the desktops were substantially faster than the laptop. The speeds also rank-ordered with the age of the computer.</li>
-<li>On the same machine, linux ran faster than windows by slightly less than a fold.</li>
-<li>It appears that the speed-ups are <em>linear</em> up until we go beyond the number of physical cores. There is incremental benefit to using logical cores but it is small.</li>
-<li>I’ve never seen a case where performance get’s substantially worse as you increase the number of workers. If the model is already fast (e.g.&nbsp;PLS) or your workers exceed system memory, this isn’t an issue.</li>
-<li>There was no real difference in performance between forking and sockets (at least using <code>doParallel</code>).</li>
-<li>The new iMacPro does really well. The speed-ups are linear up until about 8 or 9 cores. This means that an execution time of 38 minutes can be cut down to 4 or 5 minutes.</li>
-</ul>
-<p>The <code>doMC</code> results are strange. When the number of workers is a multiple of 5, there is a performance hit. At first I thought this was an aberration until it was apparent that it occurred over two operating systems and three computers. Also, it is specific to <code>doMC</code>; forking using <code>doParallel</code> does not have the same issue. I’ve notified the <code>doMC</code> package maintainer about it.</p>
-<p>What about threading? These runs had <code>foreach</code> run sequentially and allowed <code>xgb.train</code> to run in parallel by adjusting the <code>nthread</code> argument. The results:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://blog.aml4td.org/posts/while-you-wait-for-that-to-finish-can-i-interest-you-in-parallel-processing/threads-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-<p>This isn’t so great and really surprising (or fair). We are starting and stopping threads 1,250 times across the model tuning process. In general, we want to parallelize the longest running part of the algorithm. I have no doubt of the utility of threading the computations <em>for a single model</em> but it can be counterproductive when model is called repeatedly.</p>
-<p>The code and results can be found <a href="https://github.com/topepo/par-caret-bench">here</a> if you are interested in more details.</p>
-<p>(This article was originally posted at <a href="https://appliedpredictivemodeling.com/blog/2018/1/17/parallel-processing"><code>http://appliedpredictivemodeling.com</code></a>)</p>
-
-
-
- ]]></description>
-  <category>R</category>
-  <category>caret</category>
-  <category>parallel processing</category>
-  <category>iMacPro</category>
-  <category>xgboost</category>
-  <guid>https://blog.aml4td.org/posts/while-you-wait-for-that-to-finish-can-i-interest-you-in-parallel-processing/</guid>
-  <pubDate>Wed, 17 Jan 2018 05:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

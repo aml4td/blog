@@ -1,0 +1,36 @@
+---
+title: 'Progress Update (June 2024)'
+author: 'Max Kuhn'
+date: '2024-06-18'
+categories:
+  - preprocessing
+  - updates
+image: anime_barley_pca.gif
+---
+
+<hr>
+ 
+![](anime_barley_pca.gif){fig-align="center" height="350px"}
+
+We just released a new set of chapters: 
+
+ - _Embeddings_: this encompasses feature extraction tools such as PCA, MDS, UMAP, and shrunken centroids. 
+ - _Interactions and Nonlinear Features_: interaction definitions and detection methods, basis expansions (polynomials, splines), and discretization. 
+ - _Overfitting_: the first chapter of the "Optimization" part of the book. This sets up the next few chapters on resampling and model tuning. 
+ 
+We liberally used [shinylive](https://quarto.org/docs/blog/posts/2022-10-25-shinylive-extension/) to include interactive demonstrations of a few concepts, such as [UMAP parameters](http://localhost:5999/chapters/embeddings.html#fig-umap) and [natural splines](http://localhost:5999/chapters/interactions-nonlinear.html#fig-natural-cubic-spline). It will be interesting when we convert this to a pdf for publishing but, overall, it has been a [great tool to work with](https://topepo.github.io/2024_05_NYR/#/title-slide) and we think that it is a great tool for learning. 
+ 
+We still have one more chapter in the "Preparation" part on missing data. The chapter number for Overfitting will increment by one in the next release. 
+
+## What We Are Working On Now
+
+ - Light/dark mode: [Phil Karlton said](https://www.karlton.org/2017/12/naming-things-hard/) that "There are only two hard things in Computer Science: cache invalidation and naming things." Maybe the third is getting an elegant framework for seemlessly going between light and dark mode. Quarto makes it a lot easier (and hopefully will become trival) but it is _not_ easy. I have a [test repo](https://topepo.github.io/light-dark-test/) started and a branch for this book to experiment with. 
+ - A missing data chapter.
+ - A broad overview of resampling methods. 
+ - Grid search (including nested resampling, racing).
+ - Iterative search.
+ 
+ 
+ 
+ 
+
