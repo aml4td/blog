@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2024-09-progress-update/index.html",
       "/posts/2024-06-progress-update/index.html",
       "/posts/data-usage-for-postprocessors/index.html",
       "/posts/post-hoc-nearest-neighbors-prediction-adjustments/index.html",
