@@ -1,0 +1,30 @@
+---
+title: 'Progress Update (September 2024)'
+author: 'Max Kuhn'
+date: '2024-09-23'
+categories:
+  - "missing data"
+  - "grid search"
+  - resampling
+  - updates
+image: Washington.png
+---
+
+<hr>
+ 
+![](Washington.png){fig-align="center" height="350px"}
+
+Three new chapters!
+
+We’ve inserted materials on dealing with [missing data](https://aml4td.org/chapters/missing-data.html) into the fourth chapter slot, bumping subsequent chapters up a number. That finished out the “Preparation” part of the materials. 
+
+Additionally, there are two new chapters: 
+
+- [_Measuring Performance with Resampling_ ](https://aml4td.org/chapters/resampling.html) is fairly comprehensive. It discusses what resampling is (and isn’t), specific types of resampling schemes, and different statistical estimates. 
+- [_Grid Search_ ](https://aml4td.org/chapters/grid-search.html) discusses different grid types, especially space-filling designs. It also includes materials on parallel processing, submodel tricks, racing, and optimization bias/nested resampling. 
+
+We’ve also created the corresponding chapters in the [tidymodels computing companion](https://tidymodels.aml4td.org/). There are a few gaps to fill in there, but the tidymodels group has working (but unfinalized) code/APIs that will be in their respective packages soon.  
+
+Next on deck for the “Optimization” part are chapters on iterative search and one on comparing models. 
+
+We will probably include a chapter on removing predictors. This won’t be extensive (it _could_ be an entire book) but will give readers a sense of “I’m in danger” along with references for more information. 

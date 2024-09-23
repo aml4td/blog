@@ -9,8 +9,45 @@
 <link>https://blog.aml4td.org/</link>
 <atom:link href="https://blog.aml4td.org/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.555</generator>
-<lastBuildDate>Tue, 18 Jun 2024 04:00:00 GMT</lastBuildDate>
+<generator>quarto-1.6.3</generator>
+<lastBuildDate>Mon, 23 Sep 2024 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Progress Update (September 2024)</title>
+  <dc:creator>Max Kuhn</dc:creator>
+  <link>https://blog.aml4td.org/posts/2024-09-progress-update/</link>
+  <description><![CDATA[ 
+
+
+
+
+<hr>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.aml4td.org/posts/2024-09-progress-update/Washington.png" class="quarto-figure quarto-figure-center figure-img" height="350"></p>
+</figure>
+</div>
+<p>Three new chapters!</p>
+<p>We’ve inserted materials on dealing with <a href="https://aml4td.org/chapters/missing-data.html">missing data</a> into the fourth chapter slot, bumping subsequent chapters up a number. That finished out the “Preparation” part of the materials.</p>
+<p>Additionally, there are two new chapters:</p>
+<ul>
+<li><a href="https://aml4td.org/chapters/resampling.html"><em>Measuring Performance with Resampling</em></a> is fairly comprehensive. It discusses what resampling is (and isn’t), specific types of resampling schemes, and different statistical estimates.</li>
+<li><a href="https://aml4td.org/chapters/grid-search.html"><em>Grid Search</em></a> discusses different grid types, especially space-filling designs. It also includes materials on parallel processing, submodel tricks, racing, and optimization bias/nested resampling.</li>
+</ul>
+<p>We’ve also created the corresponding chapters in the <a href="https://tidymodels.aml4td.org/">tidymodels computing companion</a>. There are a few gaps to fill in there, but the tidymodels group has working (but unfinalized) code/APIs that will be in their respective packages soon.</p>
+<p>Next on deck for the “Optimization” part are chapters on iterative search and one on comparing models.</p>
+<p>We will probably include a chapter on removing predictors. This won’t be extensive (it <em>could</em> be an entire book) but will give readers a sense of “I’m in danger” along with references for more information.</p>
+
+
+
+ ]]></description>
+  <category>missing data</category>
+  <category>grid search</category>
+  <category>resampling</category>
+  <category>updates</category>
+  <guid>https://blog.aml4td.org/posts/2024-09-progress-update/</guid>
+  <pubDate>Mon, 23 Sep 2024 04:00:00 GMT</pubDate>
+  <media:content url="https://blog.aml4td.org/posts/2024-09-progress-update/Washington.png" medium="image" type="image/png" height="100" width="144"/>
+</item>
 <item>
   <title>Progress Update (June 2024)</title>
   <dc:creator>Max Kuhn</dc:creator>
@@ -315,6 +352,7 @@ Post Hoc Nearest Neighbors Prediction Adjustments</title>
 <div class="cell">
 <div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
@@ -348,6 +386,7 @@ background-color: null;
 font-style: inherit;"># Found at https://github.com/topepo/adjusted</span></span>
 <span><span class="kw" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
@@ -1690,6 +1729,7 @@ font-style: inherit;">1</span>]])</span></code></pre></div>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(split, ...) {</span>
 <span id="cb10-2">  <span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -1842,6 +1882,7 @@ font-style: inherit;"># MSE = 2.675 in the blog post</span></span></code></pre><
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(..., <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">degree =</span> <span class="dv" style="color: #AD0000;
@@ -1884,6 +1925,7 @@ font-style: inherit;"># predictor expressions</span></span>
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
+font-weight: bold;
 font-style: inherit;">function</span>(arg, call, ...)</span>
 <span id="cb18-12">    <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1969,40 +2011,6 @@ font-style: inherit;">3</span>)</span></code></pre></div>
   <category>cross-validation</category>
   <guid>https://blog.aml4td.org/posts/tidy-resampling-redux-with-agricultural-economics-data/</guid>
   <pubDate>Mon, 12 Mar 2018 04:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>RStudio 2018 Conference Presentation and Materials</title>
-  <dc:creator>Max Kuhn</dc:creator>
-  <link>https://blog.aml4td.org/posts/rstudio-2018-conference-presentation-and-materials/</link>
-  <description><![CDATA[ 
-
-
-
-
-<hr>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://blog.aml4td.org/posts/rstudio-2018-conference-presentation-and-materials/bayes-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-<p>We’ve released our videos of the talks at the 2018 RStudio conference. My talk was Modeling in the Tidyverse <a href="https://www.rstudio.com/resources/videos/modeling-in-the-tidyverse/">(video)</a> and I was also in the Tidyverse fireside chat <a href="https://youtu.be/Ol1FjFR2IMU?t=27720">(video)</a>. There are a lot of great talks on the <a href="https://www.rstudio.com/resources/webinars/">conference website</a>.</p>
-<p>I also conducted a two day workshop on <code>caret</code> and the new modeling packages (<a href="https://topepo.github.io/recipes/"><code>recipes</code></a>, <a href="https://topepo.github.io/rsample/"><code>rsample</code></a>, <a href="https://topepo.github.io/tidyposterior/"><code>tidyposterior</code></a> and others) at the conference. The was no video of that, but all of the materials can be found in the <a href="https://github.com/topepo/rstudio-conf-2018">course GitHub repository</a>.</p>
-<p>There will be at least one other workshop for this year on these topics. When that is finalized, I’ll post the details here and on <a href="https://twitter.com/topepos">on twitter</a>.</p>
-<p>(the image above is from the workshop and is from <a href="https://topepo.github.io/tidyposterior/"><code>tidyposterior</code></a>)</p>
-<p>(This article was originally posted at <a href="https://appliedpredictivemodeling.com/blog/2018/3/4/rstudio-2018-conference-presentation-and-materials"><code>http://appliedpredictivemodeling.com</code></a>)</p>
-
-
-
- ]]></description>
-  <category>R</category>
-  <category>presentations</category>
-  <category>caret</category>
-  <category>rsample</category>
-  <category>recipes</category>
-  <category>tidyposterior</category>
-  <category>RStudio</category>
-  <guid>https://blog.aml4td.org/posts/rstudio-2018-conference-presentation-and-materials/</guid>
-  <pubDate>Sun, 04 Mar 2018 05:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
