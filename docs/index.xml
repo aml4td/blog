@@ -9,8 +9,41 @@
 <link>https://blog.aml4td.org/</link>
 <atom:link href="https://blog.aml4td.org/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.6.3</generator>
-<lastBuildDate>Mon, 23 Sep 2024 04:00:00 GMT</lastBuildDate>
+<generator>quarto-1.7.31</generator>
+<lastBuildDate>Tue, 24 Jun 2025 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Part 3 is Finished</title>
+  <dc:creator>Max Kuhn</dc:creator>
+  <link>https://blog.aml4td.org/posts/2025-06-new-chapters/</link>
+  <description><![CDATA[ 
+
+
+
+
+<hr>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.aml4td.org/posts/2025-06-new-chapters/partition.svg" class="quarto-figure quarto-figure-center figure-img" height="300"></p>
+</figure>
+</div>
+<p>We’ve released additional chapters in the last month or so. These conclude Part 3 of the book.</p>
+<ul>
+<li><a href="https://aml4td.org/chapters/iterative-search.html"><em>Iterative Search</em></a> shows how to optimize tuning parameters using methods such as simulated annealing, genetic algorithms, and Bayesian optimization. This chapter also lays some of the groundwork for general Bayesian methods.</li>
+<li><a href="https://aml4td.org/chapters/feature-selection.html"><em>Feature Selection</em></a> is a survey of different methods and issues regarding the judicious removal of predictors.</li>
+<li><a href="https://aml4td.org/chapters/comparing-models.html"><em>Comparing Models</em></a> has a statistical focus on different ways to compare predictive performance within or between models.</li>
+</ul>
+<p>We’ve also updated the <a href="https://tidymodels.aml4td.org/">tidymodels computing supplement</a> for these chapters.</p>
+<p>One nice feature of these updates is that many sections of the book have direct links to the computing supplement for that topic (as well as a return link).</p>
+<p>Next up is Part 4 (Classification). A pull request is ready for review (on classification metrics), and the other chapters will describe various classification models. These may be released simultaneously as we fill in different sections of each (non-sequentially).</p>
+
+
+
+ ]]></description>
+  <category>updates</category>
+  <category>tidymodels</category>
+  <guid>https://blog.aml4td.org/posts/2025-06-new-chapters/</guid>
+  <pubDate>Tue, 24 Jun 2025 04:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Progress Update (September 2024)</title>
   <dc:creator>Max Kuhn</dc:creator>
@@ -150,6 +183,13 @@ Note
 </div>
 </div>
 <p>The predicted values are not realistic in the sense that they are not consistent with the original data. They should fall along the diagonal green line if the model is performing well.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'butcher':
+  method                 from    
+  as.character.dev_topic generics</code></pre>
+</div>
+</div>
 <p>The solid blue curve above shows a linear regression line that is fit to these data. This measures the systematic miscalibration. If we were to use the validation set to quantify the pattern, the intercept was -39.2 minutes and the slope was 2.49 minutes. Now that we know this pattern, it might be possible to remove it from the predictions.</p>
 <p>The problem, more broadly described below in Case 3, is that we can’t use the validation set to measure this pattern and assess its effectiveness.</p>
 <p>As an alternative, we used a slightly risky approach described in Case 3 to estimate a slope of -38.7 minutes, and the slope was 2.48 minutes. When these values are used to correct the validation set predictions, RMSE decreases from 4.71 to 2.68 minutes. The R<sup>2</sup> stays the same.</p>
@@ -407,11 +447,11 @@ background-color: null;
 font-style: inherit;">)</span></span>
 <span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">theme_set</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">theme_bw</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -450,7 +490,7 @@ font-style: inherit;">delivery_split</span> <span class="op" style="color: #5E5E
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rsample.tidymodels.org/reference/initial_validation_split.html">initial_validation_split</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">initial_validation_split</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -480,7 +520,7 @@ font-style: inherit;">delivery_train</span> <span class="op" style="color: #5E5E
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rsample.tidymodels.org/reference/initial_split.html">training</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">training</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -493,7 +533,7 @@ font-style: inherit;">delivery_test</span>  <span class="op" style="color: #5E5E
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rsample.tidymodels.org/reference/initial_split.html">testing</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">testing</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -506,7 +546,7 @@ font-style: inherit;">delivery_val</span>   <span class="op" style="color: #5E5E
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://rsample.tidymodels.org/reference/initial_validation_split.html">validation</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">validation</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -523,7 +563,7 @@ background-color: null;
 font-style: inherit;">&lt;-</span>  </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://parsnip.tidymodels.org/reference/mars.html">mars</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">mars</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>prod_degree <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -536,7 +576,7 @@ background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://parsnip.tidymodels.org/reference/set_args.html">set_mode</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">set_mode</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="st" style="color: #20794D;
 background-color: null;
@@ -551,7 +591,7 @@ background-color: null;
 font-style: inherit;">&lt;-</span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://workflows.tidymodels.org/reference/workflow.html">workflow</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">workflow</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -560,7 +600,7 @@ background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://workflows.tidymodels.org/reference/add_formula.html">add_formula</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">add_formula</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -575,7 +615,7 @@ background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://workflows.tidymodels.org/reference/add_model.html">add_model</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">add_model</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span> <span class="va" style="color: #111111;
 background-color: null;
@@ -586,7 +626,7 @@ background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">fit</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>data <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -605,7 +645,7 @@ background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://hardhat.tidymodels.org/reference/hardhat-extract.html">extract_fit_engine</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">extract_fit_engine</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -720,7 +760,7 @@ font-style: inherit;">delivery_val</span> <span class="op" style="color: #5E5E5E
 background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">slice</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="fl" style="color: #AD0000;
 background-color: null;
@@ -806,7 +846,7 @@ background-color: null;
 font-style: inherit;">&lt;-</span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">tibble</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>neighbors <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -823,14 +863,14 @@ background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">mutate</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span></span>
 <span>    .pred <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">map</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -860,7 +900,7 @@ font-style: inherit;">)</span>,</span>
 background-color: null;
 font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">map_dbl</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -868,7 +908,7 @@ font-style: inherit;">.pred</span>, <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">~</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://yardstick.tidymodels.org/reference/rmse.html">rmse_vec</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">rmse_vec</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -900,11 +940,11 @@ background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">ggplot</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">aes</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -919,7 +959,7 @@ background-color: null;
 font-style: inherit;">+</span></span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">geom_point</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -928,7 +968,7 @@ background-color: null;
 font-style: inherit;">+</span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">geom_line</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -937,7 +977,7 @@ background-color: null;
 font-style: inherit;">+</span></span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">labs</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>y <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -965,7 +1005,7 @@ font-style: inherit;">val_pred</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -979,7 +1019,7 @@ font-style: inherit;">)</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://purrr.tidyverse.org/reference/pluck.html">pluck</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">pluck</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="st" style="color: #20794D;
 background-color: null;
@@ -994,7 +1034,7 @@ background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">mutate</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>pct_imp <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1019,11 +1059,11 @@ background-color: null;
 font-style: inherit;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">ggplot</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">aes</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="va" style="color: #111111;
 background-color: null;
@@ -1038,7 +1078,7 @@ background-color: null;
 font-style: inherit;">+</span></span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">geom_point</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1047,7 +1087,7 @@ background-color: null;
 font-style: inherit;">+</span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">geom_line</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1056,7 +1096,7 @@ background-color: null;
 font-style: inherit;">+</span> </span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">scale_y_continuous</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>labels <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1073,7 +1113,7 @@ background-color: null;
 font-style: inherit;">+</span></span>
 <span>  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op" style="color: #5E5E5E;
+font-style: inherit;">labs</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>y <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1574,443 +1614,6 @@ font-style: inherit;">)</span></span></code></pre></div>
   <category>tidyverse</category>
   <guid>https://blog.aml4td.org/posts/new-workshop-in-washington-dc-august/</guid>
   <pubDate>Tue, 10 Apr 2018 04:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Tidy Resampling Redux with Agricultural Economics Data</title>
-  <dc:creator>Max Kuhn</dc:creator>
-  <link>https://blog.aml4td.org/posts/tidy-resampling-redux-with-agricultural-economics-data/</link>
-  <description><![CDATA[ 
-
-
-
-
-<hr>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://blog.aml4td.org/posts/tidy-resampling-redux-with-agricultural-economics-data/UNADJUSTEDNONRAW_thumb_265a.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-<p>(No statistical graphs in this one. This is what my dog Artemis looks like when she wants my attention during work hours.)</p>
-<p>Mindy L. Mallory (<a href="https://twitter.com/ace_prof"><code>@ace_prof</code></a>) wrote a blog post on <a href="http://blog.mindymallory.com/2018/02/machine-learning-and-econometrics-model-selection-and-assessment-statistical-learning-style/"><em>Machine Learning and Econometrics: Model Selection and Assessment Statistical Learning Style</em></a> where she has a great description of the variance-bias tradeoff, resampling, and model complexity using some data from agricultural economics. I asked if I could take her code and make a more <a href="https://cran.r-project.org/web/packages/tidyverse/vignettes/manifesto.html">tidy</a> version of the resampling part. Here it is…</p>
-<p>Here are the R packages that I’ll be using:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(tidyverse)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(rlang)</span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(rsample)</span>
-<span id="cb1-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(yardstick)</span>
-<span id="cb1-5"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(purrr)</span></code></pre></div>
-<p>First, duplicate the process of reading in the data and adding two new columns:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">stocks  <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">read.csv</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'http://blog.mindymallory.com/wp-content/uploads/2018/02/stocks.csv'</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> </span>
-<span id="cb2-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">as_tibble</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb2-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(</span>
-<span id="cb2-4">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">USStockUse =</span> USEndingStocks<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>USTotalUse, </span>
-<span id="cb2-5">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">WorldStockUse =</span> ROWEndingStocks<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>WorldTotalUse</span>
-<span id="cb2-6">  )</span>
-<span id="cb2-7">stocks</span></code></pre></div>
-<pre><code>## # A tibble: 43 x 8
-##     Year USEndingStocks ROWEndingStocks USTotalUse
-##    &lt;int&gt;          &lt;dbl&gt;           &lt;int&gt;      &lt;dbl&gt;
-##  1  1975           633.           36411      5767.
-##  2  1976          1136.           39491      5789.
-##  3  1977          1436.           40833      6207.
-##  4  1978          1710.           47957      6995.
-##  5  1979          2034.           59481      7604.
-##  6  1980          1392.           67180      7282.
-##  7  1981          2537.           62725      6975.
-##  8  1982          3523.           60273      7249.
-##  9  1983          1006.           63421      6693.
-## 10  1984          1648.           76287      7032.
-## # ... with 33 more rows, and 4 more variables:
-## #   WorldTotalUse &lt;int&gt;, PriceRecievedFarmers &lt;dbl&gt;,
-## #   USStockUse &lt;dbl&gt;, WorldStockUse &lt;dbl&gt;</code></pre>
-<p>The blog post has an excellent description of cross-validation and looked at five different models that encoded the US and World stock-use predictors. Either a log- or inverse-transformation was applied and then polynomial basis functions were used on these features to demonstrate overfitting.</p>
-<p>The blog post has some <code>for</code> loops to do the resampling and I volunteered to show how to do it with some tidy modeling packages.</p>
-<section id="tidy-cross-validation" class="level3">
-<h3 class="anchored" data-anchor-id="tidy-cross-validation">Tidy Cross-Validation</h3>
-<p>First, let’s take the <em>easy</em> part. Instead of using <code>for</code> loops, we can use the new infrastructure in the tidyverse to resample the model. The <a href="https://topepo.github.io/rsample"><code>rsample</code></a> package has some functions for different types of resampling and we will use the same procedure as the original post:</p>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">918</span>)</span>
-<span id="cb4-2">resamp_info <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">vfold_cv</span>(stocks, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">v =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>)</span>
-<span id="cb4-3">resamp_info</span></code></pre></div>
-<pre><code>## #  5-fold cross-validation 
-## # A tibble: 5 x 2
-##   splits       id   
-##   &lt;list&gt;       &lt;chr&gt;
-## 1 &lt;S3: rsplit&gt; Fold1
-## 2 &lt;S3: rsplit&gt; Fold2
-## 3 &lt;S3: rsplit&gt; Fold3
-## 4 &lt;S3: rsplit&gt; Fold4
-## 5 &lt;S3: rsplit&gt; Fold5</code></pre>
-<p>The first column in the tibble is a set of “<code>rsplit</code>” objects that define how the data are split for each fold of cross-validation. Each one fully and efficiently encapsulates everything what is needed to get the two divisions of the original data. In <code>rsample</code>, to avoid naming confusion, we label the two resulting data sets as:</p>
-<ul>
-<li><p>The <strong>analysis data</strong> are those that we selected in the resample. For a bootstrap, this is the sample with replacement. For 5-fold cross-validation, this is the 80% of the data. These data are often used to fit a model or calculate a statistic in traditional bootstrapping.</p></li>
-<li><p>The <strong>assessment data</strong> are usually the section of the original data not covered by the analysis set. Again, in 5-fold CV, this is the 20% held out. These data are often used to evaluate the performance of a model that was fit to the analysis data.</p></li>
-</ul>
-<p>To get these partitions for the first split there are functions <code>analysis</code> and <code>assessment</code> that return the appropriate data frames when given an <code>rsplit</code>:</p>
-<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># printing just shows the #rows per analysis/assessment/overall</span></span>
-<span id="cb6-2">resamp_info<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>splits[[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>]]</span></code></pre></div>
-<pre><code>## &lt;34/9/43&gt;</code></pre>
-<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># data used for modeling:</span></span>
-<span id="cb8-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">analysis</span>(resamp_info<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>splits[[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>]])</span></code></pre></div>
-<pre><code>## # A tibble: 34 x 8
-##     Year USEndingStocks ROWEndingStocks USTotalUse
-##    &lt;int&gt;          &lt;dbl&gt;           &lt;int&gt;      &lt;dbl&gt;
-##  1  1975           633.           36411      5767.
-##  2  1976          1136.           39491      5789.
-##  3  1977          1436.           40833      6207.
-##  4  1979          2034.           59481      7604.
-##  5  1980          1392.           67180      7282.
-##  6  1981          2537.           62725      6975.
-##  7  1982          3523.           60273      7249.
-##  8  1983          1006.           63421      6693.
-##  9  1984          1648.           76287      7032.
-## 10  1985          4040.           75069      6494.
-## # ... with 24 more rows, and 4 more variables:
-## #   WorldTotalUse &lt;int&gt;, PriceRecievedFarmers &lt;dbl&gt;,
-## #   USStockUse &lt;dbl&gt;, WorldStockUse &lt;dbl&gt;</code></pre>
-<p>The first model for the data contained the US stock-use data with an inverse transformation. Let’s side-step the polynomial model tuning for now and just fit a quadratic model. To make things easier, I’ll define a function that can be used to fit the model when given an <code>rsplit</code> object and return the holdout mean squared error (MSE):</p>
-<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">glm_results <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">function</span>(split, ...) {</span>
-<span id="cb10-2">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Get the data used ot fit the model aka the "analysis" set</span></span>
-<span id="cb10-3">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># and fit the model with a formula given in the ...</span></span>
-<span id="cb10-4">  mod <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">glm</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">analysis</span>(split), ...)</span>
-<span id="cb10-5">  </span>
-<span id="cb10-6">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Get predictions on the other data (aka the "assessment" set </span></span>
-<span id="cb10-7">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># and compute some metrics</span></span>
-<span id="cb10-8">  holdout <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">assessment</span>(split)</span>
-<span id="cb10-9">  </span>
-<span id="cb10-10">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Compute performance using the yardstick package</span></span>
-<span id="cb10-11">  rmse <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> holdout <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb10-12">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">pred =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">predict</span>(mod, holdout)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb10-13">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rmse</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">truth =</span> PriceRecievedFarmers, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">estimate =</span> pred)</span>
-<span id="cb10-14">  rmse<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">^</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span></span>
-<span id="cb10-15">}</span></code></pre></div>
-<p>We can use this with any formula since it is just passed to <code>glm</code> using the ellipses. For example to get the holdout MSE estimate for the first fold:</p>
-<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">glm_results</span>(resamp_info<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>splits[[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>]], <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">formula =</span> PriceRecievedFarmers <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">poly</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> USStockUse, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>))</span></code></pre></div>
-<pre><code>## [1] 1.67</code></pre>
-<p>To get these statistics for all folds, <code>purrr::map_dbl</code> is used to add another column:</p>
-<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">resamp_info <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> resamp_info <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span></span>
-<span id="cb13-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(</span>
-<span id="cb13-3">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">model_1_deg_2 =</span> </span>
-<span id="cb13-4">      <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">map_dbl</span>(</span>
-<span id="cb13-5">        splits, </span>
-<span id="cb13-6">        glm_results, </span>
-<span id="cb13-7">        PriceRecievedFarmers <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">poly</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span> USStockUse, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)</span>
-<span id="cb13-8">      )</span>
-<span id="cb13-9">  )</span>
-<span id="cb13-10">resamp_info</span></code></pre></div>
-<pre><code>## #  5-fold cross-validation 
-## # A tibble: 5 x 3
-##   splits       id    model_1_deg_2
-## * &lt;list&gt;       &lt;chr&gt;         &lt;dbl&gt;
-## 1 &lt;S3: rsplit&gt; Fold1         1.67 
-## 2 &lt;S3: rsplit&gt; Fold2         0.558
-## 3 &lt;S3: rsplit&gt; Fold3         0.596
-## 4 &lt;S3: rsplit&gt; Fold4         9.58 
-## 5 &lt;S3: rsplit&gt; Fold5         0.248</code></pre>
-<p>That’s a lot of variation in the outcome! The mean value is fairly consistent with the blog post though:</p>
-<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1">resamp_info <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">select</span>(model_1_deg_2) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">colMeans</span>()</span></code></pre></div>
-<pre><code>## model_1_deg_2 
-##          2.53</code></pre>
-<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># MSE = 2.675 in the blog post</span></span></code></pre></div>
-<p><em>K</em>-fold cross-validation is one of the noisiest resampling methods so this difference isn’t too surprising.</p>
-<p>This same process could be repeated for each polynomial degree to get new columns for this model (we’ll discuss this below). The good things about doing things this way:</p>
-<ul>
-<li>It is a lot cleaner (so far) than doing <code>for</code> loops.</li>
-<li>Other tidyverse infrastructure can be used. For example, <a href="https://topepo.github.io/tidyposterior"><code>tidyposterior</code></a> is a great way to do model comparisons with resampling and Bayesian analysis.</li>
-<li>It is simple to change resampling methods. Suppose you wanted to change to a larger number of bootstrap resamples (given the variance shown above). The same infrastructure can be easily exchanged; <code>resample::bootstraps</code> is used in place of <code>rsample::vfold_cv</code>.</li>
-</ul>
-</section>
-<section id="tidy-model-specification-maybe" class="level3">
-<h3 class="anchored" data-anchor-id="tidy-model-specification-maybe">Tidy Model Specification (maybe)</h3>
-<p>The model specification part is, for me, a lot more difficult to tidy. It would be good to be able to state what predictors that we want, specify the polynomial degree, and have a function to generate the appropriate formula. The original post sensibly just types the terms out.</p>
-<p>I spent some time thinking about how we could use <a href="https://adv-r.hadley.nz/expressions.html">expressions</a> and tidy evaluation (<a href="https://t.co/xEhCKne2mM">video from Hadley</a>) to make it a little less script-like. The problem is that the solution took me a while to write and, arguably, it doesn’t really buy you much more than the original code (apart from the potential copy/paste duplication errors).</p>
-<p>In any case, the function uses <code>rlang</code> to manipulate expressions to make the formula. The inputs are expressions of <em>how</em> the predictors are used (i.e.&nbsp;log, inverse, etc.) and the degree. It captures the expression (without evaluating it), substitutes it into the polynomial function, then creates the formula:</p>
-<div class="sourceCode" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">make_formula <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">function</span>(..., <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">degree =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>) {</span>
-<span id="cb18-2">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Capture the expression so it is not evaluated</span></span>
-<span id="cb18-3">  var_expr <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">exprs</span>(...)</span>
-<span id="cb18-4">  </span>
-<span id="cb18-5">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Create a template expression</span></span>
-<span id="cb18-6">  inv_poly <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">quote</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">poly</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> x, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">degree =</span> degree))</span>
-<span id="cb18-7"></span>
-<span id="cb18-8">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Use a wrapper around rlang::call_modify to reverse the</span></span>
-<span id="cb18-9">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># order of the arguments so that we can map over the</span></span>
-<span id="cb18-10">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># predictor expressions</span></span>
-<span id="cb18-11">  add_args <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">function</span>(arg, call, ...)</span>
-<span id="cb18-12">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">call_modify</span>(call, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> arg, ...)</span>
-<span id="cb18-13">  </span>
-<span id="cb18-14">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Add the variables and the degree into the template</span></span>
-<span id="cb18-15">  poly_expr <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">map</span>(var_expr, add_args, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">call =</span> inv_poly, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">degree =</span> degree)</span>
-<span id="cb18-16">  </span>
-<span id="cb18-17">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Convert to character</span></span>
-<span id="cb18-18">  poly_char <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">map_chr</span>(poly_expr, deparse)</span>
-<span id="cb18-19">  </span>
-<span id="cb18-20">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Convert to a formula</span></span>
-<span id="cb18-21">  poly_char <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">paste</span>(poly_char, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">collapse =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">" + "</span>)</span>
-<span id="cb18-22">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">as.formula</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">paste</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"PriceRecievedFarmers ~"</span>, poly_char))</span>
-<span id="cb18-23">}</span>
-<span id="cb18-24"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># For example:</span></span>
-<span id="cb18-25"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">make_formula</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/</span>USStockUse, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">log</span>(WorldStockUse), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">degree =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>)</span></code></pre></div>
-<pre><code>## PriceRecievedFarmers ~ poly(x = 1/USStockUse, degree = 3) + poly(x = log(WorldStockUse), 
-##     degree = 3)
-## &lt;environment: 0x7fdf40b64840&gt;</code></pre>
-<p>From here, we could use a bunch of <code>mutate</code> commands like the one shown above or write a slightly smaller <code>for</code> loop to work across the polynomial degrees. While the function above works well, the overall approach to working across models isn’t particularly satisfying.</p>
-<p>Any suggestions? I’m on twitter <a href="https://twitter.com/topepos"><code>@topepos</code></a>!</p>
-<p>(edit - fix fixed the formula call!)</p>
-<p>(This article was originally posted at <a href="https://appliedpredictivemodeling.com/blog/2018/3/12/2s3j82ctkrhxugq7hf3myoeeb49k8u"><code>http://appliedpredictivemodeling.com</code></a>)</p>
-
-
-</section>
-
- ]]></description>
-  <category>R</category>
-  <category>rsample</category>
-  <category>resampling</category>
-  <category>purrr</category>
-  <category>tidyverse</category>
-  <category>cross-validation</category>
-  <guid>https://blog.aml4td.org/posts/tidy-resampling-redux-with-agricultural-economics-data/</guid>
-  <pubDate>Mon, 12 Mar 2018 04:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
