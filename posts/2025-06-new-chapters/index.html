@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Max Kuhn">
-<meta name="dcterms.date" content="2024-09-23">
+<meta name="dcterms.date" content="2025-06-24">
 
-<title>Progress Update (September 2024) – Applied Predictive Modeling Blog</title>
+<title>Part 3 is Finished – Applied Predictive Modeling Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -150,12 +150,10 @@ MathJax = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Progress Update (September 2024)</h1>
+<h1 class="title">Part 3 is Finished</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">missing data</div>
-    <div class="quarto-category">grid search</div>
-    <div class="quarto-category">resampling</div>
     <div class="quarto-category">updates</div>
+    <div class="quarto-category">tidymodels</div>
   </div>
   </div>
 
@@ -173,7 +171,7 @@ MathJax = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 23, 2024</p>
+      <p class="date">June 24, 2025</p>
     </div>
   </div>
   
@@ -188,19 +186,18 @@ MathJax = {
 <hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="Washington.png" class="quarto-figure quarto-figure-center figure-img" height="350"></p>
+<p><img src="partition.svg" class="quarto-figure quarto-figure-center figure-img" height="300"></p>
 </figure>
 </div>
-<p>Three new chapters!</p>
-<p>We’ve inserted materials on dealing with <a href="https://aml4td.org/chapters/missing-data.html">missing data</a> into the fourth chapter slot, bumping subsequent chapters up a number. That finished out the “Preparation” part of the materials.</p>
-<p>Additionally, there are two new chapters:</p>
+<p>We’ve released additional chapters in the last month or so. These conclude Part 3 of the book.</p>
 <ul>
-<li><a href="https://aml4td.org/chapters/resampling.html"><em>Measuring Performance with Resampling</em></a> is fairly comprehensive. It discusses what resampling is (and isn’t), specific types of resampling schemes, and different statistical estimates.</li>
-<li><a href="https://aml4td.org/chapters/grid-search.html"><em>Grid Search</em></a> discusses different grid types, especially space-filling designs. It also includes materials on parallel processing, submodel tricks, racing, and optimization bias/nested resampling.</li>
+<li><a href="https://aml4td.org/chapters/iterative-search.html"><em>Iterative Search</em></a> shows how to optimize tuning parameters using methods such as simulated annealing, genetic algorithms, and Bayesian optimization. This chapter also lays some of the groundwork for general Bayesian methods.</li>
+<li><a href="https://aml4td.org/chapters/feature-selection.html"><em>Feature Selection</em></a> is a survey of different methods and issues regarding the judicious removal of predictors.</li>
+<li><a href="https://aml4td.org/chapters/comparing-models.html"><em>Comparing Models</em></a> has a statistical focus on different ways to compare predictive performance within or between models.</li>
 </ul>
-<p>We’ve also created the corresponding chapters in the <a href="https://tidymodels.aml4td.org/">tidymodels computing companion</a>. There are a few gaps to fill in there, but the tidymodels group has working (but unfinalized) code/APIs that will be in their respective packages soon.</p>
-<p>Next on deck for the “Optimization” part are chapters on iterative search and one on comparing models.</p>
-<p>We will probably include a chapter on removing predictors. This won’t be extensive (it <em>could</em> be an entire book) but will give readers a sense of “I’m in danger” along with references for more information.</p>
+<p>We’ve also updated the <a href="https://tidymodels.aml4td.org/">tidymodels computing supplement</a> for these chapters.</p>
+<p>One nice feature of these updates is that many sections of the book have direct links to the computing supplement for that topic (as well as a return link).</p>
+<p>Next up is Part 4 (Classification). A pull request is ready for review (on classification metrics), and the other chapters will describe various classification models. These may be released simultaneously as we fill in different sections of each (non-sequentially).</p>
 
 
 
