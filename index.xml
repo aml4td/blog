@@ -10,11 +10,11 @@
 <atom:link href="https://blog.aml4td.org/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.7.31</generator>
-<lastBuildDate>Tue, 24 Jun 2025 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 25 Jul 2025 04:00:00 GMT</lastBuildDate>
 <item>
-  <title>Part 3 is Finished</title>
+  <title>Part 3 is Finished, Part 4 Started</title>
   <dc:creator>Max Kuhn</dc:creator>
-  <link>https://blog.aml4td.org/posts/2025-06-new-chapters/</link>
+  <link>https://blog.aml4td.org/posts/2025-07-new-chapters/</link>
   <description><![CDATA[ 
 
 
@@ -23,7 +23,7 @@
 <hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://blog.aml4td.org/posts/2025-06-new-chapters/partition.svg" class="quarto-figure quarto-figure-center figure-img" height="300"></p>
+<p><img src="https://blog.aml4td.org/posts/2025-07-new-chapters/partition.svg" class="quarto-figure quarto-figure-center figure-img" height="300"></p>
 </figure>
 </div>
 <p>We’ve released additional chapters in the last month or so. These conclude Part 3 of the book.</p>
@@ -32,17 +32,22 @@
 <li><a href="https://aml4td.org/chapters/feature-selection.html"><em>Feature Selection</em></a> is a survey of different methods and issues regarding the judicious removal of predictors.</li>
 <li><a href="https://aml4td.org/chapters/comparing-models.html"><em>Comparing Models</em></a> has a statistical focus on different ways to compare predictive performance within or between models.</li>
 </ul>
+<p>On to Part 4 (Classification). So far, we have</p>
+<ul>
+<li><a href="https://aml4td.org/chapters/cls-metrics.html"><em>Characterizing Classification Models</em></a> is a pretty comprehensive discussion about the myriad tools for determining whether your classifier is doing what you want it to do.</li>
+<li><a href="https://aml4td.org/chapters/cls-linear.html"><em>Generalized Linear and Additive Classifiers</em></a> has also been started but only contains some exploratory data analysis for the example that is used in three chapters (the forestation data). Thanks to Simon Couch for reviewing that section and generating the data.</li>
+</ul>
+<p>For these chapters, we may not write them as linearly as the previous set.</p>
 <p>We’ve also updated the <a href="https://tidymodels.aml4td.org/">tidymodels computing supplement</a> for these chapters.</p>
 <p>One nice feature of these updates is that many sections of the book have direct links to the computing supplement for that topic (as well as a return link).</p>
-<p>Next up is Part 4 (Classification). A pull request is ready for review (on classification metrics), and the other chapters will describe various classification models. These may be released simultaneously as we fill in different sections of each (non-sequentially).</p>
 
 
 
  ]]></description>
   <category>updates</category>
   <category>tidymodels</category>
-  <guid>https://blog.aml4td.org/posts/2025-06-new-chapters/</guid>
-  <pubDate>Tue, 24 Jun 2025 04:00:00 GMT</pubDate>
+  <guid>https://blog.aml4td.org/posts/2025-07-new-chapters/</guid>
+  <pubDate>Fri, 25 Jul 2025 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Progress Update (September 2024)</title>
